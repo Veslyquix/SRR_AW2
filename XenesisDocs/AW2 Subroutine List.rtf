@@ -1,0 +1,454 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Courier;}{\f1\fnil\fcharset1 Cambria Math;}}
+{\*\generator Riched20 10.0.19041}{\*\mmathPr\mmathFont1\mwrapIndent1440 }\viewkind4\uc1 
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\f0\fs24\lang9 Bl dictionary\par
+\par
+
+\pard 08000ED8 - Sets what day it is in the map editor\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 08003B8C - Random Map Generator subroutine\par
+
+\pard\tx560 08005612 - Specific to DM Slot 1 to Save/Load\par
+0800568E - Specific to DM Slot 2 to Save/Load\par
+0800570A - Specific to DM Slot 3 to Save/Load\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 08016EC0 - Controls loading/saving of campaign map data stuff.\par
+
+\pard\par
+08017704 - Routine that subtracts battle maps points upon a purchase.\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+
+\pard\tx560 0801AAD8 - Checksum function - SRAM seems to get split into 0x1000 blocks.\par
+
+\pard 0801208C - COP Palette Load?\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 080129E0 - RNG Subroutine\par
+08013620 - Writes to Palette Ram loading area?\par
+\par
+08017860 - Updates what palette has been loaded for a CO.\par
+08017870 - Updates what palette has been stored for a CO.\par
+\par
+080196FC - Routine for starting a game and placing units? Checks unit script for 0xFE/FF functions.\par
+08019895 - Disables CO Powers (Scripting Subroutine)\par
+
+\pard 08019B9A - controls input for design maps menu\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+0801A022 - Action Menu: Launches sub-menu code\par
+0801A368 - Draws a display window background. Input of x start,y start, width, height r0-r3\par
+
+\pard\tx560 0801AD70 - Main Load/Save subroutine\par
+\par
+0801B120 - Subroutine. Loads Save Block IDs from 0200CC38..47 and stores them at 03007CE0..EF\par
+\tab\tab\tab\tab\tab\tab Returns with Save Type ID in R4, Save Block ID in R0\par
+0801B2F6 - Seems to be subroutine that sets up which save areas are used.\par
+0801B484 - Seems to AND the Data from 0xFEF to 0xFFF with the data \par
+
+\pard\par
+0801C95C - Routine that stops currently playing music tracks?\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+0801F34C - Subroutine that draws OAM objects to display screen. Input: r0: Tile ID r1 X Position r2 Y Position r3 = 0 data at sp = 0x1\par
+0801F888 - Subroutine that saves movement cost data for the current unit to 03003400. Input: r0 = Unit ID\par
+\par
+
+\pard 0802150C - Subroutine that sets up all game initial settings\par
+08022428 - Draws a unit on the map\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 08022618 - Routine that writes the BG2 tile for a unit to the Ram Map.\par
+0802271C - General map indicator (Low Fuel Blink)\par
+\par
+08023360 - Main graphics loader for gameplay.\par
+080233BE - Loads static part of tileset.\par
+\par
+
+\pard 08024630 - Sets transparency level for units when you hold B (0 to 16) on the map\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 080247A4 - Loads Map Pointer (Common Routine)\par
+08024ABC - Damage Formula Calc subroutine (Input of pointers to battle RAM in r0 and r1)\par
+08024C58 - Display Damage Formula Calc subroutine (input of pointers to battle RAM in r0 and r1)\par
+
+\pard 08024c9E - Load Temp Offence\par
+08024CA6 - Load Temp Defence\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 08024F20 - Damage Formula Main Routine\par
+\par
+080250D2 - Compares if unit's HP is non-zero and branches otherwise. Branch to DC if nonzero. Runs in the order of defender -> attacker\par
+\par
+080251D8 - Subroutine that sets up attack vs inventions/pipeseams/etc.\par
+08025410 - Fuel Routine. Checks if unit is dived and moves fuel cost to 0x5\par
+\par
+08025436 - Daily fuel consumption\par
+0802547C - Has the unit run out of fuel?\par
+0802562A - Affects whether a unit appears (or is invisible due to being dived) on the map (Humans) - AIs are cheating gits.\par
+08025CC8 - Attempts to create a unit at the input grid co-ordinates (r0 = x, r1 = y, r2 = UID)\par
+08025E08 - Costs for unit bought\par
+
+\pard 08025EC0 - Compares if bit 0x8 of the current unit is set. If it isn't, it \par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 08025F8A - Appears to check whether there is a transport pointer at all (Eg, can it load units at all) then checks if that unit that is attempted to be loaded is allowed. Then checks the capacity of the transport (Can it carry 2? Can it carry 1?)\par
+08026016 - Checks if two units can be joined?\par
+080261E8 - Checks whether Neotanks are unlocked. Checks game mode + state bits (input r0 = Army)\par
+08026368 - Checks if Rank >999 Points\par
+080263E0 - Calculation for the Speed Score\par
+080263A4 - Speed Scoring Subroutine\par
+08026424 - Power Scoring Subroutine\par
+080264BC - Tech Scoring Subroutine\par
+0802653A - Saves Speed Score\par
+08026548 - Saves Power Score\par
+08026556 - Saves Technique Score\par
+08026604 - Compares days to victory to speed score?\par
+080266DC - Checks whether current player (P1-4) is active and is alive. Returns 1 if true, 0 if false.\par
+
+\pard 08026F04 - Loads a player's current income and adds it to the player's current funds\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 08027078 - Checks whether Fog of War is present, then checks to see if a unit has a transport pointer to show the "may have loaded units" icon\par
+
+\pard 08027658 - Draws the CO/CO Power/Funds Combobox in the Main Game Window\par
+080267AC - Generates a list of properties that can be built from by the player\par
+0802AA78 - Draws the Property Count/Capture Limit OAM\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 08029AF8 - Repairs Units (Input of Unit to repair in r0, r4, Repair amount r1)\par
+08029CB8 - Animates Supply? (0802A182)\par
+0802AEA6 - Loads current fuel for overlay\par
+0802ba40 - Affects whether a unit appears dived in the info window.\par
+\par
+
+\pard 0802CC90 - Menu Item Visibility Check - Checks if a unit is a Sub (0x18)\par
+\par
+0802DCE8 - Controls input for Main game screen\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+
+\pard 08034142 - Controls input for Link Menu?\par
+08034780 - Sets the default rules (Used for War Room, used to clear after a campaign map)\par
+080346FC - Clears RAM after a campaign map completion\par
+080348B4 - Checks if Fog of War is on, if true displays the "Country Name, Press A!" screen\par
+\par
+08034F7C - Increments 0x030030F0\par
+08034F8C - Decrements 0x030030F0\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+08035030 - Loads terrain palettes for Fog\par
+
+\pard 08035064 - Code that retrieves the Sound Effects for weather change IDs\par
+08035144 - Changes current game weather. r0 = Weather ID\par
+08035170 - Random Weather subroutine\par
+08035490 - Calculates chance of random weathers on game setup\par
+080354FC - Loads weather data (OBJ Tile, XY positioning, etc)\par
+08035F5E - Routine that loads the sound ID for a moving unit\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+0803678C - Subroutine for fuel/ammo graphics updates. Updates on Frame 0, 20, 40\par
+
+\pard\par
+\b 08036D1C - Start of game's THUMB Code here\par
+\b0 08036E18 - Subroutine that checks whether A, B Start Select is pressed and performs a soft reset.\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+08037D80 - Calculates Rank in Campaign/War Room (S-C)\par
+
+\pard 08037DA4 - Obtains ranking on a score for Campaign (199, 249, 279) (C = 2, B = 3, A = 4, S = 5)\par
+\par
+08038368 - Finds an open entry in the current campaign run score table (0x0200C458). Checks whether the day count is >0 and then saves the currently completed map's score\par
+08038484 - Manages map clears. Checks the winning player, gets the campaign map ID, calculates the scores\par
+0803861C - Checks whether the winning player is alive and on the correct team\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 0803866C - Checks game mode and whether Hard Campaign is on\par
+
+\pard\par
+08039A5C - Input: r0 = Graphic pointer r1 = Palette Pointer r2 = Graphic Length? r3 = Palette Slot?\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+
+\pard 0803B48C - Music/SFX player subroutine\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+
+\pard 0803b5E8  -  Title Screen\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 0803C010 - Reads value for set weather option?\par
+0803C264 - Sets up weather settings from Menu\par
+0803c4cc - checks if HC has been completed\par
+\par
+0803C70C - Routine for initial save variables\par
+0803C7A0 - Compares the return on the result of whether the map has already been bought\par
+
+\pard 0803CA54 - Checks if a map has been unlocked. r0 = Map ID\par
+0803CBD8 - Used to check campaign completion status for battle maps/main menu items\par
+\par
+
+\pard\tx565\tx1133\tx1700\tx2266\tx2832\tx3401\tx3967\tx4535\tx5102\tx5669\tx6235\tx6802 0803E088 - Initialise Black Hole Inventions on Map Start\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+080402B4 - Subroutine that changes Tile Type Map (0201F882) after a pipe seam is destroyed. Input: r0 = x-coord, r1 = y-coord\par
+
+\pard 080409E8 - Subroutine that performs the animation to Capture\par
+08041FE0 - Seems to collect what B-button style is used (indirect or direct)\par
+0804151C - Menu Visibility Check - Compares unit ID is 0x2 or Less (infantry or mech), for Capt Command\par
+08041776 - Menu Visibility Check - Compares unit ID is 0x2 or Less (infantry or mech), for Launch Silo Command\par
+0804203C - Collects min/max ranges\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 08042084 - Gathers a unit's Supplying ability\par
+
+\pard\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 0804224C - Appears to check if unloading is allowed.\par
+080422A8 - Gathers whether a unit is on the same tile (so can dive)\par
+\par
+08042314 - Checks whether loading is allowed on this terrain\par
+
+\pard 0804247C - Checks whether Silo use is allowed on this terrain\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 08042998 - Join Units Subroutine\par
+080424BC - Checks whether unit is currently on the same tile it started at (Capture function)\par
+\par
+08042C9C - Gathers Price multipliers of CO\par
+08042D84 - Gathers Vision Total of CO\par
+08042E2C - Gathers Luck Total of CO\par
+08042E84 - Gathers Negative Luck Total of CO\par
+08042FC4 - Gathers Counterattack Bonus Total of CO\par
+\par
+
+\pard 08042D1C - Collects Mov Range + CO Boosts\par
+08042D50 - Collects Max Firing Range + CO Boosts\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 08043086 - (Damage Formula) - Determines what stat boosts a unit gets. Only runs for active player.\par
+080430B0 - Attack Value of CO\par
+08043120 - Defence Value of CO\par
+08043190 - Movement Bonus of CO\par
+08043200 - Range Bonus of CO\par
+08043270 - Gathers Cost Bonus of CO. Input of CO ID, Power Status and Unit ID. Outputs cost bonuses in r0\par
+080432A8 - Gathers vision bonus of CO\par
+080433D8 - Subroutine that gets the unit's base cost.\par
+
+\pard 0804365C - Checks whether there is a Day Limit and draws "Days Remaining"\par
+080436DC - Draws the combined CO Power State/Funds/Charge/CO Face panel - Input: r0 = x, r1 = y\par
+08043A80 - Grabs CO Power Animation Pointer Return: Graphic Pointer - Input: r0 = ID\par
+08043A90 - Grabs CO Power Animation Palette Pointer Return: Graphic Pointer - Input r0 = ID\par
+08043B60 - Draws the CO's Name\par
+0804402C - Draws the CO's larger wide face image\par
+08044144 - Sets CO Power/Super CO Power Status\par
+08044178 - Clears CO Power/Super CO Power Status\par
+0804428C - Runs a check to see if a COP/SCOP is active. If it is, disable activation of SCOP (Skip the next check and set 0x0)\par
+080442AC - Checks whether CO Power is available - Returns 1 if true\par
+0804429E - Runs a check, set r0, 0x0 if no SCOP available (Powers active/No charge). 0x1 if SCOP is available.\par
+08044408 - Animation Check - Returns 0x1 (Andy/Jess)\par
+0804440C - Animation Check - Returns 0x1 if the unit is a Direct (Max)\par
+0804443C - Animation Check - Returns 0x1 if the Unit has Max Range >1 (Grit)\par
+08044470 - Animation Check - Returns 0x1 if the Unit class is a Foot Soldier (Sami)\par
+08044498 - Animation Check - Returns 0x1 if the Unit class is Copter or Plane (Eagle COP)\par
+08044AB8 - Returns ??? - Input: r0 = Player ID\par
+080444B4 - Animation Check - Returns 0x1 if the Unit is in wait mode but not Foot Soldier, or Unit class is Copter or plane (Eagle SCOP)\par
+080444EC - COP Animation - Heals unit 2 HP (Hyper Repair)\par
+080444FC - COP Animation - Heals unit 5 HP (Hyper Upgrade)\par
+0804450A - COP Animation - Unset Wait\par
+08044516 - COP Animation - Restores unit's ammo and fuel to maximum value (Turbo Charge/Overdrive)\par
+08044610 - Animate CO Power on a unit (Standard type CO Powers)\par
+08044B08 - Animates unit creation for Unit Creation CO Powers (r0 = x, r1 = y, r2 = COP/SCOP mode)\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+\par
+
+\pard 08045478 - Script - \par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 080457D1 - Input of Invention 0x5 (Deathray). Runs 0x0803E388 to see if alive. Returns 1 if one is alive, 0 if all dead\par
+080457E9 - Input of Invention 0x1 (Laser). Rest as Deathray\par
+08045801 - Input of Invention 0x3 (Black Cannon). Rest as Deathray\par
+08045819 - Input of Invention 0x4 (Minicannon). Rest as Deathray\par
+08045831 - Runs subroutine 0x08045650 which checks the map to see if pipe seams are present. Returns 1 if alive, 0 if dead.\par
+08045848 - Checks if the 75th Tile on the map is owned by P1 (OS Lab Map Found)\par
+080458F9 - Checks if the 180th Tile on the Map is owned by P1 (GE Lab Map Found)\par
+08042559 - Checks all of P1's units to see how many units have fuel. If the number of units with fuel is 0 returns 1, otherwise returns 0.\par
+08045D10 - Checks if P2 has at least one battleship. Returns 0 if true, 1 if false.\par
+
+\pard 080449AC - Subroutine that applies the Meteor Strike Damage.\par
+080449C0 - Sets up targeting for Meteor Strike:\par
+\par
+08046778 - Sets up movement cost display for the R-Info window. Input: r0 = Left/Right side (0x0 or 0x80) r1 = Terrain Type\par
+\par
+08048A32 - Routine that loads points for display in the battle maps menu - Seems to be held at 02017C50 when in use?\par
+080487B4 - Seems to load the cost of items in Battle Maps, the text ID used to display and what icon is used.\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+08057FA8 - AI: How many of a unit class are present. (Input of r0 = Unit class)\par
+\par
+08058A5C - Branch where calculates the maximum counterattack AI is willing to take\par
+0805926C - AI: Branch which calculates the minimum damage the AI is willing to do\par
+\par
+\par
+0805C1C5 - Start of Turn (03004770 = 0x1)\par
+0805C209 - COP Check: If units are injured\par
+0805C1D9 - COP Check: Is it the Start of the Turn? Start (COP), End (SCOP)\par
+0805C1C1 - COP Check: Start and End of Turn (Always)\par
+0805C269 - COP Check: If not snowing\par
+0805CAA6 - AI: Checks a built unit's AI type (+0x1B) in the unit data and compares to 0x1 (infantry?)\par
+0805ECD8 - AI:  Do Nothing with this unit 0x0\par
+0805ECDC - AI: Aggressively Charge 0x1\par
+0805ED70 - AI: Move with front line 0x2\par
+0805EE40 - AI: Control method (Unknown) 0x3\par
+0805EF9C - AI: Control Method (Unknown) 0x4\par
+0805F074 - AI: Move up conservatively 0x5\par
+0805F0EC - AI: Control Method (Unknown) 0x6\par
+0805F2B4 - AI: Protect the HQ 0x7\par
+\par
+\par
+0805FC78 - Checks transport pointer, then checks whether a unit can be loaded on the tile. Does a Compare based on Unit ID whether it can be loaded. :/\par
+\par
+080607B4 - AI: What unit is built next?\par
+08060894 - AI: Subroutine used for deciding if CO has enough Inf?\par
+0806096C - AI: Whether to build a T-Copter?\par
+080609B8 - AI: Whether to build an APC?\par
+08060A20 - AI: Whether to build a Lander?\par
+08060D4C - AI: Subroutine used for deciding what to build next, provided inf and transports are built.\par
+\par
+08060DAC - AI: Calculates which properties the AI can build from. Uses 08042424 to calculate and thus Hachi can't use SCOP build as an AI.\par
+08060ED4 - What properties can be built from for this unit type? 2 = Land, 4 = Air  6 = Sea\par
+08060F00 - Determines what units the AI Can Build and calculates priority based on how many are already built. \par
+08061178 - Obtains a Random number and then uses the weightings (Unit 0x5 to 0x9) to determine a pointer to follow.\par
+Related to the build subroutine for AIs at 080607BC\par
+080612E8 - AI: Marks a property of being used with 0xFE\par
+08061788 - Saves and loads a crapload of data based on the AI type for a map.\par
+
+\pard 08061868 - Overarching AI Control Subroutine\par
+08061CDC - AI: Seems to blank word aligned bytes at around 03004100, 0x5B times\par
+08061CF8 - AI: Seems to compare the AI player's alliances\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 08061F34 - AI: Subroutine that calculates what properties exist to build transport types (list at 085767F2)\par
+
+\pard\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+
+\pard 08062964 - AI: Seems to compare how much damage will be done to a target\par
+08062988 - AI: If the unit can counterattack?\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+08064788 - Routine that handles the graphics of the weather tab?\par
+08066BF4 - Keypad handler for rules setup menu\par
+
+\pard 0806757A - Checks whether Start/A have been pressed for the intro movie.  If pressed, branches to 0803b5E8 which launches the title screen.\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 0806A7B4 - Subroutine for meteor size scaling?\par
+\par
+0806C9D8 - Code for checking until title screen reset.\par
+0806CA06 - Title screen input handler - Starts main menu if a button is pressed.\par
+\par
+
+\pard 0806f0f6 - Controls input for Sound Room\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+
+\pard 08070478 - Routine that takes Music/Sound ID and activates it?\par
+\par
+08072C44 - Updates the scrolling for Campaign World Map\par
+08072F04 - Appears to be the keypad handler for the main menu?\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+080745A9 - Input of Player 1, runs subroutine 0x08044094 (Checks if COP Charge > 0)\par
+08074598 - Input of Player 1, Checks if P1's CO Power is ready (Input of 0x1), runs subroutine 0x084423C (Check COP Ready - Standard)\par
+\par
+0807821C - Input: r0 = Campaign map ID, Loads the Flag Type (+0x2) from the campaign map header\par
+0807823C - Input: r0 = Campaign map ID, No Operation subroutine (bx r14)\par
+\par
+080785FC - Clears 0x03005944 (How many armies there are)\par
+\par
+
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720 08078791 - Setup CO Select List for Campaign Mission (Liberation)\par
+080787A5 - Setup CO Select List for Campaign Mission (Neotanks BM)\par
+080787B9 - Setup CO Select List for Campaign Mission (Factory Blues)\par
+080787ED - Setup CO Select List for Campaign Mission (Neotanks YC)\par
+08078801 - Setup CO Select List for Campaign Mission (Hunt's End)\par
+08078835 - Setup CO Select List for Campaign Mission (Neotanks GE)\par
+08078849 - Setup CO Select List for Campaign Mission (Great Sea Battle)\par
+08078865 - Setup CO Select List for Campaign Mission (Hot Pursuit)\par
+
+\pard 08078885 - Setup CO Select List for Campaign Mission (Final Front)\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 08078D84 - Loads map animation from background for CO Info screens?\par
+08078E14 - Calculates campaign mission ID from map ID (sub 0x89)\par
+\par
+0807A3AC - Subroutine that grabs the victory text IDs for a Campaign mission as well as standard victory. Input: r0 = Player, r1 = Mission number\par
+0807A908 - \par
+\par
+0807DA98 - OAM Tile Drawing Routine for War Room CO Select\par
+\par
+
+\pard 0807FE90 - Seems to be the COP BG Animation/Pal/etc. subroutine\par
+0807FEAA - Updates the Alpha Trans. for COP\par
+0807FFDA - Updates the BG0 Scrolling for COP splash\par
+\par
+08080052 - Updates BG0 scrolling for COP (End)\par
+\par
+08080E74 - Branches based on Power Mode Input (COP = 1, SCOP = 2) and executes the scripting for the mode if true\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+08082264 - Calculates what mode is being selected? (If Submenu)\par
+
+\pard 0808455A - Updates the scrolling for scrollable maps (Title screen/Menu backgrounds?)\par
+08084CB0 - Keypad handler for CO Dossier\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+08084DA2 - Checks CO ID for what name to load (CO Dossier) (Left only)\par
+\par
+
+\pard 08085026 - Checks whether Page number \f1\u8805?\f0\lang9 , Thus hiding CO Body Sprite in CO Dossier\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\par
+08085410 - Routine that determines what icon to display for a given firepower value.\par
+08085B0C - Initial Map Case for Vs (Done at bootup)\par
+\par
+08085708 - Routine for drawing unit stats in CO Info\par
+\par
+
+\pard 080860DC - Controls input for the War Room Screen\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 08087548 - Calculates which high score to show.\par
+08087B60 - Subroutine that sets up display of Enemy CO Faces (Input of Cursor Position (0-30))\par
+
+\pard 0808849E - Keypad handlers for CO Edit\par
+080889BA - Keypad handlers for CO Edit\par
+08088B64 - Keypad handlers for CO Edit\par
+\par
+0808AAA0 - swi 0xE (BgAffineSet), returns with lr\par
+0808AAA4 - swi 0xC (CpuFastSet), returns with lr\par
+0808AAA8 - swi 0xB (CpuSet), returns with lr\par
+0808AAAC - swi 0x6 (Div), returns with lr\par
+0808AAB0 - swi 0x6 (Div), moves remainder into r0, returns with lr\par
+0808AAB8 - swi 0x13 (HuffUnComp), returns with lr\par
+0808AABC - swi 0x12 (LZ77UnCompVram), returns with lr\par
+0808AAC0 - swi 0x11 (LZ77UnCompWram), returns with lr\par
+0808AAC4 - sets r1 to 1 then swi 0x25 (MultiBoot), returns with lr\par
+0808AACC - swi 0x15 (RLUnCompVram), returns with lr\par
+0808AAD0 - swi 0x14 (RLUnCompWram), returns with lr\par
+\par
+
+\pard\tx560 0808B6E8 - Subroutine that seems to copy loaded save data to RAM. Loads data from 0200002A and saves it to RAM.\par
+\par
+0808BBBC - bx r0, input subroutine in r0\par
+0808BBC0 - bx r1, input subroutine in r1\par
+0808BBC4 - bx r2, input subroutine in r2\par
+0808BBC8 - bx r3, input subroutine in r3\par
+0808BBCC - bx r4, input subroutine in r4\par
+0808BBD0 - bx r5, input subroutine in r5\par
+0808BBD4 - bx r6, input subroutine in r6\par
+0808BBD8 - bx r7, input subroutine in r7\par
+0808BBDC - bx r8, input subroutine in r8\par
+0808BBE0 - bx r9, input subroutine in r9\par
+0808BBE4 - bx r10, input subroutine in r10\par
+0808BBE8 - bx r11, input subroutine in r11\par
+0808BBEC - bx r12, input subroutine in r12\par
+0808BBF0 - bx r13, input subroutine in r13\par
+0808BBF4 - bx r14, input subroutine in r14\par
+\par
+0808BBF8 - Custom Division subroutine, avoids div0 errors. Input r0 = numerator, r1 = denominator\par
+\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 08488494 - Design Maps Load Menu Options\par
+0849ABC0 - Intel Submenu Options Controls\par
+0849AC60 - Options Submenu Options Controls\par
+\par
+\par
+085D3DD0 - Routine that checks unit allegiance type/HQ type\par
+}
+ 

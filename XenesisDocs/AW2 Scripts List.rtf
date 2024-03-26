@@ -1,0 +1,425 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fmodern\fcharset0 CourierNewPSMT;}{\f1\fmodern\fcharset0 CourierNewPS-BoldMT;}{\f2\fmodern\fcharset0 Courier;}}
+{\*\generator Riched20 10.0.17134}\viewkind4\uc1 
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\f0\fs24\lang9 AW2 Scripts List:\par
+
+\pard Scripting Subroutine:\par
+0x0801C8F4 - Top Level scripting subroutine\par
+\par
+0x0801D264 - Runs the script items\par
+\tab 0x0801D294 - Subroutine\par
+\tab 0x0848B5DC - Jump table\par
+\par
+0x0801C95C\par
+\tab Input of r0 = Script Location\par
+\tab Input of r1 = Script RAM storage location\par
+0x0801537C\par
+\tab Also a Scripting Subroutine\par
+\par
+0x08015A9C\par
+\tab Scripting Subroutine:\par
+\tab 0x080159E0\par
+\tab\tab Scripting subroutine of 0x08015A9C - Runs script items?\par
+Scripting Engine (Used generally for graphics etc.)\par
+Script Command Base Pointer - 0x0848B5DC\par
+\tab 0x2B Commands\par
+\par
+Format: Command (HW), Argument (HW), Pointer (W)\par
+\par
+\tab 0x00 \tab 0x0801CD85\tab = End\par
+\tab 0x01 \tab 0x0801CD91\par
+\tab 0x02\tab\tab 0x0801CD9D\tab = Run ASM\par
+\tab 0x03\tab\tab 0x0801CE15\par
+\tab 0x04\tab\tab 0x0801CE25\tab = Run ASM, Initial Function?\par
+\tab 0x05 \par
+\tab 0x06\par
+\tab 0x07\par
+\tab 0x08\par
+\tab 0x09\par
+\tab 0x0A\par
+\tab 0x0B\par
+\tab 0x0C\par
+\tab 0x0D\par
+\tab 0x0E \tab = Wait Command. Argument is the duration to wait script execution for.\par
+\tab 0x0F\par
+\tab 0x10\par
+\tab 0x11\par
+\tab 0x12\par
+\tab 0x13\par
+\tab 0x14 \tab = Some kind of conditional, can decrement the script location\par
+\tab 0x15\par
+\tab 0x16\par
+\tab 0x17\par
+\tab 0x18\par
+\tab 0x19\par
+\tab 0x1A \tab = ???\par
+\tab 0x1B\par
+\tab 0x1C\par
+\tab 0x1D\par
+\tab 0x1E\par
+\tab 0x1F\par
+\tab 0x20\par
+\tab 0x21\par
+\tab 0x22\par
+\tab 0x23\par
+\tab 0x24\par
+\tab 0x25\tab = Fade To White, Argument = Fade Speed (High = Fast), Pointer = None\par
+\tab 0x26\tab = Fade From White, Argument = Fade Speed, Pointer = None\par
+\tab 0x27\par
+\tab 0x28\par
+\tab 0x29\par
+\tab 0x2A\par
+\tab 0x2B\par
+\par
+
+\pard\tx560 Load Campaign Script New/Continue:\par
+0x0849EB7C\par
+\tab @@Comm\tab\tab 0x1D,\tab 0x05,\tab 0x0\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x0807813C+1\par
+\tab @@Comm\tab\tab 0x08,\tab 0x00,\tab 0x0861485C\par
+\tab @@Comm\tab\tab 0x28,\tab 0x64,\tab 0x0803BD6C+1\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x080346FC+1\par
+\tab @@Comm\tab\tab 0x0D,\tab 0x00,\tab 0x0849EBFC\par
+\tab @@Comm\tab\tab 0x0B,\tab 0x64,\tab 0x0\par
+\tab @@Comm\tab\tab 0x00,\tab 0x00,\tab 0x0\par
+\par
+Load War Room Script New/Continue:\par
+0x0849EC1C\par
+\tab @@Comm\tab\tab 0x1D,\tab 0x1E,\tab 0x0\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x080346FC+1\par
+\tab @@Comm\tab\tab 0x0D,\tab 0x00,\tab 0x0849EC34\par
+\tab @@Comm\tab\tab 0x0C,\tab 0x00,\tab 0x0\par
+\tab @@Comm\tab\tab 0x0B,\tab 0xFFFF,\tab 0x0\par
+\tab @@Comm\tab\tab 0x0D,\tab 0x00,\tab 0x0849E7F8\par
+\tab @@Comm\tab\tab 0x0B,\tab 0x00,\tab 0x0\par
+\tab @@Comm\tab\tab 0x06,\tab 0x01,\tab 0x08616C54\par
+\tab @@Comm\tab\tab 0x28,\tab 0xFFFF,\tab 0x0803BD6C+1\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x0807F57C+1\par
+\tab @@Comm\tab\tab 0x06,\tab 0x01,\tab 0x086165C0\par
+\tab @@Comm\tab\tab 0x28,\tab 0x00,\tab 0x0803BD6C+1\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x080364F4+1\par
+\tab @@Comm\tab\tab 0x00,\tab 0x00,\tab 0x0\par
+\par
+Load Versus Script New/Continue:\par
+0x0849ECE0\par
+\tab @@Comm\tab\tab 0x1D,\tab 0x05,\tab 0x0\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x0803BDDC+1\par
+\tab @@Comm\tab\tab 0x0D,\tab 0x00,\tab 0x0849ECF8\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x0803BE60+1\par
+\tab @@Comm\tab\tab 0x06,\tab 0x01,\tab 0x08616C54\par
+\tab @@Comm\tab\tab 0x27,\tab 0x00,\tab 0x0803BD6C+1\par
+\tab @@Comm\tab\tab 0x0D,\tab 0x00,\tab 0x0849E7F8\par
+\tab @@Comm\tab\tab 0x0B,\tab 0x00,\tab 0x0\par
+\tab @@Comm\tab\tab 0x0D,\tab 0x00,\tab 0x0849ED30\par
+\tab @@Comm\tab\tab 0x00,\tab 0x00,\tab 0x0\par
+\par
+Load Battle Maps Script:\par
+0x084C3138\par
+\tab @@Comm\tab\tab 0x29,\tab 0x01,\tab 0x0\par
+\tab @@Comm\tab\tab 0x1D,\tab 0x1E,\tab 0x0\par
+\tab @@Comm\tab\tab 0x14,\tab 0x00,\tab 0x0803B628+1\par
+\tab @@Comm\tab\tab 0x05,\tab 0x00,\tab 0x0848A140\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x080489CC+1\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x08049B14+1\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x08049B70+1\par
+\tab @@Comm\tab\tab 0x1E,\tab 0x1E,\tab 0x0\par
+\tab @@Comm\tab\tab 0x0E,\tab 0x0A,\tab 0x0\par
+\tab @@Comm\tab\tab 0x03,\tab 0x00,\tab 0x080490BC+1\par
+\tab @@Comm\tab\tab 0x09,\tab 0x00,\tab 0x0848A140\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x08049170+1\par
+\tab @@Comm\tab\tab 0x03,\tab 0x00,\tab 0x08049360+1\par
+\tab @@Comm\tab\tab 0x03,\tab 0x00,\tab 0x08049928+1\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x08049B80+1\par
+\tab @@Comm\tab\tab 0x28,\tab 0x00,\tab 0x0803BD6C+1\par
+\tab @@Comm\tab\tab 0x1D,\tab 0x1E,\tab 0x0\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x08011B18+1\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x08049B28+1\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x0803D960+1\par
+\tab @@Comm\tab\tab 0x0E,\tab 0x00,\tab 0x0\par
+\tab @@Comm\tab\tab 0x0C,\tab 0x01,\tab 0x0\par
+\tab @@Comm\tab\tab 0x0B,\tab 0x00,\tab 0x0\par
+\tab @@Comm\tab\tab 0x0E,\tab 0x1E,\tab 0x0\par
+\tab @@Comm\tab\tab 0x29,\tab 0x00,\tab 0x0\par
+\tab @@Comm\tab\tab 0x1D,\tab 0x1E,\tab 0x0\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x08011B18+1\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x08049B28+1\par
+\tab @@Comm\tab\tab 0x0B,\tab 0x01,\tab 0x0\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x0803B83C+1\par
+\tab @@Comm\tab\tab 0x00,\tab 0x00,\tab 0x0\par
+\par
+Load Design Room - CO Colours Script:\par
+0x0849EA94\par
+\tab @@Comm\tab\tab 0x06,\tab 0x01,\tab 0x08616DFC\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x0803B83C+1\par
+\tab @@Comm\tab\tab 0x00,\tab 0x00,\tab 0x0\par
+\par
+Load Design Room - Design Maps Script:\par
+N/A?\par
+\par
+Load Link Battle Script:\par
+0x0849EC8C\par
+\tab @@Comm\tab\tab 0x1D,\tab 0x1E,\tab 0x0\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x080346FC+1\par
+\tab @@Comm\tab\tab 0x0D,\tab 0x00,\tab 0x0849ECA4\par
+\tab @@Comm\tab\tab 0x0C,\tab 0x00,\tab 0x0\par
+\tab @@Comm\tab\tab 0x0B,\tab 0xFFFF,\tab 0x0\par
+\tab @@Comm\tab\tab 0x0D,\tab 0x00,\tab 0x0849E7F8\par
+\tab @@Comm\tab\tab 0x0B,\tab 0x00,\tab 0x0\par
+\tab @@Comm\tab\tab 0x06,\tab 0x01,\tab 0x0849E7F8\par
+\tab @@Comm\tab\tab 0x28,\tab 0xFFFF,\tab 0x0803BD6C\par
+\tab @@Comm\tab\tab 0x00,\tab 0x00,\tab 0x0\par
+\par
+Load Sound Room Script:\par
+0x0849EAAC\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x0806F710\par
+\tab @@Comm\tab\tab 0x0E,\tab 0x00,\tab 0x0\par
+\tab @@Comm\tab\tab 0x02,\tab 0x00,\tab 0x0803B83C+1\par
+\tab @@Comm\tab\tab 0x00,\tab 0x00,\tab 0x0\par
+\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803 CO Power Text Script\par
+0x0848A3E0\par
+\par
+Campaign OS Intro Script\par
+0x084BA6E0\par
+
+\pard Missile Silo Scripts:\par
+0x0849FCA4\tab Main Script\par
+\tab 0x04\tab\tab 0x08034F8C+1 \par
+\tab 0x02\tab\tab 0x08034F7C+1\par
+\tab 0x0E\par
+\tab 0x07\tab 0x3\tab 0x0849E778 \par
+\tab 0x02\tab\tab 0x08040984+1\par
+\tab 0x1A\tab\tab 0x0849A00C\par
+\tab 0x02\tab\tab 0x080409B4+1\par
+\tab 0x0E\par
+\tab 0x02\tab\tab 0x080409A0+1\par
+\tab 0x1A\tab\tab 0x0849A00C\par
+\tab 0x02\tab\tab 0x080409D0+1\par
+\tab 0x0E\par
+\tab 0x06\tab 0x1\tab 0x0849E7A0\par
+\tab 0x00\par
+\par
+0x0849FB74\tab Destroy Unit Script\par
+\par
+0x0849FB8C\tab Launching Missile\par
+\tab 0x0E \tab 0x0\par
+\tab 0x02\tab\tab 0x080404A0+1\par
+\tab 0x03 \tab\tab 0x0804050C+1\par
+\tab 0x14 \tab\tab 0x0801C7B4+1 \par
+\tab 0x0E\tab 0x3C\par
+\tab 0x0\par
+\tab\tab\par
+0x0848B5AC\tab Wait Script\par
+\tab 0x04 \tab\tab 0x0801C781\par
+\tab 0x03\tab\tab 0x0801C755\par
+\tab 0x00\par
+\par
+0x0849FBBC\tab Falling Missile?\par
+\tab 0x0E\par
+\tab 0x02 \tab\tab 0x08040591\par
+\tab 0x03\tab\tab 0x080405D9 \par
+\tab 0x02\tab\tab 0x08040641\par
+\tab 0x0E \tab 0x3C\par
+\tab 0x00\par
+\par
+0x00849E7A0\par
+\tab 0x02 \tab\tab 0x0803B701\par
+\tab 0x03\tab\tab 0x0803B735\par
+\tab 0x00\par
+0x0849FCA4 - Missile Silo Launch (Primary Script)\par
+\tab 0x0849E778\par
+\tab 0x0849FB8C\tab ;Missile Rises\par
+\tab 0x0848B5AC\tab ;Wait Script\par
+\tab 0x0849FBBC\tab ;Missile Falls\par
+\tab 0x0848B5AC\tab ;Wait Script\par
+\tab 0x00849E7A0\tab ;Missile Launch End\par
+\par
+CO Power Splash\tab ;Sets up Graphics in RAM\par
+0x08616794\par
+\tab @@Comm\tab 0x2,0x0,0x080347FC+1\par
+\tab @@Comm\tab 0xE,0x1,0\par
+\tab @@Comm\tab 0x2,0x0,0x0807FA34+1\tab ;COP Animation - Launches two sub-scripts\par
+\tab @@Comm\tab 0x3,0x0,0x0807FA84+1\tab ;bx r14 - Wait loop, it seems\par
+\tab @@Comm\tab 0x0\par
+\par
+CO Power Splash Subscripts:\par
+0x086167EC\tab ;Red Wavy Background\par
+\tab @@Comm\tab 0x0E,0x1\par
+\tab @@Comm\tab 0x02,0x0,0x0807FE90+1\par
+\tab @@Comm\tab 0x03,0x0,0x0807FF78+1\par
+\tab @@Comm\tab 0x03,0x0,0x0807FFF0+1\par
+\tab @@Comm\tab 0x0,0x0,0x0\par
+\par
+0x086167BC\tab ;Slides Across a CO Image and prints name\par
+\tab @@Comm\tab 0x0E,0x40\par
+\tab @@Comm\tab 0x02,0x0,0x0807FA88+1\tab ;CO Power Name Graphics Loader?\par
+\tab @@Comm\tab 0x03,0x0,0x0807FAE0+1\par
+\tab @@Comm\tab 0x03,0x0,0x0807FC70+1\tab ;Handles the text movement?\par
+\tab @@Comm\tab 0x03,0x0,0x0807FCF8+1\tab ;Handles the CO Image movement?\par
+\tab @@Comm\tab 0x0,0,0\par
+\par
+Super CO Power Splash\par
+0x08616844\par
+\tab @@Comm\tab 0x2,0x0,0x08034F7C+1\par
+\tab @@Comm\tab 0xE,0x1,0x0\par
+\tab @@Comm\tab 0x29,0x0,0x0\par
+\tab @@Comm\tab 0x2,0x0,0x08080F0C+1\par
+\tab @@Comm\tab 0x2,0x0,0x080800B0+1\par
+\tab @@Comm\tab 0x3,0x0,0x08080254+1\par
+\tab @@Comm\tab 0x3,0x0,0x08080324+1\par
+\tab @@Comm\tab 0x2,0x0,0x08080EE4+1\par
+\tab @@Comm\tab 0x2,0x0,0x08078B08+1\par
+\tab @@Comm\tab 0x3,0x0,0x08078BDC+1\par
+\tab @@Comm\tab 0x2,0x0,0x080366A4+1\par
+\tab @@Comm\tab 0xE,0x1,0x0\par
+\tab @@Comm\tab 0x2,0x0,0x08080498+1\par
+\tab @@Comm\tab 0x10,0x0,0x0\par
+\tab @@Comm\tab 0x0,0,0\par
+\par
+Scripting Commands for CO Power General Setup\par
+0x0849D77C\tab ;CO Power Textbox, Too\par
+\tab @@Comm\tab 0x2,0x0,0x08034F7C+1\tab ;Increment 0x030030F0\par
+\tab @@Comm\tab 0xE,0x2,0x0\par
+\tab @@Comm\tab 0x2,0x0,0x08039820+1\tab ;Picks a COP Quote?\par
+\tab @@Comm\tab 0x3,0x0,0x08039914+1\tab ;Script 0x0848A3EC/Speak COP Quote\par
+\tab @@Comm\tab 0xE,0x1,0x0\par
+\tab @@Comm\tab 0x2,0x0,0x08039650+1\tab ;Display CO Splash: CO + COP Name + Sprite\par
+\tab @@Comm\tab 0xE,0x0,0x0\par
+\tab @@Comm\tab 0x2,0x0,0x080397BC+1\tab ;Run the CO's CO Power ASM\par
+\tab @@Comm\tab 0xE,0x0,0x0\par
+\tab @@Comm\tab 0xD,0x0,0x0849D7DC\tab\tab ;Reload Graphics after Power Splash\par
+\tab @@Comm\tab 0xE,0x64,0x0\par
+\tab @@Comm\tab 0xD,0x0,0x0849D7DC\tab\tab ;Reload Graphics after Power Splash\par
+\tab @@Comm\tab 0x2,0x0,0x080397CC+1\tab ;Load CO Power Music\par
+\tab @@Comm\tab 0x2,0x0,0x080397DC+1\tab ;Load Graphics into OAM Tiles\par
+\tab @@Comm\tab 0x2,0x0,0x08034F8C+1\tab ;Decrement 0x030030F0\par
+\tab @@Comm\tab 0x0,0x0,0x0\par
+\par
+0x084A0818 - Scripting Comands for 'Default' CO Power\par
+\tab 0x4\tab\tab 0x08034F8C ;Loads 0x030030F0, Checks for 0, subtracts 1 if not equal\par
+\tab 0x2\tab\tab 0x08034F7C ;Loads 0x030030F0, adds 1, stores at same address\par
+\tab 0x2\tab\tab 0x080445A8 ;Clears 0x03001430..0x0300146F\par
+\tab 0x3\tab\tab 0x08044610 ;Checks to see if units are present, animates\par
+\tab 0xE\tab 0x1\par
+\tab 0x2\tab\tab 0x08039F58\tab ;Sets CO Power Mode\par
+\tab 0x14\tab\tab 0x08039B88 ;Common Script check subroutine?\par
+\tab 0x0\par
+\par
+0x084A08EC - Scripting Commands for Mass Damage COPs - Part 1\par
+\tab 0x4\tab\tab 0x08034F8C\par
+\tab 0x2\tab\tab 0x08034F7C\par
+\tab 0xE\par
+\tab 0x2\tab\tab 0x08044DD0\par
+\tab 0x2\tab\tab 0x080451C8\par
+\tab 0x3\tab\tab 0x08045210\par
+\tab 0x2\tab\tab 0x08044DE0\par
+\tab 0x3\tab\tab 0x08044E10\par
+\tab 0x2\tab\tab 0x08044DF8\par
+\tab 0x3\tab\tab 0x08044F24\par
+\tab 0x3\tab\tab 0x08045254\par
+\tab 0x2\tab\tab 0x08045298\par
+\tab 0x2\tab\tab 0x080452A8\tab\tab - Sets Mass Damage Weather, CO Power Status\par
+\tab 0x1A\tab\tab 0x0849BD38*\par
+\tab 0xE\tab 0x1\par
+\tab 0x0\par
+\par
+0x084A0994 - Scripting Commands for Mass Damage COPs - Part 2\par
+\tab 0xE\par
+\tab 0x2\tab\tab 0x08045358\par
+\tab 0x3\tab\tab 0x080452FC\par
+\tab 0x0\par
+\par
+0x084A07E8 - Scripting Commands for Fullscreen Flash (Enhanced Vision,  Barter, Merchant Union, Gold Rush)\par
+\tab 0x25\tab 0x100\par
+\tab 0xE\tab 0x1\par
+\tab 0x2\tab\tab 0x08039F58\par
+\tab 0x26\tab 0x40\par
+\tab 0xE\tab 0x14\par
+\tab 0x0\par
+\par
+0x084A099C - ?\par
+\tab 0x2\tab\tab 0x08045358\par
+\tab 0x3\tab\tab 0x080453B0\par
+\tab 0x0\par
+\par
+0x0804A09CC - Scripting Commands for Unit Creation (Airborne Assault, Copter Command)\par
+\tab @@Comm\tab 0x04,0x0,0x08034F8C+1\par
+\tab @@Comm\tab 0x02,0x0,0x08034F7C+1\par
+\tab @@Comm\tab 0x0E,0x0,0x0\par
+\tab @@Comm\tab 0x02,0x0,0x08045478+1\par
+\tab @@Comm\tab 0x0B,0x0,0x0\par
+\tab @@Comm\tab 0x02,0x0,0x08045490+1\tab ;Controls spawn locations (0x080454F6)\par
+\tab @@Comm\tab 0x1A,0x0,0x0849A00C\par
+\tab @@Comm\tab 0x02,0x0,0x08045564+1\tab ;Spawns The unit\par
+\tab @@Comm\tab 0x0E,0x4,0x0\par
+\tab @@Comm\tab 0xC,0x0,0x0\par
+\tab @@Comm\tab 0x0B,0x1,0x0\par
+\tab @@Comm\tab 0x02,0x08039F58+1\par
+\tab @@Comm\tab 0x14,0x08039B88+1\par
+\tab @@Comm\tab 0x00,0x0,0\par
+\par
+0x084A0858 - Scripting Commands for the Meteor Strike\par
+\tab 0x4\tab\tab 0x08034F8C ;Loads 0x030030F0, Checks for 0, subtracts 1 if not equal\par
+\tab 0x2\tab\tab 0x08034F7C ;Loads 0x030030F0, adds 1, stores at same address\par
+\tab 0xE\tab 0x1\par
+\tab 0x2\tab\tab 0x080448E4 ;What to hit\par
+\tab 0x1A\tab\tab 0x08049A0C*\par
+\tab 0x2\tab\tab 0x08044924 ;Checks whether two pointers are equal and stores at 0x030000XX\par
+\tab 0x2\tab\tab 0x08044968 ;Checks Unit Number (0-FF),Loads that unit co-ord to hit, runs 0x0806AA80 (Loads Sprite, Palette) - Sprite Effect Only - Controls what sprite to use as well.\par
+\tab 0x14\tab\tab 0x0806AAC4 ; Some kind of check\par
+\tab 0x2\tab\tab 0x08044994 ;Inflicts the damage\par
+\par
+\tab ;This block of scripting commands causes the flash if there's no Meteor launched\par
+\tab 0x2\tab\tab 0x0804495C\par
+\tab 0x2\tab\tab 0x08010F94 ;Stores 1 at 0x03002B5C\par
+\tab 0x26\tab 0x40\par
+\tab 0x2\tab\tab 0x08044940\par
+\tab 0xE\tab\tab\tab\tab\tab\par
+\par
+\tab 0x0\par
+\par
+Scripting Command Cleared Orange Dawn\par
+\tab 0x08614894\par
+\par
+\tab 0xE\par
+\tab 0x1D\tab 0x1E\par
+\tab 0x1B\tab 0x1A8\par
+\tab 0x2\tab\tab 0x08076B7D\par
+\tab 0x1E\tab 0x1E\par
+\tab 0x2\tab\tab 0x08076BF1\par
+\tab 0xE\par
+\tab 0x2\tab\tab 0x08076C1D\par
+\tab 0xE\par
+\tab 0x2\tab\tab 0x080767C1\par
+\tab 0x2\tab\tab 0x08076C8D\par
+\tab 0x2\tab\tab 0x0807639D\par
+\tab 0xD\tab\tab 0x08615614\par
+\tab 0x0\par
+\par
+Script Load War Room/Campaign Style CO Select\par
+.org 0x08616638\par
+\tab @@Comm\tab 0x02,0x00,0x0807C9EC+1\par
+\tab @@Comm\tab 0x03,0x00,0x0807CAFC+1\par
+\tab @@Comm\tab 0x03,0x00,0x0807CE5C+1\par
+\tab @@Comm\tab 0x03,0x00,0x0807E980+1\par
+\tab @@Comm\tab 0x03,0x00,0x0807ED90+1\par
+\tab @@Comm\tab 0x03,0x00,0x0807EEEC+1\par
+\tab @@Comm\tab 0x1D,0x1E,0x00\par
+\tab @@Comm\tab 0x0E,0x01,0x00\par
+\tab @@Comm\tab 0x09,0x00,0x086165C0\par
+\tab @@Comm\tab 0x09,0x00,0x086166C8\par
+\tab @@Comm\tab 0x00,0x00,0x00\par
+\par
+\b\f1 Second Scripting Type Scripts:\par
+\b0\f0 Versus Menu Script for transferral from CO Select to Vs Rules\par
+
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\f2 0x0858096C\par
+\tab @@CommB 0x2,\tab 0x00,\tab 0x080646BC+1\par
+\tab @@CommB\tab 0x1,\tab 0x00,\tab 0x080646D4+1\par
+\tab @@CommB\tab 0x1,\tab 0x00,\tab 0x080645AC+1\par
+\tab @@CommB\tab 0x2,\tab 0x00,\tab 0x0806464C+1\par
+\tab @@CommB 0x2,\tab 0x00,\tab 0x08064660+1\par
+\tab @@CommB\tab 0x1,\tab 0x00,\tab 0x08064660+1\par
+\tab @@CommB\tab 0x7,\tab 0x00,\tab 0x00000000\f0\par
+}
+ 

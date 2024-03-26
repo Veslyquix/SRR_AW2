@@ -1,0 +1,18 @@
+
+
+#ifndef FreeSpace 
+#define FreeSpace 0x800000 // after 8 mb 
+ORG FreeSpace 
+#endif 
+
+#include "C_code.lyn.event" 
+#include "AsmHooks.lyn.event" 
+
+#ifndef callHackNew 
+	#define callHackNew(offset) 		"BYTE $01 $4B $9E $46 $00 $F8 $01 $E0; POIN (offset|0x1)"
+#endif 
+
+#ifdef _AW2_ 
+
+#endif 
+
