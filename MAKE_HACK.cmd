@@ -6,7 +6,8 @@
 
 @rem defining buildfile config
 
-set "source_rom=%~dp0AW2.gba"
+set "clean_rom=%~dp0AW2.gba"
+set "source_rom=%~dp0AW2_defdisplay.gba"
 
 set "main_event=%~dp0Installer.event"
 
@@ -44,7 +45,7 @@ ColorzCore A AW2 "-output:%target_rom%" "-input:%main_event%" --nocash-sym
   echo Generating patch
 
   cd "%base_dir%"
-  "%ups%" diff -b "%source_rom%" -m "%target_rom%" -o "%target_ups%"
+  "%ups%" diff -b "%clean_rom%" -m "%target_rom%" -o "%target_ups%"
 
 
 echo:

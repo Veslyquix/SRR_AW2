@@ -95,7 +95,7 @@ int GetInitialSeed(void) {
 	return result; 
 } 
 
-u16 HashByte_Global(int number, int max, u8 noise[], int offset) {
+u16 HashByte_Global(int number, int max, int noise, int offset) {
 	if (max==0) return 0;
 	offset = Mod(offset, 256); 
 	u32 hash = 5381;
@@ -105,31 +105,21 @@ u16 HashByte_Global(int number, int max, u8 noise[], int offset) {
 	for (int i = 0; i < 3; ++i){
 		hash = ((hash << 5) + hash) ^ seed[i];
 	};
-	int noisy = noise[0] | (noise[1] << 8) | (noise[2] << 16) | (noise[3] << 24); 
 	
 	//u16 currentRN[3] = { 0, 0, 0 }; 
-	hash = GetNthRN(offset + 1, noisy+hash); 
-	//InitSeededRN(hash + seed, currentRN);
-	//hash = NextSeededRN(currentRN); 
-	//for (i = 0; i < 9; i++) { 
-		//if (!noise[i]) { break; } 
-		//hash = ((hash << 5) + hash) ^ noise[i];
-	//} 
+	hash = GetNthRN(offset + 1, noise+hash); 
+
+
 	
 	return Mod((hash & 0x2FFFFFFF), max);
 };
 
-u16 HashByte_Ch(int number, int max, u8 noise[], int offset){
-	int i = 0; 
-	for (i = 0; i < 9; i++) { 
-		if (!noise[i]) { break; } 
-	} 
-	noise[i+1] = gCh; 
-	noise[i+2] = 0; 
+u16 HashByte_Ch(int number, int max, int noise, int offset){
+	noise += (gCh << 24); 
 	return HashByte_Global(number, max, noise, offset);
 };
 
-s16 HashPercent(int number, u8 noise[], int offset, int global, int earlygamePromo){
+s16 HashPercent(int number, int noise, int offset, int global, int earlygamePromo){
 	if (number < 0) number = 0;
 	int variation = (RandValues.variance)*5;
 	int percentage = 0; 
@@ -146,11 +136,47 @@ s16 HashPercent(int number, u8 noise[], int offset, int global, int earlygamePro
 	return ret;
 };
 
-s16 HashByPercent_Ch(int number, u8 noise[], int offset, int earlygamePromo){ 
+s16 HashByPercent_Ch(int number, int noise, int offset, int earlygamePromo){ 
 	return HashPercent(number, noise, offset, false, earlygamePromo);
 };
 
-s16 HashByPercent(int number, u8 noise[], int offset){
+s16 HashByPercent(int number, int noise, int offset){
 	return HashPercent(number, noise, offset, true, false);
 };
 
+#define min_pow 3
+#define max_pow 5
+int HashPow(int number, int noise) { 
+	int result = HashByte_Global(number, ((min_pow + max_pow)*2)+1, noise, 0);
+	result = (max_pow * 10) - (result * 10); 
+	if (result < (-30)) { result = -30; } 
+	if (result > 100) { result = 100; } 
+	return result;   
+};  
+int HashDef(int number, int noise) { 
+	int result = HashByte_Global(number, ((min_pow + max_pow)*2)+1, noise, 10);
+	result = (max_pow * 10) - (result * 10); 
+	if (result < (-30)) { result = -30; } 
+	if (result > 100) { result = 100; } 
+	return result;   
+}; 
+
+#define min_mov 2 
+#define max_mov 9 
+int HashMov(int number, int noise) { 
+	int result = HashByte_Global(number, (max_mov - min_mov)+1, noise, 0);
+	result = (max_mov - result) + min_mov; 
+	result = (1-HashByte_Global(number, 3, noise, 0)) + number;
+	if (result < 1) { result = 1; } 
+	return result;   
+}; 
+
+#define min_range 2 
+#define max_range 9 
+int HashRange(int number, int noise) { 
+	int result = HashByte_Global(number, (max_range - min_range)+1, noise, 30);
+	result = (max_range - result) + min_range; 
+	result = (1-HashByte_Global(number, 3, noise, 0)) + number;
+	if (result < 1) { result = 1; } 
+	return result;   
+}; 
