@@ -13,9 +13,9 @@ struct RandomizerSettings {
 }; 
 
 struct RandomizerValues { 
-	u32 seed : 20; // max value of 999999 /  
-	u32 variance : 5; // up to 5*31 / 100% 
-	u32 bonus : 5; // up to +31 / +20 levels 
+	u32 seed : 31; 
+	u32 variance : 1; 
+	//u32 bonus : 5; 
 }; 
 
 extern struct RandomizerSettings RandBitflags; 
@@ -23,6 +23,11 @@ extern struct RandomizerValues RandValues;
 extern u8 gCh; 
 extern u32 gGameClock;
 
+// 0x0803CC84 - Loads Design Map 1/2/3 Names into RAM
+extern void LoadDesignRoomName(int, int); // 0x803CC84 
+void LoadDesignRoom1Name(void) { 
+	LoadDesignRoomName(0x200B204, 0x20280C2);
+}
 
 int NextSeededRN(u16* currentRN) {
     // This generates a pseudorandom string of 16 bits
@@ -95,16 +100,22 @@ int GetInitialSeed(void) {
 	return result; 
 } 
 
+extern u8 DesignRoom1Name[12];
 u16 HashByte_Global(int number, int max, int noise, int offset) {
 	if (max==0) return 0;
 	offset = Mod(offset, 256); 
 	u32 hash = 5381;
 	hash = ((hash << 5) + hash) ^ number;
 	//hash = ((hash << 5) + hash) ^ *StartTimeSeedRamLabel;
-	u8 seed[3] = { (RandValues.seed & 0xFF), (RandValues.seed&0xFF00)>>8, (RandValues.seed&0xFF0000)>>16 }; 
-	for (int i = 0; i < 3; ++i){
-		hash = ((hash << 5) + hash) ^ seed[i];
+	for (int i = 0; i < 12; ++i){
+		hash = ((hash << 5) + hash) ^ DesignRoom1Name[i];
 	};
+	//u8 seed[3] = { (RandValues.seed & 0xFF), (RandValues.seed&0xFF00)>>8, (RandValues.seed&0xFF0000)>>16 }; 
+	//for (int i = 0; i < 3; ++i){
+		//hash = ((hash << 5) + hash) ^ seed[i];
+	//};
+	
+	
 	
 	//u16 currentRN[3] = { 0, 0, 0 }; 
 	hash = GetNthRN(offset + 1, noise+hash); 
@@ -144,39 +155,32 @@ s16 HashByPercent(int number, int noise, int offset){
 	return HashPercent(number, noise, offset, true, false);
 };
 
-#define min_pow 3
-#define max_pow 5
-int HashPow(int number, int noise) { 
-	int result = HashByte_Global(number, ((min_pow + max_pow)*2)+1, noise, 0);
-	result = (max_pow * 10) - (result * 10); 
-	if (result < (-30)) { result = -30; } 
-	if (result > 100) { result = 100; } 
-	return result;   
+
+const int PowModifiers[13] = { -30, -20, -10, 0, 10, 15, 20, 30, 40, 50, 60, 70, 75 } ; 
+int HashPow(int number, int noise, int offset) { 
+	LoadDesignRoom1Name(); 
+	int result = HashByte_Global(number, 13, noise, offset);
+	return PowModifiers[result];   
 };  
-int HashDef(int number, int noise) { 
-	int result = HashByte_Global(number, ((min_pow + max_pow)*2)+1, noise, 10);
-	result = (max_pow * 10) - (result * 10); 
-	if (result < (-30)) { result = -30; } 
-	if (result > 100) { result = 100; } 
-	return result;   
+int HashDef(int number, int noise, int offset) { 
+	int result = HashByte_Global(number, 13, noise, offset + 11);
+	return PowModifiers[result];   
 }; 
 
-#define min_mov 2 
-#define max_mov 9 
-int HashMov(int number, int noise) { 
-	int result = HashByte_Global(number, (max_mov - min_mov)+1, noise, 0);
-	result = (max_mov - result) + min_mov; 
-	result = (1-HashByte_Global(number, 3, noise, 0)) + number;
-	if (result < 1) { result = 1; } 
-	return result;   
+const int MovModifiers[13] = { -1, 0, 0, 0, 1, 2, 3, 4 } ; 
+
+int HashMov(int number, int noise, int offset) { 
+	//int result = HashByte_Global(number, (max_mov - min_mov)+1, noise, noise);
+	//result = (max_mov - result) + min_mov; 
+	int result = HashByte_Global(number, 8, noise, offset + 21);
+	return MovModifiers[result];   
 }; 
 
-#define min_range 2 
-#define max_range 9 
-int HashRange(int number, int noise) { 
-	int result = HashByte_Global(number, (max_range - min_range)+1, noise, 30);
-	result = (max_range - result) + min_range; 
-	result = (1-HashByte_Global(number, 3, noise, 0)) + number;
-	if (result < 1) { result = 1; } 
-	return result;   
+const int RangeModifiers[13] = { 0, 0, 0, 0, 1, 2, 3, 4 } ; 
+int HashRange(int number, int noise, int offset, int otherNum) { 
+	//int result = HashByte_Global(number, (max_range - min_range)+1, noise, noise);
+	//result = (max_range - result) + min_range; 
+	if (HashMov(otherNum, noise, offset + 21)) { return 0; } 
+	int result = HashByte_Global(number, 8, noise, offset + 31);
+	return RangeModifiers[result];   
 }; 
