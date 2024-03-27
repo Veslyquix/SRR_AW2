@@ -214,7 +214,10 @@ int HashDef(int number, int noise, int offset, int coPow) {
 	
 	
 	int result = HashByte_Global(number, size, noise, offset);
-	return table[result];   
+	result = table[result];
+	// lash max 20 def in sco 
+	if ((noise == 0xC) && (coPow == 0x88)) { if (result > 20) { result = 20; } } 
+	return result;   
 };  
 
 const s8 MovModifiers[] = { -1, -2, 0, 0, 0, 1, 2, 3 } ;  
