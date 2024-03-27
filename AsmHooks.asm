@@ -44,6 +44,7 @@ ldsh r1, [r1, r2]
 add r0, r1 
 ldr r1, [sp]
 ldr r2, [sp, #4]
+mov r3, r5 
 bl HashPow @ must be multiples of 10  
 b ExitAtt 
 ReturnDefaultAtt: 
@@ -95,6 +96,7 @@ ldsh r1, [r1, r2]
 add r0, r1 
 ldr r1, [sp]
 ldr r2, [sp, #4]
+mov r3, r5 
 bl HashDef @ must be multiples of 10  
 b ExitDef 
 ReturnDefaultDef: 
@@ -145,6 +147,7 @@ ldsh r1, [r1, r2]
 add r0, r1 
 ldr r1, [sp]
 ldr r2, [sp, #4]
+mov r3, r5 
 bl HashMov  
 b ExitMov 
 ReturnDefaultMov: 
@@ -203,7 +206,7 @@ add r0, r1
 
 ldr r1, [sp]
 ldr r2, [sp, #4]
-
+str r5, [sp] 
 bl HashRange  
 b ExitRange
 ReturnDefaultRange: 

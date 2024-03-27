@@ -13,7 +13,12 @@ ORG FreeSpace
 	#define callHackr1(offset) 			"BYTE $01 $49 $8E $46 $00 $F8 $01 $E0; POIN (offset|0x1)"
 #endif 
 
+
 PUSH 
+
+ORG $442AC; SHORT $2001 $4770 // always co power available
+ORG $44280; SHORT $2001 $4770 // always sco power available 
+
 ORG $430D0 
 FILL($43108 - $430D0)
 ORG $43108

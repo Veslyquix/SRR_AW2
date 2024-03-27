@@ -152,111 +152,317 @@ s16 HashByPercent(int number, int noise, int offset){
 	return HashPercent(number, noise, offset, true, false);
 };
 
-
+// 80442AC enable co power if mov r0, #1, bx lr 
 const s8 PowModifiers[] = { -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, -30, -20 } ; 
+const s8 CoPowModifiers[] = { -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 80, 80, -10, 0 } ; 
+const s8 SCoPowModifiers[] = { 10, 20, 30, 40, 50, 60, 70, 80, 80, 80, 80, 80, 10, 20 } ; 
+
+
+
 const s8 DefModifiers[] = { -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, -30, -20, 0, 20, 30 } ; 
+const s8 CoDefModifiers[] = { -20, -10, 0, 10, 20, 30, 40, 50, 60, 60, -20, -10, 10, 30, 40 } ; 
+const s8 SCoDefModifiers[] = { -10, 0, 10, 20, 30, 40, 50, 60, 60, 60, -10, 0, 20, 40, 50 } ; 
 
 enum { 
 none1, inf, mech, mdt, apc, tank, recon, tcop, neo, lndr, artl, rckt, none2, none3, anti, miss,
 fighter, bomber, none4, copter, none5, bship, cruiser, none6, sub}; 
 
 //const int PowModifiers[13] = { -30, -20, -10, 0, 10, 15, 20, 30, 40, 50, 60, 70, 75 } ; 
-int HashPow(int number, int noise, int offset) {  
+int HashPow(int number, int noise, int offset, int coPow) {  
 	LoadDesignRoom1Name(); 
-	int result = HashByte_Global(number, sizeof(PowModifiers), noise, offset);
-	return PowModifiers[result];   
+	const s8* table = PowModifiers; 
+	int size = sizeof(PowModifiers); 
+	switch (coPow) { 
+		case 0x44: { 
+		table = CoPowModifiers; 
+		size = sizeof(CoPowModifiers); 
+		offset += 41; // make it reroll stats using the better modifiers list 
+		break; 
+		} 
+		case 0x88: { 
+		table = SCoPowModifiers; 
+		size = sizeof(SCoPowModifiers); 
+		offset += 51; // make it reroll stats using the better modifiers list 
+		break; 
+		} 
+		default: 
+	} 
+	
+	
+	int result = HashByte_Global(number, size, noise, offset);
+	return table[result];   
 };  
-int HashDef(int number, int noise, int offset) { 
+int HashDef(int number, int noise, int offset, int coPow) { 
 	LoadDesignRoom1Name(); 
-	int result = HashByte_Global(number, sizeof(DefModifiers), noise, offset + 11);
-	return DefModifiers[result];   
-}; 
+	const s8* table = DefModifiers; 
+	int size = sizeof(DefModifiers); 
+	switch (coPow) { 
+		case 0x44: { 
+		table = CoDefModifiers; 
+		size = sizeof(CoDefModifiers); 
+		offset += 41; // make it reroll stats using the better modifiers list 
+		break;
+		} 
+		case 0x88: { 
+		table = SCoDefModifiers; 
+		size = sizeof(SCoDefModifiers); 
+		offset += 51; // make it reroll stats using the better modifiers list 
+		break; 
+		} 
+		default: 
+	} 
+	
+	
+	int result = HashByte_Global(number, size, noise, offset);
+	return table[result];   
+};  
 
-const s8 MovModifiers[8] = { -1, -2, 0, 0, 0, 1, 2, 3 } ;  
-const s8 InfantryMov[9] = { 0, 0, 0, 0, 0, 1, 2, 3, -1} ; 
-const s8 MechMov[9] = { 0, 0, 0, 0, 0, 1, 2, 1, 3 } ; 
-const s8 ReconMov[10] = { 0, 0, 0, 0, 0, 1, -1, -2, -3, -4} ; 
-const s8 FighterMov[11] = { 0, 0, 0, 0, 0, -1, -2, -3, -4, -1, -2 } ; 
-const s8 BomberMov[13] = { 0, 0, 0, 0, 0, 1, 2, -1, -2, -3, -4, -1, -2 } ; 
-int HashMov(int number, int noise, int offset) { 
+const s8 MovModifiers[] = { -1, -2, 0, 0, 0, 1, 2, 3 } ;  
+const s8 CoMov[] = { 0, -1, 1, 0, 0, 0, 0, 2, 2, 1 } ;  
+const s8 SCoMov[] = { 1, 0, 0, 0, 0, 1, 2, 3, 3, 3 } ;  
+const s8 InfantryMov[] = { 0, 0, 0, 0, 0, 1, 2, 3, -1} ; 
+const s8 CoInfantryMov[] = { 0, 0, 0, 2, 1, 1, 1, 1, 2, 3, -1} ; 
+const s8 SCoInfantryMov[] = { 0, 0, 0, 4, 1, 1, 2, 6, 2, 3, 5} ; 
+const s8 MechMov[] = { 0, 0, 0, 0, 0, 1, 2, 1, 3 } ; 
+const s8 CoMechMov[] = { 0, 0, 0, 0, 1, 2, 4, 1, 2, 1, 3 } ; 
+const s8 SCoMechMov[] = { 0, 0, 0, 0, 3, 4, 5, 1, 2, 1, 3 } ; 
+const s8 ReconMov[] = { 0, 0, 0, 0, 0, 1, -1, -2, -3, -4} ; 
+const s8 CoReconMov[] = { 0, 0, 0, 0, 0, 1, 1, 0, -1, -2} ; 
+const s8 SCoReconMov[] = { 0, 0, 0, 1, 1, 1, 1, 1, -1, -2} ; 
+const s8 FighterMov[] = { 0, 0, 0, 0, 0, -1, -2, -3, -4, -1, -2 } ; 
+const s8 CoFighterMov[] = { 0, 0, 0, 0, 0, 0, -1, -2, -3, 0, -1 } ; 
+const s8 SCoFighterMov[] = { 0, 0, 0, 0, 0, 0, 0, -1, -2, 0, 0 } ; 
+const s8 BomberMov[] = { 0, 0, 0, 0, 0, 1, 2, -1, -2, -3, -4, -1, -2 } ; 
+const s8 CoBomberMov[] = { 0, 0, 0, 0, 1, 1, 2, 1, 2, -1, -2, 0, 0 } ; 
+const s8 SCoBomberMov[] = { 0, 1, 1, 1, 2, 1, 2, 1, 2, -1, -2, 0, 0 } ; 
+int HashMov(int number, int noise, int offset, int coPow) { 
 	//int result = HashByte_Global(number, (max_mov - min_mov)+1, noise, noise);
 	//result = (max_mov - result) + min_mov; 
 	LoadDesignRoom1Name(); 
 	const s8* table = MovModifiers; 
-	int size = sizeof(MovModifiers); 
-	switch (offset) { 
-	
-		case inf: {
-			table = InfantryMov; 
-			size = sizeof(InfantryMov); 
-			break; 
+	int size = sizeof(MovModifiers);
+	 
+	switch (coPow) { 
+		case 0x44: { 
+			switch (offset) { 
+				case inf: {
+					table = CoInfantryMov; 
+					size = sizeof(CoInfantryMov); offset += 41;
+					break; 
+				}
+				case mech: {
+					table = CoMechMov; 
+					size = sizeof(CoMechMov); offset += 41;
+					break; 
+				}
+				case recon: {
+					table = CoReconMov; 
+					size = sizeof(CoReconMov); offset += 41;
+					break; 
+				}
+				case fighter: {
+					table = CoFighterMov; 
+					size = sizeof(CoFighterMov); offset += 41;
+					break; 
+				}
+				case bomber: {
+					table = CoBomberMov; 
+					size = sizeof(CoBomberMov); offset += 41;
+					break; 
+				}
+				default: {
+					table = CoMov; 
+					size = sizeof(CoMov); offset += 41;
+				} 
+			}
+		break;
+		} 
+		case 0x88: { 
+			switch (offset) { 
+				case inf: {
+					table = SCoInfantryMov; 
+					size = sizeof(SCoInfantryMov); offset += 51;
+					break; 
+				}
+				case mech: {
+					table = SCoMechMov; 
+					size = sizeof(SCoMechMov); offset += 51;
+					break; 
+				}
+				case recon: {
+					table = SCoReconMov; 
+					size = sizeof(SCoReconMov); offset += 51;
+					break; 
+				}
+				case fighter: {
+					table = SCoFighterMov; 
+					size = sizeof(SCoFighterMov); offset += 51;
+					break; 
+				}
+				case bomber: {
+					table = SCoBomberMov; 
+					size = sizeof(SCoBomberMov); offset += 51;
+					break; 
+				}
+				default: {
+					table = SCoMov; 
+					size = sizeof(SCoMov); offset += 51;
+				} 
+			}
+		break; 
+		} 
+		default: {
+			switch (offset) { 
+				case inf: {
+					table = InfantryMov; 
+					size = sizeof(InfantryMov); 
+					break; 
+				}
+				case mech: {
+					table = MechMov; 
+					size = sizeof(MechMov); 
+					break; 
+				}
+				case recon: {
+					table = ReconMov; 
+					size = sizeof(ReconMov); 
+					break; 
+				}
+				case fighter: {
+					table = FighterMov; 
+					size = sizeof(FighterMov); 
+					break; 
+				}
+				case bomber: {
+					table = BomberMov; 
+					size = sizeof(BomberMov); 
+					break; 
+				}
+				default: 
+			}
 		}
-		case mech: {
-			table = MechMov; 
-			size = sizeof(MechMov); 
-			break; 
-		}
-		case recon: {
-			table = ReconMov; 
-			size = sizeof(ReconMov); 
-			break; 
-		}
-		case fighter: {
-			table = FighterMov; 
-			size = sizeof(FighterMov); 
-			break; 
-		}
-		case bomber: {
-			table = BomberMov; 
-			size = sizeof(BomberMov); 
-			break; 
-		}
-		default: 
 	} 
+
+
+	
+
 	
 	
 	int result = HashByte_Global(number, size, noise, offset + 21);
 	return table[result];   
 }; 
 
-const s8 RangeModifiers[9] = { 0, 0, 0, 0, 0, 1, 2, 3, 4 } ; 
-const s8 ArtilleryRange[10] = { 0, 0, 0, 0, 0, 1, 2, 3, 4, -1} ; 
-const s8 RocketRange[11] = { 0, 0, 0, 0, 0, 1, 2, 3, 4, -1, -2 } ; 
-const s8 MissileRange[11] = { 0, 0, 0, 0, 0, 1, 2, 3, 4, -1, -2 } ; 
-const s8 BattleshipRange[9] = { 0, 0, 0, 0, 0, 1, 2, -1, -2 } ; 
-int HashRange(int number, int noise, int offset, int otherNum) { 
+const s8 RangeModifiers[] = { 0, 0, 0, 0, 0, 1, 2, 1, 2 } ; 
+const s8 CoRange[] = { 0, 0, 0, 0, 0, 1, 2, 3, 4 } ; 
+const s8 SCoRange[] = { 1, 1, 5, 1, 1, 1, 2, 3, 4 } ; 
+const s8 ArtilleryRange[] = { 0, 0, 0, 0, 0, 1, 2, 3, 4, -1} ; 
+const s8 CoArtilleryRange[] = { 1, 1, 1, 2, 3, 1, 2, 3, 4, -1} ; 
+const s8 SCoArtilleryRange[] = { 1, 1, 2, 3, 4, 1, 2, 3, 4, 1} ; 
+const s8 RocketRange[] = { 0, 0, 0, 0, 0, 1, 2, 3, 4, -1, -2 } ; 
+const s8 CoRocketRange[] = { 0, 1, 2, 1, 2, 1, 2, 3, 4, -1, -1 } ; 
+const s8 SCoRocketRange[] = { 1, 1, 2, 3, 4, 1, 2, 3, 4, 1, 1 } ; 
+const s8 MissileRange[] = { 0, 0, 0, 0, 0, 1, 2, 3, 4, -1, -2 } ; 
+const s8 CoMissileRange[] = { 0, 1, 2, 1, 2, 1, 2, 3, 4, -1, 0 } ; 
+const s8 SCoMissileRange[] = { 1, 1, 2, 3, 4, 1, 2, 3, 4, 1, 1 } ; 
+const s8 BattleshipRange[] = { 0, 0, 0, 0, 0, 1, 2, -1, -2 } ; 
+const s8 CoBattleshipRange[] = { 0, 1, 1, 2, 3, 1, 2, -1, 0 } ; 
+const s8 SCoBattleshipRange[] = { 1, 1, 2, 3, 2, 1, 2, 1, 1 } ; 
+int HashRange(int number, int noise, int offset, int otherNum, int coPow) { 
 	//int result = HashByte_Global(number, (max_range - min_range)+1, noise, noise);
 	//result = (max_range - result) + min_range; 
 	LoadDesignRoom1Name(); 
 	
 	const s8* table = RangeModifiers; 
 	int size = sizeof(RangeModifiers); 
-	switch (offset) { 
 	
-		case artl: {
-			table = ArtilleryRange; 
-			size = sizeof(ArtilleryRange); 
-			break; 
+	if (HashMov(otherNum, noise, offset, coPow)) { return 0; } 
+
+	switch (coPow) { 
+		case 0x44: {  
+			switch (offset) { 
+				case artl: {
+					table = CoArtilleryRange; 
+					size = sizeof(CoArtilleryRange); offset += 41;
+					break; 
+				} 
+				case rckt: {
+					table = CoRocketRange; 
+					size = sizeof(CoRocketRange); offset += 41;
+					break; 
+				} 
+				case miss: {
+					table = CoMissileRange; 
+					size = sizeof(CoMissileRange); offset += 41;
+					break; 
+				} 
+				case bship: {
+					table = CoBattleshipRange; 
+					size = sizeof(CoBattleshipRange); offset += 41;
+					break; 
+				} 
+				default: {
+					table = CoRange; 
+					size = sizeof(CoRange); 
+				} 
+			}
+		break;
 		} 
-		case rckt: {
-			table = RocketRange; 
-			size = sizeof(RocketRange); 
-			break; 
+		case 0x88: {  
+			switch (offset) { 
+				case artl: {
+					table = SCoArtilleryRange; 
+					size = sizeof(SCoArtilleryRange); offset += 51;
+					break; 
+				} 
+				case rckt: {
+					table = SCoRocketRange; 
+					size = sizeof(SCoRocketRange); offset += 51;
+					break; 
+				} 
+				case miss: {
+					table = SCoMissileRange; 
+					size = sizeof(SCoMissileRange); offset += 51;
+					break; 
+				} 
+				case bship: {
+					table = SCoBattleshipRange; 
+					size = sizeof(SCoBattleshipRange); offset += 51;
+					break; 
+				} 
+				default: {
+					table = SCoRange; 
+					size = sizeof(SCoRange); offset += 51;
+				} 
+			}
+		break;
 		} 
-		case miss: {
-			table = MissileRange; 
-			size = sizeof(MissileRange); 
-			break; 
+		default: {  
+			switch (offset) { 
+				case artl: {
+					table = ArtilleryRange; 
+					size = sizeof(ArtilleryRange); 
+					break; 
+				} 
+				case rckt: {
+					table = RocketRange; 
+					size = sizeof(RocketRange); 
+					break; 
+				} 
+				case miss: {
+					table = MissileRange; 
+					size = sizeof(MissileRange); 
+					break; 
+				} 
+				case bship: {
+					table = BattleshipRange; 
+					size = sizeof(BattleshipRange); 
+					break; 
+				} 
+				default: 
+			}
+		break;
 		} 
-		case bship: {
-			table = BattleshipRange; 
-			size = sizeof(BattleshipRange); 
-			break; 
-		} 
-		default: 
-	} 
-	
-	if (HashMov(otherNum, noise, offset)) { return 0; } 
+	}
 
 	
 	int result = HashByte_Global(number, size, noise, offset + 31);
