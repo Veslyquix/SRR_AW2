@@ -16,6 +16,23 @@ ORG FreeSpace
 
 PUSH 
 
+// 0x802CD28 start Co screen 
+// starts proc 0x849aa6C - child proc 08616b74 
+
+// 0x80849C8 
+
+// $8084F44 
+//ORG $84F48; callHackNew(DefaultPowCoPageHook)
+// proc 8616BE4
+// proc + 0x64 as bool redraw ? 
+// check / do stuff if redraw ? 
+// 0x8084BD4 
+// 0x8084C14 
+// 0x80852A8 
+
+ORG $849BE 
+SHORT $2003 // default 4th page 
+
 //ORG $442AC; SHORT $2001 $4770 // always co power available
 //ORG $44280; SHORT $2001 $4770 // always sco power available 
 

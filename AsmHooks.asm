@@ -5,6 +5,32 @@
 @80856a0
 @ 30033EC - current phase (1, 2, 3, or 4) 
 
+.global DefaultPowCoPageHook
+.type DefaultPowCoPageHook, %function
+DefaultPowCoPageHook:
+
+@ldr r3, =0x3005940 @ page 
+@mov r1, #4 
+@strb r1, [r3] @ default to page 4 
+
+
+mov r4, r0 
+
+add r0, #0x64 
+mov r1, #1 
+strb r1, [r0] @ redraw ? 
+
+mov r5, r4 
+add r5, #0x4E 
+mov r1, #0 
+ldsh r0, [r5, r1] 
+cmp r0, #0 
+
+
+
+bx lr 
+.ltorg 
+
 .global GetClassAtt
 .type GetClassAtt, %function 
 GetClassAtt: 
