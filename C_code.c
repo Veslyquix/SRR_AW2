@@ -182,7 +182,7 @@ int HashPow(int number, int noise, int offset, int coPow) {
 		case 0x88: { 
 		table = SCoPowModifiers; 
 		size = sizeof(SCoPowModifiers); 
-		offset += 51; // make it reroll stats using the better modifiers list 
+		offset += 66; // make it reroll stats using the better modifiers list 
 		break; 
 		} 
 		default: 
@@ -206,7 +206,7 @@ int HashDef(int number, int noise, int offset, int coPow) {
 		case 0x88: { 
 		table = SCoDefModifiers; 
 		size = sizeof(SCoDefModifiers); 
-		offset += 51; // make it reroll stats using the better modifiers list 
+		offset += 66; // make it reroll stats using the better modifiers list 
 		break; 
 		} 
 		default: 
@@ -281,32 +281,32 @@ int HashMov(int number, int noise, int offset, int coPow) {
 			switch (offset) { 
 				case inf: {
 					table = SCoInfantryMov; 
-					size = sizeof(SCoInfantryMov); offset += 51;
+					size = sizeof(SCoInfantryMov); offset += 66;
 					break; 
 				}
 				case mech: {
 					table = SCoMechMov; 
-					size = sizeof(SCoMechMov); offset += 51;
+					size = sizeof(SCoMechMov); offset += 66;
 					break; 
 				}
 				case recon: {
 					table = SCoReconMov; 
-					size = sizeof(SCoReconMov); offset += 51;
+					size = sizeof(SCoReconMov); offset += 66;
 					break; 
 				}
 				case fighter: {
 					table = SCoFighterMov; 
-					size = sizeof(SCoFighterMov); offset += 51;
+					size = sizeof(SCoFighterMov); offset += 66;
 					break; 
 				}
 				case bomber: {
 					table = SCoBomberMov; 
-					size = sizeof(SCoBomberMov); offset += 51;
+					size = sizeof(SCoBomberMov); offset += 66;
 					break; 
 				}
 				default: {
 					table = SCoMov; 
-					size = sizeof(SCoMov); offset += 51;
+					size = sizeof(SCoMov); offset += 66;
 				} 
 			}
 		break; 
@@ -411,27 +411,27 @@ int HashRange(int number, int noise, int offset, int otherNum, int coPow) {
 			switch (offset) { 
 				case artl: {
 					table = SCoArtilleryRange; 
-					size = sizeof(SCoArtilleryRange); offset += 51;
+					size = sizeof(SCoArtilleryRange); offset += 66;
 					break; 
 				} 
 				case rckt: {
 					table = SCoRocketRange; 
-					size = sizeof(SCoRocketRange); offset += 51;
+					size = sizeof(SCoRocketRange); offset += 66;
 					break; 
 				} 
 				case miss: {
 					table = SCoMissileRange; 
-					size = sizeof(SCoMissileRange); offset += 51;
+					size = sizeof(SCoMissileRange); offset += 66;
 					break; 
 				} 
 				case bship: {
 					table = SCoBattleshipRange; 
-					size = sizeof(SCoBattleshipRange); offset += 51;
+					size = sizeof(SCoBattleshipRange); offset += 66;
 					break; 
 				} 
 				default: {
 					table = SCoRange; 
-					size = sizeof(SCoRange); offset += 51;
+					size = sizeof(SCoRange); offset += 66;
 				} 
 			}
 		break;
