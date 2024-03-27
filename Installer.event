@@ -16,8 +16,8 @@ ORG FreeSpace
 
 PUSH 
 
-ORG $442AC; SHORT $2001 $4770 // always co power available
-ORG $44280; SHORT $2001 $4770 // always sco power available 
+//ORG $442AC; SHORT $2001 $4770 // always co power available
+//ORG $44280; SHORT $2001 $4770 // always sco power available 
 
 ORG $430D0 
 FILL($43108 - $430D0)
