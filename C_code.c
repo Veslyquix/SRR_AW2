@@ -108,25 +108,22 @@ u16 HashByte_Global(int number, int max, int noise, int offset) {
 	hash = ((hash << 5) + hash) ^ number;
 	//hash = ((hash << 5) + hash) ^ *StartTimeSeedRamLabel;
 	for (int i = 0; i < 12; ++i){
+		if (!DesignRoom1Name[i]) { break; } 
 		hash = ((hash << 5) + hash) ^ DesignRoom1Name[i];
 	};
-	//u8 seed[3] = { (RandValues.seed & 0xFF), (RandValues.seed&0xFF00)>>8, (RandValues.seed&0xFF0000)>>16 }; 
-	//for (int i = 0; i < 3; ++i){
-		//hash = ((hash << 5) + hash) ^ seed[i];
-	//};
 	
-	
-	
-	//u16 currentRN[3] = { 0, 0, 0 }; 
-	hash = GetNthRN(offset + 1, noise+hash); 
+	u8 seed[3] = { (noise & 0xFF), (noise&0xFF00)>>8, (noise&0xFF0000)>>16 }; 
+	for (int i = 0; i < 3; ++i){
+		if (!seed[i]) { break; } 
+		hash = ((hash << 5) + hash) ^ seed[i];
+	};
 
-
-	
+	hash = GetNthRN(offset + 1, hash); 	
 	return Mod((hash & 0x2FFFFFFF), max);
 };
 
 u16 HashByte_Ch(int number, int max, int noise, int offset){
-	noise += (gCh << 24); 
+	noise += (gCh << 8); 
 	return HashByte_Global(number, max, noise, offset);
 };
 
@@ -156,31 +153,112 @@ s16 HashByPercent(int number, int noise, int offset){
 };
 
 
-const int PowModifiers[13] = { -30, -20, -10, 0, 10, 15, 20, 30, 40, 50, 60, 70, 75 } ; 
-int HashPow(int number, int noise, int offset) { 
+const s8 PowModifiers[] = { -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, -30, -20 } ; 
+const s8 DefModifiers[] = { -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, -30, -20, 0, 20, 30 } ; 
+
+enum { 
+none1, inf, mech, mdt, apc, tank, recon, tcop, neo, lndr, artl, rckt, none2, none3, anti, miss,
+fighter, bomber, none4, copter, none5, bship, cruiser, none6, sub}; 
+
+//const int PowModifiers[13] = { -30, -20, -10, 0, 10, 15, 20, 30, 40, 50, 60, 70, 75 } ; 
+int HashPow(int number, int noise, int offset) {  
 	LoadDesignRoom1Name(); 
-	int result = HashByte_Global(number, 13, noise, offset);
+	int result = HashByte_Global(number, sizeof(PowModifiers), noise, offset);
 	return PowModifiers[result];   
 };  
 int HashDef(int number, int noise, int offset) { 
-	int result = HashByte_Global(number, 13, noise, offset + 11);
-	return PowModifiers[result];   
+	LoadDesignRoom1Name(); 
+	int result = HashByte_Global(number, sizeof(DefModifiers), noise, offset + 11);
+	return DefModifiers[result];   
 }; 
 
-const int MovModifiers[13] = { -1, 0, 0, 0, 1, 2, 3, 4 } ; 
-
+const s8 MovModifiers[8] = { -1, -2, 0, 0, 0, 1, 2, 3 } ;  
+const s8 InfantryMov[9] = { 0, 0, 0, 0, 0, 1, 2, 3, -1} ; 
+const s8 MechMov[9] = { 0, 0, 0, 0, 0, 1, 2, 1, 3 } ; 
+const s8 ReconMov[10] = { 0, 0, 0, 0, 0, 1, -1, -2, -3, -4} ; 
+const s8 FighterMov[11] = { 0, 0, 0, 0, 0, -1, -2, -3, -4, -1, -2 } ; 
+const s8 BomberMov[13] = { 0, 0, 0, 0, 0, 1, 2, -1, -2, -3, -4, -1, -2 } ; 
 int HashMov(int number, int noise, int offset) { 
 	//int result = HashByte_Global(number, (max_mov - min_mov)+1, noise, noise);
 	//result = (max_mov - result) + min_mov; 
-	int result = HashByte_Global(number, 8, noise, offset + 21);
-	return MovModifiers[result];   
+	LoadDesignRoom1Name(); 
+	const s8* table = MovModifiers; 
+	int size = sizeof(MovModifiers); 
+	switch (offset) { 
+	
+		case inf: {
+			table = InfantryMov; 
+			size = sizeof(InfantryMov); 
+			break; 
+		}
+		case mech: {
+			table = MechMov; 
+			size = sizeof(MechMov); 
+			break; 
+		}
+		case recon: {
+			table = ReconMov; 
+			size = sizeof(ReconMov); 
+			break; 
+		}
+		case fighter: {
+			table = FighterMov; 
+			size = sizeof(FighterMov); 
+			break; 
+		}
+		case bomber: {
+			table = BomberMov; 
+			size = sizeof(BomberMov); 
+			break; 
+		}
+		default: 
+	} 
+	
+	
+	int result = HashByte_Global(number, size, noise, offset + 21);
+	return table[result];   
 }; 
 
-const int RangeModifiers[13] = { 0, 0, 0, 0, 1, 2, 3, 4 } ; 
+const s8 RangeModifiers[9] = { 0, 0, 0, 0, 0, 1, 2, 3, 4 } ; 
+const s8 ArtilleryRange[10] = { 0, 0, 0, 0, 0, 1, 2, 3, 4, -1} ; 
+const s8 RocketRange[11] = { 0, 0, 0, 0, 0, 1, 2, 3, 4, -1, -2 } ; 
+const s8 MissileRange[11] = { 0, 0, 0, 0, 0, 1, 2, 3, 4, -1, -2 } ; 
+const s8 BattleshipRange[9] = { 0, 0, 0, 0, 0, 1, 2, -1, -2 } ; 
 int HashRange(int number, int noise, int offset, int otherNum) { 
 	//int result = HashByte_Global(number, (max_range - min_range)+1, noise, noise);
 	//result = (max_range - result) + min_range; 
-	if (HashMov(otherNum, noise, offset + 21)) { return 0; } 
-	int result = HashByte_Global(number, 8, noise, offset + 31);
-	return RangeModifiers[result];   
+	LoadDesignRoom1Name(); 
+	
+	const s8* table = RangeModifiers; 
+	int size = sizeof(RangeModifiers); 
+	switch (offset) { 
+	
+		case artl: {
+			table = ArtilleryRange; 
+			size = sizeof(ArtilleryRange); 
+			break; 
+		} 
+		case rckt: {
+			table = RocketRange; 
+			size = sizeof(RocketRange); 
+			break; 
+		} 
+		case miss: {
+			table = MissileRange; 
+			size = sizeof(MissileRange); 
+			break; 
+		} 
+		case bship: {
+			table = BattleshipRange; 
+			size = sizeof(BattleshipRange); 
+			break; 
+		} 
+		default: 
+	} 
+	
+	if (HashMov(otherNum, noise, offset)) { return 0; } 
+
+	
+	int result = HashByte_Global(number, size, noise, offset + 31);
+	return table[result];   
 }; 

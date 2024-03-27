@@ -10,32 +10,33 @@ ORG FreeSpace
 
 #ifndef callHackNew 
 	#define callHackNew(offset) 		"BYTE $01 $4B $9E $46 $00 $F8 $01 $E0; POIN (offset|0x1)"
+	#define callHackr1(offset) 			"BYTE $01 $49 $8E $46 $00 $F8 $01 $E0; POIN (offset|0x1)"
 #endif 
 
 PUSH 
 ORG $430D0 
 FILL($43108 - $430D0)
 ORG $43108
-callHackNew(GetClassAtt)
+callHackr1(GetClassAtt)
 SHORT $46C0 $46C0 $46C0 
 
 
 ORG $43140 
 FILL($43178 - $43140)
 ORG $43178 
-callHackNew(GetClassDef)
+callHackr1(GetClassDef)
 SHORT $46C0 $46C0 $46C0 
 
 ORG $431B0
 FILL($431E8 - $431B0)
 ORG $431E8
-callHackNew(GetClassMov)
+callHackr1(GetClassMov)
 SHORT $46C0 $46C0 $46C0 
 
 ORG $43220 
 FILL($43258 - $43220)
 ORG $43258
-callHackNew(GetClassRange)
+callHackr1(GetClassRange)
 SHORT $46C0 $46C0 $46C0 
 
 
