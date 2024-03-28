@@ -22,7 +22,7 @@ PUSH
 // 0x80849C8 
 
 // $8084F44 
-//ORG $84F48; callHackNew(DefaultPowCoPageHook)
+ORG $84BD8; callHackNew(DefaultPowCoPageHook)
 // proc 8616BE4
 // proc + 0x64 as bool redraw ? 
 // check / do stuff if redraw ? 

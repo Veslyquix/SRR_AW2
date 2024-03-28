@@ -29,6 +29,9 @@ void LoadDesignRoom1Name(void) {
 	LoadDesignRoomName(0x200B204, 0x20280C2);
 }
 
+#define SHORTCALL __attribute__((short_call))
+#define CONSTFUNC __attribute__((const))
+extern int ModNum(int a, int b) SHORTCALL; 
 int NextSeededRN(u16* currentRN) {
     // This generates a pseudorandom string of 16 bits
     // In other words, a pseudorandom integer that can range from 0 to 65535
@@ -67,14 +70,14 @@ void InitSeededRN(int seed, u16* currentRN) {
         0xA794
     };
 
-    int mod = Mod(seed, 7);
+    int mod = ModNum(seed, 7);
 
     currentRN[0] = initTable[(mod++ & 7)];
     currentRN[1] = initTable[(mod++ & 7)];
     currentRN[2] = initTable[(mod & 7)];
 
-    if (Mod(seed, 23) > 0)
-        for (mod = Mod(seed,  23); mod != 0; mod--)
+    if (ModNum(seed, 13) > 0)
+        for (mod = ModNum(seed,  13); mod != 0; mod--)
             NextSeededRN(currentRN);
 }
 
@@ -103,7 +106,7 @@ int GetInitialSeed(void) {
 extern u8 DesignRoom1Name[12];
 u16 HashByte_Global(int number, int max, int noise, int offset) {
 	if (max==0) return 0;
-	offset = Mod(offset, 256); 
+	offset = ModNum(offset, 32); 
 	u32 hash = 5381;
 	hash = ((hash << 5) + hash) ^ number;
 	//hash = ((hash << 5) + hash) ^ *StartTimeSeedRamLabel;
@@ -117,9 +120,8 @@ u16 HashByte_Global(int number, int max, int noise, int offset) {
 		if (!seed[i]) { break; } 
 		hash = ((hash << 5) + hash) ^ seed[i];
 	};
-
 	hash = GetNthRN(offset + 1, hash); 	
-	return Mod((hash & 0x2FFFFFFF), max);
+	return ModNum((hash & 0x2FFFFFFF), max);
 };
 
 u16 HashByte_Ch(int number, int max, int noise, int offset){
@@ -159,7 +161,7 @@ const s8 SCoPowModifiers[] = { 10, 20, 30, 40, 50, 60, 70, 80, 80, 80, 80, 80, 1
 
 
 
-const s8 DefModifiers[] = { -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, -30, -20, 0, 20, 30 } ; 
+const s8 DefModifiers[] = { -30, -20, -10, 0, 10, 20, 30, 40, 50, 10, -30, -20, 0, 20, 30 } ; 
 const s8 CoDefModifiers[] = { -20, -10, 0, 10, 20, 30, 40, 50, 60, 60, -20, -10, 10, 30, 40 } ; 
 const s8 SCoDefModifiers[] = { -10, 0, 10, 20, 30, 40, 50, 60, 60, 60, -10, 0, 20, 40, 50 } ; 
 

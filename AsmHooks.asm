@@ -13,23 +13,26 @@ DefaultPowCoPageHook:
 @mov r1, #4 
 @strb r1, [r3] @ default to page 4 
 
-
-mov r4, r0 
-
 add r0, #0x64 
 mov r1, #1 
-strb r1, [r0] @ redraw ? 
+strh r1, [r0] @ redraw ? 
 
-mov r5, r4 
-add r5, #0x4E 
 mov r1, #0 
-ldsh r0, [r5, r1] 
-cmp r0, #0 
+ldr r0, =0x30033EC 
+ldrh r0, [r0] 
+mov r5, r4 
 
 
 
 bx lr 
 .ltorg 
+
+.global ModNum 
+.type ModNum, %function 
+ModNum: 
+swi 6 
+mov r0, r1 
+bx lr 
 
 .global GetClassAtt
 .type GetClassAtt, %function 
