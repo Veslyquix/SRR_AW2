@@ -11,6 +11,7 @@ $RECYCLE.BIN/
 # Windows Installer files
 # *.exe
 
+*.~lock.*
 *.gba.7z
 *.ups
 *.sym

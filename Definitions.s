@@ -28,6 +28,15 @@ SET_DATA DesignRoom1Name, 0x200B204
 SET_DATA RandBitflags, 0x203FFF8
 SET_DATA gGameClock, 0x3004008 @ in 80368D4 
 
+ 
+
+SET_DATA gPlayer0, 0x2023284
+SET_DATA gPlayer1, 0x20232C0
+SET_DATA gPlayer2, 0x20232FC
+SET_DATA gPlayer3, 0x2023338
+SET_DATA gPlayer4, 0x2023374
+
+
 @ GetClassAttBonus 
 @0804310C - Atk
 @0804317C - Def

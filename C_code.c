@@ -169,6 +169,83 @@ enum {
 none1, inf, mech, mdt, apc, tank, recon, tcop, neo, lndr, artl, rckt, none2, none3, anti, miss,
 fighter, bomber, none4, copter, none5, bship, cruiser, none6, sub}; 
 
+
+struct PlayerStruct { 
+	u32 funds; //P1 Funds
+	u32 spent; //P1 Total Funds spent
+	u32 income; //P1 Current Income
+	u8 bases; //P1's Owned Bases Total
+	u8 cities; //P1's Owned Cities Total
+	u8 airports; //P1's Owned Airports Total
+	u8 ports; // P1's Owned Ports Total
+	u8 properties; // P1 Properties Owned
+	u8 captures; // P1's Properties Captured?
+	// padding 
+	u16 padding1; 
+	u8 defeated; // =01 when P1 is defeated
+	u16 destroyedThisTurn; // Stores count of units destroyed this turn
+	u16 totalDestroyed; // Stores count of maximum units destroyed
+	u8 teamColour; // Player 1 Team Colour
+	u8 aiControlled; // 00 = None, 01 = Human, 02 = AI 
+	u8 turnState; // =03 when P1's Turn
+	u8 co; // P1 CO
+
+
+/*
+020232DE		: P1 CO Mode (00 = Normal, 01 = COP, 02 = SCOP)
+020232DF		: P1 CO Mode (Used for COP Activation)
+020232E0 W		: P1 S/COP Charge
+020232E4		: P1, which COP noise to play/Is COP/SCOP ready?
+020232E5		: P1 CO Power Uses
+020232E6 		: Temp Firepower Bonus
+020232E8 		: Temp Defence Bonus
+020232EA		: P1's Team (Used for attacking)
+020232EC		: Stores a team related byte - Appears to be the used one, others used for setup
+020232ED		: P1's HQ X Co-ordinate
+020232EE		: P1's HQ Y Co-ordinate
+020232EF		: P1's Selection Cursor X Co-ordinate
+020232F0		: P1's Selection Cursor Y Co-ordinate
+020232F2		: If set to True, Kill Player on next End Turn.
+020232F3		: Rank Earned
+020232F4		: Points for Speed Score
+020232F5		: Points for Power Score
+020232F6		: Points for Technique Score
+020232F8		: Total Score
+020232FA		: Stores Unit count
+020232FB		: Stores Unit Lost Count
+*/
+
+}; 
+
+extern struct PlayerStruct gPlayer0; // neutral properties 02023284
+extern struct PlayerStruct gPlayer1; // 20232C0
+extern struct PlayerStruct gPlayer2; // 20232FC
+extern struct PlayerStruct gPlayer3; // 2023338
+extern struct PlayerStruct gPlayer4; // 2023374
+
+int IsCoAiControlled(int co) { 
+	int result = false; 
+	if (gPlayer1.co == co) {
+		if (gPlayer1.aiControlled == 2) { 
+		result = true; } 
+	} 
+	if (gPlayer2.co == co) {
+		if (gPlayer2.aiControlled == 2) { 
+		result = true; } 
+	} 
+	if (gPlayer3.co == co) {
+		if (gPlayer3.aiControlled == 2) { 
+		result = true; } 
+	} 
+	if (gPlayer4.co == co) {
+		if (gPlayer4.aiControlled == 2) { 
+		result = true; } 
+	} 
+	//asm("mov r11, r11"); 
+
+	return result; 
+} 
+
 //const int PowModifiers[13] = { -30, -20, -10, 0, 10, 15, 20, 30, 40, 50, 60, 70, 75 } ; 
 int HashPow(int number, int noise, int offset, int coPow) {  
 	LoadDesignRoom1Name(); 
@@ -219,6 +296,7 @@ int HashDef(int number, int noise, int offset, int coPow) {
 	result = table[result];
 	// lash max 20 def in sco 
 	if ((noise == 0xC) && (coPow == 0x88)) { if (result > 20) { result = 20; } } 
+	if (IsCoAiControlled(noise)) { if (result > 40) { result = 40; } } 
 	return result;   
 };  
 
@@ -357,9 +435,10 @@ int HashMov(int number, int noise, int offset, int coPow) {
 	return table[result];   
 }; 
 
-const s8 RangeModifiers[] = { 0, 0, 0, 0, 0, 1, 2, 1, 2 } ; 
+const s8 RangeModifiers[] = { 0, 0, 0, 0, 0, 1, 2, 1, 2 }; 
 const s8 CoRange[] = { 0, 0, 0, 0, 0, 1, 2, 3, 4 } ; 
 const s8 SCoRange[] = { 1, 1, 5, 1, 1, 1, 2, 3, 4 } ; 
+const s8 AiDirectCmbRange[] = { 0, 0, 0, 0 } ; 
 const s8 ArtilleryRange[] = { 0, 0, 0, 0, 0, 1, 2, 3, 4, -1} ; 
 const s8 CoArtilleryRange[] = { 1, 1, 1, 2, 3, 1, 2, 3, 4, -1} ; 
 const s8 SCoArtilleryRange[] = { 1, 1, 2, 3, 4, 1, 2, 3, 4, 1} ; 
@@ -378,7 +457,10 @@ int HashRange(int number, int noise, int offset, int otherNum, int coPow) {
 	LoadDesignRoom1Name(); 
 	
 	const s8* table = RangeModifiers; 
-	int size = sizeof(RangeModifiers); 
+	int size = sizeof(RangeModifiers);
+	int aiControlled = 	IsCoAiControlled(noise); 
+	if (aiControlled) { table = AiDirectCmbRange; size = sizeof(AiDirectCmbRange); } 
+	if ((offset == inf) || (offset == recon)) { return 0; } 
 	
 	if (HashMov(otherNum, noise, offset, coPow)) { return 0; } 
 
@@ -408,6 +490,7 @@ int HashRange(int number, int noise, int offset, int otherNum, int coPow) {
 				default: {
 					table = CoRange; 
 					size = sizeof(CoRange); 
+					if (aiControlled) { table = AiDirectCmbRange; size = sizeof(AiDirectCmbRange); } 
 				} 
 			}
 		break;
@@ -437,6 +520,7 @@ int HashRange(int number, int noise, int offset, int otherNum, int coPow) {
 				default: {
 					table = SCoRange; 
 					size = sizeof(SCoRange); offset += 66;
+					if (aiControlled) { table = AiDirectCmbRange; size = sizeof(AiDirectCmbRange); } 
 				} 
 			}
 		break;
@@ -470,6 +554,6 @@ int HashRange(int number, int noise, int offset, int otherNum, int coPow) {
 	}
 
 	
-	int result = HashByte_Global(number, size, noise, offset + 31);
-	return table[result];   
+	int result = table[HashByte_Global(number, size, noise, offset + 31)];
+	return result;   
 }; 
