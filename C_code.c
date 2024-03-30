@@ -18,6 +18,7 @@ struct RandomizerValues {
 	//u32 bonus : 5; 
 }; 
 
+// 8034dcc update music
 extern struct RandomizerSettings RandBitflags; 
 extern struct RandomizerValues RandValues; 
 extern u8 gCh; 
@@ -126,6 +127,11 @@ u16 HashByte_Global(int number, int max, int noise, int offset) {
 
 u16 HashByte_Ch(int number, int max, int noise, int offset){
 	noise += (gCh << 8); 
+	return HashByte_Global(number, max, noise, offset);
+};
+
+u16 HashByte_ChIfConfig(int number, int max, int noise, int offset){
+	if (DesignRoom1Name[0] == 0x20) { asm("mov r11, r11"); noise += (gCh << 8); } // blank char  
 	return HashByte_Global(number, max, noise, offset);
 };
 
@@ -268,7 +274,7 @@ int HashPow(int number, int noise, int offset, int coPow) {
 	} 
 	
 	
-	int result = HashByte_Global(number, size, noise, offset);
+	int result = HashByte_ChIfConfig(number, size, noise, offset);
 	return table[result];   
 };  
 int HashDef(int number, int noise, int offset, int coPow) { 
@@ -292,7 +298,7 @@ int HashDef(int number, int noise, int offset, int coPow) {
 	} 
 	
 	
-	int result = HashByte_Global(number, size, noise, offset);
+	int result = HashByte_ChIfConfig(number, size, noise, offset);
 	result = table[result];
 	// lash max 20 def in sco 
 	if ((noise == 0xC) && (coPow == 0x88)) { if (result > 20) { result = 20; } } 
@@ -302,22 +308,25 @@ int HashDef(int number, int noise, int offset, int coPow) {
 
 const s8 MovModifiers[] = { -1, -2, 0, 0, 0, 1, 2, 3 } ;  
 const s8 CoMov[] = { 0, -1, 1, 0, 0, 0, 0, 2, 2, 1 } ;  
-const s8 SCoMov[] = { 1, 0, 0, 0, 0, 1, 2, 3, 3, 3 } ;  
-const s8 InfantryMov[] = { 0, 0, 0, 0, 0, 1, 2, 3, -1} ; 
-const s8 CoInfantryMov[] = { 0, 0, 0, 2, 1, 1, 1, 1, 2, 3, -1} ; 
-const s8 SCoInfantryMov[] = { 0, 0, 0, 4, 1, 1, 2, 6, 2, 3, 5} ; 
+const s8 SCoMov[] = { 1, 0, 0, 0, 0, 1, 2, 3, 4, 3 } ;  
+const s8 RangedMovModifiers[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3 } ;  
+const s8 RangedCoMov[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } ;  // so they can get a +range boost instead 
+const s8 RangedSCoMov[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } ;  
+const s8 InfantryMov[] = { 0, 0, 0, 0, 0, 1, 2, 3, -1,0, 0, 0, 0, 0, 1, 2, 3, -1,0, 0, 0, 0, 0, 1, 2, 3, -1, 8} ; 
+const s8 CoInfantryMov[] = { 0, 0, 0, 2, 1, 1, 1, 1, 2, 3, -1, 8} ; 
+const s8 SCoInfantryMov[] = { 0, 0, 0, 4, 1, 1, 2, 6, 2, 3, 5, 8} ; 
 const s8 MechMov[] = { 0, 0, 0, 0, 0, 1, 2, 1, 3 } ; 
 const s8 CoMechMov[] = { 0, 0, 0, 0, 1, 2, 4, 1, 2, 1, 3 } ; 
 const s8 SCoMechMov[] = { 0, 0, 0, 0, 3, 4, 5, 1, 2, 1, 3 } ; 
-const s8 ReconMov[] = { 0, 0, 0, 0, 0, 1, -1, -2, -3, -4} ; 
-const s8 CoReconMov[] = { 0, 0, 0, 0, 0, 1, 1, 0, -1, -2} ; 
-const s8 SCoReconMov[] = { 0, 0, 0, 1, 1, 1, 1, 1, -1, -2} ; 
-const s8 FighterMov[] = { 0, 0, 0, 0, 0, -1, -2, -3, -4, -1, -2 } ; 
-const s8 CoFighterMov[] = { 0, 0, 0, 0, 0, 0, -1, -2, -3, 0, -1 } ; 
-const s8 SCoFighterMov[] = { 0, 0, 0, 0, 0, 0, 0, -1, -2, 0, 0 } ; 
-const s8 BomberMov[] = { 0, 0, 0, 0, 0, 1, 2, -1, -2, -3, -4, -1, -2 } ; 
-const s8 CoBomberMov[] = { 0, 0, 0, 0, 1, 1, 2, 1, 2, -1, -2, 0, 0 } ; 
-const s8 SCoBomberMov[] = { 0, 1, 1, 1, 2, 1, 2, 1, 2, -1, -2, 0, 0 } ; 
+const s8 ReconMov[] = { 0, 0, 1, 2, 3, -1, -2, 1, 2, 3} ; 
+const s8 CoReconMov[] = { 0, 0, 1, 2, 3, 1, 1, 1, 2, 3} ; 
+const s8 SCoReconMov[] = { 0, 0, 2, 2, 3, 1, 1, 1, 2, 3} ; 
+const s8 FighterMov[] = { 0, 0, 0, 0, 0, -1, -2, -3, -4, 1, 2 } ; 
+const s8 CoFighterMov[] = { 0, 0, 0, 0, 0, 1, -1, -2, -3, 1, 2 } ; 
+const s8 SCoFighterMov[] = { 0, 0, 0, 0, 0, 1, 2, -1, -2, 2, 1 } ; 
+const s8 BomberMov[] = { 0, 0, 0, 0, 3, 1, 2, -1, -2, -3, -4, -1, -2 } ; 
+const s8 CoBomberMov[] = { 0, 0, 0, 0, 1, 1, 3, 1, 2, -1, -2, 0, 0 } ; 
+const s8 SCoBomberMov[] = { 0, 1, 1, 1, 2, 1, 3, 1, 3, -1, 2, 0, 0 } ; 
 int HashMov(int number, int noise, int offset, int coPow) { 
 	//int result = HashByte_Global(number, (max_mov - min_mov)+1, noise, noise);
 	//result = (max_mov - result) + min_mov; 
@@ -351,6 +360,15 @@ int HashMov(int number, int noise, int offset, int coPow) {
 				case bomber: {
 					table = CoBomberMov; 
 					size = sizeof(CoBomberMov); offset += 41;
+					break; 
+				}
+				case artl: 
+				case rckt: 
+				case miss: 
+				case bship: 
+				{
+					table = RangedCoMov; 
+					size = sizeof(RangedCoMov); offset += 41;
 					break; 
 				}
 				default: {
@@ -387,6 +405,15 @@ int HashMov(int number, int noise, int offset, int coPow) {
 					size = sizeof(SCoBomberMov); offset += 66;
 					break; 
 				}
+				case artl: 
+				case rckt: 
+				case miss: 
+				case bship: 
+				{
+					table = RangedSCoMov; 
+					size = sizeof(RangedSCoMov); offset += 66;
+					break; 
+				}
 				default: {
 					table = SCoMov; 
 					size = sizeof(SCoMov); offset += 66;
@@ -421,6 +448,15 @@ int HashMov(int number, int noise, int offset, int coPow) {
 					size = sizeof(BomberMov); 
 					break; 
 				}
+				case artl: 
+				case rckt: 
+				case miss: 
+				case bship: 
+				{
+					table = RangedMovModifiers; 
+					size = sizeof(RangedMovModifiers);
+					break; 
+				}
 				default: 
 			}
 		}
@@ -431,7 +467,7 @@ int HashMov(int number, int noise, int offset, int coPow) {
 
 	
 	
-	int result = HashByte_Global(number, size, noise, offset + 21);
+	int result = HashByte_ChIfConfig(number, size, noise, offset + 21);
 	return table[result];   
 }; 
 
@@ -439,16 +475,16 @@ const s8 RangeModifiers[] = { 0, 0, 0, 0, 0, 1, 2, 1, 2 };
 const s8 CoRange[] = { 0, 0, 0, 0, 0, 1, 2, 3, 4 } ; 
 const s8 SCoRange[] = { 1, 1, 5, 1, 1, 1, 2, 3, 4 } ; 
 const s8 AiDirectCmbRange[] = { 0, 0, 0, 0 } ; 
-const s8 ArtilleryRange[] = { 0, 0, 0, 0, 0, 1, 2, 3, 4, -1} ; 
+const s8 ArtilleryRange[] = { 0, 0, 0, 1, 1, 1, 2, 3, 4, -1} ; 
 const s8 CoArtilleryRange[] = { 1, 1, 1, 2, 3, 1, 2, 3, 4, -1} ; 
 const s8 SCoArtilleryRange[] = { 1, 1, 2, 3, 4, 1, 2, 3, 4, 1} ; 
-const s8 RocketRange[] = { 0, 0, 0, 0, 0, 1, 2, 3, 4, -1, -2 } ; 
+const s8 RocketRange[] = { 0, 0, 0, 1, 1, 1, 2, 3, 4, -1, -2 } ; 
 const s8 CoRocketRange[] = { 0, 1, 2, 1, 2, 1, 2, 3, 4, -1, -1 } ; 
 const s8 SCoRocketRange[] = { 1, 1, 2, 3, 4, 1, 2, 3, 4, 1, 1 } ; 
-const s8 MissileRange[] = { 0, 0, 0, 0, 0, 1, 2, 3, 4, -1, -2 } ; 
+const s8 MissileRange[] = { 0, 0, 0, 1, 1, 1, 2, 3, 4, -1, -2 } ; 
 const s8 CoMissileRange[] = { 0, 1, 2, 1, 2, 1, 2, 3, 4, -1, 0 } ; 
 const s8 SCoMissileRange[] = { 1, 1, 2, 3, 4, 1, 2, 3, 4, 1, 1 } ; 
-const s8 BattleshipRange[] = { 0, 0, 0, 0, 0, 1, 2, -1, -2 } ; 
+const s8 BattleshipRange[] = { 0, 0, 0, 1, 1, 1, 2, -1, -2 } ; 
 const s8 CoBattleshipRange[] = { 0, 1, 1, 2, 3, 1, 2, -1, 0 } ; 
 const s8 SCoBattleshipRange[] = { 1, 1, 2, 3, 2, 1, 2, 1, 1 } ; 
 int HashRange(int number, int noise, int offset, int otherNum, int coPow) { 
@@ -554,6 +590,6 @@ int HashRange(int number, int noise, int offset, int otherNum, int coPow) {
 	}
 
 	
-	int result = table[HashByte_Global(number, size, noise, offset + 31)];
+	int result = table[HashByte_ChIfConfig(number, size, noise, offset + 31)];
 	return result;   
 }; 
