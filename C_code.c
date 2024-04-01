@@ -301,7 +301,7 @@ int HashDef(int number, int noise, int offset, int coPow) {
 	int result = HashByte_ChIfConfig(number, size, noise, offset);
 	result = table[result];
 	// lash max 20 def in sco 
-	if ((noise == 0xC) && (coPow == 0x88)) { if (result > 20) { result = 20; } } 
+	if ((noise == 0xC) && (coPow == 0x88)) { if (result > 10) { result = 10; } } 
 	if (IsCoAiControlled(noise)) { if (result > 40) { result = 40; } } 
 	return result;   
 };  
