@@ -1,5 +1,11 @@
 
 #include "include/aw2.h"
+//
+// function address 2163c InitMap ?
+// bl 247A4 sets 3003f68
+// bl 8014e44 -> 8014dcc decides on address to store into 3003f68 based on
+// 3000050 map size at 21666 load 3003f68 // [3003f68]!! pointer to current
+// buffer ? store to 201e450
 
 struct RandomizerSettings {
   u16 base : 1;
@@ -148,7 +154,7 @@ s16 HashPercent(int number, int noise, int offset, int global,
                                  offset); // rn up to 150 e.g. 125
   } else {
     percentage = HashByte_Ch(number, variation * 2, noise, offset);
-  }                                // rn up to 150 e.g. 125
+  } // rn up to 150 e.g. 125
   percentage += (100 - variation); // 125 + 25 = 150
   if (earlygamePromo == 1) {
     if (percentage > 125) {

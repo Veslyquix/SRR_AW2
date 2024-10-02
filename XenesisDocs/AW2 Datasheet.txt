@@ -1,0 +1,7255 @@
+﻿CO Import Checklist:
+CO Graphic and Power Table entry
+CO Stat Entry
+CO Unit Stat Entry
+Graphical Data
+Graphical Pointer Import
+Text Data
+Text Pointer Import and Table Reference
+AI Table Reference Update
+Music (Optional)
+
+Graphical Sizes for all parts of a CO Import:
+Happy/Neutral/Sad Dialogue Faces: 48x48
+Fullbody Top: 64x128
+Fullbody Bottom: 64x192
+Small Face: 32x16 (32x12 used)
+Large Face: 48x16
+Name: 8x96
+
+(Combined Full-Body Dimension is 128x160)
+
+085D9328 - Text Strings Start
+08610A38 - Text Table Starts
+08613E07 - Text Table Ends - 3316 Entries
+
+
+Text Control Codes:
+0x00 End String
+0x09 Icon of ID of the next character
+0x0A Icon of Unit in Transport
+0x0D New Line
+0x0E Wait
+0x0F Confirm for button press
+0x16 Yes/No for Save Command?
+0x17 Yes/No Selection
+
+0x83 TextRed
+0x80 TextBlack
+
+Text Table References: (08610A38)
+0x08004D88
+0x08005270
+0x080052BC
+0x08005340
+0x0800538C
+0x08005410
+0x0800545C
+0x0801481C
+0x08014AEC
+0x08018650
+0x08018714
+0x08019F28
+0x0801A0FC
+0x0802496C
+0x0802D90C
+0x08034AF0
+0x08039F4C
+0x0803A60C
+0x0803A654
+0x080469D8
+0x08047EAC
+0x0804884C
+0x08068768
+0x080688A0
+0x0807605C
+0x0807FAC8
+0x0808069C
+0x080853A8
+
+0x081251F0 - Mini-Map Tiles (Uncompressed)
+0x081253F0 - Mini-Map Palette
+0x0849D3DC - Table of Mini-Map Terrain IDs to Tile Allocations (1 HW/entry)
+
+Text Table Unit Display Script
+0x080142A0
+
+0x08014084 - Script for Displaying Custom Icon Things
+
+0802216C	- Draws unit Tiles
+
+r0 = Ram Address
+r1 = UID
+r2 = 
+r3 = 
+r4 = 
+
+0201BD54/0201BDD4
+12
+40
+0
+0
+03001530
+03001562
+A
+
+4/6
+0201BC50 - Buffer for Tiles?
+0
+0
+3
+
+
+
+Uncompressed (4bpp, reverse)
+
+Map Unit Sprites (3 Frames of Animation)
+10BE60, 10CBE0, 10D960 - MdTank
+10BEE0 - Neotank
+10BF60 - Tank
+10BFE0 - Recon
+
+10E820 - Small HP icon counters (1-9, Load, Capt, Dive, Unkn, ?)
+
+War Room 1st to 5th Graphics
+0x080F9F84 (uncompressed)
+0x080F6164 Palette
+
+Map Sprites?
+CFFC4 - Base
+D00C4 - Airport
+
+Menu Icons
+F6184 - Attack
+F6204 - Info
+..
+..
+F6404 - Capture
+F8984 - Orange Star Army Emblem
+
+FC8C4 - Firepower Bars
+F6164 - Palette
+
+FE9C4 - Small Rank Symbols (S Rank, A B C)
+102C04 - CO Power Stars
+102E04 - POWER
+
+104464 - Tile Previews?
+
+1923E8 - S-Rank Fancy LZ77 (399 Non-DSC)
+1CC5F0, 22FEF0 - World Map? LZ77 (435 NDSC)
+1D6458 - Eagle on a bike - Gallery pic LZ77
+235558 - SUPER POWER (scroll across) LZ77
+515F0C Medium Tanks? Lz77, 670
+
+Image Compressed offsets.
+00090AA8 - Fuzz
+000926D4 - Recon Sprite OS
+00092AC0 - Recon Sprite BM
+00092EE4 - Recon Sprite GE
+00093240 - Tank Sprite
+000935C4 - Tank Sprite
+000938F4 - Tank Sprite
+00093bf0 - Mdtank Sprite
+00093F44 - MDtank sprite
+0009424C - MDtank sprite
+0009462C - Mdtank Sprite
+000949F8 -MDtank sprite
+00094DE4 - MDtank sprite
+951F8 - Art
+95588 - Art
+958F4 - Art
+95C7C - Art
+95F58 - Rocket
+962E0 - Rocket
+96660 - Rocket
+969E4 - Rocket
+
+Unit Sprites end at A534C
+A3808 - Power Anim (Kanbei Circle)
+A3C6C - Power Anim (Sami Rush)
+A3FF4 - Power Anim (Nell Cross)
+A43AC - Power Anim (Bubbles?)
+A482C - Power Anim (?)
+A4BE0 - Power Anim (Andy Loops)
+A504C - Power Anim (Drake Splash)
+A534C - Blank?
+
+Unit move sprites start
+B7C60
+End
+BD1EC
+BD1EC - Pipelines
+D22C4 - Factory
+D24E0 - Black Cannon
+D2AE8 - Deathray
+D2DA8 - Megamissile
+D3268 - Volcano
+D38AC - Black Fortress
+D3FE4 - Unknown (Says Weapon 12()
+
+D3E84 - Megamissile Palette
+
+CO Upper Bodies
+D45C8-DA5D4
+CO Lower Bodies
+DAABC - E3B18
+
+Portraits
+E8038-F545C
+
+Co Names
+F545C - F60A4
+
+1019C4 - target..thingies.
+1095A4 - More thingies
+10A6F0 - Explosion Anims?
+10B408 - Liny thing.
+10BDC0 - Soundroom Waveform
+10EB00 - 111000 - Explosions
+111000 - Long thin blank line.
+1121D0 - Trap! & Supply
+112704 - Don't know
+112F00 - Don't know
+... (more don't knows)
+1169D0 - Explosions
+117380 - Don't know
+1190F8 - 1203A8 Battle BG
+1209B4 - Thingies? (x4)
+1214B4 - Capt!
+124268 -Mini thingies.
+124478 -Damage icon + numbers.
+1248F8 - Swirly thing
+125A8C - Big numbers!
+126244 - DAY
+12653C - Defeat
+1268F8 - OK!
+126EEC - 130324 BH units
+126EEC - 131E74 - HQ Backgrounds
+131E74- Menu thingies
+1358A0 -ABC?
+
+1361B0 - 16C60C BG Images
+16CABC - Numbers
+16DBA8 - Linkin Error
+17C408 - Nintendo Presents
+17E31C - BM Intro pic
+-184FF4 - Intro pics
+1866F8 - BG Stuff
+18E364 - Angle things
+18E590 - Title Screen logo
+191CCC - 1933F4 - Rank
+1A23B4 - Copyright
+1A2A04 - Campaign Clear!
+1A31C4 - HC Clear!
+1A3BD4 - Campaign Rank!
+1A3E28 - Pallete
+1A4000 - Menu Things
+1A4450 - More Menu things
+1A4804 - BG?
+
+1D18E8 - move Out
+1d1F74 - CO Select
+1D20EC - Rank
+1D2554 - 'No Data'
+1D2660 - Link Cable warning
+1D2A54 - Map Flags
+1D35A4 - Buildings
+1D3810 - Can't tell
+1D3C34 - 'Replace current Data?'
+1D3EE8 - Gallery Pic - Andy
+1D6458 - Gallery Pic - Eagle
+1D8A54 - Link Menu
+1D9484 - 22Ac80 - pics
+22AC80 - Campaign Logo
+22DEA0 - 22F984 - Alphabet
+234B10 - Let's go!
+235558 -'Super Power'
+239228 - YAAlphabet
+23A3D4 - Ending shot
+23BFF4 - 23CFF8 Menu items
+23D2AC - 23D980 - Small menu labels
+23E140 - Rank/Colour bars.
+23EA40 - Shop Hachi
+23FD7C - Design Maps
+23FFBC - Prologue Logo
+4C3F80 - 4EF6A0 - More BG pics
+515F0C - 614151 - Pics End
+
+91CDC-126D88 - Soldier Sprites
+190C08-23BF28 - Campaign Font - EoF
+
+005D9330 - Text Data Starts
+00610A30 - Text Data Ends
+004c3c54 - Alphabet table for design maps typed.
+0016e1b0 - Staff Credits
+
+Andy Data
+5D3ED4 Start Of Andy's Data
+5D3EE0 COP Stars
+5D3EE4 SCOP Stars
+5D3ED8-D9 - Music ID and Bank. (See below)
+5D3EE9 - Army Map Sprites (00 OS, 01 BM, 02 GE, 03 YC, 04 BH)
+5D3EEA - Default Colour (War room, 00 Neutral, 01 Red, 02 Blue, 03 Green, 04 Yell., 05 Black, 06 Moved units red)
+5D3F14 - Day to day special unit properties - See List
+
+5D3F18 - Vision Bonus Day to Day
+5D3F1A - Day to day positive Luck
+5D3F1C - Day to day negative luck
+5D3F1E - Day to day Counterattack strength
+5D3F20-1: Day to Day unit cost
+5D3F22-3 - Day to day Capture Rate (0000 Normal, 3200 +50%, 6C07 Insta-capture)
+
+5D3F24-5 - Clear Weather movement type
+5D3F28-9 - Snow Weather Movement Type
+5D3F2C-D - Rain Weather Movement Type
+
+See the movement type list to edit this.
+
+Replace Data from here with stuff from the list below for those effects. This is a two hex value field. And yes, the units that are in multiple categories overlap. The game sums the two firepower effects and move bonuses
+5D3F30- 31 Soldier power - Infantry, Mechs
+5D3F34-35 Vehicle Power
+5D3F38-39 Plane Power - Fighters, Bombers
+5D3F3C-3D Copter Power - B-Copter, T-Copter
+5D3F40-41 Naval Power
+5D3F44-45 Direct Power (Max's affected units)
+5D3F48-49 - Indirect Power (Grit's affected units)
+5D3F4C-4D - Transport Power (Firepower modifiers do nothing, obviously)
+
+There's two repeat sets after this, which appear to be power and Super power settings.
+
+5D3F50 - COP Name Modifier
+5D3F54 - COP Animation Effect (See List)
+5D3F5E - Positive Luck Modifier(CO Power)
+5D3F60 - Negative Luck Modifier(Co Power)
+5D3F94 - SCOP Name Modifier
+5D3F98 - SCOP Animation Effect
+5D3FD9 - Postive Luck Modifier (SCOP)
+5D3FDB - Negative luck (SCOP)
+
+Unit modifiers (Incomplete)
+F0 3B Default
+F0 3C -10/0
+30 3C - 10/0, -1 range
+70 3C +30/30
+78 3C +50/30
+28 3D +20/20
+F8 3B +20/0. +1 Move
+28 3C +20/0
+B8 3C +15/10 (eagle)
+D8 3C -30/0
+D0 3C +1 Move, +0/10
+10 3D +1 Move
+18 3D +2 Move
+20 3D +10/0
+A8 3C +50/0
+A0 3C +1 Move
+90 3C -10/0
+48 3C -10/0
+003C- Sami's boost (+30/0, Capture Rate modifier unknown)
+F03B- Sami's drop (-10/0)
+583C- Grit's drop (-20/0)
+503C- Grit's boost (+20/0, +1 range)
+C83C- Eagle's drop (-30/0)
+
+Musics & SFX:
+Song IDs:
+00C9 - Eagle's Theme
+00CA - Drake's Theme
+00CB - Grit's Theme
+00CD - Count Up!
+
+00D1 - Andy's Theme
+00D2 - Max's Theme
+00D3 - Kanbei's Theme
+00D4 - Sonja's Theme
+00D5 - Olaf's Theme
+00D6 - Nell's Theme
+00D8 - Map Editor Theme
+00D9 - Sami's Theme
+00DA - 'DEFEAT'
+00DB - Sturm's Theme
+00DC - Last Stage Theme
+
+012C - Advance Wars 2 Opening
+012D - Lash's Theme
+012E  - Hachi's Theme
+012F  - Sensei's Theme
+0130 - Advance Wars 2 Ending
+
+0190 - Wars World News
+0191 - Adder's Theme
+0192 - Hawke's Theme
+0193 - Colin's Theme
+0194 - Orange Star Mission
+0195 - Green Earth Mission
+0196 - Yellow Comet Mission
+0197 - Blue Moon Mission
+0198 - Black Hole Mission
+0199 - Black Hole Super Power!
+019A - Super Power!
+019B - Black Hole Theme
+019C - Flak's Theme
+019D - Orange Star Theme
+019E - Jess' Theme
+019F - To the last stage
+01A0 - Victory Fanfare
+01A1 - Battle Success
+01A2 - Factory Domination
+01A3 - BH Power!
+01A4 - Power!
+01A5 - Green Earth Theme
+01A6 - Yellow Comet Theme
+01A7 - Blue Moon Theme
+01A8 - Macro Land Map
+01A9 - The World of Macro Land
+01AA - Battle Fanfare
+
+Movement Types:
+FC51 Snow Weather Type
+1C51 Clear Type (Normal)
+DC52 Rain Type
+BC53 Penaltyless Type (Sturm Style)
+
+Notes on S/COP Stars:
+If COP = 0, then the CO doesn't have a CO power
+If SCOP = 0, then the SCOP is instantly charged, all the time.
+Also, if the SCOP stars are less than the COP, the COP will NEVER charge up. The SCOP is the cap for charge.
+Stars seem to work to at least 48. The screen can only show about 34 on the left, and 11 on the right.
+
+Notes on Luck:
+These are specified in exact percentages, expressed as hex numbers. Here are the defaults %, Hex:
+Everyone: +10% (0A)
+Nell: +20% (14)
+COP: +60% (3C)
+SCOP: +100% (64)
+
+Flak: +15% (0F), -10% (0A)
+COP: +40% (28) -20% (14)
+SCOP: +80% (50) -30% (1E)
+
+Sonja: +10%, -10% (0A)
+
+Cost Modifer Information:
+The way the Cost modifier works is insanely simple.
+
+The first and second numbers are compared.
+
+If the first is greater than the second, then there is that much of a price change. Discounts have a 1% difference by default. Say in colin's example, EC is 19 smaller than FF, so Colin gets a 20% discount. If you stick FC FF in there, you get free units.
+
+Sample Costs:
+ECFF- 80% Colin
+F6FF- 90% Hachi
+1400- 120% Kanbei
+
+Special Unit Modifiers
+00 Nothing
+01 Hidden HP
+02 City Deployment
+04 Preemptive Counterattacks
+08 Piercing Vision
+
+00 Nothing
+10 Appears to be a Weather-bringer effect
+20 Doubled Terrain Stars
+40 Terrain Star Firepower boost
+80 Aerial units consume 2 less fuel per day.
+
+
+Unit modifers:
+
+3C:
+00 +30/0
+08 -10/0
+10 +1 Mov
+18 +50/0 +1 Mov
+20 +80/0 +2 Mov
+28 +20/0
+30 -10/0 -1 Rng
+38 +40/0 +1 Mov
+40 +60/0 +2 Mov
+48 -10/0
+50 +20/0 +1 Rng
+58 -20/0
+60 +50/0 +2 Rng
+68 +50/0 +3 Rng
+70 +30/30
+78 +50/30
+80 +50/50
+88 +40/0
+90 -10/0
+98 -10/0
+A0 +1 Mov
+A8 +50/0
+B0 +75/0
+B8 +15/10
+C0 +30/20
+C8 -30/0
+D0 +0/10 +1 Mov
+D8 -30/0
+E0 -10/0
+E8 +10/0
+F0 -10/0
+F8 -10/0
+
+3B Bank:
+00 -
+08 -
+10 -
+18 -
+20 +8 Mov, +10 Rng
+28 +Max/50
+30 -
+38 -
+40 -
+48 -
+50 -
+58 +100/100
+60 -
+68 -
+70 -
+78 -
+80 -
+88 -
+90 -
+98 -
+A0 -
+A8 -
+B0 -
+B8 -
+C0 -
+C8 -
+D0 +100/80
+D8 -
+E0 -
+E8 ±0/0
+F0 ±0/0 (Default)
+F8 +20/0 +1 Mov
+
+3D Bank:
+00 +30/0 +1 Mov
+08 +50/0 +2 Mov
+10 +1 Mov
+18 +2 Mov
+20 +10/0
+28 +20/20
+30 +40/40
+38 -
+40 -
+
+17B150 - Meteor Strike Sprite Starts
+6A798 - Pointer to Meteor Strike
+
+F66164 - Pallete for Names
+101904 - Pallete for various cursors.
+190BCB - Title screen text
+1D2224 - Giant font
+
+Map Data
+00 Bank
+04 - Destroyed Minicannon
+08 - Narrow Sea tile
+09=open sea tile
+10=northward shoal
+20=it says it's a sea tile but it has a mountan sprite.
+
+01 Bank
+00 - Plains
+14 - Neutral Lab
+22=Broken Pipe Seam Horizontal
+23=Broken Pipe Seam Vertical
+60=up/right elbow pipe. 
+62=Pipe Seam Horizontal
+63=Pipe Seam Vertical
+80=minisilo! I'm getting REAL close.
+81=Laser
+82=Mini Cannon South
+83=Mini Cannon North
+84=Mini Cannon West
+85=Mini Cannon East
+87=Black Cannon facing South
+8A=Black Cannon facing North(fires every other day,has Death Ray sprite when another Death Ray on map)
+8C=Impassable terrain for Factory
+8D=Factory(Produces glitched units that crash the game)
+8E=Impassable terrain for Factory
+90=Death Ray(Fires every 7 days)
+A0=Launched Silo
+A4=Unpassable blackhole inventions
+A5=Unpassible Mountain
+A7=Volcano
+AF=Blocked Terrain (fortress/giantmissile, its glitched)
+CE - Blue Moon Port
+D9=No army Lab
+DA=1st army Lab
+DB=2nd army Lab
+DC=3rd army Lab
+DD=4th army Lab
+
+Order of Stuff:
+Soldiers
+Vehicles
+Planes
+Copters
+Naval
+Direct
+Indirect
+Transports
+
+Offence
+Defence
+Movement
+Range
+
+
+Terrain Types Data
+5d511c
+Infantry Movements (32 Hex)
+Mech Movements (32 Hex)
+Tread Movements (32 Hex)
+Tyre Movements (32 Hex)
+Air Movement
+Ship Movement
+Lander
+
+
+Terrain Order:
+
+0 Null Tile
+1 Plain
+2 River
+3 Mountain
+4 Forest
+5 Road
+6 City
+7 Sea
+8 HQ
+9 Black Cannons/Factories/Giant Silos/Black Fortresses
+A Airport
+B Port
+C Bridge
+D Shoal
+E Base
+F Pipeline
+10 Pipeline Seam
+11 Silo
+12 Unknown
+13 Reef
+14-1F Various Black Hole Tech (Black Fortress parts, Minicannons, etc.)
+
+Flak 4BBp battle: 1063524 0x103A64
+102F64 Nell
+103064 Andy
+103164 Max
+103264 Olaf
+103364 Sami
+
+
+945336
+
+E5C38 Nell
+E5DB8 Andy
+E5F38 Max
+E6CB8 Flak
+
+
+CO Palettes
+Nell's Palette 1:
+E4400	Nell
+E4500	Andy
+E4600	Max
+E4700	Olaf
+E4800	Sami
+E4900	Grit
+E4A00	Kanbei
+E4B00	Sonja
+E4C00	Eagle
+E4D00	Drake
+E4E00	Sturm
+E4F00	Flak
+E5000	Lash
+E5100	Adder
+E5200	Hawke
+E5300	Hachi
+E5400	Colin
+E5500	Jess
+E5600	Sensei
+E5700	Orange Star Infantry
+E5800	Blue Moon Infantry
+E5900	Green Earth Infantry
+E5A00	Yellow Comet Infantry
+E5B00	Black Hole Infantry
+
+Header of COs Hex 1/2
+183B Nell E208/D94304 E308/D94304
+180A Andy E408/D94304 E508/D94304
+190A Max E808/D94304 E908/D94304
+1A0A Olaf F008/ED4304 F108/454C04
+1B0A Sami E608/D94304 E708/D94304
+1C0A Grit EE08/D94304 EF08/D94304
+1D0A Kanbei F208/D94304 F308/D94308
+1E0A Sonja F408/ED4704 F508/ED4704
+1F0A Eagle F808/D94308 F908/D94304
+200A Drake FA08/814C04 FB08/BD4C04
+210A Sturm  0609/D94304 0709/894A04
+220A Flak  FE08/D94304 FF08/D94304
+230A Lash 0009/D94304 0109/D94304
+240A Adder 0209/D94304 0309/D94304
+250A Hawke 0409/F94C04 0509/354D04
+260A Hachi EA08/3D4804 EB08/3D4804
+270A Colin EC08/054804 ED08 D94304
+280A Jess FC08/D94304 FD08/D94304
+290A Sensei F608/495404 F708/615404
+
+D94304 - Default
+ED4304 - Blizzard - Weather to change to at 080443F4
+454C04 - Winter Fury
+ED4704 - Reveal (Sonja)
+3D4804 - Reveal (Hachi)
+814C04 - Tsunami - damage at 08044c8e, weather at 08044c96
+BD4C04 - Typhoon damage at 08044CCA, weather at 08044CD4
+894A04 - Meteor
+F94C04 - Black Wave
+354D04 - Black Storm
+054804 - Gold Rush
+495404 - Infantry DropA
+615404 - Mech Drop
+000000 - Reset the game
+
+0x080453B0 - Mass Damage COP pattern scroll direction
+
+0x030030CC - Controls LCD options at 0x04000000
+
+0848b5EC
+
+Blizzard - 
+080443EE - sound ID played for the weather change animation
+Default 0x23
+
+Default:
+084A00B0 - First CO's Pointer to animation effect.
+
+Mass Damage Powers:
+Save to stack pointer 0xnn
+
+Damage to be inflicted is saved at  sp 0x0
+Damage to be healed is saved at sp 0x04
+Weather change is saved at sp 0x08 (-1 = no change, 0 = clear, 1 = snow 2 = rain)
+Fuel cut is saved at sp 0x0C
+
+Data in the stack pointer is saved to 0200DA09..0200DA0C
+
+08044EA20 - reads mass damage amount and compares if it = 0
+08044F34 - Reads MD Amount
+08044EAC - Reads healed amount
+08045006 - Reads MD amount and multiplies it up by 10
+08045038 - Reads whether fuel is cut
+080452B0 - Reads weather change byte
+
+Random pointers above CO data
+C8450D08
+BCAA0D08
+C04A0D08
+3CB10D08
+34500D08
+78B90D08
+F0550D08
+B8C20D08
+305B0D08
+9CCC0D08
+64600D08
+18D70D08
+4C650D08
+F0DE0D08
+E46A0D08
+88E80D08
+AC6F0D08
+04EF0D08
+48750D08
+CCF60D08
+807A0D08
+98FF0D08
+B0800D08
+68040E08
+40870D08
+7C0D0E08
+288C0D08
+60150E08
+10910D08
+441C0E08
+1C960D08
+D4220E08
+F49A0D08
+EC2A0E08
+24A00D08
+2C320E08
+D4A50D08
+183B0E08
+
+
+Winter Fury
+
+B5 || 85 B0 09 4E 0A 49 0A 4A 0B 4B 1B 88 02 24 00
+94 00 25 01 95 01 24 02 94 03 95 04 90 30 1C 00
+F0 84 F8 05 B0 70 BC 01 BC 00 47 94 09 4A 08 00
+2F 11 08 C0 3B 11 08 EC 33 00 03 70
+
+This is the damage that Winter Fury Does
+
+Mass damage CO Powers:
+
+Damage inflicted: Saved at [sp]
+Weather Change: Saved at [sp, 0x8]
+
+0x08044C52
+Damage of Winter Fury
+
+0x08044C5A
+Weather to change to
+
+This affects Winter Fury's targeting:
+00 = Allies only
+01 = Enemies Only
+02 = Enemies and Allies
+
+This is the weather changer:
+00 = Turn Clear
+01 = Turn Snowy
+02 = Turn Rainy
+
+Changing these seems to affect Healing and damage (Set targeting to 02)
+00, 00 - Default (Damage opponent)
+01, 01 - Heal Olaf's units by specified damage amount
+01, 00 - Heal Olaf's units by specified damage amount
+01, 02 - Heal's Olaf by amount, inflicts max damage on opponents
+02, 01 - Fully heals Olaf by amount, Inflicts max damage on opponents
+02, 02 - Fully heal Olaf's units
+
+Black Storm
+B5 85 B0 09 4D 0A 49 0A 4A 0B 4B 1B 88 02 24 00
+94 01 94 03 3C 02 94 00 24 03 94 04 90 28 1C 00
+F0 0C F8 05 B0 30 BC 01 BC 00 47 94 09 4A 08 D0
+33 11 08 C0 3B 11 08 EC 33 00 03 F0
+
+Changing this changes the weather.
+00: Rain
+01: Snow
+02: Clear
+03: No Change
+
+Changing this Changes the amount that Black Storm Heals/Damages.
+
+Note: The green and the red values are interelated. increasing the Damages, means you need to change the weather changer.
+
+Setting this to anything other than the default seems to produce Full health healing on Hawke's units. Also, setting this to 00, and purple to 01 produces a mass damage power with Fuel halving.
+
+Changing this from the default 03 to 01 turns Black Storm into a mass damage 2HP power with no side effects, provided everything else is untouched.
+00 Is Self Targeting, so Heals 2HP.
+
+Fiddling with just about anything else seems to cause catastropic effects.
+
+Copter Command and Airborne Assault
+First line of code for Copter Command: (0x08045448)
+00B5 011C 0348 D7F7 85FA 0121 4165 01BC
+
+First line of code for Airborne Assault: (0x08045460)
+B501 1C03 48D7 F779 FA02 2141 6501 BC00
+
+Also, a list of units for Airborne Assault:
+01 Infantry
+02 Mechs
+03 Md Tanks
+04 Glitchy
+05 Tanks
+06 Recons
+07 APC
+08 Neotanks
+09 Glitchy
+0A Artillery
+0B Rockets
+0C Glitchy
+0D Glitchy
+0E AAs
+0F Missiles
+10 Fighters
+11 Bombers
+12 Glitchy
+13 Battle Copters
+14 T- Copters
+15 Battleships
+16 Cruisers
+17 Landers
+18 Subs 
+
+Miscellaneous Numbers in CO data:
+183B Nell C5C105, D94304
+180A Andy 09C205, D94304
+190A Max C5C105, D94304
+1A0A Olaf 69C205, ED4304
+1B0A Sami C5C105, D94304
+1C0A Grit C5C105, D94304
+1D0A Kanbei C5C105, D94304
+1E0A Sonja C5C105, ED4704
+1F0A Eagle D9C105, D94304
+200A Drake C1C105, D94304
+210A Sturm  C5C105, D94304
+220A Flak  C5C105, D94304
+230A Lash C5C105, D93404
+240A Adder C5C105, D94304
+250A Hawke C1C105, D94304
+260A Hachi C5C105, D94304
+270A Colin C5C105, D94304
+280A Jess C5C105, D94304
+290A Sensei c5c105, D94304
+
+Maps Stuff
+
+Map in Memory:
+02000000 - 02000500 - Copy of the map - Design Maps related? - Save Buffer leftover
+02002052 - 0x2002558 - Copy of the Map - Design Maps related? - Save buffer leftover
+0201EE72 - 0x201F87C - Memory Location of currently loaded map (Saved to ROM version) - 2 bytes/tile
+0201F882 - Instant Map display (TSA) 1 byte/tile
+02003010 - 
+
+080BFBCA - MAP IDs for a specific map tile. Eg, 0x0023 = Mountain, MTID = 0044, 0045, 0064, 0065 (TL, TR, BL, BR)
+080C1BC4 - tile ID table: What tile type is a given tile ID, 0x3FF long
+020233B0 - Where the TSA table is stored in RAM
+0201F883
+
+08023BAC - Sets Tile IDs/Palettes for each map tile - Combines the 8x8 for each Tile ID to a 16x16
+
+080BFBC4 - Base 8x8 to 16x16 assemblies - each tile entry is 8 bytes (Top Left, Top Right, Bottom Left, Bottom Right)
+		-Loads map from 0201E450
+
+0202079A - What tiles are covered by a FoW Shroud 0 = Covered, 1+ = Visible
+
+0801BBC4 - Routine that loads the next two
+03004094 - OAM Layer that is updated (for terrain stuffs/GUI stuffs)
+030025A0 - OAM data to be updated into RAM
+
+0801bf76 - Draws Properties, GUI panels like the CO One. OAM Setup
+	Reads from 0x0200CD80/0x0200D510 for game play?
+0x00806CF28 Title Screen OAM Subroutine?
+
+0x080436DC - Main Game OAM Subroutine?
+
+0x0802B382 - Draws the Terrain Star Icon for the Infobox (OAM)
+
+08021598 - Loading the map subroutines?
+
+020288B8 - Tile HP values
+02028360 - Appears to hold Black Hole Inventions
+	+0x0 byte: X Position
+	+0x1 byte: Y Position
+	+0x2/3 - Multiple attributes (see below)
+	+0x4 byte: Current HP
+	+0x6 byte: Days left till firing counter
+	+0x7 byte: Damage inflicted
+
++0x2/0x3
++4000 to 8000:	2 Bits	Invention Facing (0 = S, 1 = N, 2 = W, 3 = E) (Note, don't use on a direction the invention doesn't do)
++2000 to 400:	4 Bits	Firing Interval
++40 to 200:	6 Bits	Black Invention ID (Allows 0-F)
++8 to 20:		3 Bits	Vertical Size (in Tiles)
++0 to 4:		3 Bits	Horizontal Size (in Tiles)
+
+Invention IDs:
+0x1	Laser Cannon
+0x2	Volcano
+0x3	Black Cannon (South)
+0x4	Minicannon
+0x5	Black Cannon (North)/Deathray?
+
+0x7	Factory
+0x8	Changeable Tile
+
+0803EB24 - What team do the inventions fire for? (cmp r0, 0x5, bne 0803EB2E - D102)
+
+0803DFB0
+
+0803E088 - Subroutine that sets up BH Inventions
+
+08045612 - Default Pipe Seam HP?
+
+08040304 - Terrain type to make East/west pipe seams when destroyed
+0804033A - Terrain type to make North/south pipe seams when destroyed
+
+
+020225CA
+030031C0
+
+Horizontal Map Size: 0201E450:XX
+Vertical Map Size: 0201e452:XX
+
+0201E454 Map Reticle X-Co-ordinate
+0201E458
+
+0201E456 Map Reticle Y-Co-ordinate
+0201E45A
+
+D60A Cleanup 5CA94C
+D00A T Minus 15
+CF0A Reclamation
+930A Spann Island 5C9E84 (EC 3F 1C )
+
+Format:
+Line 1: 
+BD0A 0700 0200 0100 0100 0100 0800 0000 
+Red: Map name index 
+Green: Number of players, extra players cannot play but in the Co doissier Nell appears as the other teams cos... (Unless hacked otherwise 
+Orange: 100 points speed (day) requirement. 
+Blue: Fog of War or not.
+
+5CA938 - Cleanup's Map Header
+C4 75 1C - Start of Mission 2's Map
+2875 1C - Start of Cleanup's Map
+F0 E1 5C  - Start of Cleanup's Unit Table
+5C E2 5C  - Start of Mission 2's unit table.
+
+Map Header+0x16
+Victory Background ID
+0x0 = Randomly select from all backgrounds
+0x1 = Standard
+0x2 = Exploding Tanks
+0x3 = Laboratory
+0x4 = Factory
+0x5 = Soldiers Marching
+0x6 = Ships Exploding
+0x7 = Andy, Max, Sami on Tank
+0x8 = River
+0x9 = Planes Exploding
+0xA = Black Cannon
+0xB = Destroyed Town
+0xC = Missile Silo
+0xD = Tank in the Woods
+0xE = Tank at Fortress
+0xF = Sea Fortress
+0x10 = Volcano
+0x11 = Hot Pursuit
+0x12 = Deathray
+
+APC - 0,5
+
+Infantry 3,7 2,8 and 3,9
+
+BH Inf at 11,4 and 12,4
+
+Text IDs/Header Locations (92 Bytes Long)
+
+Classic Maps
+Unknown (0 ID, presumably)
+Bean Island 340A 5C7810
+Crater Isle 350A (8C A1 1B 08 )
+Triangles 360A
+Ball Islands 370A
+Coral Lagoon 380A
+Puzzle Trio 390A
+Fist Peninsula 3A0A (24 A8 1B 08 )
+Deer Harbour 3B0A
+Alara Range 3C0A
+Lost River 3D0A (74 AD 1B 08 )
+Volcano Isle 3E0A
+Turtle Atoll 3F0A
+Squash Island 400A
+Cube Keys 410A
+Mirror Islands 420A (50 B6 1B 08 )
+Shark Strait 430A (20 B8 1B 08 ) (Predep: B8 0C 4A 08  )
+Royal Channel 440A (4C BB 1B 08 )
+
+Vs Maps
+Little Island 450A 5C7E2C
+Sun Canal 460A
+Beaker River 470A
+Star Islands 480A
+Eon Springs 490A
+Portal Bridge 4A0A
+Sabre Range 4B0A
+Asphalt Maze 4C0A
+Cog Isle 4D0A
+Zero Wood 4E0A
+Switchback 4F0A
+Ruby Keys 500A (F4 C8 1B 08 )
+Rainy Haven 510A
+Rail Straight 520A
+Tribe Islands 530A
+Vision Bridge 540A (60 CE 1B 08 )
+Piston Dam 550A
+Hat Harbour 560A
+Swan Cove 570A
+Go Islands 580A
+
+Predeployed Maps
+Brace Range 590A 5C85B8
+River Range 5A0A
+Moon Isle 5B0A
+Mint Plateau 5C0A
+Jewel Canal 5D0A
+Wrench Island 5E0A
+Rapid Ferry 5F0A
+Bundle City 600A
+Scarab Road 610A
+Pointing River 620A
+Liason Wood 630A
+Delta Heights 640A
+Poem Cape 650A
+Blue Lake 660A
+Coil Range 670A
+Leaf Haven 680A
+Battle Cube 690A
+
+3P Maps
+Pyramid Cape 6A0A 5C8CE8
+Bead Islands 6B0A
+Clover Keys 6C0A
+Keyhole Cove 6D0A
+Fork River 6E0A
+Mantis River 6F0A
+Channel City 700A
+Ink Canal 710A
+Shield Hills 720A
+Peril Maze 730A
+Gem Creek 740A
+Glass Heights 750A (08 F7 1B 08 )
+Devil's Inlet 760A
+Shear Port 770A
+Liar's Cove 780A 
+Nail Canal 790A
+Atlas River 7A0A
+Eel Channels 7B0A
+Jab Peninsula 7C0A
+Thorn Islands 7D0A (70 03 1C 08 )
+
+4P Maps
+Four Corners 7E0A 5C9588
+Rocket Cape 7F0A
+Crop River 800A
+Tween Isle 810A
+Rival Islands 820A (04 15 1C 08 )
+Loop Road 830A
+Plus Canal 840A
+Islas Five 850A
+Patriot Cove 860A
+Web River 870A
+Cap Narrows 880A
+Jay Islands 890A
+Chain Canal 8A0A
+Spring Lakes 8B0A
+Tatter River 8C0A
+Island X 8D0A
+Alakule 8E0A
+Traitor River 8F0A
+Fable Hills 900A
+South Cape 910A
+Glory Islands 920A
+
+War Room Maps
+Spann Island 930A 5C9E84
+Moji Island 940A
+Duo Falls 950A
+Sole Harbour 960A
+Pivot Isle 970A
+Land's End 980A
+Kita Straight 990A
+Point Stormy 9A0A
+Ridge Island 9B0A
+Mial's Hope 9C0A
+Bounty River 9D0A
+Toil Ferry 9E0A
+Twin Isle 9F0A
+Dire Range A00A
+Egg Islands A10A
+Terra Maw A20A
+Stamp Islands A30A
+Rivers Four A40A
+Ring Islands A50A
+Last Mission A60A
+Pay Dirt A70A
+Long Road A80A
+Nest Egg A90A
+The Trident AA0A
+Banker Hills AB0A
+Missile Plains AC0A
+Lost Basin AD0A
+Risky Vale AE0A
+The Ring AF0A
+Strong Land B00A
+
+New AW2 Maps
+Hourglass Isle B10A 5C855C
+Pipe Maze B20A
+Archipelagos B30A
+Big Daddy B40A
+Crossroad B50A
+Badlands B60A
+Grid Assault B70A
+Portsmouth B80A
+Knotted Keys B90A
+Wyrm's Eye BA0A
+Lock Ridge BB0A
+Heartland BC0A (38 3A 1C 08 )
+
+OS NC
+Cleanup: BD0A 5CA94C
+Border Skirmish BE0A
+Orange Dawn BF0A
+Flak Attack C00A
+Lash Out C10A
+Andy's Time C20A
+Test of Time C30A
+Liberation C40A
+
+BM NC/HC
+Toy Box CD0A
+Tanks!!! CE0A
+Reclamation CF0A
+T Minus 15 D00A
+Two-Week Test D10A
+Nature Walk D20A
+Neotanks!? D30A (C4 84 1C 08) (C4 84 1C 08) (28 F8 5C 08, 64 F8 5C 08 )
+Factory Blues D40A
+
+YC NC/HC
+Silo Scramble D50A (90 87 1C 08 ) (FC 88 1C 08 )
+Show Stopper D60A
+Sensei's Return D70A
+Duty & Honour D80A
+A Mirror Darkly D90A
+Foul Play DA0A
+Sea of Hope DB0A
+The Hunt's End DC0A
+
+GE NC/HC
+Sea Fortress DD0A
+Drake's Dilemma DE0A (74 98 1C 08 ) (Units NC:D0 19 5D 08 )
+Sinking Feeling DF0A
+To The Rescue E00A
+Navy Vs. Air E10A
+Rain of Fire E20A (D4 A2 1C 08 )
+Danger X 9 E30A (Map: 2C A4 1C 08 ) (Units: B4 2C 5D 08, E0 2D 5D 08 )
+Great Sea Battle E40A
+
+BH NC/HC
+Hot Pursuit E50A
+Final Front E60A 5CB528
+
+OS HC
+Border Skirmish C50A 5CB5E0
+Orange Dawn C60A (E0 B6 1C 08 )
+Andy's Time C70A
+Mountain Ops C80A
+Sea For All C90A (D4 BA 1C 08 )
+POW Rescue CA0A
+Test of Time CB0A
+Liberation CC0A
+
+Unused? Design Maps? (Repeated 3 Times)
+Edit 1 E70A 5CB864
+Edit 2 E80A
+Edit 3 E90A
+
+
+Terrain list:
+00 Set
+
+01 Plain
+02 Low Mountain
+03 Plain with Mountain peak below
+04 Plain with Rubble
+05 N/A
+06 N/A
+07 N/A
+08 Sea (Land on all sides)
+09 Sea (Land in Bottom Right)
+0a Sea (Land in bottom)
+0b Sea (Land in Bottom L, Bottom R)
+0c Sea (Land L and R)
+0d Sea (Land BL and TR)
+0e N/A
+0f N/A
+10 Shoal (Land S)
+11 N/A
+12 N/A
+13 East/West Bridge
+14 East/West Bridge
+15 East/West Bridge again?
+16 North/South Bridge
+17 Sea (Land Top/Bottom)
+18 North/South River
+19 East/West River
+1A T Intersection North/East/West River
+1B + Intersection River
+1C East/West River
+1D East/West Rive (South Bank only)
+1E North/South River (No Banks)
+1F North/South River (No Banks again?)
+20 Short Mountain
+21 Plain (Mountain Shadow West)
+22 Tall Mountain (Cut off Top, Mountain Top at bottom)
+23 Tall Mountain (Cut off Top)
+24 Forest + Forest Clump (Bottom Right)
+25 Forest + Forest Clump (Bottom Right)
+26 Forest + Forest Clump (Bottom)
+27 Forest + Forest Clump (Bottom Left)
+28 Sea (Land Right)
+29 Sea (Land Right + Bottom curve)
+2A Sea
+2B Sea (Land Left + Bottom curve)
+2C Sea (Land Left)
+2D Sea (Land Top L, Bottom R)
+2E Shoal (Land R)
+2F Shoal (Land R-Bottom curve)
+30 N/A
+31 Shoal (Land L-Bottom Curve)
+32 Shoal (Land L)
+33 Sea (Land L+R)
+34 Sea (Land L)
+35 Sea (Land R)
+36 N/S Bridge
+37 Sea (Land Top, Bottom R)
+38 Another damn N/S River
+39 Another E/W River 
+3A T-River (E/W/S)
+3B N/A
+3C Another E/W River
+3D Another Another E/W River
+3E N/A
+3F N/A
+40 N/S Road
+41 S/E Road
+42 S/W Road
+43 Plain with Mountaintop
+44 Forest + Forest Clumps (Right)
+45 Forest + Forest Clumps (Right)
+46 Forest Clumps (Centre)
+47 Forest + Clumps (Bottom Left)
+48 Sea (Land Top Right) 
+49 Sea (Land Top to Right Curve)
+4A Sea (Land Top)
+4B Sea (Land Top to Left Curve)
+4C Sea (Land Top Left)
+4D N/A
+4E N/A
+4F Shoal (Top to Right Curve)
+50 Shoal (North)
+51 Shoal (Top to Left Curve)
+52 N/A
+53 U Shoal (Open on Right)
+54 U Shoal (Open on left)
+55 U Shoal (Open T)
+56 N/A
+57 N/S River
+58 S/E River
+59 S/W River
+5A S/E River
+5B S/W River
+5C N/S River (No Right Bank)
+5D N/S River (No Left Bank)
+5E N/S River (No Right Bank, Up Flow)
+5F N/S River (No Left Bank, Up Flow)
+60 N/E Road
+61 E/W Road
+62 N/W Road
+63 N/A
+64 Forest + TopR Clumps
+65 Forest + TopR Clumps
+66 Forest + TopR Clumps + Left Shadow
+67 Forest + Left Shadow
+68 U Sea (Bottom Open)
+69 Sea (Land Bottom L + Bottom R)
+6A U Sea (R Open)
+6B Sea (Land Top L + Bottom L)
+6C Sea (Land Top + B)
+6D Shoal (Land Bottom, Low-High Curve)
+6E Shoal (Land Bottom, High-Low Curve)
+6F N/A
+70 N/A
+71 N/A
+72 N/A
+73 N/A
+74 N/A
+75 U Shoal (B Open)
+76 N/A
+77 N/A
+78 N/E River
+79 N/W River
+7A N/E River
+7B N/W River
+7C T-River (N/S/W)
+7D T-River (N/S/E)
+7E T-River (N/S/W)
+7F T-River (N/S/E)
+80 N/S Road (Shadow)
+81 N/E Road (shadow)
+82 N/W Road (Shadow)
+83 N/S Road
+84 E/W Road
+85 E/W Road
+86 Forest
+87 Forest
+88 T NEW Sea
+89 U-Sea (N Open)
+8A T-Sea NSE
+8B U-Sea (L Open)
+8C N/A
+8D N/A
+8E N/A
+8F North Shoal (Low-High-Low)
+90 N/A
+91 N/A
+92 End Shoal (West Face)
+93 End Shoal (East Face)
+94 N/A
+95 N/A
+96 N/A
+97 N/A
+98 N/E River
+99 S/W River
+9A S/E River
+9B S/W River
+9C T-River N/S/E
+9D T-River N/S/W
+9E T-River N/S/E
+9F T-River N/S/W
+A0 N/W Road + Shadow
+A1 E/W Road + Shadow
+A2 N/W Road + Shadow
+A3 N/S Road + Shadow
+A4 E/W Road + Shadow
+A5 E/W Road + Shadow
+A6 Forest Clump
+A7 Forest Clump (Top R Corner)
+A8 Sea Land L + BR
+A9 Sea Land R + BL
+AA T-Sea NSE
+AB T-Sea NSW
+AC N/A
+AD N/A
+AE N/A
+AF W-Face Shoal
+BO E F Shoal
+
+B1 N
+B2 Top R Corner Shoal
+B3  Top L Corner Shoal
+B4 N
+B5 N
+B6 BR CornerShoal
+B7 BL Corner Shoal
+B8 NE River
+
+B9 NW River
+BA NE River
+BB EW River
+BC EW River
+BD EW River
+BE EW River
+BF EW River
+C0 NEW Road
+C1 NES Road
+
+C2 NEW Road S
+C3 NES Road S
+C4 NE Road
+C5 NE Road
+C6 Forest  Clump
+C7 Forest Clump
+C8 NES Ocean
+C9 NWS Ocean
+
+CA N
+CB M
+CD S Shoal
+CE S Shoal
+CF W Shoal
+D0 E Shoal
+D1 N
+D2 Bottom R Corner Shoal
+
+D3 Bottom L Corner Shoal
+D4 N
+D5 N
+D6 TR Corner Shoal
+D7 TL Corner Shoal
+D8 NES River
+D9 NWS River
+DA NES River
+
+DB NWS River
+DC EW River
+DD EW River
+DE EW River
+DF EW River
+E0 EWS Road
+E1 NES Road
+E2 EWS Road Shadow
+E3 NES Road Shadow
+
+E4 NE Road Shadow
+E5 NE Road Shadow
+E6 Forest Clump
+E7 N
+E8 EW Sea
+E9 EW Sea
+EA EW SEa
+EB ES Sea
+
+EC WS Sea
+ED N
+EE N
+EF S Shoal
+F0 N
+F1 N
+F2 BL Corner Shoal
+F3 BR Corner Shoal
+
+F4 N
+F5 N
+F6 N
+F7 N
+F8 NES River
+F9 NWS River
+FA NES River
+FB NWS River
+
+FC Turbulent River
+FD Turbulent River
+FE N
+FF N
+
+01 Set
+00 + Road
+01 + Road Shadow
+02 N Cap Pipe
+03 S Cap Pipe
+04 NW Road
+05 NW Road
+06 Plain + Forest
+07 Plain + Forest
+
+08 Sea
+09 Sea
+0A Sea
+0B Sea
+0C Sea
+0D N
+0E N
+0F N
+
+10 N
+11 N
+12 TL Corner Shoal
+13 TR Corner Shoal
+14 N
+15 N
+16 N
+17 N
+
+18 River
+19 River
+1A River
+1B River
+1C River -> Sea
+1D River -> Sea
+1E N
+1F N
+
+20 W Pipe Cap
+21 E Pipe Cap
+22 NS Broken Seam
+23 EW Broken Seam
+24 NW Road
+25 NW Road
+26 Plain + Forest
+27 Plain + Forest
+
+28 Sea
+29 Sea
+2A Sea
+2B Sea
+2C Sea
+2D N
+2E N
+2F N
+
+30
+..
+37 N/A
+
+38 River
+39 River
+3A
+..
+3F N/A
+
+40 NE Pipe
+41 NW Pipe
+42 EW Pipe
+43 NS Pipe
+44 WS Road
+45 WS Road Shadow
+46 N
+47 N
+
+48
+..
+4F N/A
+
+50 - 5F N/A
+
+60 NE Pipe
+61 NW Pipe
+62 NS Pipe Seam
+63 EW Pipe Seam
+64 SE Road
+65 SE Road + Shadow
+66 N
+67 N
+
+68 Reef
+69 - 7F N/A
+
+80 Missile Silo
+81 Laser Shooter
+82 S Minicannon
+83 N Minicannon
+84 W Minicannon
+85 E Minicannon
+86 Umi (Appears as Plain. Placed under Multitile Black Inventions)
+87 South B Cannon (Overwrites 8 tiles surrounding it as well as Black cannon)
+88 Umi
+89 Umi
+8A North B Cannon
+8B Umi
+8C Umi
+8D 'Factory'
+8E Umi
+8F Umi
+
+90 Deathray
+91 Umi
+92 - 9F N/A
+
+A0 Launched Silo
+A1 - A3 N/A
+A4 Umi
+A5 Umi Mountain (Volcano)
+A6 Umi
+A7 Volcano (Takes up the tiles 1 Left, 2 Right and 2 Above 1 Below)
+A8 - AA Umi
+AB - 'Blocked' (Under Black Fortress/Factory)
+AC Umi
+AD Umi
+AE + Road
+AF Garbled Factory
+
+B0 Umi
+B1 Umi
+B2 - BF N/A
+
+C0 Neut HQ
+C1 Neut Base
+C2 Neut City
+C3 Neut Airport
+C4 Neut Port
+C5 OS HQ
+C6 OS Base
+C7 OS City
+C8 OS Airport
+C9 OS Port
+CA BM HQ
+CB BM Base
+CC BM City
+CD BM Airport
+CE BM Port
+CF GE HQ
+
+D0 GE Base
+D1 GE City
+D2 GE Airport
+D3 GE Port
+D4 YC HQ
+D5 YC Base
+D6 YC City
+D7 YC Airport
+
+D8 YC Port
+D9 Neutral Lab
+DA OS Lab
+DB BM Lab
+DC GE Lab
+DD YC Lab
+DE N
+DF N
+
+E0 - FF - Sequence Repeats
+
+02 Lot
+00 - 0F Blank
+
+
+
+
+Crater Isle
+
+
+4A077C - Vs Mode CO Order
+08043CDC - Length of CO List
+
+6166F0 - Slide Reel CO Order
+xyz (Co), FF Army swap
+
+Loader that saves the ASM pointer in RAM: 0x0807F57C
+0x0803BD14 - Calculates surplus
+
+Co no list: 
+ 00 - Nell 
+ 01 - Andy 
+ 02 - Max 
+ 03 - Olaf 
+ 04 - Sami 
+ 05 - Grit 
+ 06 - Kanbei 
+ 07 - Sonja 
+ 08 - Eagle 
+ 09 - Drake 
+ 0A - Sturm 
+ 0B - Flak 
+ 0C - Lash 
+ 0D - Adder 
+ 0E - Hawke 
+ 0F - Hachi 
+ 10 - Colin 
+ 11 - Jess 
+ 12 - Sensei
+ FF - CO select
+618100
+
+09 8F - COP Icon
+09 90 - SCOP Icon
+
+Co Select Subroutines:
+0000 0000 - None, just use the co specified 
+0x08078791 - Liberation style, Three OS cos, ONLY if in the corresponding map header the 1st co value is FF!! 
+0x080787B9 - Factory Blues, Three BM cos player 1, three os cos player 2, ONLY if in the corresponding map header the 1st co value is FF!! 
+0x080787A5  - BM Only
+0x080787ED  - YC Only
+0x08078801 - YC Factory + OS/BM support
+0x08078835 - GE Only
+0x08078849 - GE, OS, YC
+0x08078865 - All - Hot Pursuit
+0x08078885 - All - Final Front
+
+0x0807CE5C - Subroutine for the entire CO Select Slide Reel Menu, part of script 0x08616638
+0x0807C978 - Loads Script (War Room)
+0x0807C97A - Loads Script (Campaign)
+
+0x0803CA54 - Unlocked Map Checker Function (Vs Menu)
+0x0803832C - Stores map clear completion?
+
+4853db6815d6
+
+Misc Memory Addresses:
+0200C420		Battle Maps Points available
+
+02028030		0x1 	= Hard Campaign Available 
+			0x2 	= Campaign Completed (Unlock BH COs)
+			0x4	= Hard Campaign Completed
+			0x10	= Blue Moon Completed (Unlock BM COs)
+			0x20	= Yellow Comet Completed (Unlock YC COs)
+			0x40	= Green Earth Completed (Unlock GE COs)
+			
+
+02028031		:Sound Room unlocked? (0/1)
+02028038		:Hard Campaign On/Off (0/1)
+02028040		:Map Cases open 
+			0x4 = Classic
+			0x8 = Vs
+			0x10 = Predep
+			0x20 = 3p
+			0x40 = 4p
+			0x80 = War room
+
+02028042-53	:Unlocked Maps
+
+0202805A-5C	:Unlocked COs
+			5A
+			0x1	= Nell
+			0x2	= Andy
+			0x4	= Max
+			0x8	= Olaf
+			0x10	= Sami
+			0x20	= Grit
+			0x40	= Kanbei
+			0x80	= Sonja
+			
+			5B
+			0x1	= Eagle
+			0x2	= Drake
+			0x4	= Sturm
+			0x8	= Flak
+			0x10	= Lash
+			0x20	= Adder
+			0x40	= Hawke
+			0x80	= Hachi
+
+			5C
+			0x1	= Colin
+			0x2	= Jess
+			0x4	= Sensei
+
+
+0202805D-5F	:Unlocked Colour Edits (Same order as above list)
+02028060-76	:Maps Played (8/Byte)
+
+0200C078 - 2CF	:War Room High Scores
+			CO ID (1 Byte), Days (12 Bits), Score (12 Bits) - Total 4 Bytes. 5x Per Map (Top 5 scores).
+0200C2D0		:Campaign High Scores - Same format as War Room, 1 normal and one hard score per map.
+
+
+0200C458		Hold Current Campaign Run
+			Mission ID (1 Byte), Days (12 Bits), Score (12 Bits) Total - 4  Bytes, 1 per mission.
+0200050C
+0200255E
+0202FE38		Possible Addresses for #Missions completed in campaign
+
+0200C42E		Appears to hold which animation mode is set / also held at 0x03003FC9
+0200C434		Appears to hold Music On/off options for play
+
+
+020288A0		:Holds COs in list for selection
+03005944		:How many armies are there (Film Reel)
+03005948		:OS Has this many COs
+			:BM
+			:GE
+			:YC
+			:BH
+030058E0		:Holds the CO select order for the film reel
+
+
+
+
+03003F2C:		Offset for Unit Numbers for P1-P4 (
+
+
+Player 0 02023284 (Used for Neutral Properties, etc.)
+Player 1 020232C0 (3C Long)
+Player 2 020232FC
+Player 3 02023338
+Player 4 02023374
+
+020232C0 W		: P1 Funds
+020232C4		: P1 Total Funds spent
+020232C8 W		: P1 Current Income
+020232CC		: P1's Owned Bases Total
+020232CD		: P1's Owned Cities Total
+020232CE		: P1's Owned Airports Total
+020232CF		: P1's Owned Ports Total
+020232D0		: P1 Properties Owned
+020232D1		: P1's Properties Captured?
+020232D4		: =01 when P1 is defeated
+020232D6		: Stores count of units destroyed this turn
+020232D8		: Stores count of maximum units destroyed
+020232DA		: Player 1 Team Colour
+020232DB		: Player 1 is AI Controlled (00 = None, 01 = Human, 02 = AI)
+020232DC		: =03 when P1's Turn
+020232DD		: P1 CO
+020232DE		: P1 CO Mode (00 = Normal, 01 = COP, 02 = SCOP)
+020232DF		: P1 CO Mode (Used for COP Activation)
+020232E0 W		: P1 S/COP Charge
+020232E4		: P1, which COP noise to play/Is COP/SCOP ready?
+020232E5		: P1 CO Power Uses
+020232E6 		: Temp Firepower Bonus
+020232E8 		: Temp Defence Bonus
+020232EA		: P1's Team (Used for attacking)
+020232EC		: Stores a team related byte - Appears to be the used one, others used for setup
+020232ED		: P1's HQ X Co-ordinate
+020232EE		: P1's HQ Y Co-ordinate
+020232EF		: P1's Selection Cursor X Co-ordinate
+020232F0		: P1's Selection Cursor Y Co-ordinate
+020232F2		: If set to True, Kill Player on next End Turn.
+020232F3		: Rank Earned
+020232F4		: Points for Speed Score
+020232F5		: Points for Power Score
+020232F6		: Points for Technique Score
+020232F8		: Total Score
+020232FA		: Stores Unit count
+020232FB		: Stores Unit Lost Count
+
+
+02023284:	P0 - Identical format, just used for Neutral Props, etc.
+020232FC: P2 Funds Memory Address
+02023319: P2 CO
+0202331C: P2 S/COP Charge
+02023321: P2 CO Power Uses
+0202332A: P2 Current Income
+
+0x2023338: P3 Funds
+0x2023374: P4 Funds
+
+020225D4: Lab Map Tile number?
+
+02022690: Unit 1, P1 is stored in RAM here (0xC Long)
+	990: Unit 1, P2
+	C90: Unit 1, P3
+	F90: Unit 1, P4
+
+Format
+15 00 0A 05 e4 04 63 00 00 00 00 04
+
++0x0: Unit ID
++0x1: Unit States
+	0x1	: Unit Moved
+	0x2	: Unit Unselectable
+	0x4	: Currently Selected Unit
+	0x8	: Unit Being Transported
+	0x10	: Unit Transporting
+	0x20	: Unit Dived
++0x2: X Co-ordinate
++0x3: Y Co-ordinate
++0x4 - 0x5: Health, Ammo and Capture values
++0x6: Fuel value
++0x7: Unit 1 being transported
++0x8: Unit 2 being transported
++0x9: Appears to be what unit type to attempt to load into.
+	0x2 = Go repair unit
+
+
+
+03004d9c
+03004d9d
+03004ee1
+03005511
+
+030005D0: ?? (Player Turn)
+030033EC: Current Player Turn (1-4)
+03004080: Current Day
+03004084: Current Player Buildable Properties (Bits set, 20/40/60/80)
+
+;Game Rules
+0x03003FC0
+	3FC1		- Game Mode (1 = War Room, 2 = Campaign, 3 = Versus)
+	3FC2	H	- Map ID
+	3FC4		- Set by Event 0x20, Trigger condition for certain Events
+	3FC5		- Whether the Terrain/Unit Info Minipanel is displayed (0 = Off, 1 = On)
+	3FC6		- Campaign Setting - Set by Events
+	3FC7		- Set by some Events?
+	3FC8		- CO Abilities On/Off
+	3FC9		- Animation Mode Options (1-3 = A-C, 0 = Off)
+	3FCA		-
+	3FCB		-
+	3FCC		- Music On/Off
+	3FCD		- Fog of War
+	3FCE		-
+	3FCF		-
+
+	3FD0	(w)	- Appears to be unused
+	3FD4 (w)	- Has the value "100,000" stored for Vs. Menu Map Selection
+	3FD8 (w)	- Has the value "100,000" stored for Vs. Menu Map Selection
+	3FDC (w)	- Has the value "100,000" stored for Vs. Menu Map Selection
+
+	3FE0 (w)	- Has the value "100,000" stored for Vs. Menu Map Selection
+	3FE4		-
+	3FE5		-
+	3FE6		-
+	3FE7		-
+	3FE8	(hw)	- Funds per property
+	3FEA		-
+	3FEB		-
+	3FEC		- Currently Active Weather
+	3FED		- Random Weather on/off
+	3FEE		- 
+	3FEF		- Default Weather
+
+	3FF0		- Turn Limit
+	3FF1		- Capture Limit
+	3FF2		- Toggle to Enable/Disable Saving
+	3FF3		-
+	3FF4		- Army 1 Colour (Only used during setup)
+	3FF5		- Army 2 Colour (Only used during setup)
+	3FF6		- Army 3 Colour (Only used during setup)
+	3FF7		- Army 4 Colour (Only used during setup)
+	3FF8		-
+	3FF9		- Army 1 AI/Player (Setup)
+	3FFA		- Army 2 AI/Player (Setup)
+	3FFB		- Army 3 AI/Player (Setup)
+	3FFC		- Army 4 AI/Player (Setup
+	3FFD		-
+	3FFE		- Army 1 CO (Setup)
+	3FFF		- Army 2 CO (Setup)
+	4000		- Army 3 CO (Setup)
+	4001		- Army 4 CO (Setup)
+
+0x03004008	- Frame Counter (Inits at boot, no reset)
+0x03003330	- Frame Counter Mirror (Pauses during battle anims)
+0x03004078	- Frame Counter Mirror (with different Init?)
+0x030043F0	- Frame Counter Mirror (with different Init?)
+0x03005AEC	- Frame Counter Mirror (resets on Turn Init, seems to be active during input available)
+	Reset with 0x08070C02
+	Incremented with 0x0806FF68
+
+030040A0-A7: Not Used (+0x20)
+030040B0-B7: Not Used (+0x30)
+030040E0-E7: Read for some purpose
+030040F0-F7: Not Used (+0x70)
+
+03004490: Weather related
+	91: Chance of Rain
+	92: Chance of Snow
+	94: P1's turn ended in weather? 1 = yes, 0 = no. When all are =1, turn off weather.
+	95: P2
+	96: P3
+	97: P4
+
+0x08035090 - 
+0x080350D4 - Checks whether weather ends
+
+08035170 - Random Weather Subroutine
+08035490 - Random Weather Chance Generator Subroutine
+0x08035144 - Sets weather: input of Weather ID in r0
+
+08034802 - Routine that seems to set default War Room Rules.
+
+03007100 - 03007300 - Not used
+
+0x08027659 - Draws the CO Power/Funds Infobox overlay for the OAM Layer (Launched from 0x080277A0)
+	
+0x0802776C - Subroutine that launches the below drawing. Has an input of r0b0 = 0, Left, 2,Right
+
+0x0802AA78 - Draws the Property Infobox Overlay for OAM Layer (Launched from 0x0802A7CE
+		Includes Property Capture Limit
+		Ends at 0x0802B394
+
+0x0802B0B8
+	0x0802B4D4 - Draws Property Capture Limit
+		Input:
+		r0 = X-Co Ordinate
+		r1 = Y-Co Ordinate
+		r2 = ???
+		0x0802B506 - Branch if Capture Limit is set to display count.
+0x0804365C - Subroutine that checks for a Day Limit and Draws Days Remaining if True)
+
+25B6A - 6E: Colin's Gold Rush Multiplier Assembly (Adds r0 and r1)
+25B6A: Read memory address for money.
+0804481A - reads current funds and lsrs it 0x1
+
+4481a: Current funds is read into r1 and lsr 0x1 (0849) Test lsr 0x2 (0889)
+
+08024A14 - Lash's Terrain into firepower?
+080176AC - B6 - Day Incrementer (Reads current day into r1, Adds 1 into r0 and writes to RAM W/Addy @ r2)
+
+43DA2: Load Song ID
+441F8: Load COP Stars, *(9,000 + COP Uses)
+441B8
+
+44364: Loads #COP Uses?
+
+501C
+
+4436E: Writes updated #COP uses
+
+4413A: Writes COP Charge
+
+
+
+Hyper Repair/Upgrade:
+
+0829b6e: Load HP?
+0829b82: Write HP?
+
+Works by Adding +10 to HP Twice or Five times. +0 to 9 is then added to get the HP total to being perfectly at HP amount
+
+Typhoon
+08045034: Write new HP
+
+02 01E450: Map Size (HW X, HW Y)
+02 01EE72 - F322 (30x20 Map, 600 Tiles): Current Map to Save to Savefile, load on resume, etc.
+
+Max Mapsize is 1,286 Tiles
+
+Current Day Read/Write
+080176A6 - B6
+Initialise Current Day as 1
+08021552
+
+Memory that's usable?
+03007E00 0x64 bytes
+
+0804418A - Deactivate Power mode?
+08044154 - Activate current power mode?
+08026BEC - Initialise at 0?
+
+080267C0 - Sets which properties can be built from on each P's turn.
+
+08043DC0 - Compares COs and stuff?
+
+03001FD4 - Where RNGs are generated?
+
+Random Memory Addresses:
+03003130 - Whether it has been flipped.
+03003134 - Where the CO Bar is (X Pos)
+03003138 - Whether the intel box has been flipped
+0300313A - X Pos of intel box
+03003140 -	X,Y Position of Cursor on screen
+030033E0
+030033E4
+03007D00
+
+03003100 - X, Y Pos of the currently selected unit
+0802508E - Opcode that subtracts lucks from each other?
+
+Lash's Skill:
+08024a12 load terrain star values
+08024a18 lsl r0, r0 0x19
+08024a1a asr r0, r0 0x18 change 0016 to 4016 to halve bonus C015 to double.
+08024D2C - Two opcodes (Adds Terrain to 100%, multiplies then divides it.) from 3618 4E44 > 1040 3618 for +5%/Star
+
+Change to asr r0, r0 0x19 to get +5% per star?
+Stored at 030013d0 + 0x6
+base (64) stored at ^ + 0x8
+
+AW2's Damage Formula
+08024F20 - Main Damage Formula - Input: r0 = Unit 1, r1 = Unit 2
+Note: Unit 1, P1 = 01, P2 = 41, P3 = 81, P4 = C1
+;Calculations:
+08024ABC - Damage Formula Part 1
+08024C58 - Damage Formula Part 2
+
+Firepower * Base Damage
+/ 0x64
+
+0804310e - Damage formula (Firepower x Base Damage)
+08042FE6 - Loads Counterattack Boost
+08024D24/C - Adds together Counterattack Boost, Terrain Boost and Generic (Eg, PoM) boost.
+08043372 - Compares if Bit 0x40 is set in the CO Data and applies Lash's Terrain into Firepower if true
+08024d0e - DF (Defence + Terrain Defence)
+	strh r5 0xe (030013b0)
+
+bl 0x08043304 - Collects Terrain Defence
+	input: r0 = Attacker/Defender
+bl 0x08042CF8 - Collects Defence, adds 100
+	input: r0 = Player ID
+
+0804308C - Add 0x64 to firepower bonus
+08024DEE - calculates HP of attacking unit
+
+08024e34 - Subtract total defence from 200! //Damage Formula
+
+Also...
+
+08024e04. Sigh. //Display Formula
+
+Damage Formula: Branch at 0x08024B12 whether Direct or Indirect
+
+030013B0 - Stores pointer to defending unit
+030013B4 - Terrain ID Defender is on (1 = Plains, 8 = HQ, etc.)
+030013B6 - Stores Terrain Defence (Minus HP modification)
+030013BE - Stores Defender's total defence
+030013C0 - Stores Defender's Base Damage (+Firepower)
+030013D0 - Attacker's unit
+
+
+Attacker (Identical Format, +0x20)
+
+030013D0 	w	Unit Pointer
++0x04		hw	Terrain ID
++0x06		hw	Terrain Defence Bonus
++0x08		hw	Unit HP after attack completion
++0x0A
++0x0C		hw	Actual Damage with rolled Luck values
++0x0E		hw	Base Damage
++0x10		hw	Projected Damage
++0x12		hw	Projected HP lost (for AI Calc)
++0x14		hw	Projected Damage for Display
++0x16
++0x18
++0x1C		w	Pointer (unknown)
+
+030013DC: 1st RNG?
+030013C2: 2nd RNG?
+030013B8: Remaining HP of target?
+
+08024DBA: sub r0, r0, r4: Subtracts luck from damage. (1B00) - > 1900 (Add)
+
+08058A2C:	Attack estimation subroutine - uses Projected HP lost
+
+Sensei's S/COP - HP level
+08045586
+08045582 - Sets HP for spawned units.
+
+Set Unitaction done
+08042536 - Human
+
+Unsets unitaction done for next turn:
+08025ed4
+
+CO Data in ROM is 5C long.
+Player Data in RAM is 3C Long
+
+08043294 - Pricing done here.
+
+Colin's Power of Money:
+
+08044574 - mov r1, 0x96 (150d)
+		lsl r1, 0x1 (300d)
+		=1% per 300G
+
+Wipes out Bonus at start of turn.
+08044190
+
+08026c0a //Initialiser
+
+5d4bc8
+
+Music Related:
+08043DC0 = Compares if COP is on or not
+08043DC8 = Compares if SCOP is on or not
+If COP/SCOP is done - comparison of whether CO Number >e or <a (a = Sturm, e = Hawke)
+08044BA0 = Compares if COID is > This. If so, BH Music
+08044BA4 = Compares if COID is < This. If so, BH Music
+
+08044BA0 - This is the COP compare function for music
+
+Fog of War is on? FoW = 03003FCD: Fog of War Toggle
+080436f6 - Shroud? (7B40) - Controls whether you can see other CO's funds
+08027078 - Unit Data? (7B40) - Can you see what transports are holding?
+080213be (7B49) - ? - Menu? (Next four) * (Appears to run on both open and close of menu!)
+08021432 (7B4A) - 
+08021456 - Controls what is visible during FoW
+	Input to subroutine 0x080206E4. r1 = 1, nofog, r1 = 0, fog
+
+08021460 - Controls what vision ranges are drawn
+080348C4 - Controls if 'End Turn' Splash is displayed
+0804643E -	Can you see opponent's funds?
+0804659C - Can you see the number of Neutral Bases?
+08025BBC
+08042518 - Related to unit movement
+
+--AI Related
+08061B06
+08020DD8
+080426DC
+0805D726
+
+-Drawing Units in FoW:
+0x0201E96A - Unit Map Arrangement
+
+0x08022428 - Subroutine for drawing unit map sprites
+	0x080224F6 - HP
+	0x0802251A - Hidden HP
+	0x08022544 - Transporting
+	0x0802254C - Capturing
+	0x08022544 - Dived
+	
+
+0x080221F0 - Branch to whether to check for Hidden HP, etc. is run through here.
+0x08022286 - Actual Check for whether the hidden HP is applied is here.
+
+0x0802246C - Runs check for whether a unit is drawn.
+
+0x080261A4 - Subroutine for which unit map sprite to draw
+
+0x080220292 - Something to do with FoW and movement? (If = 1, can move through units?
+-08020722
+-080259FC
+-08025A84 (Write)
+-08021050 (Read) (7808) 
+020202b0 - Gets something stored here
+
+COP Animation
+08044672 - Compares if COP should animate at all - Is there a unit there?
+080446DA - Compares if COP should animate at all - Is there a unit there?
+
+08044408 - Jess'/Andy's (Animates on all units)
+080D4AC0
+0804440C - Compares for max if a unit should get animated on
+08044470 - Compares for sami - loads UnitID and checks class - compares = foot soldier (01)
+0804443C - Compares for Grit - loads UnitID, minrange checks if ≤
+08044498 - Compares for Eagle - loads UnitID, checks class - compares = Aircraft (02) or Copter (03)
+080444B4 - Compares for Eagle's SCOP - Checks if unit is in wait mode
+080444C4 - Compares for Eagle's SCOP - =/= Infantry/mech
+080444EC - Hyper Repair (Does Healing/Amount)
+		444EE - HP Healed
+080444FC - Hyper Upgrade
+		444FE - HP Healed
+08044518 - Jess' Supply Line.
+080299A6 - Loads unit ID to get Max fuel/Max ammo for Jess
+08025B08 - Checks UID for Sensei's COP
+
+080446A6 - Branch Routine that loads this.
+084A0090 - Data set for what to use in COPs.
+
+
+Graphics Notes:
+Main Game
+Background Palettes:
+Palettes 0-3: Terrain FoW Revealed
+Palettes 4-7: Terrain FoW Concealed
+Palette 8: Menu/Textbox Colour, Highlight (Movement Ranges)
+Palette 9: CO Power Overlay Colour/Mini Map Colour
+Palette A: Menu Text/Menu Icon Colour
+Palette B: Active Army Unit Wait Palette
+Palettes C-F: Army Unit Active Palette
+
+Foreground Palettes:
+Palette 0: CO Power Text
+Palette 1: GUI - Cursors, Terrain Star Values, Text
+Palette 2:
+Palette 3: Meteors
+Palette 4: Currently Selected Unit
+Palette 5: Large Terrain Graphic (R-Info Menu)
+Palette 6: Currently Highlighted Terrain (Mini-Infobox)
+Palette 7: Infobox Background Palette (CO, Power, Funds, etc.)
+Palette 8: Neutral Property Palette
+Palette 9-C: Army Property Palette (Inc. Black Hole Inventions)
+Palette D:
+Palette E: Active CO's Palette
+Palette F: Currently Highlighted Unit (Mini-Infobox)
+
+0201d904?
+Read by:
+Sensei's COP - Saved RAM copy map only seems to get read by these four routines
+08023b2e - uses it for a Ldr, then stores at 0201D8F8
+08023b40 - uses it for a Ldr
+08023b5a - uses it for a Ldr
+08023b70 - uses it for a Ldr
+
+0x0803F5E4 - Loads Army specific HQ Tiles
+
+020225C8 - ?
+
+
+080454F6 - Mov R0, 0x6 (Then adds the 'buildable byte to get the appropriate one for the current player)
+080454F8 - orr r3, r0 (20,40,60,80 - then the 6 for properties so only spawns on own!)
+
+City = 6
+HQ = 8
+Port = B
+Airport = A
+Base = E
+Lab = 
+
+
+CO Power Related
+080442C2 - Branches if the cost of a COP = 0, eg 0 star COP and disables the menu item. Changing from D008 (Beq +8) to E008 (B +8) disables CO Powers for all human players.
+
+03002020 - Used for movement costs?
+
+080124d6 - Graphical related (Writes to Alpha Blending IO map)
+030030c0 - Dead end?
+0801f8cc
+
+0801F8E0 - Adds current weather value to pointer to load for movement values.
+
+0801F8CC - Adds Weather value to CO Power value - neutralise to make all MCs use clear weather (Messes up the pathfinding though)
+
+08038778, 08038E46, 080388C2 - Loads bytes for pathfinding. Set to Mov R3/4 0x0 to fix pathfinding for above fix.
+
+
+080354FC - Subroutine that loads weather data when game loads
+08035514 - Reads weather value. Determines whether to animate snow or rain falling.
+		bl 080352B4 - Snow weather THINGY
+		bl 080353E8 - Rain weather THINGY
+
+Offset in RAM for each raindrop. Contains current position and the offset for the rain.
+
+08042DAC - Checks for rain on info screen. (-1 Vision for FoW)
+
+08024DAC - checks whether rain is present (FoW -1 Vision)
+
+080244AC - r0 (when unit selected?)
+080467B2 - Shows
+080467B4 - Used to determine which unit classes to display for movement cost data
+0804683A - Used for info menu movement cost data 
+08046C1C
+
+0x0803A0B0 - Subroutine that displays the Unit Movement Icon/Self Icon/Etc.
+0849E224 - Unit Movement Icon List
+
+Possible AI Commands:
+1/2/3 = Byte 1/2/3
+1:00
+2:46
+3:00
+Attack infantry?
+
+08077418 = Reads and compares if Army = 0x5 - AI settings?
+
+08034744 = As above?
+03003FF9 = Player = AI settings?
+03004003 = Current Teams
+
+08026f4a compares teams
+08026B70
+08027048
+0802704A
+08020856/8
+02023360 = Possible storage point for equal teams?
+0300342A = Something team related
+
+
+0801F4B4	- Movement path generation function
+		- Creates Map of movable tiles at 0x02020CA2
+		- 0xFF = No movement, other values are movement points to reach position
+		- Input: r0: X-Coord, r1: Y-Coord, r2 = Unit ID, r3 = Movement points
+	0801F838 - Resets movement path map
+	0801F6F0 - Generates a tile's validity for movement
+		- Input: r0: ID?, r1: x-delta from origin, r2: y-delta from origin
+
+Two Opcodes for Passthrough movement.
+0801F778 = Checks whether remaining movement is greater than terrain cost
+0801F7A0 = Checks Teams, whether to allow passthrough of other team units
+0801F7B0 = Checks whether remaining movement is higher than terrain cost
+
+0802E898 = Compares if same team for movement purposes. If it is not, TRAP!
+
+0802E76E = Checks whether a square is valid to select for movement
+
+08024B74 = Compares if bit 0x20 is set (Eg dived) for a unit on Attacking, and looks at base damage 0x19, (mov) instead of 0x18 +1
+0802CC98 = Compares if Unit ID = 0x18 (Sub) and thus can dive?
+08041538 = Compares if Unit ID <= 0x2 (Mech) and thus can capture
+08041776 = Compares if Unit ID <= 0x2 (Mech) and thus can launch silos
+	0x08026FD0
+
+0x0804247C - Checks whether the current tile is a Silo
+
+08090C08 = Pointer to unit build list
+081BA054 = Unit build list: List of what Unit IDs to check Build IDs and what order they're in on the screen. (Format: UID1, UID2, UID3, FF Terminator
+0802D694 = Loads address of list of unit ids (initial)
+0802D6AE = Second Run for the ID. Iunno what it does.
+0802D73C =	 "" "" for next units, eg not the first unit (continuing)
+
+More AI Commands: Is a unit in Wait Mode?
+0805Cb5a
+0805cc0a
+0805ccbe
+0805cd72
+0805ce8e
+0805cf4a
+0805cffa
+0805d0b6
+0805d172
+0805d22e
+0805d2d6
+0805d498
+0805CA9C
+08042530
+
+Is a unit being transported?
+0804253A
+
+
+080242D0 = Checks if tile is player's property, thus can be built from
+Gets Tile ID
+E0 and TID
+= Player Build ID
+Compare TID to BID
+BEQ -> Continue
+x6 = City
+x8 = HQ
+xE = Base
+xA = Airport
+xB = Port
+x14 = Lab
+0802d60A = Checks tile ID for allowing build
+
+080621C2 = Reads terrain, checks if unit can be refuelled/repaired there?
+0802A066 = As above?
+
+0802A070
+	-If unit is on a tile of the same faction goto 0802A074, else 0802A1B4
+
+0802A090
+	-If unit can be supplied on this terrain type goto 0802A094, else 0802A1B4
+
+Income
+08026F18 = Reads current income and adds it to current funds.
+
+Logic for can build ->
+Compare 0xB
+Greater than 0xB? Yes
+Compare 0xE
+Equal to 0xE? Yes
+Base
+
+Compare 0xB
+Greater than 0xB? No
+Compare 0xA
+Greater than or Equal to A? Port or Airport
+
+080242EE
+
+0802D654 - Moves r4 to the Bits for the building
+0802D638 - Pointer to the HQ's Build Hash (Default pointer = 0802D654 = Base)
+
+Graphics Routines
+0808aaa6 - Loads map sprites it seems
+08011bb0 - (Appears on build menus?)
+08021E2C - ?
+
+On the map screen
+-060046A0 - 06005420 Stores unit tiles
+-06008000 - 0600DFE0 Stores Terrain Graphics (updated with Animation) "Tiles 2"
+-0600F000 - 0600F7FE  Stores the Unit graphics (BG1 Layer), loads tiles from stored unit tiles (060046a0-)
+-Note that the active unit, selected with B/A will move to the OAM layer
+-Attack range rendered on BG0 Layer
+-Menu underlays on BG2 Layer, units on price list + prices rendered on BG0
+
+Shop Large Unit pictures rendered on OAM Layer (In one or more pieces)
+OAM Tile 1 - 070000A8 used
+-Tile loaded from 06015D00 (OS Infantry)
+-080F7844 - Location of Movement Type pictures?
+
+-08022210 - mov r0, r10 (Moves r0 to r10 which had the UID for the unit in memory)
+-085D5ABC - Just the unit's data. :/
+Graphics related data? 5C long
+--Appears to be related to what information is displayed on the R Info screen
+--Also appears to modify some form of stats (move, etc.)
+--Whether it can attack?
+
+First 0x10 Bytes
+Format:
+2 Bytes:	Text ID (Unit Name)
+2 Bytes: 	Text ID (Weapon 1 Name)
+2 Bytes: 	Text ID (Weapon 2 Name)
+2 Bytes: 	Don't Know
+2 Bytes: 	Don't Know
+1 Byte:	Total Movement
+
+All 00
+-Can't Fire
+-Can't Move
+-Info Screen messed up
+
+Movement Icon R-Info List:
+0x084C20C2
+
+08489314 - What Picture is displayed in the shop for a unit? No
+0200FD79 - (lots) - Related to info screens - appears to decompress LZ77 compressed data to here and then copy it to VRAM
+0200FD78 - 02010538
+
+0849DC68 - Pointer to compressed infantry sprite (OS, BM, GE, YC, BH)
+-ID 20,21,22,23,488
+0849DD94 - Recon compressed sprite
+-ID 28, 29, 30, 31
+
+0849DC2C - Base offset
+
+03004100 - Stores Unit ID in the menu that is currently highlighted
+-Addresses that read this
+	0803a1ca - Loads Large Sprite for right panel
+	0803a1ea - Loads Large Sprite for right Panel
+	0803a250
+	0803a27a
+	0803a2e2
+	0803a308
+	0803a096
+
+	0803a0b0
+	0803a114
+	0804ab48
+	08039f92
+	(Last four repeat constantly)
+
+0x08021AFA - Writes to below
+0x03004110 - Seems to be a 'Property' list - has Property type, X Co, Y Co
+0x08021A16 - Part of Capture Routine, seems to be a jump table for each property type
+
+0x0802B0BC
+	0x0802B4D4 - Subroutine that handles Properties OAM? No
+
+0x08021A16 (0x08021A54)
+
+
+CO Power Stuffs
+08044B28 - Routine that saves the COP mode into +1F in Player Data
+-0808f098
+
+-0200B3B4 STRB here
+(080135E4)
+-1CDAC
+-0200D6E8
+
+030014B2
+030014F0 - Both Appear to hold the cursor position
+
+03005940 - Holds what page number is being viewed for CO Info (0-4)
+08085026 - Checks whether Page number ≥, Thus hiding CO Body Sprite
+08084C50 - Pointers to where each page of page 1-4 of CO Data uses it's icons.
+	08084c64 - Use Team Icon and CO Name
+	08084c6c - Use COP Star and draw a name
+	08084C74 - Use SCOP Star and draw an indexed name
+080850f0 - Up/Down arrows displayed?
+08084c38 - Draw unit charts?
+080852B2 - Draw text or are we on Page 4?
+0808533E - Checks whether we're on Page 3 for the title of the S/COP
+080852F0 - Checks whether we're on Page 2 for the title of the S/COP
+
+08084c64: Drawing Routine (Page 1/2)
+	0x080853B0 - Draws top bar (Army Select for Dossier)
+	0x08043B60 - Draws Name
+	0x0801F34C - Generic Drawing Function (Draws Name)
+	0x080436DC - Draws CO Info Minibox
+
+0x08084C6C: Drawing Routine (Page 3)
+0x08084C74: Drawing Routine (Page 4)
+	0x080853B0 - Draws top bar (Army Select for Dossier)
+	0x0801F34C - Generic Drawing Function (Draws CO Power Icon)
+	0x080436DC - Draws CO Info Minibox
+	
+
+08019aea - Sets whether COP or SCOP comes from menu option
+
+0x0804360C - Calls the Info box draw routine
+080436DC - Appears to be the routine that draws the info box proper
+	08043764	- Funds
+	0804378A	- CO Graphic?
+	080437B8	- CO Power Stars/Power!
+		08043942	- Power Stars Y-Offset
+		080438B8	- Power! Y-Offset
+		080438DA	- Super! Y-Offset
+	
+08043898 - Draws the Info Box CO Power Power!/Super! Graphic
+080439A8 - Draws the Info Box CO Power Stars Graphic
+
+Dossier Army Highlighted (1-4) (Dynamic RAM location)
+03005940 - Dossier Page Open (1-4)
+
+08085184 - Loads army to calculate which emblem to use on Page 1
+080850BE - Loads army to calculate arrow cursor position to use
+08084DE6 - Right Arrow key dossier
+
+0849AB00
+
+03001470?
+-2CEB1 - COP
+-2CEFD - SCOP
+
+0x0300148E - Game Mode to Be Loaded
+
+080441F8 - Checks if COP is available?
+0804422C - Checks if SCOP?
+08043958
+080439CA
+
+CEB4
+CEFE
+
+0804438C
+
+08044390 1C0D - Mov r5, r1
+-Change this to Mov r5, 0xn to force either COP or SCOP  (250n)
+
+030014A1 - Appears to change with what menu items can appear
+
+0801a074
+
+0804428C - D108 - DA08, Only COP will appear on the Menu <- This is because this is the "Is an SCOP available check" - AIs won't use COPs even when maxed out on the bars if this is autoskipped, because the SCOP is never available.
+08044306
+
+-Subroutine for 'If COP is available"
+-Subroutine for "If SCOP is available" check is bl 08044280
+
+0804428C - Runs a check to see if a COP/SCOP is active. If it is, disable activation of SCOP (Skip the next check and set 0x0)
+0804429E - Runs a check, set r0, 0x0 if no SCOP available (Powers active/No charge). 0x1 if SCOP is available.
+
+08036a34
+
+0802c852 - Is this the fabled menu option? YES!
+
+What reads the result of this (020232E4 for P1):
+080442FA - Sound Effect related
+0804432C - Sound Effect Related
+
+COP Charging
+08041CAC - Defender gets twice as much as attacker?
+
+08041cb4 - Adds charge from defender being damaged to charge from attacker being damaged. Attacker is in R6, defender in r4.
+
+08041CB2 - Change from mov r1, r0 to lsl r1, r0, #0x1 to get attacker and defender to charge at same rate.
+08041C88 			- Change from mov r5, r0 to lsr r5, r0, 0x1 to halve overall charge speed
+080441D0 			- Capacity of each star in G.
+080441A8 	(21C8)	- Multiplier for Star Cost after 9 uses
+080441B2...B6 		- Routine that generates the total cost increase
+080441A4	(2809)	- Compares the address to the maximum number of COP uses before it becomes fixed
+080441BC			- Adds cost increase to base amount. Change to 1A49 to subtract it instead (careful that you don't get negative numbers!)
+
+Base unit offset 085D5ABC
+
+Allowing Subs to be built dived
+08025BEE		-Sets the unit status as 0x0
+08025cb6		-Sets that the unit is in wait mode
+
+0202266A		-Holds name of current map in memory
+
+Repairs - Same as building
+-08043292 Repair and Building prices
+
+Damage Formula
+08043054 - Loads the CO Id and Power mode here - destroys the CO memory - find a way to conserve it from here. //Note that this is a common subroutine used to gather all of the CO's stats.
+
+//These are used by both the info screen and the game to gather stats
+-Vehicle Class
+0804310C - Atk
+0804317C - Def
+080431EC - Mov
+0804325C - Rng
+
+-Appears to apply to Infantry Class alone
+08043118 - Loads the stat boost/drop here for Attack
+08043188 - Loads the stat boost/drop here for Defence
+080431F8 - Loads the stat boost/drop here for Movement
+08043268 - Loads the stat boost/drop here for Range
+
+-Need a scratch memory address to pull this off, (Holds the current charge and the maximum charge values 
+
+0804301c
+5d3ce0 - Jess Inf Drop
+5d3ce8 - Jess Veh Boost
+5d3cf0 - Jess Nav/Air Drop
+
+02022690: Unit 1, P1 is stored in RAM here (0xC Long)
+	990: Unit 1, P2
+	C90: Unit 1, P3
+	F90: Unit 1, P4
+
+lsl 0x20
+lsr 0x28
+
+080433118 - Load Offence
+080433188 - Load Defence (Secondary Weapons)
+08024c9E - Load Temp Offence
+08024CA6 - Load Temp Defence
+
+Andy Stat Loading Routines, how many?
+08043226/38
+080430D6/E8
+0804e146/58
+
+Common Subroutine
+80432E0-3302
+
+4A04	ldr r2 = #0x85D5ABC
+215C	mov r1, 0x5c
+4348	mul r0, r1
+1880	add r0, r0, r2
+7b80 ldrb r0, [r0, #0xE]
+2801	cmp r0, #0x1
+d904	bls
+2006	mov r0, #0x6
+e007	b
+0000
+5abc
+085d
+2801	ldr r2 = #0x85d5abc
+D001	beq
+2007	mov r0, #0x7
+E000	b
+2005	mov r0, #0x5
+4770	bx lr
+
+42ECC
+
+
+
+Finding the source of the player number
+Read P1 CO
+First Click
+080388D4
+08042D38
+0801F8DA
+
+Second Click
+08024D6C
+08024C10
+08042D0A
+08042E74
+08042ECC
+
+08025220
+
+Fire
+08042d6c
+08024C10
+08042D0A
+08042E74
+08042ECC
+08025220
+
+Read P2
+Second Click
+D6C
+D0A
+0804300C
+
+Fire
+D0A
+00C
+D6C
+
+09 - Control Code - Load Static 16x16 ID of X
+0A - Load Animation 16x16 ID of X
+
+
+Tile IDs?
+81b0
+81b1
+
+080014BC - ? Some sort of ID list?
+084c3752
+
+08014bc
+
+Format for MAP Ram: XYYY
+X = Palette to use (0-F)
+YYY = Tile ID
+
+Tile ID *4  (7F) = 1FC - 1B0 = 4C
+
+7F09 - Movement Square (432-435) (81B0, 81B3)
+8009 - Capture
+8109 - Fire!
+8209 - Dive Arrow
+8309 - Yellow Arrow
+8409 - Delete
+8509 - Gas
+8609 - Intel
+8709 - Save Icon
+8F09 - Power Star
+9009 - Super
+9109 - Film Reel
+9209 - No Fire
+9309 - Crotchet
+9409 - CO Info
+EF - S Rank
+F0 - A Rank
+F1 - B Rank
+F2 - C Rank
+
+010A to
+FF0A
+
+8B0A
+8C0A
+8D0A
+8E0A - Md Tank
+8F0A - Md Tank
+
+Infantry in MAP
+C67A
+
+8011c68
+0000C1C - Multi-load Opcode thingy. Used for Sprite loads (Uncompressed)
+
+08022546 - Controls which map sprite is loaded from the ID1
+08499608 - Map IDs? :o FUCK YES IT IS
+
+08499608 - Orange Star COs
+08499639 - Blue Moon COs
+0849966C - Green Earth COs
+0849969D - Yellow Comet COs
+084996D0 - Black Hole COs
+
+08499B0E - Property to tile IDs?
+Each unit has a halfword ID for the graphic used. It'll be used to find the correct graphics ID.
+
+Format is in unit order, Eg:
+00 No Unit (Unused by graphics, but still a 2 byte space in the format)
+01 Infantry 
+02 Mechs 
+03 Md Tanks 
+04 Glitchy 
+05 Tanks 
+06 Recons 
+07 APC 
+08 Neotanks 
+09 Glitchy 
+0A Artillery 
+0B Rockets 
+0C Glitchy 
+0D Glitchy 
+0E AAs 
+0F Missiles 
+10 Fighters 
+11 Bombers 
+12 Glitchy 
+13 Battle Copters 
+14 T- Copters 
+15 Battleships 
+16 Cruisers 
+17 Landers 
+18 Subs 
+
+Map Images ID (Uncompressed images at: 0810BE60)
+0000 - Medium Tank
+0001 - Neotank
+0002 - Tank
+0003 - Recon
+0004 - APC
+0005 - Arty
+0006 - Rocket
+0007 - AA
+0008 - Missile
+0009 - Fighter
+000A - Bomber
+000B - B-Copter
+000C - T-Copter
+000D - BShip
+000E - Cruiser
+000F - Lander
+0010 - Sub
+0011 - OS Inf
+0012 - OS Mech
+0013 - BM Inf
+0014 - BM Mech
+0015 - GE Inf
+0016 - GE Mech
+0017 - YC Inf
+0018 - YC Mech
+0019 - BH Inf
+001A - BH Mech
+
+UnLz ID 157 (080B7C60) - 191 (080BCEA8) - Appears to be moving animations
+396 - Capturing Animations
+Location: 0849CD88 (Base Pointer), 0x24 in length
+
+Format:
+5x Pointers: Movement Sprites for OS - BH (00 to 14)?
+
+
+
+Main Menu Hacking
+0200D7A6
+
+
+03005934
+0200D812 - Also position of cursor
+0300591C - Position of Cursor
+00 	Battle Maps
+01	Link
+02	Design Room
+03	Versus
+04	Campaign
+05	War Room
+
+	1D - 'Sub Menu'?
+00	Not In Submenu
+01	In Submenu
+
+	1E - Sub Menu Position
+06	Top Option
+08	Bottom Option
+
+03005968 - Start New Hard campaign toggled?
+01	Yes
+00	No
+
+03005920 - Sound Room toggled?
+01	Yes
+00	No
+
+080846f8
+
+02028038 - Campaign options control
+-Map
+-Unit Deployment
+-Neotanks
+-HC
+-Red Stars instead of Yellow
+-Display "Hard Campaign" vs "Campaign"
+
+Format
+0x01	Hard Campaign
+0x20	OS Neotanks
+0x40	BM Neotanks
+0x80	YC Neotanks
+0x10	GE Neotanks? (Need to confirm)
+
+08016EC0 - Controls loading/saving of campaign map data stuff.
+0803CbEE - Loads campaign data stuff
+
+
+0803867C
+08076AAC - Mov R7 0x22 <- Initial HC Mission
+080747C4
+	stores ID at 0202FE38
+
+Appears to be display of available maps
+Format (12 Bytes)
+Mission ID (2 Bytes)
+Flag X Position (2 Bytes)
+Flag Y Position (2 Bytes)
+	
+Pointer - 03000xxx (4 Bytes)
+		Seems to have something to do with the flag and it's presence - Animation perhaps?
+
+0x0803FCE8 - Toggle of two pointers (0x0849FA78 and 0x0849FA5E) toggled by hard campaign on/off. Controls whether the deathray tiles occupies the 3x3 tile slot A or B.
+
+0x080749FC - Used for unlocking 'next country' and individual flag animations?
+
+0x08076A2A
+
+0x08074574 - Unlocks/locks the mission? Input of r0 = mission ID
+0x08076858 - Seems to be a 'clear map' subroutine
+0x08075E68 - Animates the map region to colour/flag to clear, r0 = mission ID
+
+0x08074A28 - 
+
+0x08074234
+
+0x08076B7C
+
+0x080614548 (script?)
+
+0x08078270 - Checks whether the completed mission was a Factory Mission (Checks by mission IDs)
+	If true, runs 'next country' sequence.
+	0x0801CBC8	- Subroutine that initiates "next Country"
+				- r1 = 0x0: Liberation Clear, 0x1 = Factory Blues Clear, 0x2 = Hunt's End Clear
+
+0x08076b20 - Checks current mission cleared, checks a list at 0x0861515C
+
+
+0x08076BF0
+	Loads the pointer for specific mission. List from 0x0861500C. Checks 0x0202FE0D
+
+08076BF0
+Run by 0x08078480
+Called from a script at 0861598C
+
+08615974
+08615984
+08615988
+0861598C
+
+0x0807831C - Checks current mission cleared (after terrain recoloured animation)
+	Loads a pointer in list format for the subroutine?
+	0x080782C0 - Checks whether to unlock a new map - Checks whether  list of maps is cleared
+	Loads a pointer from pointer table at 0x0861500C
+	Next mission to unlock, format:
+		XX YY ZZ 0xFF XYZ = Mission ID, 0xFF = End of List
+	Launches script 0x086142E4 from subroutine
+
+0202FDFC - Base Pointer for this area
+
+0202FE00 - Cursor Position on World Map?
+0202FE08 - Last Mission cleared/current mission highlighted
+0202FE0E - FE37	Mission Available/Completion toggle
+				0x1 	= Available
+				0x2	= Complete
+				0x4	= Factory Mission
+				0x8	= Black Hole Mission?
+				0x10	= Final Mission?x
+				0x20	= Lab Mission
+
+0202FE30
+
+Mission IDs:
+00	Cleanup
+01	Border Skirmish NC
+02	Orange Dawn NC
+03	Flak Attack NC
+04	Lash Out! NC
+05	Andy's Time NC
+06	Test of Time NC
+07	Liberation NC
+08	Toy Box
+09	Tanks!!!
+0A	Reclamation
+0B	T Minus 15
+0C	Two Week Test
+0D	Nature Walk
+0E	Neotanks!?
+0F	Factory Blues
+10	Silo Scramble
+11	Show Stopper
+12	Sensei Returns
+13	Duty and Honor
+14	A Mirror Darkly
+15	Foul Play
+16	Sea of Hope
+17	The Hunt's End
+18	Sea Fortress
+19	Drake's Dilemma
+1A	Sinking Feeling
+1B	To the Rescue
+1C	Navy Vs Air
+1D	Rain of Fire
+1E	Danger X9
+1F	Great Sea Battle
+20	Hot Pursuit
+21	Final Front
+22	Border Skirmish HC
+23	Orange Dawn HC
+24	Andy's Time HC
+25	Mountain Ops
+26	Sea for All
+27	POW Rescue
+28	Test of Time HC
+29	Liberation HC
+
+
+
+0x08075E68
+0x08074754 - Subroutine that adds next available mission?
+0x08076858 - Next mission
+0x08076b7C
+0x0849EBD0
+0x080780D0
+0x08078198
+0x08078198 - Runs several scripts
+	0x086147FC
+	0x0861485C
+	0x08614894
+	0x08614614
+
+
+0x08038678 - Subroutine that checks whether a global/map flag has been set for 0x02028030/0x030033F4. Input: r0 = bit
+	Range of input: 
+		0x60 - 	0x98: Global flags from 0x02028038..0x0202803F (Campaign Progress, cleared on New)
+		0x20 - 	0x5F: Global flags from 0x02028030..0x02028037 (Unlocks, preserved on New)
+		0x0 - 	0x1F: In-Map flags from 0x030033F4..0x030033F7 (Cleared on map clear)
+0x08078358 - Checks Global Unlocks for specific bits set - if true, lab mission unlocked
+
+0x02028038:	0x2 = Unlock OS Lab (Hard Only)
+	0x4 = Unlock BM Lab
+	0x8	= Unlock YC Lab
+	0x10 = Unlock GE Lab
+	
+Campaign/Unlock Global Bits Set:
+Unlocks:
+0x20	Hard Campaign Available
+0x21	Campaign Cleared
+0x22	Hard Campaign Cleared
+0x23	Liberation (Factory Cleared)
+0x24	Factory Blues (Factory Cleared)
+0x25	The Hunt's End (Factory Cleared)
+0x26	Great Sea Battle (Factory Cleared)
+
+0x28	Sound Room Unlocked
+
+Campaign:
+0x60	Hard Campaign On
+0x61	Andy's Time HC (Lab Map Obtained)
+0x62	Toy Box (Lab Map Obtained)
+0x63	Show Stopper (Lab Map Obtained)
+0x64	Sinking Feeling (Lab Map Obtained)
+0x6A
+
+0x9D	Flak Attack
+
+Global Bits Checked:
+0x1:	Cleanup
+0x2:	Cleanup
+0x2:	Flak Attack
+0x0:	Toy Box
+0x0:	Show Stopper
+0x6A:	The Hunt's End
+0x23:	The Hunt's End (World Map)
+0x0:	Sinking Feeling
+0x60:	Final Front
+0x0:	Andy's Time HC
+
+0x0861500C - Table of unlock conditions for mission.
+	+0x0:	Pointer to Unlock List
+	+0x4:	Pointer to Clear requirements
+
+Unlock List Format:
+1 Byte per entry
+Mission ID 1, Mission ID 2, 0xFF
+
+Clear Requirements Format:
+Pointer (4 Bytes)
+Number of Maps to be cleared (1 Byte)
+0xFF (1 Byte)
+
+00	Cleanup NC
+0x08614D4C	0x08614D50 (0x08614D4E)
+01	Border Skirmish NC
+0x08614D58	0x08614D5C (0x08615D5A)
+02	Orange Dawn NC
+0x08614D64	0x08614D6C (0x08614D68)
+03	Flak Attack NC
+0x08614D74	0x08614D78 (0x08614D76)
+04	Lash Out! NC
+0x08614D80	0x08614D88 (0x08614D82)
+05	Andy's Time NC
+0x08614D90	0x08614D98 (0x08614D92)
+06	Test of Time NC
+0x08614DA0	0x08614DA8 (0x08614DA2)
+07	Liberation NC
+0x08614DB0	0x08614DBC (0x08614DB7)
+08	Toy Box
+0x08614DC4	0x08614DD0 (0x08614DC8)
+09	Tanks!!!
+0x08614DD8	0x08614DE4 (0x08614DDC)
+0A	Reclamation
+0x08614DEC	0x08614DF8 (0x08614DF0)
+0B	T Minus 15
+0x08614E00	0x08614E0C (0x08614E02)
+0C	Two Week Test
+0x08614E14	0x08614E20 (0x08614E16)
+0D	Nature Walk
+0x08614E28	0x08614E34 (0x08614E2A)
+0E	Neotanks!?
+0x08614E3C	0x08614E40 (0x08614E3E)
+0F	Factory Blues
+0x08614E48	0x08614E50 (0x08614E4C)
+10	Silo Scramble
+0x08614E58	0x08614E64 (0x08614E5C)
+11	Show Stopper
+0x08614E6C	0x08614E78 (0x08614E70)
+12	Sensei Returns
+0x08614E80	0x08614E8C (0x08614E84)
+13	Duty and Honor
+0x08614E94	0x08614EA0 (0x08614E96)
+14	A Mirror Darkly
+0x08614EA8	0x08614EB4 (0x08614EAA)
+15	Foul Play
+0x08614EBC	0x08614EC8 (0x08614EBE)
+16	Sea of Hope
+0x08614ED0	0x08614ED4 (0x08614ED2)
+17	The Hunt's End
+0x08614EDC	0x08614EE4 (0x08614EE0)
+18	Sea Fortress
+0x08614EEC	0x08614EF8 (0x08614EF0)
+19	Drake's Dilemma
+0x08614F00	0x08614F0C (0x08614F04)
+1A	Sinking Feeling
+0x08614F14	0x08614F20 (0x08614F18)
+1B	To the Rescue
+0x08614F28	0x08614F34 (0x08614F2A)
+1C	Navy Vs Air
+0x08614F3C	0x08614F48 (0x08614F3E)
+1D	Rain of Fire
+0x08614F50	0x08614F5C (0x08614F52)
+1E	Danger X9
+0x08614F64	0x08614F68 (0x08614F66)
+1F	Great Sea Battle
+0x08614F70	0x08614F74 (0x08614F72)
+20	Hot Pursuit
+0x08614F7C	0x08614F80 (0x08614F7E)
+21	Final Front
+0x08614F88	0x08614F8C (0x08614F8A)
+22	Border Skirmish HC
+0x08614F94	0x08614F98 (0x08614F96)
+23	Orange Dawn HC
+0x08614FA0	0x08614FA4 (0x08614FA2)
+24	Andy's Time HC
+0x08614FAC	0x08614FB4 (0x08614FB0)
+25	Mountain Ops
+0x08614FBC	0x08614FC4 (0x08614FBE)
+26	Sea for All
+0x08614FCC	0x08614FD4 (0x08614FCE)
+27	POW Rescue
+0x08614FDC	0x08614FE4 (0x08614FDE)
+28	Test of Time HC
+0x08614FEC	0x08614FF0 (0x08614FEE)
+29	Liberation HC
+0x08614FF8
+
+Blue Moon Initial
+0x08078450	(0x08615984)
+Yellow Comet Initial
+0x08078464	(0x08615988)
+Green Earth Initial
+0x08615084	(0x08614E48) - Factory Blues /0x086150C4 (0x08614EDC) Hunt's End
+
+0x08076B20 - Runs a check after a map clear to see if force clear other maps. Ands the unlocked maps with 0xFF (0x1 = Available)
+0x0861515C - Map ID list. Map ID of factory mission at 0x0, then every 0x8 bytes. +1-7 = Map IDs to clear.
+
+
+0x08018F34 - Subroutine that checks whether the 0th Map Flag (0x0300 was set for Toy Box
+
+Info Displays
+0802ba40 - Affects whether a unit appears dived in the info window.
+0802562a - Affects whether a unit appears (or is invisible due to being dived) on the map (Humans) - AIs are cheating gits.
+08022558 - Affects whether the dive icon appears on the unit on the map
+08025410 - Is dived? Supplying
+08024B74 - AI? Is a unit dived?
+
+0802A5F0 - Checks against 0x40 (Byte 2 in Unit info)
+0802A5F4 - Checks against 0x80 - Seems to only activate if something is about to get killed
+
+080224b6 and 0x1
+080221b0
+080221D6 - Compares (Is unit dived?)
+
+080221EE - Controls Left/Right facing on map
+
+03004674
+
+AI Building
+080608CA - Do we have enough infantry? (02029D84)
+080608D0 - Do we have enough infantry? (02029D86)
+080608F2 - (02029D85) - NOP makes for infantry spam
+08060A0A - (02029D8A) - How many  APCs do we have?
+08060AC4 - Has a unit to be built next been decided on (030046C0)
+08060F1C - (02029D9F)
+08060D6A - Build a recon?
+08057F00 - Counts number of Units matching the bitmask in r0 owned.
+
+030046C6 - Evaluated unit to build next by the AI (Subject to having funds, etc.)
+
+08061788 - Saves and loads the AI type for a map. Runs each turn for each AI player
+
+AI Data sheet
+02029C54 - AI type and rules in RAM (start)
+02029D84 - (end)
+
+
+
+Launched from 08060798
+08057FA8 - How many of a unit class are present. (Input of r0 = Unit class)
+
+08060894 - Subroutine used for deciding if CO has enough Inf?
+	08060ED4 - What properties can be built from for this unit type? 2 = Land, 4 = Air  6 = Sea
+08060930 - Something to do with Infs Vs Mechs
+	0806096C - Whether to build a T-Copter?
+	080609B8 - Whether to build an APC?
+	08060A20 - Whether to build a Lander?
+		08057F54 - Checks Unit AI Bitmasks (Input bitmask, outputs number of units that match the bitmask)
+
+08060D4C - Subroutine used for deciding what to build next, provided inf and transports are built.
+030046D0 - What can be built/Build priority. 0xFF = Can't/Don't build. FE - 0x00 = Build (Lower = more priority)
+	08060F00 - 	Determines what units the AI Can Build and calculates priority based on how many are already built. 
+				Priority lists are at 02029DA4, priority byte at 0x1B. Each is 0xC long.
+		08057FA8 - Counts how many of a particular unit type?
+	08060F74 - Calculates what units the AI has the ability to buy
+		Unbuyable/Unbuildable units are marked with an 0xFF
+	08060FFC - Calculates which unit to build.
+		Part 1: Calculates which units should be built (What does the AI not have)
+		Part 2: Generates a list of buildable candidate units at 030046E0
+		Part 3: Determines which unit to build by build priority (Higher = Better)
+
+08057690C - What Build list to use for the AI 0x13 Long
+085771C4 - Default? Apparently 0x130 long (2F-79?)
+General Things:
+0x0 = Minimum Infantry
+0x4 = Stuff for Building T-Copters
+0x6 = Stuff for building APCs
+0x7 = Stuff for building stuff
+
+Build Priority Lists: (Start +0x10 (Inf) and are 0xB long)
++0x0 = Maximum Counter Damage
++0x1 = Minimum Attack Damage
++0x2 = Lowest Fuel Value this unit will have before it goes to refuel
++0x3 = HP Value this unit will fight to before it goes and heals
++0x4 = Related to build/don't build? (Checks if = 0xFF and checks if Inf/Mechs)
++0x5
++0x6
++0x7
++0x8
++0x9
++0xA
++0xB per unit Load = Build Priority
+
+0805926C - Branch which calculates the minimum damage the AI is willing to do
+08058A5C - Branch where calculates the maximum counterattack AI is willing to take
+08060CDA - Checks +0x5
+
+08061178 - Obtains a Random number and then uses the weightings (Unit 0x5 to 0x9) to determine a pointer to follow. Black Hole Factory uses this, stores at a Unit's 0xB
+Related to the build subroutine for AIs at 080607BC
+
+0805CAA6 - Checks a built unit's AI type (+0x1B) in the unit data and compares to 0x1 (infantry?)
+
+
+0805F4CC - Uses the 'action type?' (unit +0xB) to perform an action
+AI Lists followed for each unit type?
+
+0x0857690C - List of What AIs to load in Vs mode
+
+0x030046B8 - Map type in vs mode? 0 = Land, 1 = Land/Air, 2 = Land/Sea, 3 = LAS?
+
+08025BE0
+Action Types:
+0x0 - Do Nothing (Attack in Range only)
+0x1 - Aggressively Charge
+0x2 - Move with Front Line
+0x3
+0x4
+0x5 - Conservatively move up
+0x6 - 
+0x7 - Protect the HQ
+
+0x085768E0 - Branch Table
+
+Corresponds to these subroutines:
+0805ECD8
+0805ECDC
+0805ED70
+0805EE40
+0805EF9C
+0805F074
+0805F0EC
+0805F2B4
+	
+
+0857680F - List of where to build units from?
+
+08061F34 - Subroutine that calculates what properties exist to build transport types (list at 085767F2)
+
+0806111E - Feeds into the build subroutine (08025E08)
+
+030046B8 - What Transports to build: 1 = TCopter/APC, 2 = Lander
+03004674
+030045D0 - Counts units based on some type value list at 08576877 (+UID = Value)
+030045D8 - Counts units: Battleships
+
+
+08060DAC
+Game collects properties that can be built from by the AI at
+0202EF78. Format: 4 bytes per property. List is ended by an 0xFF
+X Co-ordinate
+Y Co-ordinate
+Property Type
+Built From/Not Built From (7F/FE) - 7F denotes buildable/ FE denotes currently selected property to build from.
+
+080612E8 - Marks a property of being used with 0xFE
+
+Performed by the subroutines 08060D78 and 
+08060DAC - Calculates which properties the AI can build from. Uses 08042424 to calculate and thus Hachi can't use SCOP build as an AI.
+	
+02029D84 - Base Pointer for units to build calculation? (+0x1B = Will it be buildable?)
+
+08060F3E - multiplied by 3E8 (Counting Subroutine)
+
+
+080607B4 - What unit is built next?
+08042CC2 - Cost getter subroutine
+080610E6 - Does the AI have enough money?
+	-080619F7 bhi #0x8061156 (unsigned higher)
+080610FE - Compares to 0x3F
+	-bgt #0x8061156 (greater than or equal)
+
+0806110E - Stores at (030046C7)
+
+
+Acting
+0805E014 	- (02029D94) - Related to infantry movement?
+0805E062	- (02029D8D) - Related to unit movement?
+0805E06C 	- (02029D84) - Related to unit movement?
+080625E8	- Cmp r0, 0x18? AI Cheatery?
+08058946		- Compare Targetted unit UID to 0x18. Checks if it's a sub. If not, then it can just straight up attack even if it can't see it. Likely to affect the AI's actions in Fog of War, too.
+
+Unknown
+08060D92 (02029D87)
+
+0x02029C20 - Tracks Enemy unit data
+
+02029C54 - 
+
+080617b8
+
+0857690C - 0x10 Long + CO ID
+
+085771c4 = 0x180 long
+
+02029C54 - Loads AI rules for the current CO into the RA[M
+
+AI Directives are 0x13 long (AI type from Map)
+Adds CO ID.
+
+
+Seems to be called by 0x08061A40
+085C77A0 - Related to building/AI?
+
+0085771C4 - Base pointer?
+0857BA34 - Sami's 8 Infantry Directive?
+0857BB64 - Sami's 7 Infantry AI Directive?
+
+1st Byte = Infantry Count
+2nd Byte = ?
+3rd Byte = ?
+	-Changing to 64 makes the AI spam infantry
+
+030046C0 - Affects which unit will be built next? (+0x6)
+
+
+Sub Diving and Refuel
+08025410 //Fuel Routine. Checks if unit is dived and moves fuel cost to 0x5
+
+0802547C - Has the unit run out of fuel?
+
+Stuff:
+Can we use 08024C0E/0804308C
+
+08043104 - Loads actual boost data (For atk only?)
+08043182 - Loads boost data (for def only?)
+
+42D38
+
+441EC
+
+42D6C
+43E60
+42D0A
+4300c
+43060
+
+Routines that load a current unit's fuel:
+0802271C - General map indicator (Low Fuel Blink)
+	08022720 mov r1, 0x3 - Threshold of when the blink appears. By default it is max fuel/3
+0802AEA6 - Loads current fuel for overlay
+08025436 - Daily fuel consumption
+
+lsl 0x19, cuts off upper bit, all of the above three - should be safe to use upper bit
+-Upper bit is conserved
+
+080250D2 - Compares if unit's HP is non-zero and branches otherwise. Branch to DC if nonzero
+	-Runs in the order of defender -> attacker
+Changing the branch at D4 to NOP will cause all units in combat to die. Likewise, changing it to B xx will cause units to never get killed
+
+Top Level
+08024FA8
+	Branches to Damage Formula for attacker
+	re-arranges addreses
+	Branches to damage formula for defender
+	re-arranges again
+	Branches to obtain HP? of attacker (and a whole bunch o other crap)
+	re-arranges again
+	Defender HP and bunch o stuff
+
+Routine at 08024C1C - Branches for display damage formula?
+	Branches to 08043070
+
+Routine at 0843086 (Damage Formula) - Determines what stat boosts a unit gets. Only runs for active player.
+-Branches to 08430B0
+	Loads Base unit offset in R4
+	Loads Unknown offset in R7
+	Multiplies R3 by R2 (Unit ID is in R2, Length in R3)
+	Loads Unit Class into R3
+	Does some mixing and juggling
+	-Sub-Branches to 080432E0
+		Loads Unit Address into R2
+		Loads Range
+		Cmps and all that jazz
+		movs r0, 0x6 for indirects (class 6) and 0x5 for directs
+	Appears to compare if CO Abilities are enabled.
+
+08043145 - Appears to be for the defender and does the same thing as previous
+
+
+Branch to 08043190 - Movement gatherer branch, it seems. Outputs movement bonus in r0. Input of CO ID in r0, CO Power state in R1, Unit Type ID in R2
+080431EC - Movement for Allied B Overlay or currently selected unit
+080431F8 - Movement? (B Overlay) for Opposing players
+
+Branch to 08043200 - Range boost gatherer branch? Same input as above.
+
+080430B0 - Attack
+08043120 - Appears to gather unit class Defence stats for both players
+08043190 - Movement
+08043200 - Range
+	-Only difference between these subroutines is that 90th Opcode (mov r2, 0xX) will move 0, 2, 4, 6 depending on the subroutine (Relative offset for the stat)
+
+Unit Data Gatherers
+0x080433B8 - Movement
+0x08041FE0 - B-Button Display Type
+
+Joining Units
+
+08026016 - Checks if can be joined?
+
+
+Join Subroutine appears to start at 08042998
+080429CC - ~08042A6C - Appears to do the joining (and calculate if any money needs to be refunded)
+Starts doing ammo approx
+08042A6C
+
+Unit Cost Subroutines
+Gets the price multiplers
+08042C9C
+	->08043270 - Input of CO ID, Power Status and Unit ID. Outputs cost bonuses in r0
+Ends with cost multiplier in r0
+080433D8 - Subroutine that gets the unit's base cost.
+
+Runs for both attacking, buying and repairing.
+
+Costs for units in shopping dialog box 0802d6e4
+Costs for units actually bought 08025E08 (Subroutine)
+Repairing Units 08029AF8 (Input of Unit to repair in r0, r4, Repair amount r1)
+	Branch to 08042C9C (Gathers cost of unit for 1 HP)
+	Branch to 08025B28 (Checks whether repairs can be afforded)
+	0802A13 - value in R1 is the total of repairs performed (#HP)
+
+08029CB8 - Animates Supply? (0802A182)
+
+080211DC - Main Vision Calculation Subroutine?
+	Is infantry/mech? If yes, add mountain
+Check for Infantry at 08021210
+Check for Rain at 08042DAC
+
+080206E4 - Subroutine Blanks the vision map
+	Run by:
+		0802145A (Opening build menu)
+		08021436
+
+0802143A
+0802145E
+
+Vision reset and update subroutine 080258CC
+
+Run from 15De2
+2d47c
+23476
+2d91a
+2e5a6
+2426a
+42548
+
+08020EDC - Vision Map Generator Subroutine?
+08021036 - Piercing Vision is true
+
+0802134C - Property Vision Map Checker?
+	bl 080210C8 - input of x co-ord, y co-ord.
+
+085767D5 - List of Something to do with properties
+
+0202079A - Vision Map Starts
+
+08021008 - Check for FoW hidden tiles?
+
+0x08021052
+Multiple checks!
+08023C04 - Check whether a tile on the visionmap is greater than 0? (Stationary)
+08023A9E - Scrolling
+0802246C - ?
+08022676 - ?
+
+08042F7C
+	-Gathers Unknown
+080432A8
+	-Gathers vision bonus
+08042DE0
+	-Gathers Headquarters Type?
+08042EDC
+	-Gathers Capture Bonus
+08042E2C
+	-Gathers Luck Total
+08042E84
+	-Gathers Negative Luck Total
+08042FC4
+	-Gathers Counterattack Bonus Total
+08043270
+	-Gathers Cost Bonus
+08043050
+	-Gathers Special Skill Flags ; Input Player Number in r0
+
+084995C1 - List of what units can use the Supply command (0x1 = Yes, 0x0 = No
+
+08042084 - Gathers a unit's Supplying ability
+
+080422A8 - Gathers whether a unit is on the same tile (so can dive)
+
+080440A8 - Subtracts CO Power for COP Useage
+
+08044094 - Gathers Power Charge (r0 = Player ID)
+
+080441D4 - Gathers COP Charge capacity (r0 = Player ID)
+
+08044208 - Gathers SCOP Charge capacity (r0 = Player ID)
+
+
+Create Unit (Build) subroutine
+0x08025E08
+
+Input: r0, x, r1, y, r2, UID
+
+Menu Box System:
+
+0x0801A104	-Subroutine that enables a GUi Menu
+0x08019F90	- Menu Interface Subroutrine
+Base Menu Pointers
+0x08477C84	-Main Design Maps Systems Menu
+0x08487C04	-File (Design Maps) Sub-menu
+	0x08488494	-Load Sub-sub-menu
+	0x08488514	-Save Sub-sub-menu
+0x084872FC	-Fill (Design Maps) Sub-menu
+
+0x0848A2C	- Menu Ran when backed out of Unit Action Menu
+
+0x0849AE28	- Unit Action
+0x0849AAC0	- Main In-Game Systems Menu
+0x0849ABC0	- Intel Sub-menu
+0x0849AC60	- Options Sub-menu
+
+0x0801A022 - Launches code-checks to see if menu commands are available
+0x08019AFA - Activates selected Menu command
+
+Design Maps Specific
+0x0800056C - Activates various Design Maps State Functions
+0x0 = Launch
+0x1 = Map Editor Main
+0x2 = Terrain/Unit Selector
+0x3 = File Menu
+0x4 = Name Entry
+0x5 = Map Overlay
+0x6 = Intel Menu
+0x7 = Fill Menu
+0x8 = Help Menu
+0x9 = End Menu Function
+
+Unit Attack Menu Order
+Fire
+Fire (X)
+Capt
+Capt*
+Launch (Missile Silos)
+Load (Into Unit)
+Drop Unit 1
+Drop Unit 2
+Join
+Supply
+Wait
+Dive
+Rise
+
+Main In-Game Menu Order
+CO
+Intel
+Power
+Super
+Options
+Save
+End
+
+Visibility Functions:
+0x08019E2D = Always Display
+
+Menu Subroutines:
+0x0801A614 = Refreshes the menu next frame (used to load submenus)
+0x0801A168 = Closes the menu current and clears the menu list cache (each selectable command must use this to avoid crashes)
+
+Save Command
+0x0802CFC0
+	0x0801A168 - Script? 0x0848A42C
+		0x0801537C
+	0x0802C280 - Script? 0x0849A8F0
+		0x080193B0
+
+Capt Menu
+0x0802C9E8
+	0x0802CA0E - Cmp r0,0x4 - Compare if Sami
+Capt* Menu
+0x0802C9A4
+	0x0802C9CA - Cmp r0,0x4 - Compare if not Sami
+
+Dive Menu
+0x0802CC90
+	Loads from 0x030040D8
+
+0x030040D8 - Holds currently selected unit for menu command purposes
+	-Holds 0x02022684 if no unit is selected
+
+Everything can launch missile silos:
+0802CA64
+
+Capture and Capture* Command
+0x0802D064
+
+0x0300319C - Properties on the map to draw as OAM objects
+
+Random Map Fill Command
+0x08004B6C
+
+Capture* Menu Option Table
+0x0849AE88
+	Menu Display Check at +0x4
+	Command at +0x14
+
+Build Menu Subroutine
+bl 0x0802D5E8
+Input of x co-ord in r0, y co-ord in r1
+
+Menu Action Setup: (Capture)
+	bl 0x08034F48 (Capture/Wait/Dive/Rise)
+	bl 0x0801A168 (Capture/Wait/Dive/Rise/Supply)
+	bl 0x0802C57C (Capture/Wait)
+
+	bl 0x08042B70 (Supply)
+	bl 0x08060684 (Dive)
+	bl 0x080606A0 (Rise)
+	bl 0x08042650 (Capture)
+	bl 0x08042864 (Load)
+
+	bl 0x080424FC (Capture/Wait/Dive/Rise)
+	bl 0x0802C594 (Capture/Wait)
+
+	ldr r0,=0x03003FC0
+	add	r0,0x32
+	ldrb	r1,[r0]
+	mov	r0,0x3
+	mov r2,0x0
+	mov	r3,0x0
+	bl	0x08034534
+	pop	{r0}
+	bx r0	
+
+Fire - (Different Structure)
+0802D2A0 B500     push    {r14}
+0802D2A2 0612     lsl     r2,r2,#0x18
+0802D2A4 0E12     lsr     r2,r2,#0x18
+0802D2A6 2002     mov     r0,#0x2
+0802D2A8 4002     and     r2,r0
+0802D2AA 2A00     cmp     r2,#0x0
+0802D2AC D115     bne     #0x802D2DA
+0802D2AE 20FF     mov     r0,#0xFF
+0802D2B0 F7F2FAC2 bl      #0x801F838
+0802D2B4 490A     ldr     r1,=#0x3003100
+0802D2B6 2200     mov     r2,#0x0
+0802D2B8 5E88     ldsh    r0,[r1,r2]
+0802D2BA 2202     mov     r2,#0x2
+0802D2BC 5E89     ldsh    r1,[r1,r2]
+0802D2BE 4A09     ldr     r2,=#0x30040D8
+0802D2C0 6812     ldr     r2,[r2]
+0802D2C2 F7F3FD45 bl      #0x8020D50
+0802D2C6 4808     ldr     r0,=#0x849A9F8
+0802D2C8 2103     mov     r1,#0x3
+0802D2CA F7EFFB13 bl      #0x801C8F4
+0802D2CE F7ECFF4B bl      #0x801A168
+0802D2D2 F7F7F915 bl      #0x8024500
+0802D2D6 F007FE51 bl      #0x8034F7C
+0802D2DA BC01     pop     {r0}
+0802D2DC 4700     bx      r0
+
+
+Transport Pointer Stuff
+080422A8
+->
+	08025F74
+		-08025F8A (Loads the transport pointer)
+		-Appears to check whether there is a transport pointer at all (Eg, can it load units at all) then checks if that unit that is attempted to be loaded is allowed.
+		-Then checks the capacity of the transport (Can it carry 2? Can it carry 1?)
+	08042314
+	-Checks whether loading is allowed on this terrain
+
+	080421E2
+	0804224C
+	-Appears to check if unloading is allowed.
+	
+	0802709E
+	-Compares on end turn for FoW/Transport info hiding - Just checks whether there is a pointer or not.
+
+	08058E06
+	08058EF2
+	0805AB3E
+	0805EC24 - AI Check for Transports 1
+	0805FC82
+
+	
+
+	Loading Units on Pre-Deployed Maps
+	080196DE	//Loads the pointer to stuffamagic
+		--080196F4
+			Loads the first thingamy and compares to 0xFF (Eg, end of script)
+			Compares to 0xFE (Start of Team script)
+			(A whole bunch of crap)
+		-08019740
+			-Loads X co-ordinate into r0, y into r1 and UID into R2.
+			08025c5c
+				-08025AEC
+					-Compares if there are more than 50 units
+					-Loads the correct player ID for unit X for player X
+				08025BE0
+					-Sets up the HP/Fuel/Ammo/AI of the unit
+					-Blanks the UID of the unit being transported
+				08025C7C
+					-Saves the X/Y of the unit.
+
+				080197E8
+					-End of script? If not, go and do it again.
+
+Unlocky Stuff
+080489e2 - Base for battlemaps loadout?
+02027fb8
+
+0803c37c
+
+0803cab8
+0803CC06
+
+0803c4cc - checks if HC has been completed?
+
+0803c7ba
+
+0803c4be beq 0803c4c6
+
+0803C37C: Compares if all the new AW2 War Room maps have been bought
+0803C7CC
+0803C3FA
+
+0803C7A0 - Compares the return on the result of whether the map has already been bought
+0803C7C6 -> 0803C3F6 -> 0803CA70 Checks whether new 2p/3p/4p/Predep have been bought?
+
+0849EDB0 - Something BM related?
+
+0803cbc4 ->
+	0803cA00 - Script that adds "campaign completed status".
+
+0803c580
+
+0803C7BA - Base shop routine to check availability.
+
+0849EDb0 - Base shop stuff pointer?
+02027FB0
+
+08017704 - Routine that subtracts battle maps points upon a purchase.
+08048A32 - Routine that loads points for display in the battle maps menu - Seems to be held at 02017C50 when in use?
+080487B4 - Seems to load the cost of items in Battle Maps, the text ID used to display and what icon is used.
+0803CBD8 - Used to check campaign completion status for battle maps/main menu items
+0200C430 - Campaign High Score (Hard Campaign too?)
+08037DA4 - Obtains ranking on a score for Campaign (199, 249, 279) (C = 2, B = 3, A = 4, S = 5)
+
+0849EDB0 - Base Battlemaps Pointer?
+
+Format seems to be 0x18 Bytes per item.
+
+"Grit" In battlemaps:
+0849EDF8	- Icon used for Grit (2 Bytes)
+    	  FC	- Displayed String Text ID (2 Bytes)
+0849EDFC 	- Cost to purchase Grit (4 Bytes)
+	EE00 	- ??
+	EE0C 	- Pointer to text that displays when you opt to purchase said CO
+
+1800 1C0A 58020000 B5C40308 7DC90308
+05000000 68254C08
+
+Line 1:
+Icon ID
+Item Name
+Item Cost
+
+Line 2:
+Pointer to Text options. At the pointer, the following:
+16 Bytes: First Text command. (Description of item)
+16 Bytes: Second text command. (Would you like to buy this)
+16 Bytes: Third command? 
+
+Format:
+1A 00 00 00 00 00 00 00 - "Say This"
+05 0B 00 00 00 00 00 00 - "This will let you use Grit outside of Campaign Mode!" (Text ID of string 1)
+
+03 0B - "Is this what you are after Y/N?" dialog
+
+Icon List:
+0x13 - "Power"
+0x14 - "Super Power"
+0x18 - "Map"
+0x19 - "CO"
+0x1A - "CO Colour Edit"
+
+Items in Battlemaps Order:
+0849EDB0	- Hard Campaign
+0849EDC8	- Sound Room
+0849EDE0	- Olaf
+0849EDF8	- Grit
+0849EE10	- Colin
+0849EE28	- Kanbei
+0849EE40	- Sonja
+0849EE58	- Sensei
+0849EE70	- Eagle
+0849EE88	- Drake
+0849EEA0	- Jess
+0849EEB8	- Lash
+0849EED0	- Adder
+0849EEE8	- Hawke
+0849EF00	- Nell
+0849EF18	- Sturm
+0849EF30	- Hachi
+0849EF48	- Colour Edit Max
+0849EF60	- Colour Edit Sami
+0849EF78	- Colour Edit Olaf
+0849EF90	- Colour Edit Grit
+0849EFA8	- Colour Edit Colin
+0849EFC0	- Colour Edit Kanbei
+0849EFD8	- Colour Edit Sonja
+0849EFF0	- Colour Edit Sensei
+0849F008	- Colour Edit Eagle
+0849F020	- Colour Edit Drake
+0849F038	- Colour Edit Jess
+0849F050	- Colour Edit Flak
+0849F068	- Colour Edit Lash
+0849F080	- Colour Edit Adder
+0849F098	- Colour Edit Hawke
+0849F0B0	- Colour Edit Nell
+0849F0C8	- Colour Edit Sturm
+0849F0E0	- Colour Edit Hachi
+0849F0F8	- Map Pay Dirt
+0849F110	- Map Long Road
+0849F128	- Map Nest Egg
+0849F140	- Map The Trident
+0849F158	- Map Banker Hills
+0849F170	- Map Missile Plains
+0849F188	- Map Lost Basin
+0849F1A0	- Map Risky Vale
+0849F1B8	- Map The Ring
+0849F1D0	- Map Strong Land
+0849F1E8	- Map Hourglass Isle
+0849F200	- Map Lock Ridge
+0849F218	- Map Portsmouth
+0849F230	- Map Pipe Maze
+0849F248	- Map Knotted Keys
+0849F260	- Map Grid Assault
+0849F278	- Map Archipelagos
+0849F290	- Map Big Daddy
+0849F2A8	- Map Wyrm's Eye
+0849F2C0	- Map Badlands
+0849F2D8	- Map Crossroad
+0849F2F0	- Map Heartland
+
+
+0803B48C
+	-Music/SFX player subroutine
+
+08070478
+	-Routine that takes Music/Sound ID and activates it?
+
+0801C95C
+	-Routine that stops currently playing music tracks?
+
+0200DA74
+	-ID of currently playing song?
+
+08068BA0
+	-Hard Coded song ID for intro movie music. (mov r0, 0x96, lsl r0, r0, 0x1 = 12C)
+
+0806CF60
+	-Hard coded song ID for Title Screen (mov r0, 0xD5, lsl r0, r0, 0x1 = 1AA)
+
+086169BA
+	-Song ID for Title Screen Music
+
+086169BA
+	-Song ID for Main Menu Music
+
+08000FDA
+	-Hard coded song ID for Design Maps Music (mov r0, 0xD8 = D8)
+
+0861700C
+	-Song ID for Prologue to the Campaign
+
+08614834
+	-Song ID for World Map
+
+08085EC6
+	-Hard coded song ID for War Room Menu (mov r0, 0x C8, lsl r0, r0, 0x1)
+
+08078EC6
+	-Hard coded song ID for Battle Success (ldr r0 = 1A1, change at 08078ED0)
+
+0807AA78
+	-Hard coded song ID for Count Up screen (mov r0, 0xCD)
+
+0807B19E
+	-Hard coded song ID for OS Mission intros
+
+0807B92C
+	-Hard coded song ID for BM Mission Intros
+
+0807B93C
+	-Hard coded song ID for YC Mission intros
+
+0807B948
+	-Hard coded song ID for GE Mission intros
+
+0807BA22
+	-Hard coded song ID for "Black Hole Mission" (mov r4, 0xCC, lsl r4, r4, 0x1, mov r0, r4)
+
+0807B96E
+	-Hard coded to add 0x7 to the song ID for "Black Hole Mission"  to give "To the Last stage" if Mission ID = 0x22
+
+08078EA8
+	-Hard coded song ID for Factory/Deathray domination (mov r0, 0xD1, lsl r0, r0, 0x1 = 1A2)
+
+0806BC80
+	-Hard coded song ID for staff credits (mov r0, 0xD0, lsl r0, r0, 0x1 = 1A0)
+
+08581AE2
+	-Song ID for End of Campaign Tally 
+
+080489D8
+	-Hard coded song ID for Battle Maps (mov r0, 0x97, lsl r0, r0, x01 = 12E)
+
+08582764
+	-Base pointer to Sound Room Songs List
+
+0849BD20/08035064
+	-Sound Effects for weather change IDs/code that retrieves them
+
+02027DE0 - Rain Particles RAM
+
+Format:
+8 Bytes per Entry
+Text ID of Song Name (2 Bytes)
+Song ID to play (2 Bytes)
+What COs to display and in what manner (4 bytes)
+Formats for CO displays:
+
+05 80 01 00 - Randomly display Allied Nations COs
+00 80 01 00 - Randomly display Black Hole COs
+04 80 01 00 - GE COs
+03 80 01 00 - YC
+02 80 01 00 - BM
+01 80 01 00 - OS
+XX 00 00 00 - Display CO (Co ID)
+
+Third byte in the CO display format seems to do something else, but it doesn't seem significant.
+
+0806F0EC - Appears to be the handler for the sound room music player
+	0806f160 - Loads the song ID, etc.
+
+Army Emblem Palette
+081018E4
+
+CO Power Palette
+080A36C8 (0x20 bytes) - 16 colour palette
+00 38 BF 00 FF 08 3F 15 7F 1D BF 29 FF 31 3F 3A 7F 46 BF 4E FF 56 3F 63 7F 6B BF 77 FF 7F 00 00
+
+SCOP Palette
+Used for "Super Power" Logo
+08235D10 (0x20 bytes) - Blends the CO Power palette and fades to this one over the course of the animation.
+
+0810E780
+00 00 5F 08 1F 63 1E 42 1D 21 1C 00 FF 7F 1F 63 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+
+39 67 9A 42 38 3A 38 3A D6 2D 74 25 11 19 F1 18 77 3A F4 2D 72 5A 74 25 11 19 F1 18 1F 7C CA 18
+
+Appears to load
+
+
+08000ED8 - Sets what day it is in the map editor
+0802150C - Subroutine that sets up all game initial settings
+
+
+Range Display (Holding down B)
+0802E390 ->
+	08041FE0 - Seems to collect what B-button style is used (indirect or direct)
+	0804203C - Collects min/max ranges
+
+General Subroutine
+08042D1C - Collects Mov Range + CO Boosts
+08042D50 - Collects Max Firing Range + CO Boosts
+
+Waiting and Transports
+08025EC0 - Compares if bit 0x8 of the current unit is set. If it isn't, it 
+
+More AI Crap
+
+Overarching AI subroutine seems to start at:
+08061868
+Subroutines:
+08061CDC - Seems to blank word aligned bytes at around 03004100, 0x5B times
+
+08061CF8 - Seems to compare the AI player's alliances
+
+08051F34 - Something to do with the map
+	080270C - Something to do with the map
+
+	08061A40 - Does some elaborate pointer calculating and then saves a bunch of values loaded from ROM and saved in ram, CO dependent (02029C54 and 087ABF4 for Andy), adds 0x10 to both pointers and then repeats. Increments pointers by C and repeats about 15 times. (Is run twice)
+
+08062028 - 
+
+
+08062964
+-Seems to compare how much damage will be done to a target
+
+08062988
+-If the unit can counterattack?
+
+08036E1A
+-Subroutine that checks whether A, B Start Select is pressed and performs a soft reset.
+
+08013510 (via 0x080368F6)
+-Subroutine that handles keyboard input
+	03002090..9F used for something involving shuffling bits.
+	03004518 appears to store the final result.
+
+-Subroutines:
+	080303b0
+	080303c8
+	08030234
+	0801348C <- Vital subroutine to keyboard input
+
+080134F4 - strh r0, r2, 0x10 (r2 = 03002090) - If this is nopped, holding down a button no longer works (eg, holding L/R for a direction)
+080134F8 - srth r0, [r2] - If this is nopped, holding down B no longer works
+
+0x03002090 to 0x03002097 Keypad button states
+0x03002098 to 0x0300209F - Keypad buffer
+
+Main Menu:
+0x08072F04 - Appears to be the keypad handler for the main menu?
+
+0x08084CB0 - Keypad handler for CO Dossier
+0x08085AAA - Keypad Handler when R-Info for page 4 is open
+
+0x0802DCB4 - Keypad Handler for standard in-game screen
+
+0x080236E8 - Keypad Handler (directions) when unit selected?
+	0x08023774 - Branch for movement cursor (unit selected) if path goes outside of unit's movement range
+	0x080237B4 - Left/Right?
+
+0x08019A60 - Keypad Handler for Yes/No Textboxes?
+0x08019B9A
+0x0801961C <- This one
+
+0808611A - Keypad handler for Vs map select menu
+			and War Room Map select menu
+		0x08087974 - R-Info High Score panel?
+			0x0801CB28 - Collects High Score RAM address.
+			0x08087a10 - Draws the 1st-5th, 'points' etc.
+
+0807D328 - Controls for War Room/Campaign CO Select (Multiple)
+0807CE5C - (As above)
+	0200D8EA - X Pos in Menu
+	0200D8F0 - Y Pos in Menu
+	03005948 - Army size (1x5 Byte, OS,BM,GE,YC,BH)
+	03005958 - Army Colour/Affiliation (1x5 Byte)
+	030059C0 - Army Swap Enabled/Disabled (1x5 Word)
+	0807D10C - Branch to check whether Down is enabled
+
+08081E5C - Controls Right/Sel for Main menu
+080823D4 - Controls L/R/Sel/A/B for Side menus
+	08082418 - Sel for Sound room
+08081DDE - Controls Up/Down
+0806757A - Checks whether Start/A have been pressed for the intro movie. 
+	-If pressed, branches to 0803b5E8 which launches the title screen.
+08034142 - Controls input for Link Menu?
+
+0806f0f6 - Controls input for Sound Room
+
+0802DCE8 - Controls input for Main game screen
+	0802E2D0 - Displays the B-Button Attack Range
+
+080860DC - Controls input for the War Room Screen
+
+0808849E
+080889BA
+08088B64 - Keypad handlers for CO Edit
+
+08019B9A - controls input for design maps menu?
+
+08003bce - Design Maps?
+08014448 - Design Maps dialogue boxes?
+08019510 - Dialogue Boxes dm?
+0800108a - Design Maps?
+08000A0E - Design Maps Map drawing controls
+
+08036D1C
+-Start of game's THUMB Code here
+
+Intro screen palettes (Nintendo Presents Advance Wars 2)
+
+0000 45D1 20A8 396E 3D8F 733C 312C 49F2 1064 35D0 31AF 250B 252B 0000 1064 1064
+
+Found at: 0x0817C3E8
+
+F7 6A 00 00 08 21 CE 39 F7 62 7B 73 FF 7F FF 67 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+Found at 0x0817DA18
+
+0801218A
+
+Routine 0x0811FF0?
+
+0x06ff66
+
+0x0806c9d6
+
+0806c9D8 - Code for checking until title screen reset.
+0x0200d6A8 - Time for how long until title screen reset. Starts at 2700 Ticks, or 0x0A8C
+
+Intro Killer Patch:
+0806c9D2 - Subtracts from timer, change to nop (0000)
+0806C9BC - Timer length
+08067572 - Branch that normally waits until about a second has passed before you can skip the movie, change to E006 (b 0x08067582)
+0806CA06 - Title screen input handler - Starts main menu if a button is pressed.
+
+Change 0806C9DA to E016 b 0x086ca0a to make the game jump to the main menu after timer finishes.
+Change 0806C9D8 to E009 b 0x086C9EE to make the timer never run down.
+
+Shop Crashing
+0803A1D8
+
+0803A0A2
+	-1st okay
+	-2nd okay
+
+	8th Subroutine - 0803A14C
+
+Around 08499730 is format for display of effectiveness icons in the shop/r button screen
+03004100 - Current unit highlighted in the menu
+084997C8 - Base pointer for 'sets' of these effectiveness icons
+	Pointers
+	Infantry - 08499734
+	Mech - 0849973C
+	Md Tank - 08499746
+	Dummy (UID4) - 08499746
+	Tank - 08499754
+	Recon - 08499762
+	APC - 0849976A
+	Neotank - 08499746
+	Dummy (UID9) - 00000000
+	Artillery - 0849976B
+	Rockets - 08499774
+	Dummy (UIDC) - 00000000
+	Dummy (UIDD) - 00000000
+	Anti-Air - 0849977D
+	Missiles - 08499786
+	Fighters - 0849978B
+	Bombers - 08499790
+	Dummy (UID12) - 00000000
+	Battle Copters - 08499799
+	Transport Copters - 0849976A
+	Battleships - 084997A7
+	Cruisers - 084997B0
+	Landers - 0849976A
+	Subs - 084997C0
+
+	6A 97 49 08
+
+Format: Appears to be of customisable length bytes long.
+Comes with items in two-byte pairs.
+06 - Blank the rest of 'Weapon 1'
+07 - Blank the rest of 'Weapon 2'
+
+xxyy
+
+xx:
+0  = Inf
+1 = Veh
+2 = Copter
+3 = Plane
+4 = Ship
+5 = Sub
+
+yy:
+0 = Circle
+1 = Triangle
+
+Luck manipulation
+The RNG for this game is at 03001fd4-03001fd7. It can only be manipulated by one of these two actions:
+
+	•	When choosing which enemy to attack, every delay advances the RNG 3 times.
+	•	When moving a unit, walking diagonally advances the RNG 1 time (similar to the Fire Emblem RNG).
+
+0x0849EACC - Table of Load functions to use for each mode - Appears to convert from the main menu selection
+0x0803BBA8 - Loads this table
+Loads the ID to use from 0x030033FC
+
+0x0	0x0803BA89 	- Campaign (Continue)
+0x1	0x0803BA4D 	- Campaign (New)
+0x2	0x0803B8E1 	- Versus (Continue)
+0x3	0x0803B8B9	- Versus (New)
+0x4	0x0803B905 	- War Room (Continue)
+0x5	0x0803BA01 	- War Room (New)
+0x6	0x0803B9AD	- Battle Maps
+0x7	0x0803B9D5	- Design Room (CO)
+0x8	0x0803B9B9	- Design Room (Map)
+0x9	0x0803B859 	- Link Mode
+0xA	0x0803B875	- Sleep Mode/Music Mode (Seems Unfinished, no wakeup command, only soft reset)
+0xB	0x0803B891	- Proto-Link Mode?
+0xC	0x0803B9ED	- Sound Room
+
+
+
+Saving and Loading game data
+0808B6E8 - Subroutine that seems to copy loaded save data to RAM.
+	Loads data from 0200002A and saves it to RAM.
+
+Code for maps is loaded from 0E00E000 to 0E00F000 in Design Maps. Saved to 02002000 to 02003000 in RAM
+
+0808B1BC - Main Saving to SRAM subroutine
+
+0200C428 - Appears to be whether there's something saved in certain slots.
+SRAM Blocks:
+0x0 Game Completion State/High Scores/Etc
+0x1
+0x2 Campaign (In-Game)
+0x3 War Room
+0x4 Versus Mode
+0x5 Design Map 1
+0x6 Design Map 2
+0x7 Design Map 3
+0x8 Design Map (Versus Mode Slot)
+
+05 00 00 00 E4 02 46
+
+Process in Vs:
+Write data to be saved to 0x02000000 to 0x02001FFF
+Copy data to be saved to 0x02002052 to 0x0200
+
+Data Block Setup for In-Game Saves: (0xE28 Long?)
+0x02000000		- HWord from 0x03004080
+0x02000002		- HWord from 0x030033EC
+0x02000008		- 0x3 Word from 0x03004490
+0x02000004		- Word from 0x030033E4
+0x02000014		- 0x3C Bytes Player Data from 0x02023284 (Player 0)
+0x02000050		- 0x3C Bytes Player Data from 0x020232C0 (Player 1)
+0x0200008C		- 0x3C Bytes Player Data from 0x020232FC (Player 2)
+0x020000C8		- 0x3C Bytes Player Data from 0x02023338 (Player 3)
+0x02000104		- 0x3C Bytes Player Data from 0x02023374 (Player 4)
+0x02000140		- 0x48 bytes from 0x03003FC0
+0x02000188		- Unit 0, P1
+0x020003EC	- Unit 0, P2
+0x02000650		- Unit 0, P3
+0x020008B4		- Unit 0, P4
+0x02000B18		- 0x4 Bytes from 0x030033F6
+0x02000B98		- 0x2 Word from 0x03002F08
+0x02000BA0		- Word from 0x03002F20
+0x02000BA4		- Word 0x03001FF0
+0x02000BA8 	- Word from 0x03001FD4
+0x02000BAE	- 0x5 HWord from 0x0201E450
+0x02000BBA	- "0xFFFF"
+0x02000D28		- 0x1E Words from 0x02028360
+0x02000DA8	- Status of Black Hole Inventions on map from 0x020288B4
+
+Data Block Saved to SRAM:
+0x02002000		- "0x73726132", Then Checksum
+0x02002004		- "0xAA"
+0x02002005		- "0xF"
+0x02002006		- "0x0"
+0x02002007		- "0xFF"
+0x02002008		- Word, 0x0200CD08
+0x0200200C		- Byte, From Stack
+0x0200200D		- Byte, From Stack
+0x02002008		- Word, 0x03007CE4
+0x02002010		- 0xF Word, 0x0200CCC8
+0x02002050		- 0xE28 Bytes, Length of Data Block from 0x02000000
+0x02002052		- Data Block from 0x02000000
+0x02002FFF		- "0x55"
+
+
+
+0x08016D30 - 
+	Checks whether saving is allowed
+	Checks whether map is a design map
+
+0x08016F38 - Appears to be the Subroutine that collects all the data in 0x02000000 to be saved to SRAM
+
+0x0801A7D8 - Subroutine that sets up the 0x02002000 block. Input r1 = Address source, r2 = Length
+
+0x0802C1D0 - Save Function
+	0x08016D04 - Generates the Save Block to use based on Game Mode
+	0x08016D30 - General save subroutine for in-game saves?
+
+
+0x08016C70 - Used for Saving on the Campaign Map
+0x0803CF54 - Used for Saving Design Maps 
+
+
+0x0801AC58 - Loads the Save Block on Continue. Input: r0 = Save Slot ID, r1 = Scratch RAM Address (ends at 0x0801AD58)
+0x0801A7D8 - Saves the Save Block on Save Command. Input: r0 = Save Slot ID, r1 = Scratch RAM Address (ends at 0x0801ABF4
+
+0x08016BC0 - Loads General Game Rules/ High Scores/Etc. (0x0200C078, 0x0200C2D0, 0x0200C420, 0x02028030, 0x0202FDFC)
+0x08016EA4 - Loads Campaign Data (Map)
+0x08017208 - Loads Campaign/War Room/Versus Data (Mid-Game Save)
+0x0803CC84 - Loads Design Map 1/2/3 Names into RAM
+
+0x08017658 - Subroutine that Loads in-game Save Games?
+
+0x0849A720 - Save Script 1
+	0x0		0x0803D915
+	0x0
+0x0849A740 - Save Script 2
+	0x19					
+	0xC8E
+	0x0		0x0803B5E9
+	0x0
+0x0849A770 - Save Script 3
+0x0849A780 - Save Script 4
+0x0849A7A0 - Save Script 5
+0x0849A7C0 - Save Script 6
+0x0849A7E0 - Save Script 7
+0x0849A7F0 - Save Script 8
+0x0849A810 - Save Script 9
+0x0849A840 - Save Script 10
+0x0849A850 - Save Script 11
+0x0849A870 - Save Script 12
+
+0x0849A8F0 - Overarching Save Script? (Items 0x10 Long?)
+	0x0		0x08034F7D
+	0x0		0x08024269
+	0x17						0x1
+	0x1E		0x0849A890			0x08016E5D
+	0x19				0x0C8D
+	0x1E		0x0849A720			0x080457BD
+	0x18
+	0x0		0x0803B661
+	0x0		0x08034F8D
+	0x4
+
+			
+
+Saved Maps
+5500
+C500
+D500
+7500
+9500
+500
+2500
+B500
+
+0801AAD8 - Checksum function - SRAM seems to get split into 0x1000 blocks.
+Straight Addition Checksum.
+Checksum Generator?
+First byte stored at r5, 0x6 (0x02002000)
+Result is NOTed and stored at r5, 0x7
+
+5006
+
+0801AAD8 2100     mov     r1,#0x0                                      ;2
+0801AADA 2300     mov     r3,#0x0                                      ;2
+0801AADC 4D22     ldr     r5,=#0xFFF                                   ;9
+0801AADE 4A23     ldr     r2,=#0x2002000                               ;9
+0801AAE0 1898     add     r0,r3,r2                                     ;2
+0801AAE2 7800     ldrb    r0,[r0]                                      ;6
+0801AAE4 1808     add     r0,r1,r0                                     ;2
+0801AAE6 0600     lsl     r0,r0,#0x18                                  ;2
+0801AAE8 0E01     lsr     r1,r0,#0x18                                  ;2
+0801AAEA 3301     add     r3,#0x1                                      ;2
+0801AAEC 42AB     cmp     r3,r5                                        ;2
+0801AAEE DDF7     ble     #0x801AAE0                                   ;8
+0801AAF0 4D1E     ldr     r5,=#0x2002000                               ;9
+0801AAF2 2700     mov     r7,#0x0                                      ;2
+0801AAF4 71A9     strb    r1,[r5,#0x6]                                 ;7
+0801AAF6 43C8     mvn     r0,r1                                        ;2
+0801AAF8 71E8     strb    r0,[r5,#0x7]                                 ;7
+0801AAFA 9831     ldr     r0,[sp,#0xC4]                                ;4
+0801AAFC 0C04     lsr     r4,r0,#0x10                                  ;2
+0801AAFE 1C20     mov     r0,r4                                        ;2
+0801AB00 1C29     mov     r1,r5                                        ;2
+
+Checksum Function: 0801B0F6
+	To disable checksums:
+0801B0F8	nop
+0801B104	nop
+
+Data integrity checker at 0808AE00?
+Data integrity checker at 03007BE4?
+Address of note at 0801ACD6
+Checker at 0801b050
+
+Load/Save of Copy data integrity function in RAM is loaded from around 0808AEE4
+
+0808BBC4 bx r2
+0808B1BC
+	Data saving 0808B0E8
+0801AB02?
+0801b618
+0801b66c
+
+0x0200CC38 to 0x0200CC47
+0x03007CE0 to 0x03007CEF
+0x0801b164 Above data is copied from the first set to the second set.
+0x01b17E - compares that data to R9
+
+
+0x0801B2F6 - Seems to be subroutine that sets up which save areas are used.
+
+0x0801B484 - Seems to AND the Data from 0xFEF to 0xFFF with the data 
+
+Memory blocks of 0x1000 in length, ID of 0 to F.
+
+0x0801b130 Mov r9, r0
+
+Subroutine at 0x0801B2FC sets CC38 to cc47 in the first place.
+
+0E000FEF - seems to be the location of SRAM where the current save blocks are stored.
+02002FEF
+
+Stuff loaded from SRAM with the loaded routine at 0808AEBC
+
+Code at 0803cdbc appears to be design maps specific
+Save Area IDs?
+
+0200CC38 - Current usage of save blocks.
+
+
+Save Block IDs
+0 Flags, Options, Scores, etc.
+2 Campaign
+3 War Room
+4 Vs Mode
+5 Design Map 1
+6 Design Map 2
+7 Design Map 3
+8 Design Map (Currently in use in Vs. Mode)
+
+08005612 - Specific to DM Slot 1
+0800568E - Specific to DM Slot 2
+0800570A - Specific to DM Slot 3
+
+0801ACCA
+
+Okay, condensed:
+
+	0801AD70		Main Load/Save subroutine
+	0801AD7A		Mov R0, R4 //Puts the 'Save Type' ID in R0
+	0801AD7C		bl 0x0801B120
+			0801B120		Subroutine. Loads Save Block IDs from 0200CC38..47 and stores them at 03007CE0..EF
+						Returns with Save Type ID in R4, Save Block ID in R0
+			Does some loading/comparing and returns to:
+
+
+0803CDD6
+		0801AC58		Subroutine start, Save Type ID in R0
+					Moves save type ID to R8
+					ANDs a set of data
+		0801AC84		Save type ID in R0
+		0801AC86		bl 0x0801AD70
+			0801AD70
+			0801AD7C	bl 0x0801B120		
+				0801B120 returns with Save Block ID in R0 for that Save ID.
+			
+
+Save Blocks - All Types
+
+Header:
+0000 - Beginning
+0006 - Checksum Byte
+0007 - Checksum Byte (NEG)
+000D - Save Area ID (See Above)
+
+0x08003BCE - Check to Load the Special Design Maps Nintendo Map
+
+0x08486FC4 - Nintendo Easter Egg Design Map
+
+0x08000AC2 - Branch to check if you've placed a unit on an invalid tile 50 times in a row
+0x0200b058 - RAM Location of count
+
+Design Maps Blocks
+0050 		- Map Start
+0050..51 	- Data Length in Bytes
+0052		-X Size
+0053		-Y Size
+0054		-2 Byte Map Tiles
+0XXX		-Map End
+0XXX		-Map Name (ASCII)
+0XXX 	+0x11	-Number of Players
+		+0x13	-Player 1 Colour
+		+0x14 -Player 2 Colour
+		+0x15 -Player 3 Colour
+		+0x16 -Player 4 Colour
+		+0x17 -Stored at 02004C9 - Unknown byte
+		+0x18	-Stored at 02004CA - Unknown byte
+		+0x19	-First unit
+			-From here, units. Increments across the X axis (linear string). Format is one byte per unit. Lower 6 bits is Unit ID (0 to 0x3F..sub is 0x18). Upper 2 bits are for allegiance. 0 = P1, 1 = P2, 2 = P3, 3 = P4
+
+Possible Location of the CGs?
+B78C0 to ish to BAF10ish
+
+1B9C10
+
+5802F0 to 5819A0ish
+
+030020E0 - RAM Address where 256-colour palette stored before loading into RAM
+08186F4C - Title screen graphic
+0818E165 - Title Screen Palette
+
+081CC5F0 - World Map Graphic (Campaign)
+081D1504 - Palette for World Map Graphic
+0823A3D4 - AW2 Main Menu Background (Wars World News)
+0823A3D4 - AW2 Wars World Paper
+0823BDE0 - Palette For WWP
+0822FEF0 - AW2 Map Background Graphic for Info Screen
+082344CC - Palette 1-4 for Map Graphic
+
+08239DA4 - Menu Icon Palette
+
+Uncompressed Graphics of note
+080913B8 - HP Icons/Load/Capture/Dive
+080A1424 - Small Font
+080A1C24 - Movement Arrows
+080D0004 - Property Sprites
+080E5C38 - CO 3/4 Mugs
+080F6184 - Menu Icons
+080F7884 - Movement Type Icons
+080F81C4 - Button Icons, Country Logos and Player Numbers.
+080FB704 - Firepower Info Boxes
+080FD1C4 - Effectiveness Icons
+08102F64 - CO Status Bar 1/2 Mugs
+08104364 - Info Box Terrain Icons
+08106A64 - Info Box names
+081218Bc - Property Capture Large graphics
+0816E80C - Scoring related fonts/background stuff
+0817B150 - Meteor Graphic
+0817B950 - Meteor Palette?
+080543C7C - Explosions of some variety
+
+0x0849A2C8 - Terrain Name graphics offset for infoboxes.
+
+0x08012040 - Jump Table for CO graphics?
+
+08040640 - Subroutine that applies the Missile Silo damage. Damage to use is loaded into RAM, somewhere
+
+Meteor Strike (4HP)
+080449AC - Subroutine that applies the Meteor Strike Damage.
+
+080449C6 Loads damage to use for Meteor Strike (r2)
+080449C0 - Sets up targeting for Meteor Strike:
+		How it works:
+			X Co-ord in r0
+			Y Co-ord in r1
+			Damage in r2
+			bl 08044854
+08044854 - Where Meteor Strike hits outside its target?
+
+0849CF1E
+-Location of the Rocket's Move Sound ID
+08035F5E - Routine that loads the sound ID
+
+0802A094 - Routine for daily unit resupplying.
+
+0201C470 - Tile IDs of tiles that get sent to BG1 each screen refresh.
+0201CC70 - Tile IDs of tiles that get sent to BG2 each screen refresh.
+
+BG2 Layer
+Tile ID:
+33D - Low Ammo
+33E - Low Fuel
+33F - Low Fuel and Ammo
+
+0809139C - Colours cycled for units when COP is active (15 colours)
+
+Appears 0600E800..0600EBE0 is unused for Tiles2.
+
+08036828
+
+AW2 runs at 50 FPS?
+
+03004008 - Frame Counter
+0803678C - Subroutine for fuel/ammo graphics updates. Updates on Frame 0, 20, 40
+
+08022428
+
+08022760
+
+08022552
+
+08022202 - 0201c750 0600f340
+
+0201C470 - Tile IDs of tiles that get sent to BG1 each screen refresh.
+0201CC70 - Tile IDs of tiles that get sent to BG2 each screen refresh.
+
+BG2 Layer
+Tile ID:
+33D - Low Ammo
+33E - Low Fuel
+33F - Low Fuel and Ammo
+
+0809139C - Colours cycled for units when COP is active (15 colours)
+
+Appears 0600E800..0600EBE0 is unused for Tiles2.
+
+08036828
+
+AW2 runs at 50 FPS?
+0803678C - Subroutine for fuel/ammo graphics updates. Updates on Frame 0, 20, 40
+
+08022618 - Routine that writes the BG2 tile for a unit to the Ram Map.
+Current unit is saved in R8 at 080226B8
+
+081251B0 - Fuel Low Icon
+081251D0 - Ammo Low Icon
+08090EC4 - Nothing (Blank Square)
+
+Map Loading
+080247A4 - Loads Map Pointer (Common Routine)
+03003FC1 - Pointer to current game mode: 
+1 = Campaign
+2 = War Room
+3 = Vs
+5 = Design Room
+
+0803866C - Checks game mode and whether Hard Campaign is on
+08076A6C - First Level In Campaign
+08076AAC - First Level In Hard Campaign
+
+08077F9C - Campaign Map start...
+	08077FF8 - Whether to load a CO Select
+
+08077370 	- Checks CO List pointer on new map in Campaign (Displays the "CO Select" Image?)
+			- If not branched, will just use Map CO 1 (Map Header)
+
+08077FF8	- Loads the CO List Pointer (saved at 0200DB8C + 0x38)
+
+War Room/Campaign CO Slide reel:
+030058E0		- CO Order
+
+03005910		- Orange Star CO selected
+		+1	- Blue Moon Selected
+		+2	- Yellow Comet Selected
+		+3	- Green Earth Selected
+		+4	- Black Hole Selected
+
+0300593C		- CO Selected - Army 1
+		+1	- Army 2
+		+2	- Army 3
+		+3	- Army 4
+
+03005944		- Number of Armies available?
+03005948		- Number of Orange Star COs
+		+1	- Blue Moon COs
+		+2	- Yellow Comet COs
+		+3	- Green Earth COs
+		+4	- Black Hole COs
+
+03005958		- Army 1 Colour
+		+1	- Army 2
+		+2	- Army 3
+		+3	- Army 4
+		+4	- Army 5
+
+030059C0		- Can swap armies (Army 1) y/n
+		+4	- Army 2
+		+8	- Army 3
+		+C	- Army 4
+
+03004518		- Keypad state (mirror)
+03004538		- Keypad state (mirror)
+
+0807D800		- Check for valid menu selection - Checks if duplicate COs are selected
+
+0300596C - Current Open Map Case in Vs
+	08086590 - Updates for going right
+	0808648E - Updates for going left
+	Change 0x080865A8 to mov r0, 0x1 and 0x080864a0 to cmp r0,0x0 to enable the Campaign Map case in Vs.
+
+	0x08086428 - Checks for Game Mode War Room in Map Select
+
+0x08499CE4 - Map Case Name ID Strings
+
+0x080375A4 - Generates map list for a game mode (War Room)
+08037448 - Checks Map Case a Map Belongs to Vs Input of Map Case ID
+0x08090EF0 - List for what Map Case to use for What game mode (Dummied out for Campaign and Vs in AW2)
+
+0200D74E - Position of cursor in previous map case?
+0200D884 - Current Position of Cursor in Menu
+
+0x02027F74 - Property counts for currently highlighted map
+0x02027F78 - Map ID numbers of current map list (VS Menu)
+
+08085B0C - Initial Map Case for Vs (Done at bootup)
+
+0x080129E0 - RNG Subroutine
+0x08003B8C - Random Map Generator subroutine?
+	
+
+
+085C7888
+085C7884 - 081BA18C
+
+081BA084
+
+01 = Campaign
+02 = Classic
+03 = Vs. Maps
+04 = Pre-Deployed
+05 = 3P Maps
+06 = 4P Maps
+07 = War Room
+08 = Design Maps
+
+Text Loader: 0802495e
+Base Map List Pointer: 085C77A0
+Base Textblock Pointer: 08610A38
+
+0x08024944 - Used in Vs Maps to convert a Map ID into a Map Name String ID
+
+0x03002B80 - Text String Buffer in Vs Map Menu
+0x0801B780 - Clears the Text String Buffer, input r0 = 0x0
+0x08014A5C - Text Parser Code in Vs Map Menu
+
+0801248A - X axis background scaling
+08012494 - Y axis Map Background
+03002000
+0300200C - X/Y Scaling variables that are loaded to VRAM for BG3?
+030030E0
+03002B28 - Alpha Channel?
+03001FF8 - 
+03001418 - BG0?
+0808455A - Updates the scrolling for scrollable maps (Title screen/Menu backgrounds?)
+08072C44 - Updates the scrolling for Campaign World Map
+
+0807FEAA - Updates the Alpha Trans. for COP
+0807FF9E
+0808001A
+0807FFDA - Updates the BG0 Scrolling for COP splash
+08080052 - Updates BG0 scrolling for COP (End)
+
+03002b28 - Transparency settings for 'B' units
+08024630 - Sets transparency level for units when you hold B (0 to 16)
+
+0810E6E0 - Orange Star Unit Palette
+
+03003FC9 - Animation Options
+
+08035B08 - Movement Speed Animations?
+08042720 - Capture Animations?
+	080409E8 - Subroutine that performs the animation to Capture
+08041CD4 - Battle Animations?
+	08025974
+
+0801208C - COP Palette Load?
+	0200B3B4 - Palette to store in Pal. Ram
+	0200B3BC - Length?
+0807FE90 - Seems to be the COP BG Animation/Pal/etc. subroutine
+	080A29A4 - Loads COP effect tiles. to VRam
+
+084995F4 - Item to ORR properties to when a player yields. (Halfword)
+08028704 - When yielding, checks if current property is a HQ
+08028724 - mov r0, 0x6 - what the HQ turns into when you rout/yield a player in 3p/4p games
+
+0805FB98 - Daily AI unit functions?
+	0805FC82 - AI Related to loading transports
+
+080608F6 - Invokes RNG subroutine (building?)
+
+02029C50 - P2 Unit Priorities in RAM?
+D80
+
+0805FC78 - Checks transport pointer, then checks whether a unit can be loaded on the tile. Does a Compare based on Unit ID whether it can be loaded. :/
+
+08023360 - Main graphics loader for gameplay.
+
+080233BE - Loads static part of tileset.
+
+08021D64 - Loads 4-frame tile animations - for ocean tiles
+08021DA0 - Loads 4-frame tile animations for rivers
+	Input for both: r0 integer from 0 to 7, chooses which to load in the next frame
+
+08078D84 - Loads map animation from background for CO Info screens?
+
+08013620 - Writes to Palette Ram loading area?
+
+08035030 - Loads terrain palettes for Fog
+0849BD20 - Current Palette base pointer
+
+0x0801F34C - Generic OAM Drawing Function
+	0x0200F9B0 - RAM location for Army Emblem Lists in Vs Menu: OAM ID, Player Icon ID
+
+0x0200F920 - Menu OAM Attribute List in RAM?
+	0x0200F935 - Number of queued legitimate items via 0x0801F234
+
+0x0801F150 - Sets up the OAM list
+	r0 = Offset from 0x0200F920 (0x88 in Length, input is 0-5?)
+	r1 = Base OBJ RAM Address (0x06010000)
+	r2 = OBJ Tile Number (Start)
+	r3 = Properties (1 byte?) Bit: 0-7 = Palette Bit: 8 = 1?
+
+0x0801F234 - Adds an item to the OAM List to be displayed via 0x0801F34C
+	r0 = Object ID
+
+0x0848B738 - Entries for which blob to load graphics from
+
+Entries:
+;Graphics Pointer, Palette Pointer, Base ID Number
+0x0848B738: 0x080F6184, 0x081018C4, 0x0	;Menu Icons
+0x0848B744: 0x080F8984, 0x081018E4, 0x3E	;Army Emblems
+0x0848B750: 0x080F8C04, 0x08101904, 0x43	;Arrows/Icons for Vs Setup/Numbers/Etc
+0x0848B758: 0x080FD1C4, 0x08101924, 0xAC	;R-Info Panel Icons
+0x0848B768: 0x080FE9C4, 0x08101944, 0xB8	;Rank Icons
+0x0848B774: 0x080FEBC4, 0x08101964, 0xBC	;Rules Setup Boxes/Diamonds
+
+0x0848B780: OBJ Size? seems to be in the format X size, Y size (byte, byte), 0x0, 0x0
+0x0848BADC: Last Table Entry (0xD7)
+0x0848BB2C: Table End (0xEB)
+
+OBJ ID (versus setup menu): Called by 0x0801F3D4
+Army Emblems (+0x1)
+3E	;OS Emblem
+3F	;BM Emblem
+40	;GE Emblem
+41	;YC Emblem
+42	;BH Emblem
+
+Cursors/On-Off Icons/Rule On-Off Icons (+0x2)
+
+43	;Up Arrow
+44	;Down Arrow
+45	;Left Arrow
+46	;Right Arrow
+
+4A
+4B
+4C
+4D
+4E
+
+50	;Select Mode Arrow
+
+55
+56
+57
+58
+59
+5A
+5B
+5C
+5D
+5E
+
+68
+
+Square Frames/Team Selectors/Rule Selector Diamonds (+0x5)
+BC
+BD
+BE
+BF
+C0
+C1
+C2
+C3
+C4
+C5
+C6
+C7
+C8
+C9
+CA
+CB
+CC
+CD
+CE
+CF
+D0
+D1
+D2
+D3
+D4
+D5
+D6
+D7
+
+Game Setup Menu (Versus Setup)
+Table Start
+0x02017C50		- Copy Map ID from Game Rules
+0x02017C51		- Copy CO Powers on from Game Rules
+0x02017C54..57 	- Funds per property
+0x02017C58 		- Number of Players
+0x02017C59..5C 	- Which players are AI/Human
+0x02017C5D..60 	- Player's Colours
+0x02017C61..65 	- Player Teams
+0x02017C6C..6F 	- CO Selected (Position in CO List, not CO ID)
+0x02017C74 		- State 1 (Whether Saving Allowed Flag 3FC0 +32 is set), disables input?
+0x02017C76 		- State 2: Select COs/AI (0), Select Alliance (1).
+0x02017C7A..7B 	- Timer (16 Bit, increments 1/frame, rules area) Controls pulsing of currently highlighted option
+0x02017C7D		- State Timer for Animations/Transitions
+0x02017C7E..7F 	- Text ID for Help Box:
+					0x9D1: Fog of War
+					0x9D2: Weather
+					0x9D3: Funds
+					0x9D4: Turn Limit
+					0x9D5: Capture Limit
+					0x9D6: Powers On/Off
+					0x9D7: Visual Mode (Off)
+					0x9D8: Visual Mode (A)
+					0x9D9: Visual Mode (B)
+					0x9DA: Visual Mode (C)
+					0x9DB: Team
+					0x9DC: CO
+					0x9DD: Player/AI
+0x02017C80		- State?
+0x02017C81		- State?
+0x02017C82 		- Horizontal Position (COs/Teams)
+0x02017C83 		- Horizontal Position (Rules)
+0x02017C84..87 	- CO Portrait Position Pointer (P1)
+0x02017C88..8B 	- CO Portrait Position Pointer (P1)
+0x02017C8C..8F 	- CO Portrait Position Pointer (P1)
+0x02017C90..93 	- CO Portrait Position Pointer (P1)
+0x02017CA4		- Fog Menu Controller
+0x02017CA8		- Weather Menu Controller
+0x02017CAC		- Funds Menu Controller
+0x02017CB0		- Turn Menu Controller
+0x02017CB4		- Capt Menu Controller
+0x02017CB8		- Powers Menu Controller
+0x02017CBC		- Visuals Menu Controller
+0x02017CD4		- Fog of War Menu Switch Mirror
+0x02017CD5		- Weather Menu Switch Mirror
+0x02017CD6		- Funds Menu Switch Mirror
+0x02017CD7		- Turn Limit Menu Switch Mirror
+0x02017CD8		- Capture Limit Menu Switch Mirror
+0x02017CD9		- Powers On/Off Menu Switch Mirror
+0x02017CDA		- Visual Mode Menu Switch Mirror
+
+03001998 - Funds menu position (Other options are nearby)
+030015B8 - X Position of P1 CO Select Box
+
+0x08580DE8 - Versus Menu Setup Script?
+
+0x08065990 - Versus Menu init subroutine
+0x08066B6C - Checks State (0x02017C74) for toggles?
+0x0806630C - Checks State (0x02017C76) for whether to toggle COs/AI or Alliances
+
+0x08064EF8 - Updates the CO Face Positions when A is pressed (From CO Select to Alliances)
+0x08064F54 - Updates the CO Face Positions when B is pressed (From Alliances to CO Select)
+0x08064FC8 - Updates the CO Face Positions when A is pressed (From Map Select screen to CO Select)
+0x08065060 - Updates the CO Face Positions when A is pressed (From CO Select to Rules Select)
+0x080650B4 - Updates the CO Face Positions when B is pressed (From CO Select to Map Select)
+0x08065198 - Updates the CO Face Positions when B is pressed (From Rules Select to CO Select)
+
+0x08065D20 - Toggles 1p/Cp (Also forces 1 Human Player)
+0x08065DAC - Toggles the CO (Both Up/Down)
+	0x08043E3C - Loads new CO Faces when Up/Down is pressed through the list
+
+0x08065C9C - Handles the Cursor Position
+0x080660BC - Handles Alliance Alterations
+0x08066F20 - Handles the Help Text
+0x08065EB4 - 
+0x08065EF4 - Up/Down Arrow OAM
+0x08064E5C - Positions 1p/Cp OAM, Army Emblem OAM, CO Portrait, Square around CO
+	0x08064DCC - 1p/Cp OAM: r0 = x pos, r1 = y pos
+	0x08064E1C - Army Emblem OAM: r0 = x pos, r1 = y pos
+	0x08043FD8 - CO Neutral Face Sprite as OAM: r0 = x pos, r1 = y pos, r2 = Tile ID offset
+	0x0801F34C - Square around CO (generic OAM Loader). r0 = Tile ID, r1 = x pos, r2 = y pos, r3 = 0
+
+08065F88 - Keypad handler subroutine for rules setup menu - CO select (versus mode)
+	08065C9C - Keypad handler subroutine (left/right)
+	08065EB4 - Keypad handler subroutine (Highlight 1p/Cp toggle)
+
+08066220 - Keypad handler subroutine for rules setup menu - Team select (versus mode)
+	08065C9C - Keypad handler subroutine (left/right)
+	080660BC - Keypad handler subroutine (up/down)
+	
+	Swap to Rules
+	080654E8
+	08064A44
+
+08066D74 - Keypad handler subroutine for rules setup menu - Game Rules (versus mode)
+	08066BF4 - Keypad handler subroutine (left/right)
+	08066C70 - Keypad handler subroutine (up/down)
+08064862 - Controls Rule: Turn (Displayed Value)
+
+080658AC - Rules Transfer on Game Start - Menu Toggle Systems
+0803C1C8 - Rules Transfer from Versus Menu to Game State
+08064B84 - Transfer from Rules Select to CO/Alliance Select?
+
+Setup for Swap States:
+0x08064A44 - Loads Rules Select Graphics/OAM setup
+
+0x03001650 - GUI Controller - Fog of War
+	0x03001698 - Fog of War Switch State
+0x030016B0 - GUI Controller - Weather Rules
+	0x030016F8 - Weather Switch State
+0x03001710 - GUI Controller - Funds
+	0x03001758 - Funds Switch State
+0x03001770 - GUI Controller -  Turn Limit
+	0x030017B8 - Turn Limit Switch State
+0x030017D0 - GUI Controller - Capture Limit
+	0x03001818 - Capture Limit Switch State
+0x03001830 - GUI Controller - Powers
+	0x03001878 - Powers Switch State
+0x03001890 - GUI Controller - Visual Mode
+	0x030018D8 - Visual Mode Switch State
+
+Format: 0x60 Long
++0x00:	Pointer - Appears to control Visibility/OAM elements, Pointer never followed, just checked
++0x04:	Pointer - Appears to control what happens on A/B Button press
++0x08:	Pointer - Appears to control Positioning, but seems to be dummied? Only called on setup?
++0x12:	Bitmask (Visibility?)
++0x28:	Current X Offset
++0x2A:	Current Y Offset
++0x38:	Final Y Offset?
++0x3A:	Vertical per-frame Y adjustment?
++0x3C:	Vertical Y adjustment?
++0x40:	Unknown Byte
++0x41:	Unknown Byte
++0x46:	Currently Highlighted (1 = True, 0 = False)
++0x47:	Selector Style (1 = Omnidirectional, 0 = Min/Max)
++0x48:	Menu Switch State
++0x49:	Mirror of 0x48
++0x4C:	Pointer - Controls Label Styles
+
+0x08580956	- Table of Initial Y Offsets (for appearance animations?)
+0x08580972	- Menu Scripting (7 Commands)
+0x085809A4	- Table for option range for each menu item (8 halfwords)
+0x085809B8	- Pointer Table of Label Styles (7 pointers)
+0x085809D0	- Table of Selector styles (8 bytes)
+
+Menu Script
+0x0858096C
+	@@CommB 0x2,	0x00,	0x080646BC+1
+	@@CommB	0x1,	0x00,	0x080646D4+1
+	@@CommB	0x1,	0x00,	0x080645AC+1
+	@@CommB	0x2,	0x00,	0x0806464C+1
+	@@CommB 0x2,	0x00,	0x08064660+1
+	@@CommB	0x1,	0x00,	0x08064660+1
+	@@CommB	0x7,	0x00,	0x00000000
+
+Icon IDs:
+	ON		- C8
+	Random	- C9
+	Snow	- CA
+	OFF		- CB
+	Clear	- CC
+	Rain	- CD
+	TYPE A	- CE
+	TYPE B	- CF
+	TYPE C	- D0
+
+OAM Pointers:
+Note: Pointers never actually followed through, just uses for Notzero bit checks
+	0858096C	- FoW, Weather, Funds, Turn
+	00000000	- Powers, Visual Mode
+
+Label Styles:
+080645AC - Calling Subroutine
+Code:
+	08064738	- ON/OFF
+	08064774	- Random/Clear/Snow/Rain
+	080647BC	- 1000 ± 500 increments
+	0806486C	- Off/1 ± 1 increments
+	08064918	- Off/1 ± 1 increments (checks property count for maximum value)
+	080649D0	- Type A/Type B/Type C/Off
+
+0x08580D6C - List of Text IDs for GUI elements
+
+0x080646E8
+	0x08580948 - ROM Table of Menu settings? Initial positions?
+
+
+030016F8 - Menu Option Weather Setting?
+03001938
+
+020288A0 - Slide reel order in RAM
+03003FFD - What the order for default COs are at Vs Screen
+080347BE - COs for P1-P4 default
+0803C264 - Sets up weather settings from Menu
+
+085809A4 - Base rule settings data for RAM.
+
+Versus Menu Screen Transitions:
+0x08043E34 - CO Face Loader (Vs Menu, and others?)
+Input: r0 = CO ID, r1 = Tile OAM Address
+
+
+OAM Tiles:
+0x06010740..0x060131FF - Unused by the Vs. Menu
+
+OAM Tiles loaded from CO Select to Rules Select Screen:
+"TEAMS"
+0x06014620..0x06014700 
+0x06014720..0x06014800 
+0x06014820..0x06014900
+0x06014920..0x06014A00
+
+0x06014A70..0x06014B50
+
+Rules Select to CO Select
+"RULES"
+0x06014620..0x06014700
+0x06014720..0x06014800 
+0x06014820..0x06014900
+0x06014920..0x06014A00
+0x06014A20..0x06014B00
+
+08064788 - Routine that handles the graphics of the weather tab?
+
+
+Scoring
+P1 Caps P2's HQ
+020232FC
+	+0x14	: Days taken for loss?
+	+0x13	: ??
+
+08026604 - Compares days to victory to speed score?
+
+080263E0 - Calculation for the Speed Score
+0802653A - Saves Speed Score
+08026548 - Saves Power Score
+08026556 - Saves Technique Score
+
+Top Level:
+080263A4 - Speed Scoring Subroutine
+08026424 - Power Scoring Subroutine
+080264BC	 - Tech Scoring Subroutine
+08026368 - Checks if Rank >999 Points
+08037D80 - Generates Ranking categories (War Room)
+0807A908 - Grabs which current player turn it is?
+
+
+08028AF0 - Technique Scoring subroutine?
+	08027222 - Compares how many units built to how many units alive?
+
+0803802A - Loads up various score bits and pieces for info screen?
+08017720 - Converts scoring bits into format to be saved
+
+Stuff For Scoring Menu:
+08079066 - saves scores to around 0200d610
+
+War Room Menu
+08087548 - Calculates which high score to show.
+	08037D80 - Calculates Rank
+
+030058E0 - Order for CO Select Screen
+03003FC2 - Current Map ID?
+B4 - Design 1?
+B5 - Design 2
+B6 - Design 3
+
+Design Map 1 Name: 0200B204 020004B4 02002504 
+0200B09C 0202266A 020280C2 
+Text Parser Items for Menu Widgets/Map Select Menus, etc: 03002B80
+
+
+
+0x08086BF8 - Text Display for Vs Maps
+Input: r0,r1,r2
+r0: 0 = Right Scroll, 1 = Left Scroll
+r1: 5?
+r2: 0?
+
+08087C44
+
+Main Menu
+08082264 - Calculates what mode is being selected???? (If Submenu)
+08081E70
+
+030033FC - Which game mode is loaded when the game starts
+
+00 - Campaign (Loaded)
+01 - Campaign (New)
+02 - Vs (Loaded)
+03 - Vs (New)
+04 - War Room (Loaded)
+05 - War Room (New)
+06 - Battle Maps
+07 - Design Room (CO Colour Edit)
+08 - Design Room (Map Edit)
+09 - Link Mode
+
+0C - Sound Room
+
+0849EACC - Base pointer for mode load code
+
+0803C70C - Routine for initial save variables
+0849EE60 - Base initial variable data?
+
+0200C440 - What Palettes each CO is using. (0-7, one byte per CO)
+03005964 - What Palette Andy is using?
+
+08017860 - Updates what palette has been loaded for a CO.
+08017870 - Updates what palette has been stored for a CO.
+
+03003FC8 - CO Abilities on or off
+Routines that read this value:
+
+Display for Unit Stats
+0804323A
+080431CA
+080430EA
+
+08043024
+
+080432B0
+
+0801F8D2
+080388C8
+
+0804315A
+08042E36
+08042E8E
+08042FCC
+0802C9A8
+08038E4C
+
+08043278
+08038782
+
+Game Start
+080269F0
+08042F38
+08042F80
+08042EE4
+
+
+08085708 - Routine for drawing unit stats in CO Info?
+08616B22 - Order of units on info screen
+
+08085798 - How many X units the statbar/move icons are offset? (initial, 0x24)
+08085748 - How many X units apart each row is (0x36 default)
+08085752 - Initial X offset (0x13 default)
+080857D0 - Initial X offset of Range Icon
+080857D4 - Initial Y offset of Range icon
+08085752 - X offset for unit map sprite
+08085764 - Initial Y Offset
+080857FA - X offset for +1/2/3 icons (range)
+08085832 - X offset for Move Icon
+0808585C - X offset for +1/2/3 icons (move)
+08085836 - Y Offset for move icons
+
+Dividing by 4
+Multiplying by 3 (2 instructions)
+Multiplying by 8
+
+08084D12
+
+020005D0/0200D6E2 - Which player number for page of CO Dossier
+
+08085410 - Routine that determines what icon to display for a given firepower value.
+9B - -10%
+9C - -20%
+9D - -30%
+9E - Normal Firepower
+9F - +10%
+A0 - +15%
+A1 - +20%
+A2 - +30%
+A3 - +40%
+A4 - +50%
+A5 - +60%
+A6 - +70%
+A7 - +75%
+
+
+0801F150 - Design Maps Menu OAM Setup
+r0 = 0
+r1 = 0x06010000
+r2 = 0x28D
+r3 = 0x1D
+
+0801F234 - Design Maps Menu OAM handler?
+r0 = Input
+
+0801F34C - Subroutine that draws OAM objects to display screen?
+Input:
+r0: Tile ID
+r1 X Position?
+r2 Y Position?
+r3 = 0?
+data at sp = 0x1
+
+0807DA98 - OAM Tile Drawing Routine for War Room CO Select
+
+Left Arrow
+Right Arrow
+Up Arrow
+Down Arrow
+Player Number
+R INFO
+A OK!
+B BACK
+Army Emblem
+Surplus
+1 (1P)
+p (1P)
+
+
+Tilemap Palettes:
+080BF8C4
+Plains, Mountains, Forests: Pal 0
+		Transparent: 0
+		Plains: 1-3
+		Forest: 3-5, A-F
+		Mountains: 6-9
+Pipes: Pal 1
+		Transparent: 0
+		Plains: 1-3
+		Pipe: B-F
+Plains, Sea, River, Reef: Pal 2
+		Transparent: 0
+		Plains: 1-3
+		Ocean/River: A-F
+Roads, Bridges: Pal 3
+		
+
+0801F0E0 (03001FE0)
+
+08049E224 - What Image to use for Move icon in R-Menu
+
+24 - Tread
+25 - Tyre
+26 - Infantry
+27 - Mech
+28 - Ship
+29 - Sub
+2A - Plane
+
+Info Panel
+0803A11C
+ldrb r0, r2, 0x10?
+
+0849E240
+
+
+081BA068
+Which unit information set to use.
+
+Information on Units
+0849E398 - Infantry
+0849E3B8 - Mech
+
+Format: Text IDs
+Order:
+General Unit Information
+Movement Information
+Vision Information
+Fuel Information
+Weapon 1 Information
+Weapon 1 Ammo Information
+Weapon 1 Range Information
+Weapon 1, Target 1 Information
+Weapon 1, Target 2 Information
+Weapon 1, Target 3 Information
+Weapon 1, Target 4 Information
+Weapon 2 Information
+Weapon 2, Target 1 Information
+Weapon 2, Target 2 Information
+Weapon 2, Target 3 Information
+Weapon 2, Target 4 Information
+
+0x08104264 - Power Stars Palette
+
+0x0803EED4 - Loads Terrain Type for Position?
+0x08047118 - Compares for specific terrains, whether to display the movetype costs
+
+Menu Subroutine for Design Maps
+0x0801A104
+r0 = Menu Items Pointer
+
+Code:
+0x08019AB0
+0x0849AAC0 - Menu Options controls? 0x20 in length.
+
+0 - CO
+1 - Intel
+2 - Power
+3 - Super
+4 - Options
+5 - Save
+6 - End Turn
+
+0x0848A42C - Appears to be 'In-game GUI' Menu
+0x0849ABC0 - Intel Submenu Options Controls
+0x0849AC60 - Options Submenu Options Controls
+0x08488494 - Design Maps Load Menu Options
+	0x080057F0 - Loads pointer into r3
+0x08487C84 - Design Maps Main Menu Options Controls
+0x08487C04 - Load/Save/Name Entry Menu Options Controls
+	0x08004C42 - Loads pointer into r0
+0x08488514 - Design Maps Save Menu Options
+	0x0800596E - Loads pointer into r3
+
+Format:
+0x00
+0x04 - Code Pointer (Loads a map for preview?)
+0x0C - Display items Code Pointer (Eg, Design Map Preview)
+0x14 - Item Selected Code pointer (Pressed A)
+0x18 - Code Pointer
+0x1C - Name ID
+
+0x085C77A0
+
+Design Maps:
+08004EDC
+08004F1C
+08004F5C - Design Maps Load Code: Difference is lsl 0x2/3/4
+
+Game Start - Unit Setup
+080196FC - Routine for starting a game and placing units?
+	Checks unit list for 0xFE/FF functions.
+
+War Room Screen Scoring:
+0x08087B20 - Works out the numbers?
+0x08037D80 - Score Margins?
+
+0x08026768 - Current Player Turn updater - runs once per end turn.
+
+End Turn Function
+0x080266DC - Checks whether current player (P1-4) is active and is alive. Returns 1 if true, 0 if false.
+
+AI COP Activation Rules
+Types:
+0x0805C1C5 - Start of Turn (03004770 = 0x1)
+0x0805C209 - If units are injured
+0x0805C1D9 - Start (COP), End (SCOP)
+0x0805C1C1 - Start and End of Turn (Always)
+0x0805C269 - If not snowing
+
+COP Activation Check (Percentage Chance)
+
+0805DBA0 - Loads type Pointer and runs check (SCOP)
+
+0x03004770 - Current AI Turn Phase (0x1B in Unit Data) Code Run
+0x080576738 - List of AI Unit Phases (1)
+	Phases
+	0x1 - Turn Start								0805CE21*Start Turn COP
+	0x2 - Capture with Infantry						0805CA61
+	0x3	- Dunno							(0x3)		0805CB1D
+	0x4	- Fire With Indirects	(0x4)				0805CBCD
+	0x5	- 085DB71									0805CE21
+	0x6	- Attack with Fighters and Bombers			0805CC89
+	0x7	- Attack with Directs	(0x5)				0805CD35
+	0x8	- Attack with Directs	(0x5)				0805CD35
+	0x9	- 085DB65									0805CDF1
+	0xA - Attack with Infantry	 (0x1)				0805CF0D
+	0xB	- Position with Transports (0x2)			0805CE51
+	0xC	- (0x2)										0805CFBD
+	0xD - Position with Inf. Transport (2)			0805D079
+	0xE	- Position with Indirects		(0x4)		0805D135
+	0xF	- Position with Landers	(0x6)				0805D1F1
+	0x10 - Position with Landers	(0x6)			0805D1F1*End Turn COP
+	0x11 - Appears to be Dummied Code				0805D2A1
+	0x12 - 085DB71									0805CD35
+	0x13 - Attack with Directs (0x5)				0805CD35
+	0x14 - Ends Turn	 (Str 5 at 0x3004780)		0805D339
+
+0x080576E8 - List of AI Turn Phases (2)
+	0x1 - 0x0805CE21
+	0x2 - 0x0805CA61
+	0x3 - 0x0805CB1D
+	0x4	- 0x0805CBCD
+	0x5	- 0x0805CE21
+	0x6	- 0x0805CC89
+	0x7	- 0x0805CD35
+	0x8	- 0x0805CD35
+	0x9	- 0x0805CDF1
+	0xA	- 0x0805CF0D
+	0xB	- 0x0805CE51
+	0xC	- 0x0805CFBD
+	0xD	- 0x0805D079
+	0xE	- 0x0805D135
+	0xF	- 0x0805D1F1
+	0x10	- 0x0805D1F1
+	0x11	- 0x0805D2A1
+	0x12	- 0x0805CE21*
+	0x13	- 0x0805CD35
+	0x14	- 0x0805D339
+
+
+1B Types:
+1 - Foot Soldiers
+2 - Infantry Transports
+3 - None?
+4 - Indirect
+5 - Direct
+6 - Ground Unit Transport
+7 - None?
+
+080618E2 - Stores 0 at the Start of the Turn
+08061B10 - Loads AI Phase, Increments and runs code from List at 085766E8
+
+0x0805FCBA - Transport (Hardcoded UID) check
+
+Event Scripting Engine
+0x08044474 - Code Executing Event Triggers
+0x080744A4 - Event Triggers 0 to 0x7 code pointers
+
+0x08019404 - Code Executing Script Functions
+0x0848A244 - Scripting Code Jump Table
+
+0x030033F4 - Holds whether particular flags have been set/events ran. Used by the 0x7 Trigger (at least)
+
+Event Trigger Control codes: 0x8 Bytes long.
+00 XX YY00 00000000 - Time Trigger. X = Player, Y = Day
+01 XX 0000 YYYYYYYY - Unit Selection Trigger. X = Unit, Y = Event Pointer
+02 XX 0000 YYYYYYYY - Is a Flag True. X = Flag ID
+03 XX 0000 YYYYYYYY - Is a Flag False. X = Flag ID
+04 XX 0000 YYYYYYYY - Menu Command Selection Trigger. X = Menu Command Special ID, Y = Event Pointer
+05 00 0000 YYYYYYYY - Runs ASM code, excutes next item if returns 1 (Is True). Y = ASM Pointer
+06 00 0000 YYYYYYYY - Runs ASM code, excutes next item if returns 0 (Is False). Y = ASM Pointer
+07 XX 0000 YYYYYY08 - Set Event Flag Trigger. X = Event flag to set, Y = Event Pointer
+08 0000000 00000000 - End Script
+
+Event Codes: 0x10 bytes long
+0x00	= Run ASM
+0x01	= Pause Event execution
+0x02
+0x03
+0x04	= End Event
+0x05
+0x06
+0x07
+0x08
+0x09
+0x0A
+0x0B
+0x0C
+0x0D
+0x0E
+0x0F	= Move Cursor
+0x10
+0x11	= Control Menu
+0x12	= Unlock Controls
+0x13	= Lock Controls
+0x14
+0x15
+0x16
+0x17	= Create Textbox
+0x18	= Delete/Clear Textbox
+0x19	= Play Text in Textbox
+0x1A	= Battlemaps Specific Textbox
+0x1B
+0x1C
+0x1D	= Call Event
+0x1E	= Call Event, Run ASM
+0x1F
+0x20	= Set Event Trigger
+0x21
+0x22	= Dummy Command
+0x23	= Dummy Command
+0x24
+0x25
+0x26
+0x27
+0x28	= Show Icon
+0x29	= Delete/Clear Icon
+0x2A
+0x2B
+0x2C	= Show Mini Info Panel
+0x2D	= Hide Mini Info Panel
+0x2E
+0x2F
+0x30	= Set Textbox Colour to Player
+0x31	= Set Textbox Colour to Value
+0x32	= Set Textbox Colour to currently active player
+0x33
+0x34
+0x35
+0x36
+0x37
+0x38	= Set Textbox CO Face
+0x39
+0x3A
+0x3B
+0x3C
+0x3D
+0x3E	= Call Event if Flag Set
+0x3F
+0x40	= Set Victory/Defeat State
+0x41	= Play Audio
+0x42	= Stop Audio
+0x43	= Check CO
+0x44	= Set Global Flag
+0x45	= Clear Global Flag
+0x46	= Move Screen Position
+
+
+
+Trigger Map Slots:
+Trigger 0: Pre-Day (Before "Day X" is displayed)
+Trigger 1: During Day (After "Day X" is displayed)
+Trigger 2: Selection of a Unit
+Trigger 3: Selection of a Unit Menu Function - (Fire, Capt, etc.) Input includes Unit + Menu command ID
+Trigger 4: Selection of a Game Menu Function - Input includes Menu Command ID
+Trigger 5: Map Win/Loss
+
+0x08074584 - Returns a map's pointer to triggers
+
+Assembly Code Scripts run from Triggers:
+0x0801978D - ??? (Run from Lab Mission, writes to "03003FC6")
+0x08019895 - Disables CO Powers
+0x0801987C - Sets 0x03003FC0 to 0x1
+0x080457D1 - Input of Invention 0x5 (Deathray). Runs 0x0803E388 to see if alive. Returns 1 if one is alive, 0 if all dead
+0x080457E9 - Input of Invention 0x1 (Laser). Rest as Deathray
+0x08045801 - Input of Invention 0x03 (Black Cannon). Rest as Deathray
+0x08045819 - Input of Invention 0x04 (Minicannon). Rest as Deathray
+0x08045831 - Runs subroutine 0x08045650 which checks the map to see if pipe seams are present. Returns 1 if alive, 0 if dead.
+
+0x080745A9 - Input of Player 1, runs subroutine 0x08044094 (Checks if COP Charge > 0)
+0x08074598 - Input of Player 1, Checks if P1's CO Power is ready (Input of 0x1), runs subroutine 0x084423C (Check COP Ready - Standard)
+0x08045831 - Checks if the 75th Tile on the map is owned by P1 (OS Lab Map Found)
+0x080458F9 - Checks if the 180th Tile on the Map is owned by P1 (GE Lab Map Found)
+0x08042559 - Checks all of P1's units to see how many units have fuel. If the number of units with fuel is 0 returns 1, otherwise returns 0.
+
+0x0803861d - Is Victory or Defeat? (All Campaign Maps)
+0x08045925 - Check whether P1's Units have Fuel? (Cleanup)
+0x080459e5 - Check if any units have been injured (Border Skirmish)
+0x0804599d - Check whether a unit is capturing a HQ - Is buggy in usage in mission (Border Skirmish)
+0x08045a79 - Check if any B-Copters have been injured (Orange Dawn)
+0x080745a9 - Check if P1 has any CO Power Charge? (Flak Attack, Lash Out, Andy's Time)
+0x08074599 - Check if P1 has a CO Power ready? (Flak Attack, Lash Out, Andy's Time)
+0x08045849 - Check if P1 owns the 75th Tile - Lab Map City(Flak Attack)
+0x08045b19 - Check if P1 has used a single CO Power (Andy's Time)
+0x08045801 - Are Black Cannons Alive? (Andy's Time, Drake's Dilemma, Hot Pursuit, Andy's Time HC)
+0x08045831 - Are Pipe Seams Alive? (Liberation, Factory Blues, Hunt's End, Great Sea Battle, Liberation HC)
+0x080458a1 - Check if P1 owns the 120th Tile - Lab Map City (Toy Box)
+0x08045b31 - Check if P2 owns the 8 cities at tile locations 158, 161, 182, 187, 257, 262, 283 and 286 (T Minus 15)
+0x08045bf1 - Check if P1's unit is at the 37th tile on the Unit Map (0x0201E450) (Nature Walk)
+0x080458cd - Check if P1 owns the 240th Tile - Lab Map City (Show Stopper)
+0x08045819 - Are Minicannons Alive? (Show Stopper, Foul Play, Sea Fortress)
+0x08045c19 - Check if P2 owns the 10 cities at tile locations 21, 22, 23, 24, 25, 75, 76, 77, 78 and 79(Duty And Honour)
+0x08045ce9 - Check if P2's unit is at the 30th tile on the Unit Map (A Mirror Darkly)
+0x08045d11 - Are any P2 Battleships Alive? (Sinking Feeling)
+0x080458f9 - Check if P1 owns the 180th Tile - Lab Map City (Sinking Feeling)
+0x080457e9 - Are Lasers alive? (To The Rescue)
+0x08045d4d - Move  unit to within the Orange Star Area (To The Rescue)
+0x080457d1 - Are Deathrays Alive? (Final Front)
+0x08045875 - Check if P1 owns the 36th Tile - Lab Map City (Andy's Time HC)
+
+
+08045D10 - Checks if P2 has at least one battleship. Returns 0 if true, 1 if false.
+
+
+0x0848A224 Base Command Pointer
+0x0200C528 Current Event Pointer
+
+Event Scripting Commands: 16 bytes long.
+0x0		0x08017A81	Run Assembly	
+0x1		0x08017A59		Pause
+0x2		0x08017B51
+0x3		0x08017B51
+0x4		0x08017B51		End Script
+0x5		0x08017B61
+0x6		0x08017B65
+0x7		0x08017B8D
+0x8		0x08017BB1
+0x9		0x08017BD5
+0xA		0x08017BFD
+0xB		0x08017C25
+0xC		0x08017AD5
+0xD		0x08017B09		Add Units from Unit Script (Unit Script format AW1 Non-substitutable)
+0xE		0x08017AD5
+0xF		0x08017C71		Move Screen
+0x10	0x08017DD5
+0x11	0x08017E0D	Controls Menu
+0x12	0x08017E8D	Unlocks the Keypad 0x08017E8C
+0x13	0x08017EBD	Locks the Keypad
+0x14	0x08018D91	Moves the current cursor position
+0x15	0x08018DC1
+0x16	0x08017B51
+0x17	0x08018465	Create Textbox
+0x18	0x0801853D	Clear Textbox
+0x19	0x080185D1	Display Text
+0x1A	0x08018695	Battlemaps Textbox
+0x1B	0x08018B41	*Loads and Stores some data from 0x0200C528 and stores at 0x0200C544
+0x1C	0x08018B69
+0x1D	0x08018BAD	Call Script (No ASM Launched)
+0x1E	0x08018BCD	Call Script (W3 is Launched, 0x0803866D in the game by default)
+0x1F	0x08018C0D
+0x20	0x08018C55	Sets Active Trigger States (Sets 0x03003FC4)
+0x21	0x08018C81
+0x22	0x08018CE9	Dummied Instruction (Precedes 0x12)
+0x23	0x08018D09	Dummied Instruction
+0x24	0x08018D29
+0x25	0x08018D49
+0x26	0x08018D6D
+0x27	0x08018D71
+0x28	0x08018E25	Display Icons
+0x29	0x08018E7D	Clear Icons
+0x2A	0x08018EB1	*Cmp:
+0x2B	0x08018759	*Used by CO Power Textboxes
+0x2C	0x080187C9	Show Terrain/Unit Info Minipanel
+0x2D	0x08018801	Hide Terrain/Unit Info Minipanel
+0x2E	0x08018839
+0x2F	0x08018891
+0x30	0x080188D1	Colour textbox by player #'s army
+0x31	0x0801914D	Colour textbox by army colour number
+0x32	0x0801894D	Colour textbox by current player turn's army colour
+0x33	0x08018985
+0x34	0x080189B9
+0x35	0x080189ED
+0x36	0x08018A65
+0x37	0x08018B19
+0x38	0x08017F55	Change the CO in the Textbox
+0x39	0x08018101	
+0x3A	0x08017F0D	Appears to Set/Clear a bunch of Event/Script Points
+0x3B	0x08018ADD
+0x3C	0x08018EE5
+0x3D	0x08018F05
+0x3E	0x08018F35	Check a conditional flag and update script with new script
+0x3F	0x08018F75
+0x40	0x08018FB5	Cause Victory/Defeat
+0x41	0x08018FE5	Play Music
+0x42	0x0801903D	Stop Music
+0x43	0x0801906D
+0x44	0x080190ED	Set Unlockable Bits/Global variable (0x02028030...)
+0x45	0x0801911D	Clear Unlockable Bits
+0x46	0x08017CB1	Scrolls the Screen to tile X/Y
+0x47	0x08017CF1
+0x48	0x08017D31
+0x49	0x08017D71
+0x4A	0x08017DA1
+0x4B	0x08017881
+
+Victory Assembly Script
+Sets/Unsets 0x030030F0
+08034F7D - Ran when victory dialogue starts
+08034F8D - Ran when victory dialogue finishes
+
+030030F0 - Seems to be set when a menu opens, unset when a menu closes. Used for menu depth?
+
+World Map Scripts:
+0x22, 0x12, 0x0 (0801987D), 0x3A, 0x4
+All intro scripts apparently include this
+
+0801A368 - Draws a display window background. Input of x start,y start, width, height r0-r3
+
+0801A444 - Draws window/boxes on various screens.
+r0 = x pos
+r1 = y pos
+r2 = x size
+r3 = y size
+
+0801f086
+0849f9F0 - Meteor Strike Co-ordinates for sprite?
+
+Victory is always P1's (Riverside Scoring) - Code Locations for WRH2 which checks what player turn it is to do scoring. Both the score AND the results screen.
+08078e66
+08079028
+0807903E
+08079052
+0807908E
+080791C8
+0807944E
+
+08038004
+0803801A
+080382EC
+0807A864
+0807AFA0
+
+Writes to War Room High Scores
+
+Meteor Summoning - Graphical Manipulation
+03002520 - X Distortion of Sprite
+0801e108 - Code that writes X Distortion
+
+030025A0..A5 - Sprite setup for Meteor
+0801BD00 - Code that Writes it?
+
+0806a7B4 - Subroutine for meteor size scaling?
+0806A7F2 - Controls meteor size scaling - size is put into r10? (x-dimension)
+	0801E108 - Subroutine that does this. Puts it into WRAM (03002526)
+
+08043BA4 - Seems to set up the tiles for the CO Dossier fullscreen
+
+
+War Room Select Menu Stuff
+08087B60 - Subroutine that sets up display of Enemy CO Faces (Input of Cursor Position (0-30))
+
+08087C14 - Sets up CO Faces on War Room R Menu/Enemy Display. (Maybe More)
+	08087C44 - Checks whether the time is 0 days?
+	08087C46 - Loads CO ID to display in the High Scores
+
+	0x08087AB0 - Draws High Scores 1-5
+		0x08087AB8 - Draws Day Number
+		0x08087AD6 - Draws Points Numbers
+		0x08087AEC - Draws CO Faces
+
+0x080879d8 - Sets up Panel when R is pressed on the screen
+
+08087BCA - Loads CO ID for Enemy (and then uses 08043FA8 to display it)
+
+0808643E - Checks if R Button is pressed
+
+080251D8 - Subroutine that sets up attack vs inventions/pipeseams/etc.
+
+Updates Unit Location to selected tile: 03003100
+
+Unit vs Unit: 08024F6A
+
+08024A64 - Saves Terrain Update
+
+Unit Vs Invention
+080251FC
+
+08084dA2 - Checks CO ID for what name to load (CO Dossier) (Left only)
+084DBC - CO ID for Face
+
+
+08042DCC
+
+085D3DD0 - Routine that checks unit allegiance tpye/HQ type
+
+085D4D21 - Hachi's Unit Allegiance Type/HQ Type (0 = OS, 4 = BH)
+
+08562128 - Unit Type In Battle Animations
+
+08086a9e
+
+08086a94
+
+08086af2
+
+080149C0 - Subroutine which changes what colour the map name is.
+
+08014A46 - Subroutine which draws the text for the War Room Maps screen?
+
+Subroutine that turns transparent background pixels to non-transparent for Battle Animations
+08043EE6 - 	27E0
+			023F
+08043EFE -		27E0
+			013F
+08043F16 -		20E0
+08043F2A - 	200E
+
+Map Designer
+0200B02E - Army for properties
+0200B02F - Which army the menu units belong to
+
+
+Handled by subroutine 0x080077EC
+0804887AC - Unit List for Design Maps Unit and Terrain menu
+
+Notes:
+Terrain and units use a different format:
+
+Units: Unit ID, 0x00
+Note: Delete = 0x0019
+
+Terrain Order 08488810
+Unit Order 08488856
+0849A2C8 - Name ID to use for each Terrain
+			4 bytes: Name Offset, Palette to use
+0849A354 - Name ID to use for each unit
+08106a64 - Base pointer for Terrain Name graphics
+08108264 - Base pointer for Unit name graphics?
+
+08002A8C - Subroutine that loads OAMs for unit names
+
+Subroutine: 080078E4
+0x0200b224 - 1 (load units) 0 (load terrain)
+
+0802700C - Allowed to build from this terrain subroutine? (AI?)
+
+085767F2
+
+0808BBF8 - Division subroutine, handles 0 condition without breaking (returns zero for a zero divisor)
+
+0x0824238C - Music Table
+0x08240FB0 - AW1 Song Samples
+0x082415C8 - AW2 Song Samples
+0x08240CD4 - SFX Samples
+0x08459DCC - Song Headers Start
+
+0x08001158 - Subroutine that updates the Tile Map with new tiles
+
+0x0800AFCC - Draws shadows for natural tiles
+0x08007DD0 - Shadows for properties?
+0x08001704 - Adjusts shadows - Takes tile ID input and compares if it's a tile on the list of 0x084597E to the tile on the list 0x84591C 
+
+0x0800164C - Compares if tiles adjacent are shoal or sea (for Reef)
+
+
+00 = Null Tile
+01 = plain
+02 = river
+03 = mountain
+04 = wood
+05 = road
+06 = city
+07 = sea tile
+08 = HQ
+09 = 
+0a = airport
+0b = port
+0c = bridge
+0d = shoal
+0e = base
+0f = pipe
+10 = pipe seam
+11 = silo
+12 = launched silo?
+13 = reef
+26 = OS city
+28 = OS HQ
+2e = OS base
+2a = OS airport
+2b = OS port
+46 = BM city
+48 = BM HQ
+4e = BM base
+4a = BM airport
+4b = BM port
+66 = GE city
+68 = GE HQ
+6e = GE base
+6a = GE airport
+6b = GE port
+86 = YC city
+88 = YC HQ
+8e = YC base
+8a = YC airport
+8b = YC port
+
+03003340 - Some RAM address related to the capture command. Pointers to other  offset
+Update: Appears to be a temporary location map?
+
+0804236C - Bl to compare whether a tile is captureable
+
+Subroutine - 0x0802A6B0 - Daily Tasks after the 'Day X' splash is displayed for resupplying units?
+	Seems to run once per day
+
+0x08022990 - Range Square Drawing Subroutine
+	Input of X/Y and 1/0?
+	0x08013C00 - Range Square Drawing Function - This one blanks BG0
+	0x080227F4 - Range Square Drawing Function - This one creates the tilemap in WRam
+
+
+0x080369BC - Main Graphics Drawing Subroutine - Controls the OAM for the entire main game.
+	First Branch - Draw this frame?
+	Second Branch - ???
+	Thrid Branch
+		Draw GUI
+		???
+		Draw Properties	- 0x 08023EEC, 0x0803F990, 0x0801F06C, 0x0801F084
+			Appears to be a list of properties at 0x03003150 (0x4 long per property)
+			Property ID (Owner + Property Type)
+			X Co-ordinate
+			Y Co-ordinate
+			???
+
+0x0803B404 - Dummied Subroutine
+0x0803F990 - 
+	0x0803F9FA - Handles Black Hole Invention Graphics? (0x0803FC46)
+		0x0803FC94 - Jump Table for graphics for them?
+
+0x0802DC2C	- Routine Starts here, is jump table
+0x0802D6C6 - Overall Drawing Routine for the GUI Bls from here (In Game Main Screen)
+
+
+0x0802A7C4 and 0x0802776C
+Draws the GUI for the Main Game (Info Box Only
+
+0x080228D8 - Does the Range/Movement palette options
+
+0x0201E462 - Holds what unit is located on what tile
+0x0201E96A - Mirror of Address 1?
+	Player 1: 0x01 - 0x40
+	Player 2: 0x41 - 0x80
+	Player 3: 0x81 - 0xC0
+	Player 4: 0xC1 - 0x100
+
+0x08035b08 - Animation speed - checks whether Anim A is true (0x1)
+0x08041CD4 - Checks whether BA is true
+	0x08041CD4 - 0x3 (Player Only)
+	0x08041CF4 - 0x0 (Battle Animations On)
+
+0x08042720 - Capture Animation (0x1)
+
+08616F0E	- Table of Text IDs for CO Dossier. (¬_¬)
+
+0x08044178 - Turns off CO Powers and Temp Offence/Defence bonuses after CO Power
+
+0x08026D68 - Income calculator subroutine
+	0x08026C6C - Calculates the worth of each property
+	
+
+0x08025B58 - Fund Adder subroutine, input r0 = Player, r1 = Funds
+
+Bonus for CO Power Offence/Defence: 0x08044544/0x08044552
+
+Unravelling Meteor Strike:
+Scripting Subroutine:
+0x0801C8F4 - Top Level scripting subroutine
+
+0x0801D294 - Runs the script items
+	0x0848B5DC - Jump table
+
+0x0801C95C
+	Input of r0 = Script Location
+	Input of r1 = Script RAM storage location
+
+0x0801537C
+	Also a Scripting Subroutine
+
+0x08015A9C
+	Scripting Subroutine:
+	0x080159E0
+		Scripting subroutine of 0x08015A9C - Runs script items?
+
+CO Powers have their own scripting, 2 words long (Function, Modifier, Pointer)
+
+Scripting Engine (Used generally for graphics etc.)
+Script Command Base Pointer - 0x0848B5DC
+	0x2B Commands
+
+Format: Command (HW), Argument (HW), Pointer (W)
+
+
+0x08039634 - Subroutine Gives pointer for the CO Power Text Script
+0x08080E74 - Subroutine, Picks whether to run COP or SCOP splash Script.
+
+0x0802A7B0 - Sets script for turn start (post next day animation)
+
+0x0849FB44 - Start of Turn Script (Refuel/Etc)
+0x0849A1D8 - Script for Start of Turn Mission Scripts (Post Day)
+
+0x0849D77C - Run CO Power Text (+more)
+0x0849D7AC - Script to pick which COP Splash Script to play?
+0x08616794 - Run CO Power Splash Screen
+0x08616844 - Run SCO Power Splash Screen
+0x08581500 - Run Intro Scripts: " Nintendo Presents: Advance Wars"
+0x08580F24
+0x08580FCC
+
+0x08580E94 - Run Intro Scripts:"2"
+0x08580FF4
+0x08580EAC - Fadeout
+
+0x08580FE4 - Run Intro Scripts: "Wars World News"
+
+0x08581014 - Run Intro Scripts: "Blue Moon"
+0x08581068
+0x085810B8
+0x08581014
+
+0x08581014  - Run Intro Scripts: "Yellow Comet"
+0x08581068
+0x085810B8
+0x08581014
+
+0x08580EAC - Run Intro Scripts: "2"
+0x08580FE4
+
+0x08581014 - Run Intro Scripts: "Green Earth"
+0x08581068
+0x085810B8
+0x08581014
+
+0x08581420 - Run Intro Scripts: "Black Hole Coming Again!"
+0x08581108 - "AW1 Images"
+0x08581138
+0x08580FF4
+0x08580FE4
+
+0x08581480 - "Andy"
+0x08581108
+0x08581138
+0x08581210
+
+0x08581480 - "Sami"
+0x08581108
+0x08581138
+0x08581210
+
+0x08581480 - "Max"
+0x08581108
+0x08581138
+0x08581210
+
+0x085814E8 - "Black Hole Army"
+0x08581264 - "Flak"
+0x08581108
+0x08581264 - "Lash"
+0x08581108
+0x08581264 - "Adder"
+0x08581108
+0x08581264 - "Hawke"
+
+0x08581CF8 - "Fade to Title Screen"
+0x08581C68
+0x08581E28
+
+0x0849E750 - Title Screen (Advance Wars 2Swoosh)
+0x08581E10
+
+0x0849E750 - Main Menu
+0x0848929C
+0x0849E818
+0x08616990
+0x0848929C
+0x08616a58
+0x084892C4
+0x0848927C
+0x08616A08
+0x086140D4
+
+0x08616A68 - New Game Commands
+
+0x0848929C - Campaign (New)
+0x0848927C
+0x0848929C
+0x0849EB34
+0x0848929C
+0x08616FD4
+0x0849E750
+0x0848929C
+0x086170D4
+0x0861707C
+0x084892C4
+0x0848929C
+0x0848927C
+
+0x0848A140 - Prologue Script
+
+0x08617094
+0x0848929C
+0x0848927C
+0x08617094 x (50ish frames)
+0x0849E750
+0x08617094
+
+0x08615AAC - Start Campaign "Orange Star"?
+0x08614314
+0x086144FC
+0x0848A140
+0x0849E728 - Orange Star Dialogue
+0x0849E750
+
+0x08614314
+0x08614344
+0x086143B8
+0x08614460
+
+0x08614390 - World Map - Display Targeting Reticule for Map Item
+0x08614370
+
+0x08615BBC - World Map: quit
+
+0x0848929C - Versus Menu
+0x0848927C
+0x0848929C
+0x0849ECE0
+0x0848929C
+0x08616C54
+0x0848929C
+0x08615CA0
+0x086140D4
+0x08616CF4
+0x084892C4
+0x0848927C
+
+0x08616D1C - Appears to Draw Map
+
+0x0849AA68 - CO Dossier Screen
+0x0848929C
+0x0848927C
+0x08616B74
+0x0848929C
+0x08615CA0
+0x08616BE4
+0x084892C4
+0x0848927C
+
+0x0849BE38 - Select a unit
+
+
+
+0x0807FA88 Text for COPs? (Crashes when invalid power state given)
+
+
+0x08039650:
+	bl	0x08080E74	;Checks for COP (1) or SCOP (2) and runs script
+
+Blizzard - No Scripts
+
+
+
+Unknown Scripts: (Vs Menu?)
+0x08580CB4	-	Alternative Format? (ASM Pointer W, HW, Type HW?)
+	0x08065710+1
+	0x08065960+1
+	
+
+0x08580E0C
+	0x5		0x08066FE0+1
+	0x0	0x1	0x08067020+1	;Runs on Game Start from Rule Setup Menu?
+	0x0	0x2	0x0
+
+0x08580CB0
+	
+
+0x08580E94 (0x080673cc)
+	0x2		0x080671CC+1
+	0x3		0x080672A8+1
+	0x0		
+
+0x08580EAC (0x080673EC)
+	0x2		0x0806724C+1
+	0x3		0x080672A8+1
+	0x0
+
+0x08580EC4 (0x0806740C)
+	0x2		0x08067300+1
+	0x3		0x0806724C+1
+	0x0
+0x08580E64 (0x08067500)
+	0xA	0xCC	00C8,00B4
+
+0x08580E60 (0x08069834) "0x0200FC50"
+0x08580E60 (0x0806A028)
+
+
+
+
+
+ASM Function Ran (Missile Silo Scripts):
+	0x080448E4 - Determines what unit to hit
+		0x0805C720 - Targeting Calculator?
+			0x0805C290 - RN's which team to hit
+				0x0805C2DC/085C514/0x0805C720
+	0x08044924 - Checks whether two pointers are equal and stores at 0x030000XX
+	0x08044968 - Checks Unit Number (0-FF),Loads that unit co-ord, runs:
+		0x0806AA80
+
+0x0201FD8A - Temporary Targeting map. Used for properties, Meteor Strike, misc things.
+0817B150 - Meteor Sprite (6A798
+
+
+0x080448E4 - Setup for Meteor Targeting
+0x0805C290 - Picks the Meteor Targeting mode
+
+0x0805C2DC - Meteor Check A - Straight Cost Comparison
+	Checks MS User's team
+		0x0801F838 - Blanks MS Target map (0x0201FD8A)
+		0x0801F9C0 - Subroutine that blanks out strike map (-1 = no target, 0 = Target)
+	Checks nearby units - 0x0805C394
+	Checks for Submarine (is dived?) - 0x0805C40E
+	Checks if Unit HP > 10
+		0x08026F28 Team Compare subroutine, input of Player in r0 and r1
+	If Ally, calculates cost and subtracts from total
+	If enemy, Calculates Cost and adds to total
+	Loops through all the options
+	Checks the Calc'd total and compares 0x0805C4CE
+		If greater, stores the Unit Number for the target in the stack
+
+0x0805C2BE - Meteor Check B - Total HP Comparison
+
+0x0805C720 - Meteor Check C - 2x Multiplier for Indirects, Straight Cost Comparison
+	Mostly as A.
+		0x08020DBC - Check Fog of War
+	0x0805C88C - Checks the Unit's minimum range 
+
+Note: All three modes ignore units with HP at 1.
+
+Script COP Animation
+0x0807FA34:
+	bl	0x08043Ba4	;Loads CO Sprite into OAM Tiles
+	bl	0x08013618	;Hides GUI Elements/Redraws screen?
+	bl	0x0801C8F4	;Script Loader (Background)	Script: 0x086167EC
+	bl	0x0801C8F4	;Script Loader (CO Sprite)		Script: 0x086167BC
+	bl	0x08080EF8
+
+Compressed .Map format
+Header (4 Bytes): 
+10 (Specifies Lz77 apparently) 
+zz yy xx (Specifies the length of the data (Number of tiles in the map *2 + 2) 
+
+Okay, so that's the header. After that we put the map. 
+
+
+0x08042730 - Hard check whether a tile is a HQ or Laboratory - Checks whether to force-display the Capture Animation
+0x0804281A - Hard check whether a tile is a HQ or Laboratory - Checks whether to perform Team Defeat when captured
+
+0x08028944	- Checks Autoloss Bit
+0x08028BFA	- 
+0x08028C88 - Checks whether the lose bit is set
+0x03007DB0 - Used as a temporary storage to check to kill armies.
+0x02028ACE - Branch to determine which player to Kill
+
+0x08028CF4 	- 'General Player Aliveness Check. Checks if any Victory/Defeat Conditions Met
+0x08028BAC	- Checks if there is only one player left, if so go to Victory Screen 
+0x08028B70 - Checks if there is a Capture Limit and whether it has been surpassed
+
+0x0802AA78 - Draws the Entire Mouseover info box (Unit Stats/Terrain Stats)
+
+0x08028894	- Subroutine that Kills a player.  - Note that this is only run if there are greater than 2 Players left
+	Input 	r0 = Player to Kill
+		 r1 = Kill States
+			0x01 Routed Player, 
+			0x02 HQ Captured Player
+			0x08 Player Yielded
+			0x10 ???
+
+	0x08028CD8	- Player HQ Captured Subroutine
+0x08019940 - Win Game Subroutine, r0 = Winning Player
+
+0x08044144 - Sets CO Power Status from +1F into +1E
+
+Terrain Setup Stuff
+0x080175A4 - From the main map at 0x0201E450, creates the tile type map at 0x0201F882
+
+Display Window Stuff
+Calculates Damage Numbers for each digit
+0x08037200 (0802B4B4)
+	r0 = X Position
+	r1 = Y Position
+	r2 = Damage
+	r3 = Base Tile ID
+Checks whether damage is less than 999
+0x08037170
+
+0x0802ABA0 - Display for Number of Terrain Stars in Mini-Infobox
+0x0802AE40 - Display for HP in Mini-Infobox
+
+Sappy Engine Settings
+  03000000-03007FFF   WRAM - In-chip Work RAM   (32 KBytes)
+
+Priority List 0x08242314
+Pointer1		Pointer2, 0x50n	Num Tracks		
+0x03005AE0		0x03000658		0x8
+0x03005B20		0x030008D8		0x2
+0x03005C30		0x03000978		0x2
+0x03005BA0		0x03000A18		0x1
+0x030059E0		0x03000A68		0x1
+0x03005A60		0x03000AB8		0x1
+0x03005AA0		0x03000B08		0x1
+0x03005BF0		0x03000B58		0x2
+0x03005A20		0x03000BF8		0x8
+0x03005B60		0x03000E78		0x3
+
+Initial Stack Pointer	0x03007E00	
+
+0X0804B580 - Seems to load sprites/tiles for the battle animations. Inputs:
+r0 = 0x0 or 0x1 Left/Right Side (For Battle Background Graphic)
+r1 = Value from r5/r6?
+r2 = Tiles 2 VRAM Pointer
+r3 = Tiles 1 VRAM Pointer
+sp = Background Palette RAM Pointer
+sp+0x4 = OBJ Tiles VRAM Pointer
+sp+0x8 = OAM Palette RAM Pointer
+
+0x08566C04
+
+Table: 0x085D64A8
+Loader 0x08057D58
+
+
+0x08562128 = Table of what Army each Battle Sprite has
+Loaded by 0x0805681C
+
+
+From 0x080866C4
+
+0x08087168
+Draws the OAM Objects for the VS Menu.
+0x080871C8
+	Up Map Case Arrow
+0x080871EE
+	Down Map Case Arrow
+0x080871FE
+	Left Map Case Arrow
+0x0808720C
+	Right Map Case Arrow
+
+0x080872D0
+Draws the Slider Guide OAM for the Vs Menu
+0x08087468
+	Slider Guide
+0x080874F6
+	Position Indicator
+
+0x030024E4
+	WIN1 Horizontal Size
+
+Terrain Info List:
+18B8 1108 4CBC 1108 FCBB 1108 2C09 4409 
+Red: Pointer for picture used in terrain info screen. 
+Blue:Index for the name of the terrain used in terrain info screen. 
+Orange: Index for terrain description. 
+Green: Pointer to terrain picture pallette. 
+Olive: Method of graphic reading from the rom. 
+
+Line 2: 
+0100 0000 
+Red: Terrain defense
+
+Terrain Order, no. (offset): 
+01 (5D5850) Plain 
+02 (5D5864) River 
+03 (5D5878) Mountain 
+04 (5D588C) Forest 
+05 (5D58A0) Road 
+06 (5D58B4) City 
+07 (5D58C8) Sea 
+08 (5D58DC) HQ 
+09 (5D58F0) ??? (Claims it's Sea) 
+0A (5D5904) Airport 
+0B (5D5918) Port 
+0C (5D592C) Bridge 
+0D (5D5940) Shoal 
+0E (5D5954) Base 
+0F (5D5968) Pipeline 
+10 (5D597C) Pipeline Seam 
+11 (5D5990) Silo Unused 
+12 (5D59A4) Silo Used 
+13 (5D59B8) Reef 
+14 (5D59CC) Lab 
+15 (5D59E0) Minicannon S 
+16 (5D59F4) Minnicannon N 
+17 (5D5908) Minicannon W 
+18 (5D591C) Minnicannon E 
+19 (5D5A30) Laser 
+1A (5D5A44) Cannon S 
+1B (5D5A58) Cannon N 
+1C (5D5A6C) Volcano 
+1D (5D5A80) Factory 
+1E (5D5A94) Deathray 
+1F (5D5AA8) Missile / Fortress
+
+0x085767F2: Build Bits for tiles for the AI property checks
+
+0x08045612: Pipeline Seam HP?
+
+0x0803F990: OAM Property Sprites to Use
+
+x0_000
+:
+also I found the table that contains the unit flash animation graphics whoo
+[
+3:21pm
+]
+Xenesis
+:
+Oh?
+[
+3:21pm
+]
+x0_000
+:
+they're apparently all 8 frames?
+[
+3:21pm
+]
+x0_000
+:
+4a06f0
+
+
+10:48
+x0_000
+ok
+
+
+[
+06:19am
+]
+x0_000
+:
+xen: I have to documentation to make new COP animations :toot:
+[
+07:18am
+
+Xenesis
+:
+x0_000: That sounds neat
+[
+10:59am
+]
+x0_000
+:
+[
+11:00am
+]
+x0_000
+:
+if you want the notes, the important bits are
+[
+11:00am
+]
+x0_000
+:
+084a06f0 - table
+[
+11:00am
+]
+x0_000
+:
+two words per entry, first word is a graphic, second is a palette
+[
+11:00am
+]
+x0_000
+:
+of course they're not associated (I think 5-6 are nonexistent
+[
+11:00am
+]
+x0_000
+:
+)
+
+AI Table Stuff:
+0x030046B4: Pointer to current Black Hole Factory Deployment List
+0x030046B8: 0x1 = Airport Present, 0x2 = Port Present
+
+AI Data sheet
+02029C54 - AI type and rules in RAM (start)
+02029D84 - (end)
+Loaded into RAM at the start of the AI's turn
+
+02029D84 - Mirrored to here. Seems to be where some values are used from. Gets updated
+
+080591E4
+
+"Max Counter Damage" - Maximum HP loss for an acceptable attack
+"Min Atk Damage" - Still unknown, not actually correct?
+-Checks +0xA in individual unit's data (AI control byte)
+-If 0xA is greater than this value, nothing special happens?
+-If 0xA is less than:
+	-Check movement range
+	-Check if value is = 100 and unit is indirect
+
+Still not sure what it actually does
+
+;Build Rates: Percentage of the Army. E.g. Build rate of 5 = 5% of Army
+
+AI Table Format:
+; Original offset: 0x85771c4
+; Minimum Infantry/Mechs
+	.db 5
+; Ratio of Infantry to Neutral Properties (Bugged in AW2, always = True)
+	.db 20
+; Foot Soldiers Build Rate
+	.db 20
+; Mech replaces Infantry Rate (scales by day, see: 0x080608F6/0x08060D78)
+; Caps at 80%
+	.db 5
+; T-Copter/Foot Soldier Build Rate
+	.db 0
+; APC/Foot Soldier Build Rate (With Airport)
+	.db 0
+; APC/Foot Soldier Build Rate (Without Airport)
+	.db 5
+; Lander/Ground Unit Build Rate
+	.db 0
+; Scaling Multiplier for Build Calculations (leave at 100/0x64)
+	.db 100
+; Unknown +9
+	.db 5
+; Unknown +A
+	.db 0
+; Unknown +B
+	.db 3
+; Unknown +C
+	.db 3
+; Unknown +D
+	.db 1
+; Unknown +E
+	.db 100
+; Unknown +F
+	.db 127
+
+; Infantry
+; Max Counter Damage
+	.db 90
+; Min Attack Damage
+	.db 10
+; Minimum Fuel
+	.db 10
+; Minimum HP
+	.db 20
+; Aggressiveness
+	.db 255
+; Unknown
+	.db 255,255,255,255,255,255
+; Build Rate
+	.db 0
+
+; Mech
+; Note: Includes co-opted space for more information
+; Max Counter Damage
+	.db 90
+; Min Attack Damage
+	.db 10
+; Minimum Fuel
+	.db 10
+; Minimum HP
+	.db 20
+; Agressiveness
+	.db 255
+; Indirect Unit Army Composition
+	.db 20
+; Minimum Units to Build a Lander
+	.db 0
+; Funding Ratio: How much of Current Funds to spend
+; on building Unit-specific counters
+	.db 50
+; Unknown +0x24,+0x25,+0x26
+	.db 0,0,0
+; Build Rate
+	.db 0
+
+;Standard Entries From Here
+; Medium Tank
+; Max Counter Damage
+	.db 90
+; Min Attack Damage
+	.db 30
+; Minimum Fuel
+	.db 30
+; Minimum HP
+	.db 20
+; Agressiveness
+	.db 20,40,50,60,80,80,100
+; Build Rate
+	.db 18
+
+; Unit ID 4
+; Max Counter Damage
+	.db 0
+; Min Attack Damage
+	.db 0
+; Minimum Fuel
+	.db 0
+; Minimum HP
+	.db 0
+; Agressiveness
+	.db 255,255,255,255,255,255,255
+; Build Rate
+	.db 0
+
+; Tank
+; Max Counter Damage
+	.db 90
+; Min Attack Damage
+	.db 10
+; Minimum Fuel
+	.db 20
+; Minimum HP
+	.db 20
+; Agressiveness
+	.db 20,40,60,80,100,100,100
+; Build Rate
+	.db 20
+
+; Recon
+; Max Counter Damage
+	.db 90
+; Min Attack Damage
+	.db 10
+; Minimum Fuel
+	.db 20
+; Minimum HP
+	.db 20
+; Agressiveness
+	.db 50,75,100,100,100,100,100
+; Build Rate
+	.db 0
+
+; APC
+; Max Counter Damage
+	.db 50
+; Min Attack Damage
+	.db 50
+; Minimum Fuel
+	.db 20
+; Minimum HP
+	.db 20
+; Agressiveness
+	.db 255,255,255,255,255,255,255
+; Build Rate
+	.db 1
+
+; Neotank
+; Max Counter Damage
+	.db 100
+; Min Attack Damage
+	.db 20
+; Minimum Fuel
+	.db 30
+; Minimum HP
+	.db 20
+; Agressiveness
+	.db 10,20,40,60,80,80,100
+; Build Rate
+	.db 6
+
+; Unit ID 9
+; Max Counter Damage
+	.db 0
+; Min Attack Damage
+	.db 0
+; Minimum Fuel
+	.db 0
+; Minimum HP
+	.db 0
+; Agressiveness
+	.db 255,255,255,255,255,255,255
+; Build Rate
+	.db 0
+
+; Artillery
+; Max Counter Damage
+	.db 90
+; Min Attack Damage
+	.db 100
+; Minimum Fuel
+	.db 20
+; Minimum HP
+	.db 20
+; Agressiveness
+	.db 20,40,60,80,100,100,100
+; Build Rate
+	.db 15
+
+; Rockets
+; Max Counter Damage
+	.db 90
+; Min Attack Damage
+	.db 100
+; Minimum Fuel
+	.db 50
+; Minimum HP
+	.db 20
+; Agressiveness
+	.db 0,0,90,90,100,100,100
+; Build Rate
+	.db 30
+
+; Unit ID C
+; Max Counter Damage
+	.db 0
+; Min Attack Damage
+	.db 0
+; Minimum Fuel
+	.db 0
+; Minimum HP
+	.db 0
+; Agressiveness
+	.db 255,255,255,255,255,255,255
+; Build Rate
+	.db 0
+
+; Unit ID D
+; Max Counter Damage
+	.db 0
+; Min Attack Damage
+	.db 0
+; Minimum Fuel
+	.db 0
+; Minimum HP
+	.db 0
+; Agressiveness
+	.db 255,255,255,255,255,255,255
+; Build Rate
+	.db 0
+
+; Anti-Air
+; Max Counter Damage
+	.db 90
+; Min Attack Damage
+	.db 10
+; Minimum Fuel
+	.db 20
+; Minimum HP
+	.db 20
+; Agressiveness
+	.db 10,20,60,90,100,100,100
+; Build Rate
+	.db 10
+
+; Missiles
+; Max Counter Damage
+	.db 0
+; Min Attack Damage
+	.db 0
+; Minimum Fuel
+	.db 0
+; Minimum HP
+	.db 0
+; Agressiveness
+	.db 0,0,0,0,0,0,0
+; Build Rate
+	.db 0
+
+; Fighter
+; Max Counter Damage
+	.db 0
+; Min Attack Damage
+	.db 0
+; Minimum Fuel
+	.db 0
+; Minimum HP
+	.db 0
+; Agressiveness
+	.db 0,0,0,0,0,0,0
+; Build Rate
+	.db 0
+
+; Bomber
+; Max Counter Damage
+	.db 0
+; Min Attack Damage
+	.db 0
+; Minimum Fuel
+	.db 0
+; Minimum HP
+	.db 0
+; Agressiveness
+	.db 0,0,0,0,0,0,0
+; Build Rate
+	.db 0
+
+; Unit ID 0x12
+; Max Counter Damage
+	.db 0
+; Min Attack Damage
+	.db 0
+; Minimum Fuel
+	.db 0
+; Minimum HP
+	.db 0
+; Agressiveness
+	.db 255,255,255,255,255,255,255
+; Build Rate
+	.db 0
+
+; B-Copter
+; Max Counter Damage
+	.db 0
+; Min Attack Damage
+	.db 0
+; Minimum Fuel
+	.db 0
+; Minimum HP
+	.db 0
+; Agressiveness
+	.db 0,0,0,0,0,0,0
+; Build Rate
+	.db 0
+
+; T-Copter
+; Max Counter Damage
+	.db 0
+; Min Attack Damage
+	.db 0
+; Minimum Fuel
+	.db 0
+; Minimum HP
+	.db 0
+; Agressiveness
+	.db 255,255,255,255,255,255,255
+; Build Rate
+	.db 0
+
+; Battleship
+; Max Counter Damage
+	.db 0
+; Min Attack Damage
+	.db 0
+; Minimum Fuel
+	.db 0
+; Minimum HP
+	.db 0
+; Agressiveness
+	.db 0,0,0,0,0,0,0
+; Build Rate
+	.db 0
+
+; Cruiser
+; Max Counter Damage
+	.db 0
+; Min Attack Damage
+	.db 0
+; Minimum Fuel
+	.db 0
+; Minimum HP
+	.db 0
+; Agressiveness
+	.db 0,0,0,0,0,0,0
+; Build Rate
+	.db 0
+
+; Lander
+; Max Counter Damage
+	.db 0
+; Min Attack Damage
+	.db 0
+; Minimum Fuel
+	.db 0
+; Minimum HP
+	.db 0
+; Agressiveness
+	.db 255,255,255,255,255,255,255
+; Build Rate
+	.db 0
+
+; Submarine
+; Max Counter Damage
+	.db 0
+; Min Attack Damage
+	.db 0
+; Minimum Fuel
+	.db 0
+; Minimum HP
+	.db 0
+; Agressiveness
+	.db 0,0,0,0,0,0,0
+; Build Rate
+	.db 0
+
+;World Map Tile Recolour Format
+;Grid Co-ordinates (Top Left)
+	.db	04,15
+
+;Recolour Area (X,Y dimensions)
+	.db	05,04
+
+;Pointer to Recoloured Palette
+	.dw	0x08614904
+
+0x080761A0 - Checks whether a country boundary has been crossed by the cursor
+	0x08075FBC - Check whether cursor has crossed a country boundary
+		Uses the palette ID of the tile to calculate what country it belongs to
+		0x081CC520 - Palette ID for the country Text boxes
+		0x081CC578 - Text String IDs for Countries
+		0x081CC550 - What Country Emblem Tiles to use
+0x08076AE4 - Loads World Map on Campaign Boot?
+0x081D0BAC - Map Image (Lz77 Compressed)
+0x0200FC50 - World Map Tile ID Buffer
+16-bit, BG3 Tile Format
+Recoloured Palette: ID Number for palette (e.g. 0x0 to 0x1F)
+Occupy Background Palette slots of same offset
+0x6: Orange Star Cleared
+0x7: Blue Moon Cleared
+0x8: Yellow Comet Cleared
+0x9: Green Earth Cleared
+0xA: Black Hole Uncleared
+0xB: Orange Star Uncleared
+0xC: Blue Moon Uncleared
+0xD: Yellow Comet Uncleared
+0xE: Green Earth Uncleared
+
+0x08026BAC - Game Initialisation Subroutine for new map (Clears RAM)
+
+0x08036DFE - Game Wait Loop
+0x080369BC - Game Main Loop?
+0x08036E18 - Game Soft-Reset Loop (A+B+Start+Sel)
+
+0x0802349C	-	Launches all the tile copy/drawing subroutines?
+0x0803F5E4 - Handles Property Tiles into OBJ Tiles (HQs, 
+0x0803F8E0 - Handles Factory Smoke animation tiles
+0x080219AC - Generates the Property List (0x03004110)
+	0x0801F838 - Fills a length with the byte in r0
+
+0x080470F8 - Sets up whether the R-Info Dossier should have one or two pages
+
+0x08084B18 - Loads Firepower Bar graphics, numbers, etc. for CO Dossier
+
+0x0808124A - What CO ID is used for the Select*Mode menu
+
+0x03001404 - Controls Lock - if 1, game ignores keypad input. If 0, normal input.
+
+0803BD14 - No input, returns number of 0xFF (CO Selects) for the current map
+0803656E - Checks for 0xFF (CO Select) and replaces it with the menu selected CO instead
+
+0802543C - checks fuel levels
+    0849A1C0 - script?
+ 
+08034650 - main game handling branch?
+    reference table: 080345fc
+    0x00 - softlock?
+    
+    0x01 - 08034938 checks if a turn limit was reached
+        moves to state 2 afterwards
+        
+    0x02 - 080349e4 makes the screen black for VS mode with humans
+        moves to state 3 afterwards
+    
+    0x03 - 08034af8 changes active player, plays the "press A to continue screen" for FOW
+        moves to state 4 afterwards
+    
+    0x04 - 08034db0 play "DAY X" banner
+    
+    0x05 - 08034dcc update music (and some other stuff related to the map)
+        -note: the game has handling to update music if CO Powers are in effect
+        even though they normally expire at the start of a day.
+    
+    0x06 - 08034df8 update weather
+    
+    0x07 - 08034ea4 ???
+        -jumps to either 8 or 9
+    
+    0x08 - 08034c90 ???
+    
+    0x09 - 08034ca4 refuels/restock
+    
+    0x0a - 08034cb8 ??? (makes CO graphic flicker)
+        -loops through something
+    
+    0x0b - 08034cd4 ??? (makes CO graphic flicker)
+        -checks maps with black hole inventions, so it might be that?
+        
+    0x0c - 08034d18 figure out who to give control of the turn
+        -chooses between 0xd, 0xe or 0x13
+    
+    0x0d - 0802dc2c give control to the player
+    0x0e - 0806171c give control to the AI
+    0x0f - softlock?
+    0x10 - 08034ed0 execute a game action
+    0x11 - softlock?
+    0x12 - 08034ef0
+    0x13 - 08034350
+    0x14 - 08034f1c
+    
+    08034938 - ?
+    
+08034DA4 - handles state updating
+
+Large text (e.g. BATTLE*MAPS):
+0x085802B4 - Not standard text ID, just pointer to ASCII.
+
+0x08048AE0 - Calls "BATTLE*MAPS"
+
+0x0803C816 - Calls the Battlemaps Unlock list for the main menu?
+0x0803C7A6 - Calls the Battlemaps Unlock list for the Battlemaps Submenu?
+
+Unlock List Calls:
+0x0803C700
+0x0803C7A2 - Initial Battlemaps Load
+0x0803C816 - Main Menu
+0x0803C86A - Battlemaps Screen
+0x0803C894
+0x080487DC - Battlemaps List Items
+0x08048AE0 - Battlemaps Title Text Load
+0x080494D8 - Battlemaps List Item Selection
+0x08049566 - Battlemaps Item purchase
+0x080495CE - Battlemaps Item Price deduction?
+0x08049668 - Battlemaps Screen Price Countdown
+
+0x08025B80 - Fuel Subtraction applicator function (runs after a unit's move is completed). Input of r0 = Unit Pointer, r1 = Fuel to Subtract
+	0x03004074 - Calculated fuel value to subtract
+
+0x0802042C - Pathing in the diagonal
+
+0x020211AA - Fuel Use map for pathing
+
+0x0801F838 - Sets the fuel pathing map to the value in r0
+
+0x0801F6F0 - Calculates pathing values
+
+0x0801F538 - Calculates origin for fuel pathing diagonals
+0x0801F600 - Jump table that calculates which fuel values for a tile on the map
+
+0x0300059E	-X/Y co-ordinate of the cursor
+0x030005A0	-X co-ordinate of the path movements
+0x030005AC 	-Y-co-ordinate of the path movements
+
+Factory Unit Production Lists for Campaign 0x60 in Length
+0x08576ec3	- Liberation (Normal)
+0x08576f23	- Factory Blues (Normal)
+0x08576f83	- The Hunt's End (Normal)
+0x08576fe3	- Great Sea Battle (Normal)
+0x08577043	- Liberation (Hard)
+0x085770a3	- Factory Blues (Hard)
+0x08577103	- The Hunt's End (Hard)
+0x08577163	- Great Sea Battle (Hard)
+
+Unit AI:
+00 = Used in Battle Cube, Grid Assualt & Big Daddy PD 4P Map.  Used for P1 CP unit data as well.
+01 = Used in Long Road WR Map.
+02 = Used in Border Skirmish NC Map.
+03 = Used in Flak Attack CP Map
+04 = Used in Pre-Deployed Maps. Seems to be the default value.
+05 = Used in Hot Pursuit
+06 = Used in Missle Plains WR Map.
+
+Campaign Map Headers: 0x08615194
+
+Offset - Size - Description
++0x0	2	Map ID to use for the Campaign mission
++0x2	1	Flag Type that appears on the world map
++0x3	1	Star rating for the map
++0x4	1	Star rating for the map Hard Campaign
++0x5	1	Unknown
++0x6	2	Flag Position X co-ordinate
++0x8	2	Flag Position Y co-ordinate
++0xC	4	Pointer to the worldmap recolour list for this mission
++0x10	2	Text ID for the mission's description
++0x12	2	Unknown
++0x14	4	Pointer to Pre-mission event
++0x18	4	Pointer to Post-mission event (victory or defeat)
++0x1C	4	Unknown
++0x20	4	Pointer to CO Selection for CO select option
++0x24	4	Pointer to Factory unit production list
++0x28	4	Pointer to Factory unit production list Hard Campaign
++0x2C	4	Unknown
+
+Movement Cost:
+0x03003400 - Holds buffer of current movement type for selected unit
+0x0801F888 - Related to Highlighted movement tiles (AI Pathfinding too?)
+	0x03004480 - Seems to hold the player of the unit selected
+0x08038EC2 - Related to plotting movement paths (calculations for arrows/auto-paths)
+0x0803893A
