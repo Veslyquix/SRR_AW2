@@ -248,6 +248,27 @@ pop {r3}
 bx r3 
 .ltorg
 
- 
+@ 21674 
+.global ReplaceMapHook 
+.type ReplaceMapHook, %function 
+ReplaceMapHook: 
+push {lr} 
+mov r0, #0 
+strh r0, [r4, #0x4] 
+strh r0, [r4, #0x6] 
+strh r0, [r4, #0x8] 
+strh r0, [r4, #0xA] 
+strh r0, [r4, #0xC] 
+strh r0, [r4, #0xE] 
+strh r0, [r4, #0x10] 
+
+mov r0, r2 @ map in ram 
+mov r1, r4 
+bl GenerateMap 
+
+mov r0, #0 
+pop {r1} 
+bx r1 
+.ltorg 
  
  
