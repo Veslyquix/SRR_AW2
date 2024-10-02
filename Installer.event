@@ -21,7 +21,7 @@ ALIGN 4
 NumberOfMapPieces:
 WORD NumberOfMapPiecesDef
 RandomizeMaps:
-WORD 0 
+WORD 1 
 
 PUSH 
 

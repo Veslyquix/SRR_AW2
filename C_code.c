@@ -717,7 +717,13 @@ extern struct Map_Struct *MapPiecesTable[0xFF];
 void GenerateMap(struct Map_Struct *dst, struct ChHeader *head);
 void CopyMapPiece(u16 dst[], u8 xx, u8 yy, u8 map_size_x, u8 map_size_y);
 extern int RandomizeMaps;
-int ShouldMapBeRandomized(void) { return RandomizeMaps; }
+int ShouldMapBeRandomized(void) {
+  LoadDesignRoom1Name();
+  if (DesignRoom1Name[0] == 0x20) {
+    return RandomizeMaps; // if name starts with a space, randomize maps
+  }
+  return RandomizeMaps; // change to return false; later
+}
 void GenerateMap(struct Map_Struct *dst, struct ChHeader *head) {
   if (!ShouldMapBeRandomized()) {
     return;
