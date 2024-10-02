@@ -724,6 +724,69 @@ int ShouldMapBeRandomized(void) {
   }
   return RandomizeMaps; // change to return false; later
 }
+struct Vec2u {
+  int x;
+  int y;
+};
+
+extern int Rand(int val);
+int NextRN(int val) {
+  if (!val) {
+    val = 0x29ae6736;
+  }
+  val = Rand(val);
+  return val;
+}
+
+// Randomized wiggly line function without diagonal moves and ensuring no gaps
+void drawWigglyLine(struct Map_Struct *dst, int xA, int yA, int xB, int yB,
+                    int value) {
+  int x = xA, y = yA;
+  int map_size_x = dst->x;
+  dst->data[(y * map_size_x) + x] = value; // Mark the start point
+  u32 rand = 0;
+  int attempts = 0;
+  int move = 0;
+  int backtrack = 0;
+
+  while (x != xB || y != yB) {
+    attempts++;
+    if (attempts > 100000) {
+      break;
+    }
+    move = HashByte_Ch(move, 2, x, attempts);
+    // rand = NextRN(rand + attempts);
+    // int move = ModNum(
+    // rand, 2); // Randomly choose between 0 (horizontal) or 1 (vertical)
+    backtrack = HashByte_Ch(backtrack, 3, y, attempts);
+    // int backtrack = ModNum(rand, 4); // 25% chance of backtracking
+
+    // Horizontal move
+    if (move == 0) {
+      if (backtrack == 0 && x != xA) {
+        // Move horizontally away (backtrack)
+        x += (xA > x) ? 1 : -1;
+      } else if (x != xB) {
+        // Move horizontally toward the goal
+        x += (xB > x) ? 1 : -1;
+      }
+    }
+    // Vertical move
+    else if (move == 1) {
+      if (backtrack == 0 && y != yA) {
+        // Move vertically away (backtrack)
+        y += (yA > y) ? 1 : -1;
+      } else if (y != yB) {
+        // Move vertically toward the goal
+        y += (yB > y) ? 1 : -1;
+      }
+    }
+    // asm("mov r11, r11");
+    //  Mark the new position in the array
+    dst->data[(y * map_size_x) + x] = value;
+  }
+}
+
 void GenerateMap(struct Map_Struct *dst, struct ChHeader *head) {
   if (!ShouldMapBeRandomized()) {
     return;
@@ -739,8 +802,21 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head) {
       dst->data[(iy * map_size_x) + ix] = 1; // make everything the default tile
     }
   }
-  // int FrequencyOfObjects_Link;
-  //  creates a randomized map
+  // int pathLength = 15;
+  // int amountOfPaths = map_size_y * map_size_x;
+  struct Vec2u start;
+  start.x = 3;
+  start.y = 3;
+  struct Vec2u end;
+  end.x = 26;
+  end.y = 26;
+  drawWigglyLine(dst, start.x, start.y, end.x, end.y, 0x104 >> 2);
+  // drawWigglyLine(int array[ROWS][COLS], int xA, int yA, int xB, int yB, int
+  // value)
+
+  // return;
+  //  int FrequencyOfObjects_Link;
+  //   creates a randomized map
   for (int iy = 0; iy < map_size_y; iy++) {
     for (int ix = 0; ix < map_size_x; ix++) {
       // dst->data[(iy * map_size_x) + ix] = 1;

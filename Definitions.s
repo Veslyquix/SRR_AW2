@@ -12,7 +12,7 @@
 	.set    \name, \value
 .endm
 
-
+SET_FUNC Rand, 0x80129E1 
 SET_FUNC __aeabi_idiv, 0x808AAAD
 SET_FUNC Div, 0x808AAAD
 SET_FUNC Mod, 0x808AAB1
