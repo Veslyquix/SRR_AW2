@@ -1,63 +1,5 @@
 
 #include "include/aw2.h"
-//
-// function address 2163c InitMap ?
-// bl 247A4 sets 3003f68
-// bl 8014e44 -> 8014dcc decides on address to store into 3003f68 based on
-// 3000050 map size at 21666 load 3003f68 // [3003f68]!! pointer to current
-// buffer ? store to 201e450
-// [201e450..201e451]?
-// 215fc
-
-// around 216fe it sets the terrain for the map
-// [201f8c4]!! // terrain
-// [201eeb0]!! // tiles
-
-// map size pointer: 8499590
-// gMapTile[y][x]: 849959c ?
-
-// r9 as 3003f68 poin 2003010
-//
-
-// [2003012]!! // tiles for map
-
-//
-// size + 0x417a offset: copy of map size / header stuff?
-
-// 20225f0
-
-struct Map_Struct {
-  u8 x;
-  u8 y;
-  u16 data[];
-};
-struct ChHeader {
-  u16 x;
-  u16 y;
-};
-void GenerateMap(struct Map_Struct *dst, struct ChHeader *head);
-void GenerateMap(struct Map_Struct *dst, struct ChHeader *head) {
-  dst->x = 30;
-  dst->y = 30;
-  head->x = dst->x;
-  head->y = dst->y;
-  u8 map_size_x = dst->x;
-  u8 map_size_y = dst->y;
-  // int FrequencyOfObjects_Link;
-  //  creates a randomized map
-  for (int iy = 0; iy < map_size_y; iy++) {
-    for (int ix = 0; ix < map_size_x; ix++) {
-      dst->data[(iy * map_size_x) + ix] = 1;
-      // if (FrequencyOfObjects_Link > NextRN_N(100)) {
-
-      // CopyMapPiece(
-      // dst->data, ix, iy, map_size_x, map_size_y,
-      // dst->data[map_size_y * map_size_x +
-      // map_size_x]); // bottom right tile as default tile
-      // }
-    }
-  }
-}
 
 struct RandomizerSettings {
   u16 base : 1;
@@ -732,3 +674,115 @@ int HashRange(int number, int noise, int offset, int otherNum, int coPow) {
   int result = table[HashByte_ChIfConfig(number, size, noise, offset + 31)];
   return result;
 };
+
+//
+// function address 2163c InitMap ?
+// bl 247A4 sets 3003f68
+// bl 8014e44 -> 8014dcc decides on address to store into 3003f68 based on
+// 3000050 map size at 21666 load 3003f68 // [3003f68]!! pointer to current
+// buffer ? store to 201e450
+// [201e450..201e451]?
+// 215fc
+
+// around 216fe it sets the terrain for the map
+// [201f8c4]!! // terrain
+// [201eeb0]!! // tiles
+
+// map size pointer: 8499590
+// gMapTile[y][x]: 849959c ?
+
+// r9 as 3003f68 poin 2003010
+//
+
+// [2003012]!! // tiles for map
+
+//
+// size + 0x417a offset: copy of map size / header stuff?
+
+// 20225f0
+extern int NumberOfMapPieces;
+extern int FrequencyOfObjects_Link;
+struct Map_Struct {
+  u8 x;
+  u8 y;
+  u16 data[];
+};
+struct ChHeader {
+  u16 x;
+  u16 y;
+};
+
+extern struct Map_Struct *MapPiecesTable[0xFF];
+
+void GenerateMap(struct Map_Struct *dst, struct ChHeader *head);
+void CopyMapPiece(u16 dst[], u8 xx, u8 yy, u8 map_size_x, u8 map_size_y);
+extern int RandomizeMaps;
+int ShouldMapBeRandomized(void) { return RandomizeMaps; }
+void GenerateMap(struct Map_Struct *dst, struct ChHeader *head) {
+  if (!ShouldMapBeRandomized()) {
+    return;
+  }
+  dst->x = 30;
+  dst->y = 30;
+  head->x = dst->x;
+  head->y = dst->y;
+  u8 map_size_x = dst->x;
+  u8 map_size_y = dst->y;
+  for (int iy = 0; iy < map_size_y; iy++) {
+    for (int ix = 0; ix < map_size_x; ix++) {
+      dst->data[(iy * map_size_x) + ix] = 1; // make everything the default tile
+    }
+  }
+  // int FrequencyOfObjects_Link;
+  //  creates a randomized map
+  for (int iy = 0; iy < map_size_y; iy++) {
+    for (int ix = 0; ix < map_size_x; ix++) {
+      // dst->data[(iy * map_size_x) + ix] = 1;
+      //  if (FrequencyOfObjects_Link > NextRN_N(100)) {
+
+      CopyMapPiece(dst->data, ix, iy, map_size_x, map_size_y);
+    }
+  }
+}
+
+void CopyMapPiece(u16 dst[], u8 placement_x, u8 placement_y, u8 map_size_x,
+                  u8 map_size_y) {
+  struct Map_Struct *T = MapPiecesTable[HashByte_Ch(
+      placement_x, NumberOfMapPieces, placement_y, (int)dst)];
+  // struct Map_Struct *T = MapPiecesTable[0];
+  int piece_size_x = (T->x);
+  int piece_size_y = (T->y);
+  int defaultTile = 1;
+  int exit = false; // default to false
+
+  int border_y = placement_y;
+  int border_x = placement_x;
+  if ((placement_y) && ((piece_size_y > 1) ||
+                        (piece_size_x > 1))) { // border of 1 tile on left/above
+    border_y = placement_y - 1;
+  }
+  if ((placement_x) && ((piece_size_y > 1) || (piece_size_x > 1))) {
+    border_x = placement_x - 1;
+  }
+  for (int y = 0; y <= piece_size_y + 1; y++) {
+    for (int x = 0; x <= piece_size_x + 1;
+         x++) { // if any tile is not the default, then immediately exit
+      if (dst[(border_y + y) * map_size_x + border_x + x] != defaultTile) {
+        exit = true;
+      }
+    }
+  }
+  int loc;
+  // this is to stop it from drawing outside the map / from one side to another
+  if (!(((piece_size_x + placement_x) > map_size_x) ||
+        ((piece_size_y + placement_y) > map_size_y) || (exit))) {
+    for (int y = 0; y < piece_size_y; y++) {
+      for (int x = 0; x < piece_size_x; x++) {
+        loc = ((placement_y + y) * map_size_x) + placement_x + x;
+        // dst[((placement_y+y) * map_size_x) + placement_x+x] =
+        // T->data[y*piece_size_x+x];
+        dst[loc] = T->data[y * piece_size_x + x] >> 2;
+      }
+    }
+  }
+}

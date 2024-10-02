@@ -13,6 +13,15 @@ ORG FreeSpace
 	#define callHackr1(offset) 			"BYTE $01 $49 $8E $46 $00 $F8 $01 $E0; POIN (offset|0x1)"
 #endif 
 
+#include "MapPieces/GeneratedInstaller.event" 
+ALIGN 4 
+FrequencyOfObjects_Link:
+WORD 100 // percent  
+ALIGN 4 
+NumberOfMapPieces:
+WORD NumberOfMapPiecesDef
+RandomizeMaps:
+WORD 0 
 
 PUSH 
 
