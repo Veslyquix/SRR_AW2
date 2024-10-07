@@ -26,6 +26,8 @@ WORD 1
 PUSH 
 
 ORG $21674 
+callHackNew(MapSizeHook) 
+ORG $216a0 
 callHackNew(ReplaceMapHook) 
 
 // 0x802CD28 start Co screen 

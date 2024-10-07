@@ -700,6 +700,12 @@ int HashRange(int number, int noise, int offset, int otherNum, int coPow) {
 // size + 0x417a offset: copy of map size / header stuff?
 
 // 20225f0
+
+// [201ee72]!!
+// f4e0 - make road at coords?
+// to 201E450 ram / 201EE72
+extern void MakeRoad(int x, int y);
+extern u16 mapTileData[];
 extern int NumberOfMapPieces;
 extern int FrequencyOfObjects_Link;
 struct Map_Struct {
@@ -714,7 +720,7 @@ struct ChHeader {
 
 extern struct Map_Struct *MapPiecesTable[0xFF];
 
-void GenerateMap(struct Map_Struct *dst, struct ChHeader *head);
+void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID);
 void CopyMapPiece(u16 dst[], u8 xx, u8 yy, u8 map_size_x, u8 map_size_y);
 extern int RandomizeMaps;
 int ShouldMapBeRandomized(void) {
@@ -739,30 +745,43 @@ int NextRN(int val) {
 }
 
 // Randomized wiggly line function without diagonal moves and ensuring no gaps
-void drawWigglyLine(struct Map_Struct *dst, int xA, int yA, int xB, int yB,
-                    int value) {
+void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX) {
+
   int x = xA, y = yA;
-  int map_size_x = dst->x;
-  dst->data[(y * map_size_x) + x] = value; // Mark the start point
-  u32 rand = 0;
+  // mapTileData[(y * sizeX) + x] = 0x104; // Mark the start point [201ee78]!!
+  MakeRoad(x, y); // Mark the start point
   int attempts = 0;
-  int move = 0;
+  int dir = 0;
   int backtrack = 0;
+  int backtrackChance = 0;
+  int freq = sizeX >> 2; // every n attempts, change direction
+  if (freq < 3) {
+    freq = 3;
+  }
+  if (freq > 6) {
+    freq = 6;
+  }
 
   while (x != xB || y != yB) {
     attempts++;
     if (attempts > 100000) {
       break;
     }
-    move = HashByte_Ch(move, 2, x, attempts);
-    // rand = NextRN(rand + attempts);
-    // int move = ModNum(
-    // rand, 2); // Randomly choose between 0 (horizontal) or 1 (vertical)
-    backtrack = HashByte_Ch(backtrack, 3, y, attempts);
+    if (x < 0 || y < 0) {
+      asm("mov r11, r11");
+    }
+    backtrackChance = Mod(attempts, 8) < 4 ? 0 : 2;
+    backtrackChance += attempts < 200 ? 2 : 5;
+    if (!Mod(attempts, freq)) {
+      dir = HashByte_Ch(
+          dir, 2, x,
+          attempts); // Randomly choose between 0 (horizontal) or 1 (vertical)
+      backtrack = HashByte_Ch(backtrack, backtrackChance, y, attempts);
+    }
     // int backtrack = ModNum(rand, 4); // 25% chance of backtracking
 
-    // Horizontal move
-    if (move == 0) {
+    // Horizontal dir
+    if (dir == 0) {
       if (backtrack == 0 && x != xA) {
         // Move horizontally away (backtrack)
         x += (xA > x) ? 1 : -1;
@@ -772,7 +791,7 @@ void drawWigglyLine(struct Map_Struct *dst, int xA, int yA, int xB, int yB,
       }
     }
     // Vertical move
-    else if (move == 1) {
+    else if (dir == 1) {
       if (backtrack == 0 && y != yA) {
         // Move vertically away (backtrack)
         y += (yA > y) ? 1 : -1;
@@ -781,16 +800,35 @@ void drawWigglyLine(struct Map_Struct *dst, int xA, int yA, int xB, int yB,
         y += (yB > y) ? 1 : -1;
       }
     }
-    // asm("mov r11, r11");
     //  Mark the new position in the array
-    dst->data[(y * map_size_x) + x] = value;
+    // mapTileData[(y * sizeX) + x] =
+    // 0x104; // because MakeRoad doesn't write to mapTileData when only
+    // displaying the preview, I guess?
+    MakeRoad(x, y);
+    //  dst->data[(y * map_size_x) + x] = mapTileData[(y * map_size_x) + x];
+    //   dst->data[(y * map_size_x) + x] = value;
   }
 }
 
-void GenerateMap(struct Map_Struct *dst, struct ChHeader *head) {
+void SetMapSize(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   if (!ShouldMapBeRandomized()) {
     return;
-  }
+  } // [20225cc]!!
+  dst->x = 30;
+  dst->y = 30;
+  head->x = dst->x;
+  head->y = dst->y;
+}
+#define HQ_OS 0x714 >> 2
+#define HQ_BM 0x7A8 >> 2
+#define HQ_GE 0x7BC >> 2
+#define HQ_YS 0x7D0 >> 2
+void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
+  if (!ShouldMapBeRandomized()) {
+    return;
+  } // [20225cc]!!
+  int cID = gCh;
+  gCh = chID;
   dst->x = 30;
   dst->y = 30;
   head->x = dst->x;
@@ -799,22 +837,47 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head) {
   u8 map_size_y = dst->y;
   for (int iy = 0; iy < map_size_y; iy++) {
     for (int ix = 0; ix < map_size_x; ix++) {
-      dst->data[(iy * map_size_x) + ix] = 1; // make everything the default tile
+      mapTileData[(iy * map_size_x) + ix] = 1; // make everything the default
+      // tile
     }
   }
   // int pathLength = 15;
   // int amountOfPaths = map_size_y * map_size_x;
-  struct Vec2u start;
-  start.x = 3;
-  start.y = 3;
-  struct Vec2u end;
-  end.x = 26;
-  end.y = 26;
-  drawWigglyLine(dst, start.x, start.y, end.x, end.y, 0x104 >> 2);
+  struct Vec2u start, end, q;
+  int qMaxX = map_size_x >> 1;
+  int qMaxY = map_size_y >> 1;
+  int qMin;
+  int offset = 0;
+  q.x = HashByte_Ch(gCh, 2, gCh, offset + 5); // quadrant 0, 1 as left or right
+  q.y = HashByte_Ch(gCh, 2, gCh, offset + 8); // up or down
+  qMin = (map_size_x >> 1) * q.x;
+  start.x = HashByte_Ch(gCh, qMaxX, gCh, offset + 0) + qMin;
+
+  qMin = (map_size_y >> 1) * q.y;
+  start.y = HashByte_Ch(start.x, qMaxY, gCh, offset + 1) + qMin;
+
+  q.x = q.x ^ q.x;
+  q.y = q.y ^ q.y; // opposite corner
+  qMin = (map_size_x >> 1) * q.x;
+  end.x = HashByte_Ch(start.y, qMaxX, gCh, offset + 2) + qMin;
+
+  qMin = (map_size_x >> 1) * q.y;
+  end.y = HashByte_Ch(end.x, qMaxY, gCh, offset + 3) + qMin;
+
+  drawWigglyRoad(start.x, start.y, end.x, end.y, dst->x);
+  mapTileData[(start.y * map_size_x) + start.x] = HQ_OS;
+  mapTileData[(end.y * map_size_x) + end.x] = HQ_BM;
+  u16 *data = dst->data;
+  for (int iy = 0; iy < map_size_y; iy++) { // copy into initial buffer
+    for (int ix = 0; ix < map_size_x; ix++) {
+      data[(iy * map_size_x) + ix] = mapTileData[(iy * map_size_x) + ix];
+    }
+  }
   // drawWigglyLine(int array[ROWS][COLS], int xA, int yA, int xB, int yB, int
   // value)
 
-  // return;
+  gCh = cID; // remove later
+  return;
   //  int FrequencyOfObjects_Link;
   //   creates a randomized map
   for (int iy = 0; iy < map_size_y; iy++) {
@@ -822,9 +885,10 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head) {
       // dst->data[(iy * map_size_x) + ix] = 1;
       //  if (FrequencyOfObjects_Link > NextRN_N(100)) {
 
-      CopyMapPiece(dst->data, ix, iy, map_size_x, map_size_y);
+      CopyMapPiece(data, ix, iy, map_size_x, map_size_y);
     }
   }
+  gCh = cID;
 }
 
 void CopyMapPiece(u16 dst[], u8 placement_x, u8 placement_y, u8 map_size_x,

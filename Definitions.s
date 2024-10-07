@@ -12,6 +12,8 @@
 	.set    \name, \value
 .endm
 
+SET_DATA mapTileData, 0x201EE72
+SET_FUNC MakeRoad, 0x800f4e1 @ 0x80080f8 
 SET_FUNC Rand, 0x80129E1 
 SET_FUNC __aeabi_idiv, 0x808AAAD
 SET_FUNC Div, 0x808AAAD

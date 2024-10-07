@@ -249,9 +249,9 @@ bx r3
 .ltorg
 
 @ 21674 
-.global ReplaceMapHook 
-.type ReplaceMapHook, %function 
-ReplaceMapHook: 
+.global MapSizeHook 
+.type MapSizeHook, %function 
+MapSizeHook: 
 push {lr} 
 mov r0, #0 
 strh r0, [r4, #0x4] 
@@ -263,12 +263,34 @@ strh r0, [r4, #0xE]
 strh r0, [r4, #0x10] 
 
 mov r0, r2 @ map in ram 
-mov r1, r4 
-bl GenerateMap 
-
+mov r1, r4 @ ch header 
+mov r2, r5 @ chID 
+bl SetMapSize 
 mov r0, #0 
 pop {r1} 
 bx r1 
+.ltorg 
+
+
+.global ReplaceMapHook 
+.type ReplaceMapHook, %function 
+ReplaceMapHook: 
+push {lr} 
+strb r0, [r1] 
+ldr r3, =0x80215FC 
+mov lr, r3 
+.short 0xf800 @ blh 
+ldr r0, =0x3003F68 
+ldr r0, [r0] 
+mov r1, r4 
+mov r2, r5 @ chID 
+bl GenerateMap 
+
+mov r1, #0 
+ldr r0, [r6] 
+ldrh r0, [r0, #2] 
+pop {r3} 
+bx r3 
 .ltorg 
  
  
