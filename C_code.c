@@ -1,6 +1,6 @@
 
 #include "include/aw2.h"
-
+#define ABS(aValue) ((aValue) >= 0 ? (aValue) : -(aValue))
 struct RandomizerSettings {
   u16 base : 1;
   u16 growth : 2; // vanilla, randomized, 0%, 100%
@@ -721,7 +721,7 @@ struct ChHeader {
 extern struct Map_Struct *MapPiecesTable[0xFF];
 
 void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID);
-void CopyMapPiece(u16 dst[], u8 xx, u8 yy, u8 map_size_x, u8 map_size_y);
+void CopyMapPiece(u16 dst[], u8 xx, u8 yy, u8 map_size_x, u8 map_size_y, int);
 extern int RandomizeMaps;
 int ShouldMapBeRandomized(void) {
   LoadDesignRoom1Name();
@@ -743,6 +743,22 @@ int NextRN(int val) {
   val = Rand(val);
   return val;
 }
+
+#define HQ_OS 0x714 >> 2
+#define BASE_OS 0x718 >> 2
+#define HQ_BM 0x7A8 >> 2
+#define BASE_BM 0x72c >> 2
+#define HQ_GE 0x7BC >> 2
+#define BASE_GE 0x740 >> 2
+#define HQ_YS 0x7D0 >> 2
+#define BASE_YS 0x754 >> 2
+
+#define Mountain 0x80 >> 2
+#define Sea 0xA8 >> 2
+#define Plain 0x4 >> 2
+#define Forest 0x21C >> 2
+
+const u16 defaultTiles[] = {Mountain, Forest, Plain, Sea};
 
 // Randomized wiggly line function without diagonal moves and ensuring no gaps
 void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX) {
@@ -804,40 +820,49 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX) {
     // mapTileData[(y * sizeX) + x] =
     // 0x104; // because MakeRoad doesn't write to mapTileData when only
     // displaying the preview, I guess?
-    MakeRoad(x, y);
+
+    // tiles adjacent to HQ will be a base
+    if ((ABS(x - xA) + ABS(y - yA)) == 1) {
+      mapTileData[(y * sizeX) + x] = BASE_OS;
+    } else if ((ABS(x - xB) + ABS(y - yB)) == 1) {
+      mapTileData[(y * sizeX) + x] = BASE_BM;
+    } else {
+      MakeRoad(x, y);
+    }
     //  dst->data[(y * map_size_x) + x] = mapTileData[(y * map_size_x) + x];
     //   dst->data[(y * map_size_x) + x] = value;
   }
+  mapTileData[(yA * sizeX) + xA] = HQ_OS;
+  mapTileData[(yB * sizeX) + xB] = HQ_BM;
 }
 
 void SetMapSize(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   if (!ShouldMapBeRandomized()) {
     return;
-  } // [20225cc]!!
+  }
   dst->x = 30;
   dst->y = 30;
   head->x = dst->x;
   head->y = dst->y;
 }
-#define HQ_OS 0x714 >> 2
-#define HQ_BM 0x7A8 >> 2
-#define HQ_GE 0x7BC >> 2
-#define HQ_YS 0x7D0 >> 2
+
 void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   if (!ShouldMapBeRandomized()) {
     return;
-  } // [20225cc]!!
+  }
   int cID = gCh;
   gCh = chID;
-  dst->x = 30;
-  dst->y = 30;
+  // dst->x = 30;
+  // dst->y = 30;
   head->x = dst->x;
   head->y = dst->y;
   u8 map_size_x = dst->x;
   u8 map_size_y = dst->y;
+  int defaultTile = Forest;
   for (int iy = 0; iy < map_size_y; iy++) {
     for (int ix = 0; ix < map_size_x; ix++) {
-      mapTileData[(iy * map_size_x) + ix] = 1; // make everything the default
+      mapTileData[(iy * map_size_x) + ix] =
+          defaultTile; // make everything the default
       // tile
     }
   }
@@ -856,8 +881,8 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   qMin = (map_size_y >> 1) * q.y;
   start.y = HashByte_Ch(start.x, qMaxY, gCh, offset + 1) + qMin;
 
-  q.x = q.x ^ q.x;
-  q.y = q.y ^ q.y; // opposite corner
+  q.x = !q.x;
+  q.y = !q.y; // opposite corner
   qMin = (map_size_x >> 1) * q.x;
   end.x = HashByte_Ch(start.y, qMaxX, gCh, offset + 2) + qMin;
 
@@ -865,8 +890,6 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   end.y = HashByte_Ch(end.x, qMaxY, gCh, offset + 3) + qMin;
 
   drawWigglyRoad(start.x, start.y, end.x, end.y, dst->x);
-  mapTileData[(start.y * map_size_x) + start.x] = HQ_OS;
-  mapTileData[(end.y * map_size_x) + end.x] = HQ_BM;
   u16 *data = dst->data;
   for (int iy = 0; iy < map_size_y; iy++) { // copy into initial buffer
     for (int ix = 0; ix < map_size_x; ix++) {
@@ -876,29 +899,40 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   // drawWigglyLine(int array[ROWS][COLS], int xA, int yA, int xB, int yB, int
   // value)
 
-  gCh = cID; // remove later
-  return;
-  //  int FrequencyOfObjects_Link;
-  //   creates a randomized map
+  // gCh = cID; // remove later
+  // return;
+  //   int FrequencyOfObjects_Link;
+  //    creates a randomized map
   for (int iy = 0; iy < map_size_y; iy++) {
     for (int ix = 0; ix < map_size_x; ix++) {
       // dst->data[(iy * map_size_x) + ix] = 1;
       //  if (FrequencyOfObjects_Link > NextRN_N(100)) {
 
-      CopyMapPiece(data, ix, iy, map_size_x, map_size_y);
+      CopyMapPiece(data, ix, iy, map_size_x, map_size_y, defaultTile);
+    }
+  }
+
+  for (int iy = 0; iy < map_size_y;
+       iy++) { // fill in borders with plains, forest, or mountains
+    for (int ix = 0; ix < map_size_x; ix++) {
+
+      if (data[(iy * map_size_x) + ix] == defaultTile) {
+        int rand = HashByte_Ch(ix, 3, iy, 0);
+        data[(iy * map_size_x) + ix] = defaultTiles[rand];
+        ;
+      }
     }
   }
   gCh = cID;
 }
 
 void CopyMapPiece(u16 dst[], u8 placement_x, u8 placement_y, u8 map_size_x,
-                  u8 map_size_y) {
-  struct Map_Struct *T = MapPiecesTable[HashByte_Ch(
-      placement_x, NumberOfMapPieces, placement_y, (int)dst)];
+                  u8 map_size_y, int defaultTile) {
+  int rand = HashByte_Ch(placement_x, NumberOfMapPieces, placement_y, (int)dst);
+  struct Map_Struct *T = MapPiecesTable[rand];
   // struct Map_Struct *T = MapPiecesTable[0];
   int piece_size_x = (T->x);
   int piece_size_y = (T->y);
-  int defaultTile = 1;
   int exit = false; // default to false
 
   int border_y = placement_y;
@@ -919,7 +953,8 @@ void CopyMapPiece(u16 dst[], u8 placement_x, u8 placement_y, u8 map_size_x,
     }
   }
   int loc;
-  // this is to stop it from drawing outside the map / from one side to another
+  // this is to stop it from drawing outside the map / from one side to
+  // another
   if (!(((piece_size_x + placement_x) > map_size_x) ||
         ((piece_size_y + placement_y) > map_size_y) || (exit))) {
     for (int y = 0; y < piece_size_y; y++) {
