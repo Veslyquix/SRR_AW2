@@ -705,6 +705,13 @@ int HashRange(int number, int noise, int offset, int otherNum, int coPow) {
 // f4e0 - make road at coords?
 // to 201E450 ram / 201EE72
 extern void MakeRoad(int x, int y);
+
+extern u16 Unk_200B000;
+extern u16 Unk_200B02a;
+extern u8 SelectedTile;
+extern u16 SelectedTileX;
+extern u16 SelectedTileY;
+extern void MakeTile(void); // uses above three ram
 extern u16 mapTileData[];
 extern int NumberOfMapPieces;
 extern int FrequencyOfObjects_Link;
@@ -754,11 +761,25 @@ int NextRN(int val) {
 #define BASE_YS 0x754 >> 2
 
 #define Mountain 0x80 >> 2
-#define Sea 0xA8 >> 2
 #define Plain 0x4 >> 2
 #define Forest 0x21C >> 2
+#define Sea 0x20 >> 2 // 1 tile of sea in plains
+// #define SeaC 0xA8 >> 2 // connecting to sea
 
-const u16 defaultTiles[] = {Mountain, Forest, Plain, Sea};
+#define Airport 0x70c >> 2
+#define Port 0x710 >> 2
+#define Base 0x784 >> 2
+#define City 0x788 >> 2
+#define Silo 0x600 >> 2
+
+#define BridgeH 0x50 >> 2
+#define BridgeV 0x58 >> 2
+#define RoadV 0x100 >> 2
+#define RoadH 0x184 >> 2
+
+#define Laser 0x604 >> 2
+#define Cannon 0x608 >> 2
+#define Volcano 0x69C >> 2
 
 // Randomized wiggly line function without diagonal moves and ensuring no gaps
 void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX) {
@@ -840,16 +861,63 @@ void SetMapSize(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   if (!ShouldMapBeRandomized()) {
     return;
   }
-  dst->x = 30;
-  dst->y = 30;
+  int x = dst->x;
+  int y = dst->y;
+  x = HashByte_Ch(gCh, x, 5, 0) + x / 2; // 50% to 150% of usual
+  y = HashByte_Ch(gCh, y, 5, 0) + y / 2;
+  // set min / max
+  if (x < 15) {
+    x = 15;
+  }
+  if (y < 10) {
+    y = 10;
+  }
+  if (x > 30) {
+    x = 30;
+  }
+  if (y > 30) {
+    y = 30;
+  }
+
+  dst->x = x;
+  dst->y = y;
   head->x = dst->x;
   head->y = dst->y;
 }
+
+struct tileWeight {
+  u16 tile;
+  u16 weight;
+};
+extern u32 gActiveMap;
+
+// Design room definitions
+#define _River 0
+#define _Wood 1
+#define _Mtn 2
+#define _Sea 3
+#define _Plain 4
+#define _HQ 5
+#define _City 6
+#define _Base 7
+#define _Arprt 8
+#define _Port 9
+#define _Silo 0xA
+#define _Pipe 0xB
+#define _Seam 0xC
+#define _Brdg 0xD
+#define _Road 0xE
+#define _Reef 0xF
+#define _Shoal 0x10
+
+const struct tileWeight defaultTiles[] = {
+    {_Mtn, 55}, {_Wood, 55}, {_Plain, 55}, {_River, 55}};
 
 void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   if (!ShouldMapBeRandomized()) {
     return;
   }
+  gActiveMap = 0x200B000;
   int cID = gCh;
   gCh = chID;
   // dst->x = 30;
@@ -890,39 +958,64 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   end.y = HashByte_Ch(end.x, qMaxY, gCh, offset + 3) + qMin;
 
   drawWigglyRoad(start.x, start.y, end.x, end.y, dst->x);
-  u16 *data = dst->data;
-  for (int iy = 0; iy < map_size_y; iy++) { // copy into initial buffer
-    for (int ix = 0; ix < map_size_x; ix++) {
-      data[(iy * map_size_x) + ix] = mapTileData[(iy * map_size_x) + ix];
-    }
-  }
-  // drawWigglyLine(int array[ROWS][COLS], int xA, int yA, int xB, int yB, int
-  // value)
 
   // gCh = cID; // remove later
   // return;
-  //   int FrequencyOfObjects_Link;
-  //    creates a randomized map
+  u16 *data = mapTileData;
   for (int iy = 0; iy < map_size_y; iy++) {
     for (int ix = 0; ix < map_size_x; ix++) {
       // dst->data[(iy * map_size_x) + ix] = 1;
       //  if (FrequencyOfObjects_Link > NextRN_N(100)) {
 
-      CopyMapPiece(data, ix, iy, map_size_x, map_size_y, defaultTile);
+      // CopyMapPiece(data, ix, iy, map_size_x, map_size_y, defaultTile);
     }
   }
+
+  int totalWeight = 0;
+  struct tileWeight
+      tiles[(sizeof(defaultTiles) >> 2)]; // defaultTiles is pointers, so >> 2
+  for (int i = 0; i < (sizeof(defaultTiles) >> 2); ++i) {
+    totalWeight += defaultTiles[i].weight;
+    tiles[i].tile = defaultTiles[i].tile;
+    tiles[i].weight = totalWeight;
+  }
+
+  u32 unk = Unk_200B000;
+  Unk_200B000 = 0x1008;
 
   for (int iy = 0; iy < map_size_y;
        iy++) { // fill in borders with plains, forest, or mountains
     for (int ix = 0; ix < map_size_x; ix++) {
 
       if (data[(iy * map_size_x) + ix] == defaultTile) {
-        int rand = HashByte_Ch(ix, 3, iy, 0);
-        data[(iy * map_size_x) + ix] = defaultTiles[rand];
-        ;
+        int rand = HashByte_Ch(ix, totalWeight, iy, 0);
+        int i = 0;
+        for (; i < (sizeof(defaultTiles) >> 2); ++i) {
+          //
+          if (rand < tiles[i].weight) {
+            break;
+          }
+        }
+        // asm("mov r11, r11");
+        Unk_200B02a = tiles[i].tile;
+        SelectedTile = tiles[i].tile; // [200b036]!
+        SelectedTileX = ix;
+        SelectedTileY = iy;
+
+        MakeTile();
+
+        // data[(iy * map_size_x) + ix] = tiles[i].tile;
       }
     }
   }
+
+  data = dst->data;
+  for (int iy = 0; iy < map_size_y; iy++) { // copy into initial buffer
+    for (int ix = 0; ix < map_size_x; ix++) {
+      data[(iy * map_size_x) + ix] = mapTileData[(iy * map_size_x) + ix];
+    }
+  }
+  Unk_200B000 = unk;
   gCh = cID;
 }
 

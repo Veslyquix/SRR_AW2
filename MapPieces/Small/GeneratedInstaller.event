@@ -1,0 +1,62 @@
+//Generated - do not edit!
+ 
+ 
+ 
+ALIGN 4 
+MapPiecesTable: 
+POIN Airport1_data 
+POIN Base_data 
+POIN Bridge1_data 
+POIN Bridge2_data 
+POIN Cannon1_data 
+POIN City1_data 
+POIN Laser_data 
+POIN Port1_data 
+POIN Road2_data 
+POIN Road3_data 
+POIN Sea1_data 
+POIN Silo1_data 
+POIN Volcano_data 
+WORD 0 
+ 
+#define NumberOfMapPiecesDef 13 
+ 
+ALIGN 4 
+Airport1_data: 
+#incbin "Airport1_data.dmp" 
+ALIGN 4 
+Base_data: 
+#incbin "Base_data.dmp" 
+ALIGN 4 
+Bridge1_data: 
+#incbin "Bridge1_data.dmp" 
+ALIGN 4 
+Bridge2_data: 
+#incbin "Bridge2_data.dmp" 
+ALIGN 4 
+Cannon1_data: 
+#incbin "Cannon1_data.dmp" 
+ALIGN 4 
+City1_data: 
+#incbin "City1_data.dmp" 
+ALIGN 4 
+Laser_data: 
+#incbin "Laser_data.dmp" 
+ALIGN 4 
+Port1_data: 
+#incbin "Port1_data.dmp" 
+ALIGN 4 
+Road2_data: 
+#incbin "Road2_data.dmp" 
+ALIGN 4 
+Road3_data: 
+#incbin "Road3_data.dmp" 
+ALIGN 4 
+Sea1_data: 
+#incbin "Sea1_data.dmp" 
+ALIGN 4 
+Silo1_data: 
+#incbin "Silo1_data.dmp" 
+ALIGN 4 
+Volcano_data: 
+#incbin "Volcano_data.dmp" 

@@ -14,6 +14,23 @@
 
 SET_DATA mapTileData, 0x201EE72
 SET_FUNC MakeRoad, 0x800f4e1 @ 0x80080f8 
+SET_FUNC MakeMountain, 0x800b049 @ ? 1 
+SET_FUNC MakeSea, 0x8007c05 @ ??? 
+SET_FUNC MakeRiver, 0x8009FE1 
+SET_FUNC MakeTile2, 0x8007F15 @ generic? includes forest? 
+@ 0 forest, 1 plain, 
+
+@ store tile into 0x200B000 
+@ coord x into 0x200b008, y into 0x200b00a 
+SET_FUNC MakeTile, 0x80085E1 @ 
+SET_DATA Unk_200B000, 0x200B000 
+SET_DATA Unk_200B02a, 0x200B02a @ press B in design room on tile 
+SET_DATA SelectedTile, 0x200B036 
+SET_DATA SelectedTileX, 0x200B008 
+SET_DATA SelectedTileY, 0x200B00A 
+SET_DATA gActiveMap, 0x200B0B0 
+
+
 SET_FUNC Rand, 0x80129E1 
 SET_FUNC __aeabi_idiv, 0x808AAAD
 SET_FUNC Div, 0x808AAAD
