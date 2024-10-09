@@ -931,18 +931,32 @@ extern u32 gActiveMap;
 #define _Reef 0x13
 
 const struct tileWeight defaultTiles[] = {
-    {_Plain, 155}, {_River, 0}, {_Mtn, 55},   {_Wood, 55}, {_Road, 10},
-    {_City, 55},   {_Sea, 55},  {_Arprt, 25}, {_Port, 10}, {_Brdg, 15},
-    {_Shoal, 0},   {_Base, 35}, {_Pipe, 25},  {_Silo, 15}, {_Reef, 0},
+    {_Plain, 95}, {_River, 0}, {_Mtn, 55},   {_Wood, 55}, {_Road, 10},
+    {_City, 55},  {_Sea, 55},  {_Arprt, 25}, {_Port, 10}, {_Brdg, 15},
+    {_Shoal, 0},  {_Base, 35}, {_Pipe, 0},   {_Silo, 15}, {_Reef, 0},
 };
 
 const struct tileWeight mountainousTiles[] = {
     {_Plain, 15}, {_River, 0}, {_Mtn, 155},  {_Wood, 15}, {_Road, 15},
     {_City, 55},  {_Sea, 15},  {_Arprt, 15}, {_Port, 15}, {_Brdg, 0},
-    {_Shoal, 0},  {_Base, 25}, {_Pipe, 15},  {_Silo, 15}, {_Reef, 0},
+    {_Shoal, 0},  {_Base, 25}, {_Pipe, 0},   {_Silo, 15}, {_Reef, 0},
 };
 
+const struct tileWeight industrialTiles[] = {
+    {_Plain, 15}, {_River, 0}, {_Mtn, 15},   {_Wood, 15}, {_Road, 255},
+    {_City, 55},  {_Sea, 15},  {_Arprt, 15}, {_Port, 15}, {_Brdg, 80},
+    {_Shoal, 0},  {_Base, 25}, {_Pipe, 100}, {_Silo, 15}, {_Reef, 0},
+};
+// extern const u32 gTileBank[];
+const struct tileWeight *const gTileBank[] = {defaultTiles, mountainousTiles,
+                                              industrialTiles};
+
 extern u8 Unk_200B007;
+
+#define Plain2 0x84 >> 2
+#define Plain3 0xC >> 2
+#define Plain4 0x10C >> 2
+
 extern void SetSelectedTile(int);
 void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   if (!ShouldMapBeRandomized()) {
@@ -958,7 +972,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   head->y = dst->y;
   u8 map_size_x = dst->x;
   u8 map_size_y = dst->y;
-  int defaultTile = Forest;
+  int defaultTile = Plain;
   for (int iy = 0; iy < map_size_y; iy++) {
     for (int ix = 0; ix < map_size_x; ix++) {
       mapTileData[(iy * map_size_x) + ix] =
@@ -1002,13 +1016,15 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
       CopyMapPiece(data, ix, iy, map_size_x, map_size_y, defaultTile);
     }
   }
-
+  // sizeof(gTileBank) >> 0
+  const struct tileWeight *bank = gTileBank[Mod(q.x, 3)];
+  // const struct tileWeight *bank = gTileBank[1];
   int totalWeight = 0;
   int size = (sizeof(defaultTiles) >> 2);
   struct tileWeight tiles[size]; // defaultTiles is pointers, so >> 2
   for (int i = 0; i < size; ++i) {
-    totalWeight += defaultTiles[i].weight;
-    tiles[i].tile = defaultTiles[i].tile;
+    totalWeight += bank[i].weight;
+    tiles[i].tile = bank[i].tile;
     tiles[i].weight = totalWeight;
   }
 
@@ -1026,8 +1042,9 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   for (int iy = 0; iy < map_size_y;
        iy++) { // fill in borders with plains, forest, or mountains
     for (int ix = 0; ix < map_size_x; ix++) {
-
-      if (data[(iy * map_size_x) + ix] == defaultTile) {
+      int tmp = data[(iy * map_size_x) + ix];
+      if ((tmp == Plain) || (tmp == Plain2) || (tmp == Plain3) ||
+          (tmp == Plain4)) {
         int rand = HashByte_Ch(ix, totalWeight, iy, 0);
         int i = 0;
         for (; i < size; ++i) {
@@ -1038,8 +1055,8 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
         }
         // tiles[i].tile = _Plain;
         //   asm("mov r11, r11");
-        Unk_200B02a = tiles[i].tile;  //? previous selection?
-        SelectedTile = tiles[i].tile; //
+        Unk_200B02a = tiles[i].tile; // needed
+        // SelectedTile = tiles[i].tile; // ??
 
         SelectedTileX = ix;
         SelectedTileY = iy;
