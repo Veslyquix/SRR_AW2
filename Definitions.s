@@ -27,6 +27,7 @@ SET_FUNC SetSelectedTile, 0x8000CCD @ [200b02a]!!
 
 SET_DATA Unk_200B000, 0x200B000 
 SET_DATA Unk_200B007, 0x200B007 
+SET_DATA Surplus, 0x200B012 
 SET_DATA Unk_200B02a, 0x200B02a @ press B in design room on tile 
 SET_DATA SelectedTile, 0x200B036 
 SET_DATA SelectedTile_3A, 0x200B03A 

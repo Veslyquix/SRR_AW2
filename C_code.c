@@ -883,8 +883,8 @@ void SetMapSize(struct Map_Struct *dst, struct ChHeader *head, int chID) {
     y = 30;
   }
 
-  dst->x = x;
-  dst->y = y;
+  // dst->x = x;
+  // dst->y = y;
   head->x = dst->x;
   head->y = dst->y;
 }
@@ -931,21 +931,21 @@ extern u32 gActiveMap;
 #define _Reef 0x13
 
 const struct tileWeight defaultTiles[] = {
-    {_Plain, 95}, {_River, 0}, {_Mtn, 55},   {_Wood, 55}, {_Road, 10},
-    {_City, 55},  {_Sea, 55},  {_Arprt, 25}, {_Port, 10}, {_Brdg, 15},
-    {_Shoal, 0},  {_Base, 35}, {_Pipe, 0},   {_Silo, 15}, {_Reef, 0},
+    {_Plain, 15}, {_River, 0}, {_Mtn, 55},  {_Wood, 55}, {_Road, 10},
+    {_City, 12},  {_Sea, 55},  {_Arprt, 6}, {_Port, 3},  {_Brdg, 15},
+    {_Shoal, 0},  {_Base, 8},  {_Pipe, 0},  {_Silo, 6},  {_Reef, 0},
 };
 
 const struct tileWeight mountainousTiles[] = {
-    {_Plain, 15}, {_River, 0}, {_Mtn, 155},  {_Wood, 15}, {_Road, 15},
-    {_City, 55},  {_Sea, 15},  {_Arprt, 15}, {_Port, 15}, {_Brdg, 0},
-    {_Shoal, 0},  {_Base, 25}, {_Pipe, 0},   {_Silo, 15}, {_Reef, 0},
+    {_Plain, 15}, {_River, 0}, {_Mtn, 155}, {_Wood, 15}, {_Road, 15},
+    {_City, 25},  {_Sea, 15},  {_Arprt, 5}, {_Port, 5},  {_Brdg, 0},
+    {_Shoal, 0},  {_Base, 15}, {_Pipe, 0},  {_Silo, 5},  {_Reef, 0},
 };
 
 const struct tileWeight industrialTiles[] = {
     {_Plain, 15}, {_River, 0}, {_Mtn, 15},   {_Wood, 15}, {_Road, 255},
-    {_City, 55},  {_Sea, 15},  {_Arprt, 15}, {_Port, 15}, {_Brdg, 80},
-    {_Shoal, 0},  {_Base, 25}, {_Pipe, 100}, {_Silo, 15}, {_Reef, 0},
+    {_City, 25},  {_Sea, 15},  {_Arprt, 15}, {_Port, 5},  {_Brdg, 80},
+    {_Shoal, 0},  {_Base, 15}, {_Pipe, 100}, {_Silo, 5},  {_Reef, 0},
 };
 // extern const u32 gTileBank[];
 const struct tileWeight *const gTileBank[] = {defaultTiles, mountainousTiles,
@@ -1018,7 +1018,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   }
   // sizeof(gTileBank) >> 0
   const struct tileWeight *bank = gTileBank[Mod(q.x, 3)];
-  // const struct tileWeight *bank = gTileBank[1];
+  // const struct tileWeight *bank = gTileBank[0];
   int totalWeight = 0;
   int size = (sizeof(defaultTiles) >> 2);
   struct tileWeight tiles[size]; // defaultTiles is pointers, so >> 2
@@ -1038,14 +1038,15 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   SelectedTile = _Plain;
   SelectedTile_3A = 0;
   PreviousTile_3C = 9;
+  // Surplus = 0; // at 0x800C468 it checks if this is <= 0x3B
 
-  for (int iy = 0; iy < map_size_y;
-       iy++) { // fill in borders with plains, forest, or mountains
-    for (int ix = 0; ix < map_size_x; ix++) {
+  for (int iy = map_size_y - 1; iy >= 0;
+       iy--) { // fill in borders with plains, forest, or mountains
+    for (int ix = map_size_x - 1; ix >= 0; ix--) {
       int tmp = data[(iy * map_size_x) + ix];
       if ((tmp == Plain) || (tmp == Plain2) || (tmp == Plain3) ||
           (tmp == Plain4)) {
-        int rand = HashByte_Ch(ix, totalWeight, iy, 0);
+        int rand = HashByte_Ch(ix, totalWeight, iy, tmp);
         int i = 0;
         for (; i < size; ++i) {
           //
@@ -1063,7 +1064,40 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
         // SetSelectedTile(tiles[i].tile); // sets 0x200B036 but also breaks
         // stuff fsr
 
-        MakeTile();
+        // since MakeTile() isn't working for properties, I'm doing it this
+        // way...
+        if ((tiles[i].tile == _City) || (tiles[i].tile == _Base) ||
+            (tiles[i].tile == _Arprt) || (tiles[i].tile == _Port) ||
+            (tiles[i].tile == _Silo)) {
+          int tile = Plain;
+          switch (tiles[i].tile) {
+          case _City: {
+            tile = City;
+            break;
+          }
+          case _Base: {
+            tile = Base;
+            break;
+          }
+          case _Arprt: {
+            tile = Airport;
+            break;
+          }
+          case _Port: {
+            tile = Port;
+            break;
+          }
+          case _Silo: {
+            tile = Silo;
+            break;
+          }
+          default:
+          }
+
+          data[(iy * map_size_x) + ix] = tile;
+        } else {
+          MakeTile(); // doesn't seem to work for properties atm
+        }
 
         // data[(iy * map_size_x) + ix] = tiles[i].tile;
       }
