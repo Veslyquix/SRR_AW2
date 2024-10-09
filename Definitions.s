@@ -23,9 +23,14 @@ SET_FUNC MakeTile2, 0x8007F15 @ generic? includes forest?
 @ store tile into 0x200B000 
 @ coord x into 0x200b008, y into 0x200b00a 
 SET_FUNC MakeTile, 0x80085E1 @ 
+SET_FUNC SetSelectedTile, 0x8000CCD @ [200b02a]!! 
+
 SET_DATA Unk_200B000, 0x200B000 
+SET_DATA Unk_200B007, 0x200B007 
 SET_DATA Unk_200B02a, 0x200B02a @ press B in design room on tile 
 SET_DATA SelectedTile, 0x200B036 
+SET_DATA SelectedTile_3A, 0x200B03A 
+SET_DATA PreviousTile_3C, 0x200B03C 
 SET_DATA SelectedTileX, 0x200B008 
 SET_DATA SelectedTileY, 0x200B00A 
 SET_DATA gActiveMap, 0x200B0B0 

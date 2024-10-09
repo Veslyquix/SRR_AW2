@@ -5,9 +5,9 @@
  </tileset>
  <layer id="1" name="Tile Layer 1" width="3" height="1">
   <data>
-   <tile gid="483"/>
+   <tile gid="451"/>
    <tile gid="98"/>
-   <tile gid="483"/>
+   <tile gid="451"/>
   </data>
  </layer>
 </map>

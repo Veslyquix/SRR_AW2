@@ -706,9 +706,11 @@ int HashRange(int number, int noise, int offset, int otherNum, int coPow) {
 // to 201E450 ram / 201EE72
 extern void MakeRoad(int x, int y);
 
-extern u16 Unk_200B000;
+extern u8 Unk_200B000[];
 extern u16 Unk_200B02a;
 extern u8 SelectedTile;
+extern u16 SelectedTile_3A;
+extern u16 PreviousTile_3C;
 extern u16 SelectedTileX;
 extern u16 SelectedTileY;
 extern void MakeTile(void); // uses above three ram
@@ -753,11 +755,11 @@ int NextRN(int val) {
 
 #define HQ_OS 0x714 >> 2
 #define BASE_OS 0x718 >> 2
-#define HQ_BM 0x7A8 >> 2
+#define HQ_BM 0x728 >> 2
 #define BASE_BM 0x72c >> 2
-#define HQ_GE 0x7BC >> 2
+#define HQ_GE 0x73C >> 2
 #define BASE_GE 0x740 >> 2
-#define HQ_YS 0x7D0 >> 2
+#define HQ_YS 0x750 >> 2
 #define BASE_YS 0x754 >> 2
 
 #define Mountain 0x80 >> 2
@@ -766,10 +768,12 @@ int NextRN(int val) {
 #define Sea 0x20 >> 2 // 1 tile of sea in plains
 // #define SeaC 0xA8 >> 2 // connecting to sea
 
+#define HQ 0x700 >> 2
+#define Base 0x704 >> 2
+#define City 0x708 >> 2
 #define Airport 0x70c >> 2
 #define Port 0x710 >> 2
-#define Base 0x784 >> 2
-#define City 0x788 >> 2
+
 #define Silo 0x600 >> 2
 
 #define BridgeH 0x50 >> 2
@@ -891,32 +895,60 @@ struct tileWeight {
 };
 extern u32 gActiveMap;
 
+// enum {
+// Possible MU States
+
+// MU_STATE_NONE,
+// _Plain,
+// MU_STATE_MOVEMENT,
+// MU_STATE_SLEEPING,
+// MU_STATE_UNK4,
+// MU_STATE_BUMPING,
+// MU_STATE_DISPLAY_UI,
+// MU_STATE_DEATHFADE,
+// };
+
 // Design room definitions
-#define _River 0
-#define _Wood 1
-#define _Mtn 2
-#define _Sea 3
-#define _Plain 4
-#define _HQ 5
+// 0
+#define _Plain 1
+#define _River 2
+#define _Mtn 3
+#define _Wood 4
+#define _Road 5
 #define _City 6
-#define _Base 7
-#define _Arprt 8
-#define _Port 9
-#define _Silo 0xA
-#define _Pipe 0xB
-#define _Seam 0xC
-#define _Brdg 0xD
-#define _Road 0xE
-#define _Reef 0xF
-#define _Shoal 0x10
+#define _Sea 7
+#define _HQ 8
+// 9
+#define _Arprt 0xA
+#define _Port 0xB
+#define _Brdg 0xC
+#define _Shoal 0xD
+#define _Base 0xE
+#define _Pipe 0xF
+#define _Seam 0x10
+#define _Silo 0x11
+// 0x12
+#define _Reef 0x13
 
 const struct tileWeight defaultTiles[] = {
-    {_Mtn, 55}, {_Wood, 55}, {_Plain, 55}, {_River, 55}};
+    {_Plain, 155}, {_River, 0}, {_Mtn, 55},   {_Wood, 55}, {_Road, 10},
+    {_City, 55},   {_Sea, 55},  {_Arprt, 25}, {_Port, 10}, {_Brdg, 15},
+    {_Shoal, 0},   {_Base, 35}, {_Pipe, 25},  {_Silo, 15}, {_Reef, 0},
+};
 
+const struct tileWeight mountainousTiles[] = {
+    {_Plain, 15}, {_River, 0}, {_Mtn, 155},  {_Wood, 15}, {_Road, 15},
+    {_City, 55},  {_Sea, 15},  {_Arprt, 15}, {_Port, 15}, {_Brdg, 0},
+    {_Shoal, 0},  {_Base, 25}, {_Pipe, 15},  {_Silo, 15}, {_Reef, 0},
+};
+
+extern u8 Unk_200B007;
+extern void SetSelectedTile(int);
 void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   if (!ShouldMapBeRandomized()) {
     return;
   }
+  u32 activeMap = gActiveMap;
   gActiveMap = 0x200B000;
   int cID = gCh;
   gCh = chID;
@@ -967,21 +999,29 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
       // dst->data[(iy * map_size_x) + ix] = 1;
       //  if (FrequencyOfObjects_Link > NextRN_N(100)) {
 
-      // CopyMapPiece(data, ix, iy, map_size_x, map_size_y, defaultTile);
+      CopyMapPiece(data, ix, iy, map_size_x, map_size_y, defaultTile);
     }
   }
 
   int totalWeight = 0;
-  struct tileWeight
-      tiles[(sizeof(defaultTiles) >> 2)]; // defaultTiles is pointers, so >> 2
-  for (int i = 0; i < (sizeof(defaultTiles) >> 2); ++i) {
+  int size = (sizeof(defaultTiles) >> 2);
+  struct tileWeight tiles[size]; // defaultTiles is pointers, so >> 2
+  for (int i = 0; i < size; ++i) {
     totalWeight += defaultTiles[i].weight;
     tiles[i].tile = defaultTiles[i].tile;
     tiles[i].weight = totalWeight;
   }
 
-  u32 unk = Unk_200B000;
-  Unk_200B000 = 0x1008;
+  u8 someData[0x40];
+  for (int i = 0; i < 0x40; ++i) {
+    someData[i] = Unk_200B000[i] + 1;
+    Unk_200B000[i] = 0;
+  }
+  // Unk_200B000 = 0x1008;
+  Unk_200B007 = 0;
+  SelectedTile = _Plain;
+  SelectedTile_3A = 0;
+  PreviousTile_3C = 9;
 
   for (int iy = 0; iy < map_size_y;
        iy++) { // fill in borders with plains, forest, or mountains
@@ -990,17 +1030,21 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
       if (data[(iy * map_size_x) + ix] == defaultTile) {
         int rand = HashByte_Ch(ix, totalWeight, iy, 0);
         int i = 0;
-        for (; i < (sizeof(defaultTiles) >> 2); ++i) {
+        for (; i < size; ++i) {
           //
           if (rand < tiles[i].weight) {
             break;
           }
         }
-        // asm("mov r11, r11");
-        Unk_200B02a = tiles[i].tile;
-        SelectedTile = tiles[i].tile; // [200b036]!
+        // tiles[i].tile = _Plain;
+        //   asm("mov r11, r11");
+        Unk_200B02a = tiles[i].tile;  //? previous selection?
+        SelectedTile = tiles[i].tile; //
+
         SelectedTileX = ix;
         SelectedTileY = iy;
+        // SetSelectedTile(tiles[i].tile); // sets 0x200B036 but also breaks
+        // stuff fsr
 
         MakeTile();
 
@@ -1009,13 +1053,20 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
     }
   }
 
+  // for some reason MakeTile kills the HQs so gotta place 'em again
+  data[(start.y * map_size_x) + start.x] = HQ_OS;
+  data[(end.y * map_size_x) + end.x] = HQ_BM;
+
   data = dst->data;
   for (int iy = 0; iy < map_size_y; iy++) { // copy into initial buffer
     for (int ix = 0; ix < map_size_x; ix++) {
       data[(iy * map_size_x) + ix] = mapTileData[(iy * map_size_x) + ix];
     }
   }
-  Unk_200B000 = unk;
+  for (int i = 0; i < 0x40; ++i) {
+    Unk_200B000[i] = someData[i] - 1;
+  }
+  gActiveMap = activeMap;
   gCh = cID;
 }
 
