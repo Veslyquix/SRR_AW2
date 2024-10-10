@@ -11,7 +11,11 @@ ORG FreeSpace
 #ifndef callHackNew 
 	#define callHackNew(offset) 		"BYTE $01 $4B $9E $46 $00 $F8 $01 $E0; POIN (offset|0x1)"
 	#define callHackr1(offset) 			"BYTE $01 $49 $8E $46 $00 $F8 $01 $E0; POIN (offset|0x1)"
+    #define jumpToHack(offset) "BYTE 0x00 0x4B 0x18 0x47; POIN (offset|0x1); PROTECT CURRENTOFFSET-8 CURRENTOFFSET-1"
 #endif 
+
+// [85CA938+0x34]? Cleanup campaign normal unit pointer 
+// [85CA938+0x10]?
 
 #include "MapPieces/GeneratedInstaller.event" 
 ALIGN 4 
@@ -24,6 +28,13 @@ RandomizeMaps:
 WORD 1 
 
 PUSH 
+
+ORG $77EF0 
+callHackNew(GetPreEventPointerHook)
+ORG $74584 
+jumpToHack(GPE_2)
+ORG $196d4  
+callHackNew(UnitPointerHook)
 
 ORG $21674 
 callHackNew(MapSizeHook) 

@@ -727,6 +727,7 @@ void CopyMapPiece(u16 dst[], u8 xx, u8 yy, u8 map_size_x, u8 map_size_y, int);
 extern int RandomizeMaps;
 int ShouldMapBeRandomized(void) {
   LoadDesignRoom1Name();
+  // DesignRoom1Name[0] = 2;
   if (DesignRoom1Name[0] == 0x20) {
     return RandomizeMaps; // if name starts with a space, randomize maps
   }
@@ -800,9 +801,6 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX) {
     attempts++;
     if (attempts > 100000) {
       break;
-    }
-    if (x < 0 || y < 0) {
-      asm("mov r11, r11");
     }
     backtrackChance = Mod(attempts, 8) < 4 ? 0 : 2;
     backtrackChance += attempts < 200 ? 2 : 5;
@@ -963,7 +961,7 @@ const struct tileWeight defaultTiles[] = {
 };
 
 const struct tileWeight mountainousTiles[] = {
-    {_Plain, 15}, {_River, 0}, {_Mtn, 155}, {_Wood, 15}, {_Road, 15},
+    {_Plain, 15}, {_River, 0}, {_Mtn, 95},  {_Wood, 15}, {_Road, 15},
     {_City, 25},  {_Sea, 15},  {_Arprt, 5}, {_Port, 5},  {_Brdg, 0},
     {_Shoal, 0},  {_Base, 15}, {_Pipe, 0},  {_Silo, 5},  {_Reef, 0},
 };
@@ -1051,6 +1049,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
     someData[i] = Unk_200B000[i] + 1;
     Unk_200B000[i] = 0;
   }
+
   int cID = gCh;
   gCh = chID;
   // dst->x = 30;
@@ -1059,6 +1058,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   head->y = dst->y;
   u8 map_size_x = dst->x;
   u8 map_size_y = dst->y;
+  int numberOfPlayers = 2;
   int defaultTile = Plain;
 
   // gActiveMap->SelectedTile = _Plain;
@@ -1073,6 +1073,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
       // MakeTile();
     }
   }
+
   // int pathLength = 15;
   // int amountOfPaths = map_size_y * map_size_x;
   struct Vec2u start, end, q;
@@ -1093,10 +1094,10 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   qMin = (map_size_x >> 1) * q.x;
   end.x = HashByte_Ch(start.y, qMaxX, gCh, offset + 2) + qMin;
 
-  qMin = (map_size_x >> 1) * q.y;
+  qMin = (map_size_y >> 1) * q.y;
   end.y = HashByte_Ch(end.x, qMaxY, gCh, offset + 3) + qMin;
 
-  drawWigglyRoad(start.x, start.y, end.x, end.y, dst->x);
+  drawWigglyRoad(start.x, start.y, end.x, end.y, map_size_x);
 
   // gCh = cID; // remove later
   // return;
@@ -1106,9 +1107,10 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
       // dst->data[(iy * map_size_x) + ix] = 1;
       //  if (FrequencyOfObjects_Link > NextRN_N(100)) {
 
-      // CopyMapPiece(data, ix, iy, map_size_x, map_size_y, defaultTile);
+      CopyMapPiece(data, ix, iy, map_size_x, map_size_y, defaultTile);
     }
   }
+
   // sizeof(gTileBank) >> 0
   const struct tileWeight *bank = gTileBank[Mod(q.x, 3)];
   // const struct tileWeight *bank = gTileBank[0];
@@ -1150,8 +1152,10 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
     }
   }
 
-  // for some reason MakeTile kills the HQs so gotta place 'em again
+  // for some reason MakeTile kills some properties so gotta place 'em again
+  data[(start.y * map_size_x) + start.x + 1] = BASE_OS;
   data[(start.y * map_size_x) + start.x] = HQ_OS;
+  data[(end.y * map_size_x) + end.x + 1] = BASE_BM;
   data[(end.y * map_size_x) + end.x] = HQ_BM;
 
   data = dst->data;

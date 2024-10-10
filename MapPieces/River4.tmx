@@ -6,14 +6,14 @@
  <layer id="1" name="Tile Layer 1" width="3" height="3">
   <data>
    <tile gid="76"/>
-   <tile gid="24"/>
    <tile gid="74"/>
-   <tile gid="20"/>
-   <tile gid="20"/>
-   <tile gid="20"/>
-   <tile gid="268"/>
-   <tile gid="109"/>
-   <tile gid="269"/>
+   <tile gid="2"/>
+   <tile gid="45"/>
+   <tile gid="286"/>
+   <tile gid="26"/>
+   <tile gid="44"/>
+   <tile gid="42"/>
+   <tile gid="2"/>
   </data>
  </layer>
 </map>
