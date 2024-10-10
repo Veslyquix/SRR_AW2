@@ -129,11 +129,18 @@ u16 HashByte_Ch(int number, int max, int noise, int offset) {
   return HashByte_Global(number, max, noise, offset);
 };
 
-u16 HashByte_ChIfConfig(int number, int max, int noise, int offset) {
-  if (DesignRoom1Name[0] == 0x20) {
-    asm("mov r11, r11");
+s16 HashByte_ChIfConfig(int number, int max, int noise, int offset) {
+  if (DesignRoom1Name[0] == 0x41 ||
+      DesignRoom1Name[0] == 0x43) { // "A" or "C" = no random stats
+    return (-1);
+  }
+  if (DesignRoom1Name[0] == 0x20) { // blank char
+    // asm("mov r11, r11");
     noise += (gCh << 8);
-  } // blank char
+    if (DesignRoom1Name[1] == 0x41 || DesignRoom1Name[1] == 0x43) {
+      return (-1);
+    }
+  }
   return HashByte_Global(number, max, noise, offset);
 };
 
@@ -317,6 +324,10 @@ int HashPow(int number, int noise, int offset, int coPow) {
   }
 
   int result = HashByte_ChIfConfig(number, size, noise, offset);
+  if (result < 0) {
+    return number;
+  }
+
   return table[result];
 };
 int HashDef(int number, int noise, int offset, int coPow) {
@@ -340,6 +351,9 @@ int HashDef(int number, int noise, int offset, int coPow) {
   }
 
   int result = HashByte_ChIfConfig(number, size, noise, offset);
+  if (result < 0) {
+    return number;
+  }
   result = table[result];
   // lash max 20 def in sco
   if ((noise == 0xC) && (coPow == 0x88)) {
@@ -528,6 +542,9 @@ int HashMov(int number, int noise, int offset, int coPow) {
   }
 
   int result = HashByte_ChIfConfig(number, size, noise, offset + 21);
+  if (result < 0) {
+    return number;
+  }
   return table[result];
 };
 
@@ -563,7 +580,7 @@ int HashRange(int number, int noise, int offset, int otherNum, int coPow) {
     return 0;
   }
 
-  if (HashMov(otherNum, noise, offset, coPow)) {
+  if (HashMov(otherNum, noise, offset, coPow) > 0) {
     return 0;
   }
 
@@ -671,8 +688,11 @@ int HashRange(int number, int noise, int offset, int otherNum, int coPow) {
   }
   }
 
-  int result = table[HashByte_ChIfConfig(number, size, noise, offset + 31)];
-  return result;
+  int result = HashByte_ChIfConfig(number, size, noise, offset + 31);
+  if (result < 0) {
+    return number;
+  }
+  return table[result];
 };
 
 //
@@ -727,9 +747,15 @@ void CopyMapPiece(u16 dst[], u8 xx, u8 yy, u8 map_size_x, u8 map_size_y, int);
 extern int RandomizeMaps;
 int ShouldMapBeRandomized(void) {
   LoadDesignRoom1Name();
-  // DesignRoom1Name[0] = 2;
+  // DesignRoom1Name[0] = 2; // don't randomize if design room 1 name starts
+  // with "B" or "C"
+  if (DesignRoom1Name[0] == 0x42 || DesignRoom1Name[0] == 0x43) {
+    return false;
+  }
   if (DesignRoom1Name[0] == 0x20) {
-    return RandomizeMaps; // if name starts with a space, randomize maps
+    if (DesignRoom1Name[1] == 0x42 || DesignRoom1Name[1] == 0x43) {
+      return false;
+    }
   }
   return RandomizeMaps; // change to return false; later
 }
@@ -747,14 +773,14 @@ int NextRN(int val) {
   return val;
 }
 
-#define HQ_OS 0x714 >> 2
-#define BASE_OS 0x718 >> 2
-#define HQ_BM 0x728 >> 2
-#define BASE_BM 0x72c >> 2
-#define HQ_GE 0x73C >> 2
-#define BASE_GE 0x740 >> 2
-#define HQ_YS 0x750 >> 2
-#define BASE_YS 0x754 >> 2
+#define HQ_OS (0x714 >> 2)
+#define BASE_OS (0x718 >> 2)
+#define HQ_BM (0x728 >> 2)
+#define BASE_BM (0x72c >> 2)
+#define HQ_GE (0x73C >> 2)
+#define BASE_GE (0x740 >> 2)
+#define HQ_YS (0x750 >> 2)
+#define BASE_YS (0x754 >> 2)
 
 #define Mountain 0x80 >> 2
 #define Plain 0x4 >> 2
@@ -780,7 +806,8 @@ int NextRN(int val) {
 #define Volcano 0x69C >> 2
 
 // Randomized wiggly line function without diagonal moves and ensuring no gaps
-void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX) {
+void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
+                    int factionB) {
 
   int x = xA, y = yA;
   // mapTileData[(y * sizeX) + x] = 0x104; // Mark the start point [201ee78]!!
@@ -839,17 +866,17 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX) {
 
     // tiles adjacent to HQ will be a base
     if ((ABS(x - xA) + ABS(y - yA)) == 1) {
-      mapTileData[(y * sizeX) + x] = BASE_OS;
+      mapTileData[(y * sizeX) + x] = BASE_OS + (factionA * 5);
     } else if ((ABS(x - xB) + ABS(y - yB)) == 1) {
-      mapTileData[(y * sizeX) + x] = BASE_BM;
+      mapTileData[(y * sizeX) + x] = BASE_OS + (factionB * 5);
     } else {
       MakeRoad(x, y);
     }
     //  dst->data[(y * map_size_x) + x] = mapTileData[(y * map_size_x) + x];
     //   dst->data[(y * map_size_x) + x] = value;
   }
-  mapTileData[(yA * sizeX) + xA] = HQ_OS;
-  mapTileData[(yB * sizeX) + xB] = HQ_BM;
+  // mapTileData[(yA * sizeX) + xA] = HQ_OS;
+  // mapTileData[(yB * sizeX) + xB] = HQ_BM;
 }
 
 void SetMapSize(struct Map_Struct *dst, struct ChHeader *head, int chID) {
@@ -955,25 +982,31 @@ extern struct activeMap *gActiveMap;
 #define _Reef 0x13
 
 const struct tileWeight defaultTiles[] = {
-    {_Plain, 15}, {_River, 0}, {_Mtn, 55},  {_Wood, 55}, {_Road, 10},
-    {_City, 12},  {_Sea, 55},  {_Arprt, 6}, {_Port, 3},  {_Brdg, 15},
-    {_Shoal, 0},  {_Base, 8},  {_Pipe, 0},  {_Silo, 6},  {_Reef, 0},
+    {_Plain, 35}, {_River, 0}, {_Mtn, 75},  {_Wood, 75}, {_Road, 40},
+    {_City, 12},  {_Sea, 55},  {_Arprt, 2}, {_Port, 1},  {_Brdg, 15},
+    {_Shoal, 15}, {_Base, 8},  {_Pipe, 0},  {_Silo, 3},  {_Reef, 0},
 };
 
 const struct tileWeight mountainousTiles[] = {
-    {_Plain, 15}, {_River, 0}, {_Mtn, 95},  {_Wood, 15}, {_Road, 15},
-    {_City, 25},  {_Sea, 15},  {_Arprt, 5}, {_Port, 5},  {_Brdg, 0},
-    {_Shoal, 0},  {_Base, 15}, {_Pipe, 0},  {_Silo, 5},  {_Reef, 0},
+    {_Plain, 15}, {_River, 0}, {_Mtn, 125}, {_Wood, 15}, {_Road, 15},
+    {_City, 12},  {_Sea, 15},  {_Arprt, 2}, {_Port, 1},  {_Brdg, 0},
+    {_Shoal, 0},  {_Base, 8},  {_Pipe, 0},  {_Silo, 2},  {_Reef, 0},
 };
 
 const struct tileWeight industrialTiles[] = {
     {_Plain, 15}, {_River, 0}, {_Mtn, 15},   {_Wood, 15}, {_Road, 255},
-    {_City, 25},  {_Sea, 15},  {_Arprt, 15}, {_Port, 5},  {_Brdg, 80},
-    {_Shoal, 0},  {_Base, 15}, {_Pipe, 100}, {_Silo, 5},  {_Reef, 0},
+    {_City, 12},  {_Sea, 15},  {_Arprt, 2},  {_Port, 1},  {_Brdg, 80},
+    {_Shoal, 10}, {_Base, 8},  {_Pipe, 100}, {_Silo, 8},  {_Reef, 0},
+};
+const struct tileWeight waterTiles[] = {
+    {_Plain, 15}, {_River, 15}, {_Mtn, 15},  {_Wood, 15}, {_Road, 40},
+    {_City, 12},  {_Sea, 155},  {_Arprt, 1}, {_Port, 2},  {_Brdg, 80},
+    {_Shoal, 15}, {_Base, 8},   {_Pipe, 20}, {_Silo, 2},  {_Reef, 10},
 };
 // extern const u32 gTileBank[];
+#define NumberOfBanks 4
 const struct tileWeight *const gTileBank[] = {defaultTiles, mountainousTiles,
-                                              industrialTiles};
+                                              industrialTiles, waterTiles};
 
 extern u8 Unk_200B007;
 
@@ -1041,7 +1074,7 @@ void memcpy(void *s1, const void *s2, size_t n) {
     s1 = s2;
   }
 }*/
-
+extern int GetNumberOfPlayers(void);
 extern void SetSelectedTile(int);
 void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   if (!ShouldMapBeRandomized()) {
@@ -1066,7 +1099,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   head->y = dst->y;
   u8 map_size_x = dst->x;
   u8 map_size_y = dst->y;
-  int numberOfPlayers = 2;
+  int numberOfPlayers = GetNumberOfPlayers();
   int defaultTile = Plain;
 
   // gActiveMap->SelectedTile = _Plain;
@@ -1084,7 +1117,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
 
   // int pathLength = 15;
   // int amountOfPaths = map_size_y * map_size_x;
-  struct Vec2u start, end, q;
+  struct Vec2u p1, p2, p3, p4, q;
   int qMaxX = map_size_x >> 1;
   int qMaxY = map_size_y >> 1;
   int qMin;
@@ -1092,20 +1125,38 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   q.x = HashByte_Ch(gCh, 2, gCh, offset + 5); // quadrant 0, 1 as left or right
   q.y = HashByte_Ch(gCh, 2, gCh, offset + 8); // up or down
   qMin = (map_size_x >> 1) * q.x;
-  start.x = HashByte_Ch(gCh, qMaxX, gCh, offset + 0) + qMin;
+  p1.x = HashByte_Ch(gCh, qMaxX, gCh, offset + 0) + qMin;
 
   qMin = (map_size_y >> 1) * q.y;
-  start.y = HashByte_Ch(start.x, qMaxY, gCh, offset + 1) + qMin;
+  p1.y = HashByte_Ch(p1.x, qMaxY, gCh, offset + 1) + qMin;
 
   q.x = !q.x;
   q.y = !q.y; // opposite corner
   qMin = (map_size_x >> 1) * q.x;
-  end.x = HashByte_Ch(start.y, qMaxX, gCh, offset + 2) + qMin;
+  p2.x = HashByte_Ch(p1.y, qMaxX, gCh, offset + 2) + qMin;
 
   qMin = (map_size_y >> 1) * q.y;
-  end.y = HashByte_Ch(end.x, qMaxY, gCh, offset + 3) + qMin;
+  p2.y = HashByte_Ch(p2.x, qMaxY, gCh, offset + 3) + qMin;
 
-  drawWigglyRoad(start.x, start.y, end.x, end.y, map_size_x);
+  drawWigglyRoad(p1.x, p1.y, p2.x, p2.y, map_size_x, 0, 1);
+
+  if (numberOfPlayers == 4) {
+    p3.x = Mod(p1.x + (map_size_x >> 1), map_size_x);
+    p3.y = p1.y;
+    // p1.y = Mod(p1.y + (map_size_y >> 1), map_size_y);
+    // p2.x = Mod(p2.x + (map_size_x >> 1), map_size_x);
+    p4.x = Mod(p2.x + (map_size_x >> 1), map_size_x);
+    p4.y = p2.y;
+    drawWigglyRoad(p3.x, p3.y, p4.x, p4.y, map_size_x, 2, 3);
+  }
+  if (numberOfPlayers == 3) {
+    // p1.x = Mod(p1.x + (map_size_x >> 1), map_size_x);
+    p3.x = p2.x;
+    p3.y = Mod(p2.y + (map_size_y >> 1), map_size_y);
+    // p2.x = Mod(p2.x + (map_size_x >> 1), map_size_x);
+    // p2.y = Mod(p2.y + (map_size_y >> 1), map_size_y);
+    drawWigglyRoad(p2.x, p2.y, p3.x, p3.y, map_size_x, 1, 2);
+  }
 
   // gCh = cID; // remove later
   // return;
@@ -1120,7 +1171,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   }
 
   // sizeof(gTileBank) >> 0
-  const struct tileWeight *bank = gTileBank[Mod(q.x, 3)];
+  const struct tileWeight *bank = gTileBank[Mod(q.x, NumberOfBanks)];
   // const struct tileWeight *bank = gTileBank[0];
   int totalWeight = 0;
   int size = (sizeof(defaultTiles) >> 2);
@@ -1161,10 +1212,20 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   }
 
   // for some reason MakeTile kills some properties so gotta place 'em again
-  data[(start.y * map_size_x) + start.x + 1] = BASE_OS;
-  data[(start.y * map_size_x) + start.x] = HQ_OS;
-  data[(end.y * map_size_x) + end.x + 1] = BASE_BM;
-  data[(end.y * map_size_x) + end.x] = HQ_BM;
+  data[(p1.y * map_size_x) + p1.x + 1] = BASE_OS;
+  data[(p1.y * map_size_x) + p1.x] = HQ_OS;
+  data[(p2.y * map_size_x) + p2.x + 1] = BASE_BM;
+  data[(p2.y * map_size_x) + p2.x] = HQ_BM;
+  if (numberOfPlayers == 3) {
+    data[(p3.y * map_size_x) + p3.x + 1] = BASE_GE;
+    data[(p3.y * map_size_x) + p3.x] = HQ_GE;
+  }
+  if (numberOfPlayers == 4) {
+    data[(p3.y * map_size_x) + p3.x + 1] = BASE_GE;
+    data[(p3.y * map_size_x) + p3.x] = HQ_GE;
+    data[(p4.y * map_size_x) + p4.x + 1] = BASE_YS;
+    data[(p4.y * map_size_x) + p4.x] = HQ_YS;
+  }
 
   data = dst->data;
   for (int iy = 0; iy < map_size_y; iy++) { // copy into initial buffer

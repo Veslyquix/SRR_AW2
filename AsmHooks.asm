@@ -51,7 +51,7 @@ str r2, [sp, #4]@ offset
 ldr r0, =0x85D3E2C 
 add r3, r0 
 ldr r7, [r3] 
-add r0, r2 
+mov r0, r2 
 ldr r3, =0x80432E0 
 mov lr, r3 
 .short 0xf800 
@@ -103,7 +103,7 @@ str r2, [sp, #4]@ offset
 ldr r0, =0x85D3E2C 
 add r3, r0 
 ldr r7, [r3] 
-add r0, r2 
+mov r0, r2 
 ldr r3, =0x80432E0 
 mov lr, r3 
 .short 0xf800 
@@ -155,7 +155,7 @@ str r2, [sp, #4]@ offset
 ldr r0, =0x85D3E2C 
 add r3, r0 
 ldr r7, [r3] 
-add r0, r2 
+mov r0, r2 
 ldr r3, =0x80432E0 
 mov lr, r3 
 .short 0xf800 
@@ -207,7 +207,7 @@ str r2, [sp, #4]@ offset
 ldr r0, =0x85D3E2C 
 add r3, r0 
 ldr r7, [r3] 
-add r0, r2 
+mov r0, r2 
 ldr r3, =0x80432E0 
 mov lr, r3 
 .short 0xf800 
@@ -227,17 +227,17 @@ b ExitRange
 RangeCont:
 ldrb r0, [r6, #0x18]
 mov r2, #6
-mov r3, #4 @ for mov 
+
 cmp r0, #0 
 beq ReturnDefaultRange
 ldsh r0, [r7, r2] 
-ldsh r2, [r7, r3] 
-ldsh r3, [r7, r3] 
-add r3, r2 
-
 ldsh r1, [r1, r2] 
 add r0, r1 
 
+mov r3, #4 @ for mov 
+ldsh r2, [r7, r3] 
+ldsh r3, [r7, r3] 
+add r3, r2 
 
 ldr r1, [sp]
 ldr r2, [sp, #4]
@@ -366,6 +366,33 @@ UnitPointerHook_Vanilla:
 mov r0, r1 
 pop {r3} 
 bx r3 
+.ltorg 
+
+.global GetNumberOfPlayers 
+.type GetNumberOfPlayers, %function 
+GetNumberOfPlayers: @ see 0x807733a 
+push {r4-r5, lr} 
+@ldr r4, =0x8615194 
+@ldr r5, =0x81cc5a0 
+@ldr r2, [r5] 
+@ldr r0, [r2, #0xC] 
+@lsl r1, r0, #1 
+@add r1, r0 
+@lsl r1, #4 
+@add r0, r1, r4 
+@mov r3, #0 
+@ldsh r2, [r0, r3] 
+
+ldr r2, =0x3003FC2 
+ldrb r2, [r2] 
+ldr r3, =0x85c77a0 
+mov r0, #0x5C 
+mul r0, r2 
+add r2, r0, r3 
+ldrb r0, [r2, #0x18] 
+pop {r4-r5} 
+pop {r1} 
+bx r1 
 .ltorg 
 
 

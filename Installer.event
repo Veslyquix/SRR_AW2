@@ -62,26 +62,27 @@ SHORT $2003 // default 4th page
 //ORG $44280; SHORT $2001 $4770 // always sco power available 
 
 ORG $430D0 
-FILL($43108 - $430D0)
+SHORT $e01a // b 0x8043108 
+//FILL($43108 - $430D0)
 ORG $43108
 callHackr1(GetClassAtt)
 SHORT $46C0 $46C0 $46C0 
 
 
 ORG $43140 
-FILL($43178 - $43140)
+SHORT $e01a 
 ORG $43178 
 callHackr1(GetClassDef)
 SHORT $46C0 $46C0 $46C0 
 
 ORG $431B0
-FILL($431E8 - $431B0)
+SHORT $e01a 
 ORG $431E8
 callHackr1(GetClassMov)
 SHORT $46C0 $46C0 $46C0 
 
 ORG $43220 
-FILL($43258 - $43220)
+SHORT $e01a 
 ORG $43258
 callHackr1(GetClassRange)
 SHORT $46C0 $46C0 $46C0 

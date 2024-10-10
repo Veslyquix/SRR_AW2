@@ -4,22 +4,12 @@
  
 ALIGN 4 
 MapPiecesTable: 
-POIN Base1_data 
-POIN Base2_data 
-POIN Base3_data 
 POIN Beach2_data 
 POIN Beach3_data 
 POIN Beach_data 
 POIN Bridge3_data 
 POIN Bridge4_data 
 POIN Bridge5_data 
-POIN City2_data 
-POIN City3_data 
-POIN City4_data 
-POIN City5_data 
-POIN City6_data 
-POIN City7_data 
-POIN City8_data 
 POIN LoneTree_data 
 POIN Mountain1_data 
 POIN Mountain2_data 
@@ -31,7 +21,6 @@ POIN Pipe2_data
 POIN River2_data 
 POIN River3_data 
 POIN River4_data 
-POIN River5_data 
 POIN River_data 
 POIN Road2_data 
 POIN Road3_data 
@@ -45,17 +34,8 @@ POIN Water3_data
 POIN Water_data 
 WORD 0 
  
-#define NumberOfMapPiecesDef 39 
+#define NumberOfMapPiecesDef 28 
  
-ALIGN 4 
-Base1_data: 
-#incbin "Base1_data.dmp" 
-ALIGN 4 
-Base2_data: 
-#incbin "Base2_data.dmp" 
-ALIGN 4 
-Base3_data: 
-#incbin "Base3_data.dmp" 
 ALIGN 4 
 Beach2_data: 
 #incbin "Beach2_data.dmp" 
@@ -74,27 +54,6 @@ Bridge4_data:
 ALIGN 4 
 Bridge5_data: 
 #incbin "Bridge5_data.dmp" 
-ALIGN 4 
-City2_data: 
-#incbin "City2_data.dmp" 
-ALIGN 4 
-City3_data: 
-#incbin "City3_data.dmp" 
-ALIGN 4 
-City4_data: 
-#incbin "City4_data.dmp" 
-ALIGN 4 
-City5_data: 
-#incbin "City5_data.dmp" 
-ALIGN 4 
-City6_data: 
-#incbin "City6_data.dmp" 
-ALIGN 4 
-City7_data: 
-#incbin "City7_data.dmp" 
-ALIGN 4 
-City8_data: 
-#incbin "City8_data.dmp" 
 ALIGN 4 
 LoneTree_data: 
 #incbin "LoneTree_data.dmp" 
@@ -128,9 +87,6 @@ River3_data:
 ALIGN 4 
 River4_data: 
 #incbin "River4_data.dmp" 
-ALIGN 4 
-River5_data: 
-#incbin "River5_data.dmp" 
 ALIGN 4 
 River_data: 
 #incbin "River_data.dmp" 
