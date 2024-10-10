@@ -706,13 +706,6 @@ int HashRange(int number, int noise, int offset, int otherNum, int coPow) {
 // to 201E450 ram / 201EE72
 extern void MakeRoad(int x, int y);
 
-extern u8 Unk_200B000[];
-extern u16 Unk_200B02a;
-extern u8 SelectedTile;
-extern u16 SelectedTile_3A;
-extern u16 PreviousTile_3C;
-extern u16 SelectedTileX;
-extern u16 SelectedTileY;
 extern void MakeTile(void); // uses above three ram
 extern u16 mapTileData[];
 extern int NumberOfMapPieces;
@@ -893,7 +886,40 @@ struct tileWeight {
   u16 tile;
   u16 weight;
 };
-extern u32 gActiveMap;
+
+extern u8 Unk_200B000[];
+/*
+
+extern u8 Unk_200B036;
+extern u16 SelectedTile;
+extern u16 SelectedTile_3A;
+extern u16 PreviousTile_3C;
+extern u16 SelectedTileX;
+extern u16 SelectedTileY;
+*/
+/* 08 */ u32 save_magic32;
+/* 0C */ u8 _pad_0C[0xF - 0xC];
+/* 0F */ u8 unk0F;
+// clang-format off
+struct activeMap {
+  u8 unk1[0x8-0]; 
+  u16 SelectedTileX;
+  u16 SelectedTileY;
+  u8 unk2[0x12-0xC]; 
+  u8 Surplus; // +0x12
+  u8 unk3[0x2a-0x13]; 
+  u16 SelectedTile; // press B in design room on tile 
+  u16 unk2C; 
+  u8 factionProperties; // Army for properties
+  u8 factionUnits; // Which army the menu units belong to
+  u8 unk4[0x36-0x30]; 
+  u16 unk36; 
+  u16 unk38; 
+  u16 unk3a;
+  u16 previousTile; 
+};
+// clang-format on
+extern struct activeMap *gActiveMap;
 
 // enum {
 // Possible MU States
@@ -956,14 +982,75 @@ extern u8 Unk_200B007;
 #define Plain2 0x84 >> 2
 #define Plain3 0xC >> 2
 #define Plain4 0x10C >> 2
+extern void MakeProperty(int id, int ix, int iy);
+
+void MakeSomeTile(int ix, int iy, int tile, int map_size_x, u16 data[]) {
+  // tile = _City;
+  gActiveMap->SelectedTile = tile; // needed
+  // Unk_200B036 = tiles[i].tile; // ??
+
+  gActiveMap->SelectedTileX = ix;
+  gActiveMap->SelectedTileY = iy;
+  // MakeTile();
+
+  switch (tile) {
+  case _City: {
+    data[(iy * map_size_x) + ix] = City;
+    // MakeProperty(0, ix, iy);
+    break;
+  }
+  case _Base: {
+    data[(iy * map_size_x) + ix] = Base;
+    // MakeProperty(1, ix, iy);
+    break;
+  }
+  case _Arprt: {
+    data[(iy * map_size_x) + ix] = Airport;
+    // MakeProperty(2, ix, iy);
+    break;
+  }
+  case _Port: {
+    data[(iy * map_size_x) + ix] = Port;
+    // MakeProperty(3, ix, iy);
+    break;
+  }
+  case _Silo: {
+    data[(iy * map_size_x) + ix] = Silo;
+    // MakeProperty(4, ix, iy);
+    break;
+  }
+  default: {
+    MakeTile(); // doesn't seem to work for properties atm
+  }
+  }
+  // MakeTile(); // doesn't seem to work for properties atm
+  //    data[(iy * map_size_x) + ix] = tile;
+
+  // data[(iy * map_size_x) + ix] = tiles[i].tile;
+}
+
+/*
+void memcpy(void *s1, const void *s2, size_t n) {
+  for (int i = 0; i < n; ++i) {
+    s1 = s2;
+  }
+}*/
 
 extern void SetSelectedTile(int);
 void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   if (!ShouldMapBeRandomized()) {
     return;
   }
-  u32 activeMap = gActiveMap;
-  gActiveMap = 0x200B000;
+  if ((int)gActiveMap < 0) {
+    gActiveMap = (void *)0x200B000;
+  }
+  u32 activeMap = (int)gActiveMap;
+
+  u8 someData[0x40];
+  for (int i = 0; i < 0x40; ++i) {
+    someData[i] = Unk_200B000[i] + 1;
+    Unk_200B000[i] = 0;
+  }
   int cID = gCh;
   gCh = chID;
   // dst->x = 30;
@@ -973,11 +1060,17 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   u8 map_size_x = dst->x;
   u8 map_size_y = dst->y;
   int defaultTile = Plain;
+
+  // gActiveMap->SelectedTile = _Plain;
+  // struct activeMap map = *gActiveMap;
   for (int iy = 0; iy < map_size_y; iy++) {
     for (int ix = 0; ix < map_size_x; ix++) {
       mapTileData[(iy * map_size_x) + ix] =
           defaultTile; // make everything the default
       // tile
+      // map.SelectedTileX = ix;
+      // map.SelectedTileY = iy;
+      // MakeTile();
     }
   }
   // int pathLength = 15;
@@ -1013,7 +1106,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
       // dst->data[(iy * map_size_x) + ix] = 1;
       //  if (FrequencyOfObjects_Link > NextRN_N(100)) {
 
-      CopyMapPiece(data, ix, iy, map_size_x, map_size_y, defaultTile);
+      // CopyMapPiece(data, ix, iy, map_size_x, map_size_y, defaultTile);
     }
   }
   // sizeof(gTileBank) >> 0
@@ -1028,17 +1121,13 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
     tiles[i].weight = totalWeight;
   }
 
-  u8 someData[0x40];
-  for (int i = 0; i < 0x40; ++i) {
-    someData[i] = Unk_200B000[i] + 1;
-    Unk_200B000[i] = 0;
-  }
-  // Unk_200B000 = 0x1008;
-  Unk_200B007 = 0;
-  SelectedTile = _Plain;
-  SelectedTile_3A = 0;
-  PreviousTile_3C = 9;
+  // Unk_200B007 = 0;
+  // gActiveMap->SelectedTile = _Plain;
+  // SelectedTile_3A = 0;
+  // PreviousTile_3C = 9;
   // Surplus = 0; // at 0x800C468 it checks if this is <= 0x3B
+  gActiveMap->Surplus = 0;
+  gActiveMap->factionProperties = 0;
 
   for (int iy = map_size_y - 1; iy >= 0;
        iy--) { // fill in borders with plains, forest, or mountains
@@ -1054,52 +1143,9 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
             break;
           }
         }
-        // tiles[i].tile = _Plain;
-        //   asm("mov r11, r11");
-        Unk_200B02a = tiles[i].tile; // needed
-        // SelectedTile = tiles[i].tile; // ??
+        // tiles[i].tile = _City;
 
-        SelectedTileX = ix;
-        SelectedTileY = iy;
-        // SetSelectedTile(tiles[i].tile); // sets 0x200B036 but also breaks
-        // stuff fsr
-
-        // since MakeTile() isn't working for properties, I'm doing it this
-        // way...
-        if ((tiles[i].tile == _City) || (tiles[i].tile == _Base) ||
-            (tiles[i].tile == _Arprt) || (tiles[i].tile == _Port) ||
-            (tiles[i].tile == _Silo)) {
-          int tile = Plain;
-          switch (tiles[i].tile) {
-          case _City: {
-            tile = City;
-            break;
-          }
-          case _Base: {
-            tile = Base;
-            break;
-          }
-          case _Arprt: {
-            tile = Airport;
-            break;
-          }
-          case _Port: {
-            tile = Port;
-            break;
-          }
-          case _Silo: {
-            tile = Silo;
-            break;
-          }
-          default:
-          }
-
-          data[(iy * map_size_x) + ix] = tile;
-        } else {
-          MakeTile(); // doesn't seem to work for properties atm
-        }
-
-        // data[(iy * map_size_x) + ix] = tiles[i].tile;
+        MakeSomeTile(ix, iy, tiles[i].tile, map_size_x, data);
       }
     }
   }
@@ -1117,7 +1163,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   for (int i = 0; i < 0x40; ++i) {
     Unk_200B000[i] = someData[i] - 1;
   }
-  gActiveMap = activeMap;
+  gActiveMap = (void *)activeMap;
   gCh = cID;
 }
 
