@@ -982,6 +982,14 @@ extern u8 Unk_200B007;
 #define Plain4 0x10C >> 2
 extern void MakeProperty(int id, int ix, int iy);
 
+void AddPropertyByID(int id, int ix, int iy, int map_size_x, u16 data[]) {
+  if (gActiveMap->Surplus > 55) {
+    return;
+  }
+  gActiveMap->Surplus++;
+  data[(iy * map_size_x) + ix] = id;
+}
+
 void MakeSomeTile(int ix, int iy, int tile, int map_size_x, u16 data[]) {
   // tile = _City;
   gActiveMap->SelectedTile = tile; // needed
@@ -993,27 +1001,27 @@ void MakeSomeTile(int ix, int iy, int tile, int map_size_x, u16 data[]) {
 
   switch (tile) {
   case _City: {
-    data[(iy * map_size_x) + ix] = City;
+    AddPropertyByID(City, ix, iy, map_size_x, data);
     // MakeProperty(0, ix, iy);
     break;
   }
   case _Base: {
-    data[(iy * map_size_x) + ix] = Base;
+    AddPropertyByID(Base, ix, iy, map_size_x, data);
     // MakeProperty(1, ix, iy);
     break;
   }
   case _Arprt: {
-    data[(iy * map_size_x) + ix] = Airport;
+    AddPropertyByID(Airport, ix, iy, map_size_x, data);
     // MakeProperty(2, ix, iy);
     break;
   }
   case _Port: {
-    data[(iy * map_size_x) + ix] = Port;
+    AddPropertyByID(Port, ix, iy, map_size_x, data);
     // MakeProperty(3, ix, iy);
     break;
   }
   case _Silo: {
-    data[(iy * map_size_x) + ix] = Silo;
+    AddPropertyByID(Silo, ix, iy, map_size_x, data);
     // MakeProperty(4, ix, iy);
     break;
   }
