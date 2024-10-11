@@ -781,7 +781,7 @@ extern void MakeForestSimple(int x, int y, int one);
 extern void MakeRiver(int x, int y);
 extern void MakeSea(int x, int y, int one);
 extern void MakeSeaSafe(int x, int y, int one);
-extern void MakeSeaSafest(int x, int y, int one);
+extern void MakeSeaSafest(int x, int y);
 extern void MakeBridge(int x, int y, int one);
 extern void MakeShoal(int x, int y, int one);
 extern void MakePipe(int x, int y);
@@ -863,6 +863,10 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
     func = MakeRiver;
     break;
   }
+  case _Sea: {
+    func = MakeSeaSafest;
+    break;
+  }
   default:
   }
   // void MyFunction(int x, int y) = MakeRoad();
@@ -889,9 +893,9 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
     backtrackChance += attempts < 200 ? 2 : 5;
     if (!Mod(attempts, freq)) {
       dir = HashByte_Ch(
-          dir, 2, x,
+          dir, 2, x + id,
           attempts); // Randomly choose between 0 (horizontal) or 1 (vertical)
-      backtrack = HashByte_Ch(backtrack, backtrackChance, y, attempts);
+      backtrack = HashByte_Ch(backtrack, backtrackChance, y + id, attempts);
     }
     // int backtrack = ModNum(rand, 4); // 25% chance of backtracking
 
@@ -919,7 +923,7 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
     // mapTileData[(y * sizeX) + x] =
     // 0x104; // because MakeRoad doesn't write to mapTileData when only
     // displaying the preview, I guess?
-
+    mapTileData[(y * sizeX) + x] = RoadH; // make it a plain first
     func(x, y);
 
     // tiles adjacent to HQ will be a base
@@ -944,6 +948,12 @@ void SetMapSize(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   }
   int x = dst->x;
   int y = dst->y;
+  if (x > 35) {
+    x = 35;
+  }
+  if (y > 35) {
+    y = 35;
+  }
   x = HashByte_Ch(gCh, x, 5, 0) + x / 2; // 50% to 150% of usual
   y = HashByte_Ch(gCh, y, 5, 0) + y / 2;
   // set min / max
@@ -953,15 +963,15 @@ void SetMapSize(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   if (y < 10) {
     y = 10;
   }
-  if (x > 30) {
-    x = 30;
+  if (x > 25) {
+    x = 25;
   }
-  if (y > 30) {
-    y = 30;
+  if (y > 25) {
+    y = 25;
   }
 
-  // dst->x = x;
-  // dst->y = y;
+  dst->x = x;
+  dst->y = y;
   head->x = dst->x;
   head->y = dst->y;
 }
@@ -1007,41 +1017,41 @@ extern struct activeMap *gActiveMap;
 
 const struct tileWeight defaultTiles[] = {
     {_Plain, 35}, {_River, 0}, {_Mtn, 45},  {_Wood, 45}, {_Road, 40},
-    {_City, 12},  {_Sea, 55},  {_Arprt, 2}, {_Port, 1},  {_Brdg, 15},
-    {_Shoal, 15}, {_Base, 8},  {_Pipe, 0},  {_Silo, 3},  {_Reef, 0},
+    {_City, 25},  {_Sea, 55},  {_Arprt, 4}, {_Port, 1},  {_Brdg, 15},
+    {_Shoal, 15}, {_Base, 15}, {_Pipe, 0},  {_Silo, 12}, {_Reef, 0},
 };
 
 const struct tileWeight mountainousTiles[] = {
     {_Plain, 15}, {_River, 0}, {_Mtn, 125}, {_Wood, 15}, {_Road, 15},
-    {_City, 12},  {_Sea, 15},  {_Arprt, 2}, {_Port, 1},  {_Brdg, 0},
-    {_Shoal, 0},  {_Base, 8},  {_Pipe, 0},  {_Silo, 2},  {_Reef, 0},
+    {_City, 25},  {_Sea, 15},  {_Arprt, 4}, {_Port, 1},  {_Brdg, 0},
+    {_Shoal, 0},  {_Base, 15}, {_Pipe, 0},  {_Silo, 8},  {_Reef, 0},
 };
 
 const struct tileWeight forestTiles[] = {
     {_Plain, 15}, {_River, 0}, {_Mtn, 25},  {_Wood, 155}, {_Road, 15},
-    {_City, 12},  {_Sea, 15},  {_Arprt, 2}, {_Port, 1},   {_Brdg, 0},
-    {_Shoal, 0},  {_Base, 8},  {_Pipe, 0},  {_Silo, 2},   {_Reef, 0},
+    {_City, 25},  {_Sea, 15},  {_Arprt, 4}, {_Port, 1},   {_Brdg, 0},
+    {_Shoal, 0},  {_Base, 15}, {_Pipe, 0},  {_Silo, 4},   {_Reef, 0},
 };
 
 const struct tileWeight industrialTiles[] = {
     {_Plain, 15}, {_River, 0}, {_Mtn, 15},   {_Wood, 15}, {_Road, 155},
-    {_City, 12},  {_Sea, 15},  {_Arprt, 2},  {_Port, 1},  {_Brdg, 80},
-    {_Shoal, 10}, {_Base, 8},  {_Pipe, 100}, {_Silo, 8},  {_Reef, 0},
+    {_City, 25},  {_Sea, 15},  {_Arprt, 6},  {_Port, 1},  {_Brdg, 80},
+    {_Shoal, 10}, {_Base, 20}, {_Pipe, 100}, {_Silo, 25}, {_Reef, 0},
 };
 const struct tileWeight pipeTiles[] = {
-    {_Plain, 15}, {_River, 0}, {_Mtn, 15},   {_Wood, 15}, {_Road, 100},
-    {_City, 12},  {_Sea, 15},  {_Arprt, 2},  {_Port, 1},  {_Brdg, 80},
-    {_Shoal, 10}, {_Base, 8},  {_Pipe, 255}, {_Silo, 8},  {_Reef, 0},
+    {_Plain, 15}, {_River, 0}, {_Mtn, 15},   {_Wood, 15}, {_Road, 60},
+    {_City, 25},  {_Sea, 15},  {_Arprt, 4},  {_Port, 1},  {_Brdg, 40},
+    {_Shoal, 10}, {_Base, 15}, {_Pipe, 255}, {_Silo, 12}, {_Reef, 0},
 };
 const struct tileWeight waterTiles[] = {
-    {_Plain, 15},  {_River, 15}, {_Mtn, 15},  {_Wood, 15}, {_Road, 20},
-    {_City, 12},   {_Sea, 155},  {_Arprt, 1}, {_Port, 2},  {_Brdg, 80},
-    {_Shoal, 155}, {_Base, 8},   {_Pipe, 20}, {_Silo, 2},  {_Reef, 10},
+    {_Plain, 15},  {_River, 0}, {_Mtn, 15},  {_Wood, 15}, {_Road, 20},
+    {_City, 25},   {_Sea, 155}, {_Arprt, 6}, {_Port, 8},  {_Brdg, 80},
+    {_Shoal, 155}, {_Base, 15}, {_Pipe, 20}, {_Silo, 6},  {_Reef, 10},
 };
 const struct tileWeight riverTiles[] = {
-    {_Plain, 15},  {_River, 155}, {_Mtn, 15},  {_Wood, 15}, {_Road, 20},
-    {_City, 12},   {_Sea, 55},    {_Arprt, 1}, {_Port, 2},  {_Brdg, 80},
-    {_Shoal, 125}, {_Base, 8},    {_Pipe, 20}, {_Silo, 2},  {_Reef, 10},
+    {_Plain, 15}, {_River, 255}, {_Mtn, 15},  {_Wood, 15}, {_Road, 20},
+    {_City, 25},  {_Sea, 0},     {_Arprt, 6}, {_Port, 2},  {_Brdg, 80},
+    {_Shoal, 45}, {_Base, 15},   {_Pipe, 20}, {_Silo, 6},  {_Reef, 0},
 };
 
 // extern const u32 gTileBank[];
@@ -1083,10 +1093,12 @@ void MakeSomeTile(int ix, int iy, int tile, int map_size_x, u16 data[]) {
   }
   case _Mtn: {
     MakeMountain(ix, iy, 1);
+    // MakeTile();
     break;
   }
   case _Wood: {
-    MakeTileSimple(ix, iy, Forest);
+    // MakeTileSimple(ix, iy, Forest);
+    MakeTile();
     break;
   }
   case _Road: {
@@ -1095,7 +1107,7 @@ void MakeSomeTile(int ix, int iy, int tile, int map_size_x, u16 data[]) {
   }
   case _Sea: {
     // MakeTileSimple(ix, iy, Sea);
-    MakeSeaSafest(ix, iy, 1); // destroys properties
+    MakeSeaSafest(ix, iy); // destroys properties
     break;
   }
   case _Brdg: {
@@ -1104,7 +1116,7 @@ void MakeSomeTile(int ix, int iy, int tile, int map_size_x, u16 data[]) {
     break;
   }
   case _Shoal: {
-    // MakeSeaSafest(ix, iy, 1); // destroys properties
+    // MakeSeaSafest(ix, iy); // destroys properties
     MakeTile();
     // MakeShoal(ix, iy, 1);
     break;
@@ -1118,8 +1130,8 @@ void MakeSomeTile(int ix, int iy, int tile, int map_size_x, u16 data[]) {
     break;
   }
   case _Reef: {
-    MakeTileSimple(ix, iy, Reef);
-    // MakeReefSafe(ix, iy, 1);
+    // MakeTileSimple(ix, iy, Reef);
+    MakeReefSafe(ix, iy, 1);
     break;
   }
   case _City: {
@@ -1209,6 +1221,11 @@ void PlaceHQAndBase(int x, int y, int sizeX, int sizeY, int faction, u16 *data,
   numberOfBases -= SetDataIfValidCoord(x, y + 1, sizeX, sizeY, tile, data);
 }
 extern void SetSelectedTile(int);
+
+const u8 WigglyLineTypes[] = {
+    _Road, _River, _River, _Pipe, _Sea, 0,
+};
+
 void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   if (!ShouldMapBeRandomized()) {
     return;
@@ -1263,6 +1280,31 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   int qMaxY = map_size_y >> 1;
   int qMin;
   int offset = 0;
+
+  // draw a wiggly road, river, pipe, or sea
+
+  q.x = HashByte_Ch(map_size_x, 2, map_size_y,
+                    offset + 12); // quadrant 0, 1 as left or right
+  q.y = HashByte_Ch(map_size_y, 2, map_size_x, offset + 15); // up or down
+  qMin = (map_size_x >> 1) * q.x;
+  p1.x = HashByte_Ch(map_size_x, qMaxX, map_size_y, offset + 4) + qMin;
+
+  qMin = (map_size_y >> 1) * q.y;
+  p1.y = HashByte_Ch(map_size_y, qMaxY, map_size_x, offset + 6) + qMin;
+  int type = WigglyLineTypes[Mod(p1.x + p1.y, sizeof(WigglyLineTypes))];
+  q.x = !q.x;
+  q.y = !q.y; // opposite corner
+  qMin = (map_size_x >> 1) * q.x;
+  p2.x = HashByte_Ch(p1.y, qMaxX, gCh, offset + 7) + qMin;
+
+  qMin = (map_size_y >> 1) * q.y;
+  p2.y = HashByte_Ch(p2.x, qMaxY, gCh, offset + 9) + qMin;
+
+  if (type) {
+    drawWigglyRoad(p1.x, p1.y, p2.x, p2.y, map_size_x, 0, 1, type);
+  }
+
+  // draw a road and connect HQs
   q.x = HashByte_Ch(gCh, 2, gCh, offset + 5); // quadrant 0, 1 as left or right
   q.y = HashByte_Ch(gCh, 2, gCh, offset + 8); // up or down
   qMin = (map_size_x >> 1) * q.x;
@@ -1284,6 +1326,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   p3.y = Mod(p2.y + (map_size_y >> 1), map_size_y);
   if (numberOfPlayers > 2) {
     drawWigglyRoad(p2.x, p2.y, p3.x, p3.y, map_size_x, 1, 2, _Road);
+    drawWigglyRoad(p1.x, p1.y, p3.x, p3.y, map_size_x, 0, 2, _Road);
   }
   p4.x = Mod(p2.x + (map_size_x >> 1), map_size_x);
   p4.y = p2.y;
@@ -1292,6 +1335,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
     p3.y = p1.y;
 
     drawWigglyRoad(p3.x, p3.y, p4.x, p4.y, map_size_x, 2, 3, _Road);
+    drawWigglyRoad(p2.x, p2.y, p4.x, p4.y, map_size_x, 1, 3, _Road);
   }
 
   // gCh = cID; // remove later
