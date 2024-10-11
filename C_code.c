@@ -1042,7 +1042,7 @@ struct activeMap {
 extern struct activeMap *gActiveMap;
 
 const struct tileWeight defaultTiles[] = {
-    {_Plain, 35}, {_River, 0}, {_Mtn, 45},  {_Wood, 45}, {_Road, 40},
+    {_Plain, 85}, {_River, 0}, {_Mtn, 45},  {_Wood, 45}, {_Road, 40},
     {_City, 25},  {_Sea, 55},  {_Arprt, 4}, {_Port, 1},  {_Brdg, 15},
     {_Shoal, 15}, {_Base, 15}, {_Pipe, 0},  {_Silo, 12}, {_Reef, 0},
 };
