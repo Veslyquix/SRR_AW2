@@ -724,7 +724,6 @@ int HashRange(int number, int noise, int offset, int otherNum, int coPow) {
 // [201ee72]!!
 // f4e0 - make road at coords?
 // to 201E450 ram / 201EE72
-extern void MakeRoad(int x, int y);
 
 extern void MakeTile(void); // uses above three ram
 extern u16 mapTileData[];
@@ -773,6 +772,22 @@ int NextRN(int val) {
   return val;
 }
 
+extern void MakeRoad(int x, int y);
+extern void MakeRoadSimple(int x, int y);
+extern void MakeTileSimple(int x, int y, int tile);
+extern void MakeMountain(int x, int y, int one);
+extern void MakeForest(int x, int y, int one);
+extern void MakeForestSimple(int x, int y, int one);
+extern void MakeRiver(int x, int y);
+extern void MakeSea(int x, int y, int one);
+extern void MakeSeaSafe(int x, int y, int one);
+extern void MakeSeaSafest(int x, int y, int one);
+extern void MakeBridge(int x, int y, int one);
+extern void MakeShoal(int x, int y, int one);
+extern void MakePipe(int x, int y);
+extern void MakeSeam(int x, int y, int one);
+extern void MakeReefSafe(int x, int y, int one);
+
 #define HQ_OS (0x714 >> 2)
 #define BASE_OS (0x718 >> 2)
 #define HQ_BM (0x728 >> 2)
@@ -785,8 +800,9 @@ int NextRN(int val) {
 #define Mountain 0x80 >> 2
 #define Plain 0x4 >> 2
 #define Forest 0x21C >> 2
-#define Sea 0x20 >> 2 // 1 tile of sea in plains
-// #define SeaC 0xA8 >> 2 // connecting to sea
+#define Sea 0x20 >> 2  // 1 tile of sea in plains
+#define SeaC 0xA8 >> 2 // connecting to sea
+#define Reef 0x5A0 >> 2
 
 #define HQ 0x700 >> 2
 #define Base 0x704 >> 2
@@ -796,22 +812,62 @@ int NextRN(int val) {
 
 #define Silo 0x600 >> 2
 
-#define BridgeH 0x50 >> 2
-#define BridgeV 0x58 >> 2
-#define RoadV 0x100 >> 2
-#define RoadH 0x184 >> 2
+#define BridgeH (0x50 >> 2)
+#define BridgeV (0x58 >> 2)
+#define RoadV (0x100 >> 2)
+#define RoadH (0x184 >> 2)
 
 #define Laser 0x604 >> 2
 #define Cannon 0x608 >> 2
 #define Volcano 0x69C >> 2
 
+// Design room definitions
+// 0
+#define _Plain 1
+#define _River 2
+#define _Mtn 3
+#define _Wood 4
+#define _Road 5
+#define _City 6
+#define _Sea 7
+#define _HQ 8
+// 9
+#define _Arprt 0xA
+#define _Port 0xB
+#define _Brdg 0xC
+#define _Shoal 0xD
+#define _Base 0xE
+#define _Pipe 0xF
+#define _Seam 0x10
+#define _Silo 0x11
+// 0x12
+#define _Reef 0x13
+
 // Randomized wiggly line function without diagonal moves and ensuring no gaps
 void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
-                    int factionB) {
+                    int factionB, int id) {
 
   int x = xA, y = yA;
   // mapTileData[(y * sizeX) + x] = 0x104; // Mark the start point [201ee78]!!
-  MakeRoad(x, y); // Mark the start point
+  void (*func)(int x, int y) = MakeRoad; // default
+  switch (id) {
+  case _Road: {
+    func = MakeRoad;
+    break;
+  }
+  case _Pipe: {
+    func = MakePipe;
+    break;
+  }
+  case _River: {
+    func = MakeRiver;
+    break;
+  }
+  default:
+  }
+  // void MyFunction(int x, int y) = MakeRoad();
+
+  func(x, y); // Mark the start point
   int attempts = 0;
   int dir = 0;
   int backtrack = 0;
@@ -864,18 +920,21 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
     // 0x104; // because MakeRoad doesn't write to mapTileData when only
     // displaying the preview, I guess?
 
+    func(x, y);
+
     // tiles adjacent to HQ will be a base
-    if ((ABS(x - xA) + ABS(y - yA)) == 1) {
-      mapTileData[(y * sizeX) + x] = BASE_OS + (factionA * 5);
-    } else if ((ABS(x - xB) + ABS(y - yB)) == 1) {
-      mapTileData[(y * sizeX) + x] = BASE_OS + (factionB * 5);
-    } else {
-      MakeRoad(x, y);
-    }
+    // if ((ABS(x - xA) + ABS(y - yA)) == 1) {
+    // mapTileData[(y * sizeX) + x] = BASE_OS + (factionA * 5);
+    // } else if ((ABS(x - xB) + ABS(y - yB)) == 1) {
+    // mapTileData[(y * sizeX) + x] = BASE_OS + (factionB * 5);
+    // } else {
+    // MakeRoad(x, y);
+    // }
     //  dst->data[(y * map_size_x) + x] = mapTileData[(y * map_size_x) + x];
     //   dst->data[(y * map_size_x) + x] = value;
   }
-  // mapTileData[(yA * sizeX) + xA] = HQ_OS;
+  // mapTileData[(yA * sizeX) + xA] = HQ_OS + (factionA * 5);
+  // mapTileData[(y * sizeX) + x] = HQ_OS + (factionB * 5);
   // mapTileData[(yB * sizeX) + xB] = HQ_BM;
 }
 
@@ -946,43 +1005,8 @@ struct activeMap {
 // clang-format on
 extern struct activeMap *gActiveMap;
 
-// enum {
-// Possible MU States
-
-// MU_STATE_NONE,
-// _Plain,
-// MU_STATE_MOVEMENT,
-// MU_STATE_SLEEPING,
-// MU_STATE_UNK4,
-// MU_STATE_BUMPING,
-// MU_STATE_DISPLAY_UI,
-// MU_STATE_DEATHFADE,
-// };
-
-// Design room definitions
-// 0
-#define _Plain 1
-#define _River 2
-#define _Mtn 3
-#define _Wood 4
-#define _Road 5
-#define _City 6
-#define _Sea 7
-#define _HQ 8
-// 9
-#define _Arprt 0xA
-#define _Port 0xB
-#define _Brdg 0xC
-#define _Shoal 0xD
-#define _Base 0xE
-#define _Pipe 0xF
-#define _Seam 0x10
-#define _Silo 0x11
-// 0x12
-#define _Reef 0x13
-
 const struct tileWeight defaultTiles[] = {
-    {_Plain, 35}, {_River, 0}, {_Mtn, 75},  {_Wood, 75}, {_Road, 40},
+    {_Plain, 35}, {_River, 0}, {_Mtn, 45},  {_Wood, 45}, {_Road, 40},
     {_City, 12},  {_Sea, 55},  {_Arprt, 2}, {_Port, 1},  {_Brdg, 15},
     {_Shoal, 15}, {_Base, 8},  {_Pipe, 0},  {_Silo, 3},  {_Reef, 0},
 };
@@ -993,20 +1017,37 @@ const struct tileWeight mountainousTiles[] = {
     {_Shoal, 0},  {_Base, 8},  {_Pipe, 0},  {_Silo, 2},  {_Reef, 0},
 };
 
+const struct tileWeight forestTiles[] = {
+    {_Plain, 15}, {_River, 0}, {_Mtn, 25},  {_Wood, 155}, {_Road, 15},
+    {_City, 12},  {_Sea, 15},  {_Arprt, 2}, {_Port, 1},   {_Brdg, 0},
+    {_Shoal, 0},  {_Base, 8},  {_Pipe, 0},  {_Silo, 2},   {_Reef, 0},
+};
+
 const struct tileWeight industrialTiles[] = {
-    {_Plain, 15}, {_River, 0}, {_Mtn, 15},   {_Wood, 15}, {_Road, 255},
+    {_Plain, 15}, {_River, 0}, {_Mtn, 15},   {_Wood, 15}, {_Road, 155},
     {_City, 12},  {_Sea, 15},  {_Arprt, 2},  {_Port, 1},  {_Brdg, 80},
     {_Shoal, 10}, {_Base, 8},  {_Pipe, 100}, {_Silo, 8},  {_Reef, 0},
 };
-const struct tileWeight waterTiles[] = {
-    {_Plain, 15}, {_River, 15}, {_Mtn, 15},  {_Wood, 15}, {_Road, 40},
-    {_City, 12},  {_Sea, 155},  {_Arprt, 1}, {_Port, 2},  {_Brdg, 80},
-    {_Shoal, 15}, {_Base, 8},   {_Pipe, 20}, {_Silo, 2},  {_Reef, 10},
+const struct tileWeight pipeTiles[] = {
+    {_Plain, 15}, {_River, 0}, {_Mtn, 15},   {_Wood, 15}, {_Road, 100},
+    {_City, 12},  {_Sea, 15},  {_Arprt, 2},  {_Port, 1},  {_Brdg, 80},
+    {_Shoal, 10}, {_Base, 8},  {_Pipe, 255}, {_Silo, 8},  {_Reef, 0},
 };
+const struct tileWeight waterTiles[] = {
+    {_Plain, 15},  {_River, 15}, {_Mtn, 15},  {_Wood, 15}, {_Road, 20},
+    {_City, 12},   {_Sea, 155},  {_Arprt, 1}, {_Port, 2},  {_Brdg, 80},
+    {_Shoal, 155}, {_Base, 8},   {_Pipe, 20}, {_Silo, 2},  {_Reef, 10},
+};
+const struct tileWeight riverTiles[] = {
+    {_Plain, 15},  {_River, 155}, {_Mtn, 15},  {_Wood, 15}, {_Road, 20},
+    {_City, 12},   {_Sea, 55},    {_Arprt, 1}, {_Port, 2},  {_Brdg, 80},
+    {_Shoal, 125}, {_Base, 8},    {_Pipe, 20}, {_Silo, 2},  {_Reef, 10},
+};
+
 // extern const u32 gTileBank[];
-#define NumberOfBanks 4
-const struct tileWeight *const gTileBank[] = {defaultTiles, mountainousTiles,
-                                              industrialTiles, waterTiles};
+const struct tileWeight *const gTileBank[] = {
+    defaultTiles, mountainousTiles, forestTiles, industrialTiles,
+    pipeTiles,    waterTiles,       riverTiles};
 
 extern u8 Unk_200B007;
 
@@ -1014,7 +1055,7 @@ extern u8 Unk_200B007;
 #define Plain3 0xC >> 2
 #define Plain4 0x10C >> 2
 extern void MakeProperty(int id, int ix, int iy);
-
+// 8800f8e
 void AddPropertyByID(int id, int ix, int iy, int map_size_x, u16 data[]) {
   if (gActiveMap->Surplus > 55) {
     return;
@@ -1024,7 +1065,6 @@ void AddPropertyByID(int id, int ix, int iy, int map_size_x, u16 data[]) {
 }
 
 void MakeSomeTile(int ix, int iy, int tile, int map_size_x, u16 data[]) {
-  // tile = _City;
   gActiveMap->SelectedTile = tile; // needed
   // Unk_200B036 = tiles[i].tile; // ??
 
@@ -1033,6 +1073,55 @@ void MakeSomeTile(int ix, int iy, int tile, int map_size_x, u16 data[]) {
   // MakeTile();
 
   switch (tile) {
+  case _Plain: {
+    MakeTileSimple(ix, iy, Plain);
+    break;
+  }
+  case _River: {
+    MakeRiver(ix, iy);
+    break;
+  }
+  case _Mtn: {
+    MakeMountain(ix, iy, 1);
+    break;
+  }
+  case _Wood: {
+    MakeTileSimple(ix, iy, Forest);
+    break;
+  }
+  case _Road: {
+    MakeRoad(ix, iy); // destroys properties
+    break;
+  }
+  case _Sea: {
+    // MakeTileSimple(ix, iy, Sea);
+    MakeSeaSafest(ix, iy, 1); // destroys properties
+    break;
+  }
+  case _Brdg: {
+    // MakeBridge(ix, iy, 1);
+    MakeTileSimple(ix, iy, BridgeH + (Mod(Mod(ix, iy), 2) << 1));
+    break;
+  }
+  case _Shoal: {
+    // MakeSeaSafest(ix, iy, 1); // destroys properties
+    MakeTile();
+    // MakeShoal(ix, iy, 1);
+    break;
+  }
+  case _Pipe: {
+    MakePipe(ix, iy);
+    break;
+  }
+  case _Seam: {
+    MakeSeam(ix, iy, 1);
+    break;
+  }
+  case _Reef: {
+    MakeTileSimple(ix, iy, Reef);
+    // MakeReefSafe(ix, iy, 1);
+    break;
+  }
   case _City: {
     AddPropertyByID(City, ix, iy, map_size_x, data);
     // MakeProperty(0, ix, iy);
@@ -1075,6 +1164,50 @@ void memcpy(void *s1, const void *s2, size_t n) {
   }
 }*/
 extern int GetNumberOfPlayers(void);
+int ValidCoord(int x, int y, int sizeX, int sizeY) {
+  if (x < 0 || y < 0) {
+    return false;
+  }
+  if (x >= sizeX || y >= sizeY) {
+    return false;
+  }
+  return true;
+}
+
+int SetDataIfValidCoord(int x, int y, int sizeX, int sizeY, int tile,
+                        u16 *data) {
+  if (ValidCoord(x, y, sizeX, sizeY)) {
+    data[((y)*sizeX) + (x)] = tile;
+    return 1;
+  }
+  return 0;
+}
+
+void PlaceHQAndBase(int x, int y, int sizeX, int sizeY, int faction, u16 *data,
+                    int numberOfBases) {
+
+  MakeRoad(x - 1, y);
+  MakeRoad(x + 1, y);
+  MakeRoad(x, y - 1);
+  MakeRoad(x, y + 1);
+  data[(y * sizeX) + x] = HQ_OS + (faction * 5);
+
+  int tile = BASE_OS + (faction * 5);
+  numberOfBases -= SetDataIfValidCoord(x - 1, y, sizeX, sizeY, tile, data);
+
+  if (numberOfBases <= 0) {
+    return;
+  }
+  numberOfBases -= SetDataIfValidCoord(x + 1, y, sizeX, sizeY, tile, data);
+  if (numberOfBases <= 0) {
+    return;
+  }
+  numberOfBases -= SetDataIfValidCoord(x, y - 1, sizeX, sizeY, tile, data);
+  if (numberOfBases <= 0) {
+    return;
+  }
+  numberOfBases -= SetDataIfValidCoord(x, y + 1, sizeX, sizeY, tile, data);
+}
 extern void SetSelectedTile(int);
 void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   if (!ShouldMapBeRandomized()) {
@@ -1115,6 +1248,14 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
     }
   }
 
+  // Unk_200B007 = 0;
+  // gActiveMap->SelectedTile = _Plain;
+  // SelectedTile_3A = 0;
+  // PreviousTile_3C = 9;
+  // Surplus = 0; // at 0x800C468 it checks if this is <= 0x3B
+  gActiveMap->Surplus = 0;
+  gActiveMap->factionProperties = 0;
+
   // int pathLength = 15;
   // int amountOfPaths = map_size_y * map_size_x;
   struct Vec2u p1, p2, p3, p4, q;
@@ -1138,24 +1279,19 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   qMin = (map_size_y >> 1) * q.y;
   p2.y = HashByte_Ch(p2.x, qMaxY, gCh, offset + 3) + qMin;
 
-  drawWigglyRoad(p1.x, p1.y, p2.x, p2.y, map_size_x, 0, 1);
-
-  if (numberOfPlayers == 4) {
+  drawWigglyRoad(p1.x, p1.y, p2.x, p2.y, map_size_x, 0, 1, _Road);
+  p3.x = p2.x;
+  p3.y = Mod(p2.y + (map_size_y >> 1), map_size_y);
+  if (numberOfPlayers > 2) {
+    drawWigglyRoad(p2.x, p2.y, p3.x, p3.y, map_size_x, 1, 2, _Road);
+  }
+  p4.x = Mod(p2.x + (map_size_x >> 1), map_size_x);
+  p4.y = p2.y;
+  if (numberOfPlayers > 3) {
     p3.x = Mod(p1.x + (map_size_x >> 1), map_size_x);
     p3.y = p1.y;
-    // p1.y = Mod(p1.y + (map_size_y >> 1), map_size_y);
-    // p2.x = Mod(p2.x + (map_size_x >> 1), map_size_x);
-    p4.x = Mod(p2.x + (map_size_x >> 1), map_size_x);
-    p4.y = p2.y;
-    drawWigglyRoad(p3.x, p3.y, p4.x, p4.y, map_size_x, 2, 3);
-  }
-  if (numberOfPlayers == 3) {
-    // p1.x = Mod(p1.x + (map_size_x >> 1), map_size_x);
-    p3.x = p2.x;
-    p3.y = Mod(p2.y + (map_size_y >> 1), map_size_y);
-    // p2.x = Mod(p2.x + (map_size_x >> 1), map_size_x);
-    // p2.y = Mod(p2.y + (map_size_y >> 1), map_size_y);
-    drawWigglyRoad(p2.x, p2.y, p3.x, p3.y, map_size_x, 1, 2);
+
+    drawWigglyRoad(p3.x, p3.y, p4.x, p4.y, map_size_x, 2, 3, _Road);
   }
 
   // gCh = cID; // remove later
@@ -1170,8 +1306,8 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
     }
   }
 
-  // sizeof(gTileBank) >> 0
-  const struct tileWeight *bank = gTileBank[Mod(q.x, NumberOfBanks)];
+  const struct tileWeight *bank = gTileBank[HashByte_Ch(
+      gActiveMap->Surplus, sizeof(gTileBank) >> 2, p1.x, p1.y)];
   // const struct tileWeight *bank = gTileBank[0];
   int totalWeight = 0;
   int size = (sizeof(defaultTiles) >> 2);
@@ -1181,14 +1317,6 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
     tiles[i].tile = bank[i].tile;
     tiles[i].weight = totalWeight;
   }
-
-  // Unk_200B007 = 0;
-  // gActiveMap->SelectedTile = _Plain;
-  // SelectedTile_3A = 0;
-  // PreviousTile_3C = 9;
-  // Surplus = 0; // at 0x800C468 it checks if this is <= 0x3B
-  gActiveMap->Surplus = 0;
-  gActiveMap->factionProperties = 0;
 
   for (int iy = map_size_y - 1; iy >= 0;
        iy--) { // fill in borders with plains, forest, or mountains
@@ -1212,19 +1340,17 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   }
 
   // for some reason MakeTile kills some properties so gotta place 'em again
-  data[(p1.y * map_size_x) + p1.x + 1] = BASE_OS;
-  data[(p1.y * map_size_x) + p1.x] = HQ_OS;
-  data[(p2.y * map_size_x) + p2.x + 1] = BASE_BM;
-  data[(p2.y * map_size_x) + p2.x] = HQ_BM;
-  if (numberOfPlayers == 3) {
-    data[(p3.y * map_size_x) + p3.x + 1] = BASE_GE;
-    data[(p3.y * map_size_x) + p3.x] = HQ_GE;
+  PlaceHQAndBase(p1.x, p1.y, map_size_x, map_size_y, 0, data,
+                 Mod(p1.x + p1.y, 3) + 2);
+  PlaceHQAndBase(p2.x, p2.y, map_size_x, map_size_y, 1, data,
+                 Mod(p2.x + p2.y, 3) + 2);
+  if (numberOfPlayers > 2) {
+    PlaceHQAndBase(p3.x, p3.y, map_size_x, map_size_y, 2, data,
+                   Mod(p3.x + p3.y, 3) + 2);
   }
-  if (numberOfPlayers == 4) {
-    data[(p3.y * map_size_x) + p3.x + 1] = BASE_GE;
-    data[(p3.y * map_size_x) + p3.x] = HQ_GE;
-    data[(p4.y * map_size_x) + p4.x + 1] = BASE_YS;
-    data[(p4.y * map_size_x) + p4.x] = HQ_YS;
+  if (numberOfPlayers > 3) {
+    PlaceHQAndBase(p4.x, p4.y, map_size_x, map_size_y, 3, data,
+                   Mod(p4.x + p4.y, 3) + 2);
   }
 
   data = dst->data;
@@ -1266,7 +1392,7 @@ void CopyMapPiece(u16 dst[], u8 placement_x, u8 placement_y, u8 map_size_x,
       }
     }
   }
-  int loc;
+  int loc, tile;
   // this is to stop it from drawing outside the map / from one side to
   // another
   if (!(((piece_size_x + placement_x) > map_size_x) ||
@@ -1276,7 +1402,18 @@ void CopyMapPiece(u16 dst[], u8 placement_x, u8 placement_y, u8 map_size_x,
         loc = ((placement_y + y) * map_size_x) + placement_x + x;
         // dst[((placement_y+y) * map_size_x) + placement_x+x] =
         // T->data[y*piece_size_x+x];
-        dst[loc] = T->data[y * piece_size_x + x] >> 2;
+        tile = T->data[y * piece_size_x + x] >> 2;
+        switch (tile) {
+        case City:
+        case Base:
+        case Airport:
+        case Port:
+        case Silo: {
+          gActiveMap->Surplus++;
+        }
+        default:
+        }
+        dst[loc] = tile;
       }
     }
   }

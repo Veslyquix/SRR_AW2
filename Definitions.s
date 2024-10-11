@@ -12,20 +12,48 @@
 	.set    \name, \value
 .endm
 
+SET_FUNC MakeRiver, 0x8009F11 
+SET_FUNC MakeMountain, 0x800b049 
+SET_FUNC MakeForest, 0x800CF29
+    SET_FUNC MakeForestSimple, 0x8007d71 
+SET_FUNC MakeRoad, 0x800f4e1 
+    SET_FUNC MakeRoadSimple, 0x80080f9 
+
+SET_FUNC MakeProperty, 0x800C455 @ r0 x r1 y r2 as _City  
+SET_FUNC EnsureValidTile, 0x8008BB9 @ might delete surrounding tiles or something 
+SET_FUNC MakeProperty2, 0x8008A8D @ r0 as 0-4, r1 x r2 y 
+
+SET_FUNC MakeSeaSafest 0x8007CA1 
+SET_FUNC MakeSeaSafe, 0x8007c05 @ ??? 
+SET_FUNC MakeSea, 0x8007BA5 
+
+@SET_FUNC MakeHQ, 0x800C455 same as MakeProperty 
+SET_FUNC MakeBridge, 0x8008F6D 
+SET_FUNC MakeShoal, 0x8007BA5 @ Called by MakeSeaSafe
+SET_FUNC MakePipe, 0x8010D29 
+SET_FUNC MakeSeam, 0x8010D81 
+SET_FUNC MakeReefSafe, 0x800BF79 
+
 SET_DATA mapTileData, 0x201EE72
-SET_FUNC MakeRoad, 0x800f4e1 @ 0x80080f8 
-SET_FUNC MakeMountain, 0x800b049 @ ? 1 
-SET_FUNC MakeSea, 0x8007c05 @ ??? 
-SET_FUNC MakeRiver, 0x8009FE1 
-SET_FUNC MakeTile2, 0x8007F15 @ generic? includes forest? 
+
+
+SET_FUNC MakeTile, 0x80085E1 @ 
+SET_FUNC MakeTile2, 0x8007F15 
+SET_FUNC MakeTile3, 0x800CEF9 
+SET_FUNC MakeTileSimple, 0x8001159 @ r0 x r1 y r2 tile 
+
+
+
 @ 0 forest, 1 plain, 
 
 @ store tile into 0x200B000 
 @ coord x into 0x200b008, y into 0x200b00a 
-SET_FUNC MakeTile, 0x80085E1 @ 
+
+
+
+
 SET_FUNC SetSelectedTile, 0x8000CCD @ [200b02a]!! 
-SET_FUNC MakePropertySafe, 0x8008BB9 @ doesn't work for my use case 
-SET_FUNC MakeProperty, 0x8008A8D @ r0 as 0-4, r1 x r2 y 
+
 SET_DATA Unk_200B06A, 0x200B06A @ byte stored to after making a tile 
 
 SET_DATA Unk_200B000, 0x200B000 
