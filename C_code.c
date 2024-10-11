@@ -843,6 +843,15 @@ extern void MakeReefSafe(int x, int y, int one);
 // 0x12
 #define _Reef 0x13
 
+// #define ForceSizeX 20
+// #define ForceSizeY 15
+#define LineSegment
+#define HQs
+#define Pieces
+#define Filler
+// #define ForceTileBank defaultTiles
+// #define ForceType _Sea
+
 // Randomized wiggly line function without diagonal moves and ensuring no gaps
 void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
                     int factionB, int id) {
@@ -850,8 +859,11 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
   int x = xA, y = yA;
   // mapTileData[(y * sizeX) + x] = 0x104; // Mark the start point [201ee78]!!
   void (*func)(int x, int y) = MakeRoad; // default
+  int tile = Plain;
   switch (id) {
   case _Road: {
+    // tile = RoadH;
+    tile = 0;
     func = MakeRoad;
     break;
   }
@@ -864,6 +876,7 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
     break;
   }
   case _Sea: {
+    tile = SeaC;
     func = MakeSeaSafest;
     break;
   }
@@ -898,7 +911,13 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
       backtrack = HashByte_Ch(backtrack, backtrackChance, y + id, attempts);
     }
     // int backtrack = ModNum(rand, 4); // 25% chance of backtracking
-
+    if (tile == RoadH || tile == RoadV) {
+      if (dir == 0) {
+        tile = RoadH;
+      } else {
+        tile = RoadV;
+      }
+    }
     // Horizontal dir
     if (dir == 0) {
       if (backtrack == 0 && x != xA) {
@@ -923,7 +942,9 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
     // mapTileData[(y * sizeX) + x] =
     // 0x104; // because MakeRoad doesn't write to mapTileData when only
     // displaying the preview, I guess?
-    mapTileData[(y * sizeX) + x] = RoadH; // make it a plain first
+    if (tile) {
+      mapTileData[(y * sizeX) + x] = tile; // make it a plain first
+    }
     func(x, y);
 
     // tiles adjacent to HQ will be a base
@@ -969,7 +990,12 @@ void SetMapSize(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   if (y > 25) {
     y = 25;
   }
-
+#ifdef ForceSizeX
+  x = ForceSizeX;
+#endif
+#ifdef ForceSizeY
+  y = ForceSizeY;
+#endif
   dst->x = x;
   dst->y = y;
   head->x = dst->x;
@@ -1198,10 +1224,18 @@ int SetDataIfValidCoord(int x, int y, int sizeX, int sizeY, int tile,
 void PlaceHQAndBase(int x, int y, int sizeX, int sizeY, int faction, u16 *data,
                     int numberOfBases) {
 
-  MakeRoad(x - 1, y);
-  MakeRoad(x + 1, y);
-  MakeRoad(x, y - 1);
-  MakeRoad(x, y + 1);
+  if (ValidCoord(x - 1, y, sizeX, sizeY)) {
+    MakeRoad(x - 1, y);
+  }
+  if (ValidCoord(x + 1, y, sizeX, sizeY)) {
+    MakeRoad(x + 1, y);
+  }
+  if (ValidCoord(x, y - 1, sizeX, sizeY)) {
+    MakeRoad(x, y - 1);
+  }
+  if (ValidCoord(x, y + 1, sizeX, sizeY)) {
+    MakeRoad(x, y + 1);
+  }
   data[(y * sizeX) + x] = HQ_OS + (faction * 5);
 
   int tile = BASE_OS + (faction * 5);
@@ -1251,6 +1285,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   u8 map_size_y = dst->y;
   int numberOfPlayers = GetNumberOfPlayers();
   int defaultTile = Plain;
+  u16 *data;
 
   // gActiveMap->SelectedTile = _Plain;
   // struct activeMap map = *gActiveMap;
@@ -1300,13 +1335,41 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   qMin = (map_size_y >> 1) * q.y;
   p2.y = HashByte_Ch(p2.x, qMaxY, gCh, offset + 9) + qMin;
 
+#ifdef ForceType
+  type = ForceType;
+#endif
+
   if (type) {
+    // make it extend to the edge of the map
+    if (p1.x > p1.y) {
+      if (p1.x > (map_size_x >> 1)) {
+        p1.x = map_size_x - 1;
+        p2.x = 0;
+      } else {
+        p1.y = 0;
+        p2.y = map_size_y - 1;
+      }
+    } else {
+      if (p1.y > (map_size_y >> 1)) {
+        p1.y = map_size_y - 1;
+        p2.y = 0;
+      } else {
+        p1.x = 0;
+        p2.x = map_size_x - 1;
+      }
+    }
+// now draw it
+#ifdef LineSegment
     drawWigglyRoad(p1.x, p1.y, p2.x, p2.y, map_size_x, 0, 1, type);
+#endif
   }
 
+#ifdef HQs
   // draw a road and connect HQs
-  q.x = HashByte_Ch(gCh, 2, gCh, offset + 5); // quadrant 0, 1 as left or right
-  q.y = HashByte_Ch(gCh, 2, gCh, offset + 8); // up or down
+  q.x = HashByte_Ch(gCh, 2, gCh, offset + 5); // quadrant 0, 1 as left or
+  // right
+  q.y = HashByte_Ch(gCh, 2, gCh,
+                    offset + 8); // up or down qMin = (map_size_x >> 1) * q.x;
   qMin = (map_size_x >> 1) * q.x;
   p1.x = HashByte_Ch(gCh, qMaxX, gCh, offset + 0) + qMin;
 
@@ -1337,10 +1400,13 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
     drawWigglyRoad(p3.x, p3.y, p4.x, p4.y, map_size_x, 2, 3, _Road);
     drawWigglyRoad(p2.x, p2.y, p4.x, p4.y, map_size_x, 1, 3, _Road);
   }
+#endif
 
+  data = mapTileData;
+#ifdef Pieces
   // gCh = cID; // remove later
   // return;
-  u16 *data = mapTileData;
+
   for (int iy = 0; iy < map_size_y; iy++) {
     for (int ix = 0; ix < map_size_x; ix++) {
       // dst->data[(iy * map_size_x) + ix] = 1;
@@ -1349,9 +1415,13 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
       CopyMapPiece(data, ix, iy, map_size_x, map_size_y, defaultTile);
     }
   }
+#endif
 
   const struct tileWeight *bank = gTileBank[HashByte_Ch(
       gActiveMap->Surplus, sizeof(gTileBank) >> 2, p1.x, p1.y)];
+#ifdef ForceTileBank
+  bank = ForceTileBank;
+#endif
   // const struct tileWeight *bank = gTileBank[0];
   int totalWeight = 0;
   int size = (sizeof(defaultTiles) >> 2);
@@ -1362,6 +1432,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
     tiles[i].weight = totalWeight;
   }
 
+#ifdef Filler
   for (int iy = map_size_y - 1; iy >= 0;
        iy--) { // fill in borders with plains, forest, or mountains
     for (int ix = map_size_x - 1; ix >= 0; ix--) {
@@ -1382,7 +1453,9 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
       }
     }
   }
+#endif
 
+#ifdef HQs
   // for some reason MakeTile kills some properties so gotta place 'em again
   PlaceHQAndBase(p1.x, p1.y, map_size_x, map_size_y, 0, data,
                  Mod(p1.x + p1.y, 3) + 2);
@@ -1396,6 +1469,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
     PlaceHQAndBase(p4.x, p4.y, map_size_x, map_size_y, 3, data,
                    Mod(p4.x + p4.y, 3) + 2);
   }
+#endif
 
   data = dst->data;
   for (int iy = 0; iy < map_size_y; iy++) { // copy into initial buffer
