@@ -860,6 +860,7 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
   // mapTileData[(y * sizeX) + x] = 0x104; // Mark the start point [201ee78]!!
   void (*func)(int x, int y) = MakeRoad; // default
   int tile = Plain;
+  int tmp = 0;
   switch (id) {
   case _Road: {
     // tile = RoadH;
@@ -899,11 +900,11 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
 
   while (x != xB || y != yB) {
     attempts++;
-    if (attempts > 100000) {
+    if (attempts > 500) {
       break;
     }
     backtrackChance = Mod(attempts, 8) < 4 ? 0 : 2;
-    backtrackChance += attempts < 200 ? 2 : 5;
+    backtrackChance += attempts < 50 ? 2 : 5;
     if (!Mod(attempts, freq)) {
       dir = HashByte_Ch(
           dir, 2, x + id,
@@ -911,13 +912,13 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
       backtrack = HashByte_Ch(backtrack, backtrackChance, y + id, attempts);
     }
     // int backtrack = ModNum(rand, 4); // 25% chance of backtracking
-    if (tile == RoadH || tile == RoadV) {
-      if (dir == 0) {
-        tile = RoadH;
-      } else {
-        tile = RoadV;
-      }
-    }
+    // if (tile == RoadH || tile == RoadV) {
+    // if (dir == 0) {
+    // tile = RoadH;
+    // } else {
+    // tile = RoadV;
+    // }
+    // }
     // Horizontal dir
     if (dir == 0) {
       if (backtrack == 0 && x != xA) {
@@ -942,10 +943,16 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
     // mapTileData[(y * sizeX) + x] =
     // 0x104; // because MakeRoad doesn't write to mapTileData when only
     // displaying the preview, I guess?
+    tmp = mapTileData[(y * sizeX) + x];
     if (tile) {
-      mapTileData[(y * sizeX) + x] = tile; // make it a plain first
+      mapTileData[(y * sizeX) + x] = tile; // make it something else first
     }
     func(x, y);
+    if (tmp ==
+        mapTileData[(y * sizeX) + x]) { // if unchanged, make it a plain first
+      mapTileData[(y * sizeX) + x] = Plain;
+      func(x, y);
+    }
 
     // tiles adjacent to HQ will be a base
     // if ((ABS(x - xA) + ABS(y - yA)) == 1) {
@@ -984,11 +991,11 @@ void SetMapSize(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   if (y < 10) {
     y = 10;
   }
-  if (x > 25) {
-    x = 25;
+  if (x > 30) {
+    x = 30;
   }
-  if (y > 25) {
-    y = 25;
+  if (y > 30) {
+    y = 30;
   }
 #ifdef ForceSizeX
   x = ForceSizeX;
