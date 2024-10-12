@@ -18,6 +18,7 @@ SET_FUNC MakeForest, 0x800CF29
     SET_FUNC MakeForestSimple, 0x8007d71 
 SET_FUNC MakeRoad, 0x800f4e1 
     SET_FUNC MakeRoadSimple, 0x80080f9 
+    SET_FUNC GetMostFittingTile, 0x8001705 
 
 SET_FUNC MakeProperty, 0x800C455 @ r0 x r1 y r2 as _City  
 SET_FUNC EnsureValidTile, 0x8008BB9 @ might delete surrounding tiles or something 
@@ -26,6 +27,9 @@ SET_FUNC MakeProperty2, 0x8008A8D @ r0 as 0-4, r1 x r2 y
 SET_FUNC MakeSeaSafest 0x8007CA1 
 SET_FUNC MakeSeaSafe, 0x8007c05 @ ??? 
 SET_FUNC MakeSea, 0x8007BA5 
+@ 40c8 
+    @ BA9C 
+        @ MakeSeaSafest 
 
 @SET_FUNC MakeHQ, 0x800C455 same as MakeProperty 
 SET_FUNC MakeBridge, 0x8008F6D 
@@ -35,7 +39,12 @@ SET_FUNC MakeSeam, 0x8010D81
 SET_FUNC MakeReefSafe, 0x800BF79 
 
 SET_DATA mapTileData, 0x201EE72
+SET_DATA terrainTileData, 0x201E450+0x1432  
+SET_DATA currentTileData, 0x201E450+0x417a
 
+@[201f882]?
+@ [201EEE4]! @ 6x 3y tile 
+@ [201F8C4]! @ 6x 3y terrain 
 
 SET_FUNC MakeTile, 0x80085E1 @ 
 SET_FUNC MakeTile2, 0x8007F15 

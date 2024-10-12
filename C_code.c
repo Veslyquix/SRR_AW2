@@ -727,6 +727,7 @@ int HashRange(int number, int noise, int offset, int otherNum, int coPow) {
 
 extern void MakeTile(void); // uses above three ram
 extern u16 mapTileData[];
+extern u16 terrainTileData[];
 extern int NumberOfMapPieces;
 extern int FrequencyOfObjects_Link;
 struct Map_Struct {
@@ -943,15 +944,23 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
     // mapTileData[(y * sizeX) + x] =
     // 0x104; // because MakeRoad doesn't write to mapTileData when only
     // displaying the preview, I guess?
+    // mapTileData[(y * sizeX) + x] = Forest;
+    // continue;
+
     tmp = mapTileData[(y * sizeX) + x];
-    if (tile) {
-      mapTileData[(y * sizeX) + x] = tile; // make it something else first
-    }
+    // if (tile) {
+    // mapTileData[(y * sizeX) + x] = tile;  // make it something else first
+    // terrainTileData[(y * sizeX) + x] = 1; // make it something else first
+    // }
     func(x, y);
-    if (tmp ==
-        mapTileData[(y * sizeX) + x]) { // if unchanged, make it a plain first
-      mapTileData[(y * sizeX) + x] = Plain;
-      func(x, y);
+    if (tmp == mapTileData[(y * sizeX) + x] ||
+        mapTileData[(y * sizeX) + x] ==
+            Plain) { // if unchanged, make it a plain first
+      if (tile) {
+        mapTileData[(y * sizeX) + x] = tile;  // make it something else first
+        terrainTileData[(y * sizeX) + x] = 1; // make it something else first
+        func(x, y);
+      }
     }
 
     // tiles adjacent to HQ will be a base
@@ -1300,6 +1309,8 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
     for (int ix = 0; ix < map_size_x; ix++) {
       mapTileData[(iy * map_size_x) + ix] =
           defaultTile; // make everything the default
+      terrainTileData[(iy * map_size_x) + ix] =
+          1; // otherwise MakeRoad and MakeTile etc. will change tiles
       // tile
       // map.SelectedTileX = ix;
       // map.SelectedTileY = iy;

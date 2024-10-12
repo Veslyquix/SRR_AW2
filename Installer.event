@@ -29,6 +29,21 @@ WORD 1
 
 PUSH 
 
+// by Xenesis 
+ORG $67568 // skip waiting on boot and unlocks things 
+callHackNew(BitSet_UnlockAll) 
+ORG $6C9FA
+SHORT $46C0 // a press 
+
+ORG $67580 
+//SHORT $46c0 // always go to start 
+
+ORG $36d1c //  main 
+    //ORG $8aaf4 // fade in? 
+    ORG $8AB7E 
+    //SHORT $46c0 
+
+
 ORG $77EF0 
 callHackNew(GetPreEventPointerHook)
 ORG $74584 
