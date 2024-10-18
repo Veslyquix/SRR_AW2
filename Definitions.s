@@ -41,7 +41,8 @@ SET_FUNC MakeReefSafe, 0x800BF79
 SET_DATA mapTileData, 0x201EE72
 SET_DATA terrainTileData, 0x201E450+0x1432  
 SET_DATA currentTileData, 0x201E450+0x417a
-
+SET_DATA gPlaySt, 0x3003FC0
+SET_DATA gActiveMap, 0x200B0B0 
 @[201f882]?
 @ [201EEE4]! @ 6x 3y tile 
 @ [201F8C4]! @ 6x 3y terrain 
@@ -52,13 +53,20 @@ SET_FUNC MakeTile3, 0x800CEF9
 SET_FUNC MakeTileSimple, 0x8001159 @ r0 x r1 y r2 tile 
 
 
-
-@ 0 forest, 1 plain, 
-
 @ store tile into 0x200B000 
 @ coord x into 0x200b008, y into 0x200b00a 
 
+@AI Table Stuff:
+@0x030046B4: Pointer to current Black Hole Factory Deployment List
+@0x030046B8: 0x1 = Airport Present, 0x2 = Port Present
+@ Campaign Map Headers: 0x08615194
 
+@0202FE0E - FE37	Mission Available/Completion toggle
+@				0x1 	= Available
+@				0x2	= Complete
+@				0x4	= Factory Mission
+
+@ 0 forest, 1 plain, 
 
 
 SET_FUNC SetSelectedTile, 0x8000CCD @ [200b02a]!! 
@@ -74,7 +82,7 @@ SET_DATA SelectedTile, 0x200B02a @ press B in design room on tile
 SET_DATA Unk_200B036, 0x200B036 @ 
 SET_DATA SelectedTile_3A, 0x200B03A 
 SET_DATA PreviousTile_3C, 0x200B03C 
-SET_DATA gActiveMap, 0x200B0B0 
+
 
 
 SET_FUNC Rand, 0x80129E1 

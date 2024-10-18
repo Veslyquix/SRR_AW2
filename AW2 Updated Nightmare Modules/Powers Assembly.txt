@@ -1,0 +1,14 @@
+0x00000000
+0x080443D9 Standard Animations
+0x080443ED Blizzard
+0x080447ED Fade to White (Wind)
+0x08044805 Fade to White (Coins)
+0x0804483D Fade to White (Coins)
+0x08044C45 Winter Fury (SCOP)
+0x08044A89 Meteor Strike (SCOP)
+0x08044C81 Tsunami
+0x08044CBD Typhoon (SCOP)
+0x08044CF9 Black Wave
+0x08044D35 Black Storm (SCOP)
+0x08045449 Deploy Infantry on Cities
+0x08045461 Deploy Mechs on Cities (SCOP)

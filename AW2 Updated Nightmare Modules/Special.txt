@@ -1,0 +1,10 @@
+9
+0x00 Nothing
+0x01 Hidden HP
+0x02 City Deployment
+0x04 Pre-emptive Counterattacks
+0x08 Piercing Vision
+0x10 Unknown (Possibly Unused)
+0x20 Doubled Terrain Stars
+0x40 1.x Firepower Multiplier, where x = Terrain Stars
+0x80 Reduces Aircraft daily fuel consumption by 2.

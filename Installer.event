@@ -15,7 +15,8 @@ ORG FreeSpace
 #endif 
 
 // [85CA938+0x34]? Cleanup campaign normal unit pointer 
-// [85CA938+0x10]?
+// [85CA938+0x24]? days remaining 
+// Sami's time [0x85CAAA8+0x24]?
 
 #include "MapPieces/GeneratedInstaller.event" 
 ALIGN 4 
@@ -27,10 +28,21 @@ WORD NumberOfMapPiecesDef
 RandomizeMaps:
 WORD 1 
 
+
 PUSH 
 
-// by Xenesis 
-ORG $67568 // skip waiting on boot and unlocks things 
+ORG $43630 
+jumpToHack(GetNumberOfDaysHook) // display only 
+
+ORG $618a8
+// callHackNew(EnsureFactoryPointer) 
+// SHORT $46c0 
+
+ORG $618F8 
+callHackNew(EnsureFactoryPointer2) 
+
+
+ORG $67568 // skip waiting on boot and unlocks things by Xenesis 
 callHackNew(BitSet_UnlockAll) 
 ORG $6C9FA
 SHORT $46C0 // a press 

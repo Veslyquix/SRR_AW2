@@ -1,0 +1,157 @@
+1
+Advance Wars 2 CO Other Editor
+0x4A0090
+24
+68
+AW2 CO List.txt
+NULL
+
+Full Body Pointer Location
+0
+4
+NEHU
+NULL
+
+Name Graphic Pointer
+4
+4
+NEHU
+NULL
+
+First Palette Pointer
+8
+4
+NEHU
+NULL
+
+CO Face Pointer
+12
+4
+NEHU
+NULL
+
+CO Face Happy Pointer
+16
+4
+NEHU
+NULL
+
+CO Face Sad Pointer
+20
+4
+NEHU
+NULL
+
+Uncompressed Miniportrait
+24
+4
+NEHU
+NULL
+
+COP Unit Animation
+28
+1
+NEHU
+NULL
+
+COP Unit Animation Palette
+29
+1
+NEHU
+NULL
+
+Unknown
+30
+1
+NEHU
+NULL
+
+Unknown
+31
+1
+NEHU
+NULL
+
+ASM for COP Animation Condition
+32
+4
+NEHU
+NULL
+
+ASM to run on each unit for COP
+36
+4
+NEHU
+NULL
+
+ASM to run once when COP activates?
+40
+4
+NEHU
+NULL
+
+COP Sound 1
+44
+2
+NEHU
+NULL
+
+COP Sound 2
+46
+2
+NEHU
+NULL
+
+SCOP Unit Animation
+48
+1
+NEHU
+NULL
+
+SCOP Unit Animation Palette
+49
+1
+NEHU
+NULL
+
+Unknown
+50
+1
+NEHU
+NULL
+
+Unknown
+51
+1
+NEHU
+NULL
+
+ASM for SCOP Animation Condition
+52
+4
+NEHU
+NULL
+
+ASM to run on each unit for SCOP
+56
+4
+NEHU
+NULL
+
+ASM to run once when SCOP activates?
+60
+4
+NEHU
+NULL
+
+SCOP Sound 1
+64
+2
+NEHU
+NULL
+
+SCOP Sound 2
+66
+2
+NEHU
+NULL

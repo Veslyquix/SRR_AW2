@@ -1,0 +1,122 @@
+Cleanup  All 
+Border Skirmish  All 
+Orange Dawn  All 
+Flak Attack  All 
+Lash Out  All 
+Andy's Time  All 
+Test of Time  All 
+Liberation  All 
+Border Skirmish - Hard  All 
+Orange Dawn - Hard  All 
+Andy's Time - Hard  All 
+Mountain Ops - Hard  All 
+Sea For All - Hard  All 
+POW Rescue - Hard  All 
+Test of Time - Hard  All 
+Liberation - Hard  All 
+Toy Box  All 
+Tanks!  All 
+Reclamation  All 
+T Minus 15  All 
+Two Week Test  All 
+Nature Walk  All 
+Neotanks!?  All 
+Factory Blues  All 
+Silo Scramble  All 
+Showstopper  All 
+Sensei's Return  All 
+Duty and Honour  All 
+A Mirror Darkly  All 
+Foul Play  All 
+Sea of Hope  All 
+The Hunt's End  All 
+Sea Fortress  All 
+Drake's Dilemma  All 
+Sinking Feeling  All 
+To The Rescue!  All 
+Navy Vs Air!  All 
+Rain of Fire  All 
+Danger x9  All 
+Great Sea Battle  All 
+Hot Pursuit  All 
+The Final Front  All 
+-
+-
+Nell  Land/Air/Sea 
+Nell  Land 
+Nell  Land/Air 
+Nell  Land/Sea 
+Andy  Land/Air/Sea 
+Andy  Land 
+Andy  Land/Air 
+Andy  Land/Sea 
+Max  Land/Air/Sea 
+Max  Land 
+Max  Land/Air 
+Max  Land/Sea 
+Olaf  Land/Air/Sea 
+Olaf  Land 
+Olaf  Land/Air 
+Olaf  Land/Sea 
+Sami  Land/Air/Sea 
+Sami  Land 
+Sami  Land/Air 
+Sami  Land/Sea 
+Grit  Land/Air/Sea 
+Grit  Land 
+Grit  Land/Air 
+Grit  Land/Sea 
+Kanbei  Land/Air/Sea 
+Kanbei  Land 
+Kanbei  Land/Air 
+Kanbei  Land/Sea 
+Sonja  Land/Air/Sea 
+Sonja  Land 
+Sonja  Land/Air 
+Sonja  Land/Sea 
+Eagle  Land/Air/Sea 
+Eagle  Land 
+Eagle  Land/Air 
+Eagle  Land/Sea 
+Drake  Land/Air/Sea 
+Drake  Land 
+Drake  Land/Air 
+Drake  Land/Sea 
+Hachi  Land/Air/Sea 
+Hachi  Land 
+Hachi  Land/Air 
+Hachi  Land/Sea 
+Colin  Land/Air/Sea 
+Colin  Land 
+Colin  Land/Air 
+Colin  Land/Sea 
+Jess  Land/Air/Sea 
+Jess  Land 
+Jess  Land/Air 
+Jess  Land/Sea 
+Sensei  Land/Air/Sea 
+Sensei  Land 
+Sensei  Land/Air 
+Sensei  Land/Sea 
+-
+FLak  Land/Air/Sea 
+Flak  Land 
+Flak  Land/Air 
+Flak  Land/Sea 
+Lash  Land/Air/Sea 
+Lash  Land 
+Lash  Land/Air 
+Lash  Land/Sea 
+Adder  Land/Air/Sea 
+Adder  Land 
+Adder  Land/Air 
+Adder  Land/Sea 
+Hawke  Land/Air/Sea 
+Hawke  Land 
+Hawke  Land/Air 
+Hawke  Land/Sea 
+-
+Sturm  Land/Air/Sea 
+Sturm  Land 
+Sturm  Land/Air 
+Sturm  Land/Sea 

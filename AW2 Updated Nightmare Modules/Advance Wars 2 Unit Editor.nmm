@@ -1,0 +1,463 @@
+1
+Advance Wars 2 Unit Editor
+0x5D5B18
+24
+92
+Units.txt
+NULL
+
+Name Index
+0
+2
+NEDU
+NULL
+
+Primary Weapon Name Index
+2
+2
+NEDU
+NULL
+
+Secondary Weapon Name Index
+4
+2
+NEDU
+NULL
+
+Unit Price (10% of total price)
+6
+2
+NEDU
+NULL
+
+A if unit uses ammo
+8
+2
+NEHU
+NULL
+
+Movement
+10
+1
+NEDU
+NULL
+
+Max Ammo
+11
+1
+NEDU
+NULL
+
+Vision
+12
+1
+NEDU
+NULL
+
+Unknown
+13
+1
+NEHU
+NULL
+
+Minimum Range
+14
+1
+NEDU
+NULL
+
+Maximum Range
+15
+1
+NEDU
+NULL
+
+Max Fuel
+16
+1
+NEDU
+NULL
+
+Unknown
+17
+1
+NEHU
+NULL
+
+Unknown
+18
+2
+NEHU
+NULL
+
+Transport Pointer
+20
+4
+NEHU
+NULL
+
+Unit Class
+24
+1
+NDHU
+Unit Class.txt
+
+Movement Type
+25
+1
+NDHU
+Movement Type.txt
+
+Deploy Location
+26
+1
+NEHU
+NULL
+
+AI Byte
+27
+1
+NEHU
+NULL
+
+Unknown
+28
+1
+NEHU
+NULL
+
+Unknown
+29
+1
+NEHU
+NULL
+
+Unknown
+30
+1
+NEHU
+NULL
+
+Base Damage 1 (Infantry)
+31
+1
+NEDU
+NULL
+
+Base Damage 1 (Mech)
+32
+1
+NEDU
+NULL
+
+Base Damage 1 (Medium Tank)
+33
+1
+NEDU
+NULL
+
+Base Damage 1 (Glitchy)
+34
+1
+NEDU
+NULL
+
+Base Damage 1 (Tank)
+35
+1
+NEDU
+NULL
+
+Base Damage 1 (Recon)
+36
+1
+NEDU
+NULL
+
+Base Damage 1 (APC)
+37
+1
+NEDU
+NULL
+
+Base Damage 1 (Neotank)
+38
+1
+NEDU
+NULL
+
+Base Damage 1 (Glitchy)
+39
+1
+NEDU
+NULL
+
+Base Damage 1 (Artillery)
+40
+1
+NEDU
+NULL
+
+Base Damage 1 (Rocket)
+41
+1
+NEDU
+NULL
+
+Base Damage 1 (Glitchy)
+42
+1
+NEDU
+NULL
+
+Base Damage 1 (Glitchy)
+43
+1
+NEDU
+NULL
+
+Base Damage 1 (Anti Air)
+44
+1
+NEDU
+NULL
+
+Base Damage 1 (Missile)
+45
+1
+NEDU
+NULL
+
+Base Damage 1 (Fighter)
+46
+1
+NEDU
+NULL
+
+Base Damage 1 (Bomber)
+47
+1
+NEDU
+NULL
+
+Base Damage 1 (Glitchy)
+48
+1
+NEDU
+NULL
+
+Base Damage 1 (Battle Copter)
+49
+1
+NEDU
+NULL
+
+Base Damage 1 (Transport Copter)
+50
+1
+NEDU
+NULL
+
+Base Damage 1 (Battleship)
+51
+1
+NEDU
+NULL
+
+Base Damage 1 (Cruiser)
+52
+1
+NEDU
+NULL
+
+Base Damage 1 (Lander)
+53
+1
+NEDU
+NULL
+
+Base Damage 1 (Sub)
+54
+1
+NEDU
+NULL
+
+Base Damage 1 (Dived Sub)
+55
+1
+NEDU
+NULL
+
+Unknown
+56
+1
+NEHU
+NULL
+
+Base Damage 2 (Infantry)
+57
+1
+NEDU
+NULL
+
+Base Damage 2 (Mech)
+58
+1
+NEDU
+NULL
+
+Base Damage 2 (Medium Tank)
+59
+1
+NEDU
+NULL
+
+Base Damage 2 (Glitchy)
+60
+1
+NEDU
+NULL
+
+Base Damage 2 (Tank)
+61
+1
+NEDU
+NULL
+
+Base Damage 2 (Recon)
+62
+1
+NEDU
+NULL
+
+Base Damage 2 (APC)
+63
+1
+NEDU
+NULL
+
+Base Damage 2 (Neotank)
+64
+1
+NEDU
+NULL
+
+Base Damage 2 (Glitchy)
+65
+1
+NEDU
+NULL
+
+Base Damage 2 (Artillery)
+66
+1
+NEDU
+NULL
+
+Base Damage 2 (Rocket)
+67
+1
+NEDU
+NULL
+
+Base Damage 2 (Glitchy)
+68
+1
+NEDU
+NULL
+
+Base Damage 2 (Glitchy)
+69
+1
+NEDU
+NULL
+
+Base Damage 2 (Anti Air)
+70
+1
+NEDU
+NULL
+
+Base Damage 2 (Missile)
+71
+1
+NEDU
+NULL
+
+Base Damage 2 (Fighter)
+72
+1
+NEDU
+NULL
+
+Base Damage 2 (Bomber)
+73
+1
+NEDU
+NULL
+
+Base Damage 2 (Glitchy)
+74
+1
+NEDU
+NULL
+
+Base Damage 2 (Battle Copter)
+75
+1
+NEDU
+NULL
+
+Base Damage 2 (Transport Copter)
+76
+1
+NEDU
+NULL
+
+Base Damage 2 (Battleship)
+77
+1
+NEDU
+NULL
+
+Base Damage 2 (Cruiser)
+78
+1
+NEDU
+NULL
+
+Base Damage 2 (Lander)
+79
+1
+NEDU
+NULL
+
+Base Damage 2 (Sub)
+80
+1
+NEDU
+NULL
+
+Base Damage 2 (Dived Sub)
+81
+1
+NEDU
+NULL
+
+Unknown
+82
+2
+NEHU
+NULL
+
+Repair Pointer
+84
+4
+NEHU
+NULL
+
+Fuel Consumption
+88
+4
+NEHU
+NULL

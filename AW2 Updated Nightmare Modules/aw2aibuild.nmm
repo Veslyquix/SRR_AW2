@@ -1,0 +1,968 @@
+1
+AW2 (U) AI Build Priority
+0x5771C4
+122
+304
+AI List 2.txt
+NULL
+
+Minimum Infantry
+0
+1
+NEDU
+NULL
+
+T-Copter Priority Build
+4
+1
+NEDU
+NULL
+
+APC Priority Build
+6
+1
+NEDU
+NULL
+
+Lander Priority Build
+7
+1
+NEDU
+NULL
+
+Infantry Build Rate
+27
+1
+NEDU
+NULL
+
+Mech Build Rate
+39
+1
+NEDU
+NULL
+
+MdTank Build Rate
+51
+1
+NEDU
+NULL
+
+Unit 0x4 Build Rate
+63
+1
+NEDU
+NULL
+
+Tank Build Rate
+75
+1
+NEDU
+NULL
+
+Recon Build Rate
+87
+1
+NEDU
+NULL
+
+APC Build Rate
+99
+1
+NEDU
+NULL
+
+Neotank Build Rate
+111
+1
+NEDU
+NULL
+
+Unit 0x9 Build Rate
+123
+1
+NEDU
+NULL
+
+Artillery Build Rate
+135
+1
+NEDU
+NULL
+
+Rockets Build Rate
+147
+1
+NEDU
+NULL
+
+Unit 0xC Build Rate
+159
+1
+NEDU
+NULL
+
+Unit 0xD Build Rate
+171
+1
+NEDU
+NULL
+
+Anti-Air Build Rate
+183
+1
+NEDU
+NULL
+
+Missiles Build Rate
+195
+1
+NEDU
+NULL
+
+Fighters Build Rate
+207
+1
+NEDU
+NULL
+
+Bombers Build Rate
+219
+1
+NEDU
+NULL
+
+Unit 0x13 Build Rate
+231
+1
+NEDU
+NULL
+
+B-Copter Build Rate
+243
+1
+NEDU
+NULL
+
+T-Copter Build Rate
+255
+1
+NEDU
+NULL
+
+Battleship Build Rate
+267
+1
+NEDU
+NULL
+
+Cruiser Build Rate
+279
+1
+NEDU
+NULL
+
+Lander Build Rate
+291
+1
+NEDU
+NULL
+
+Sub Build Rate
+303
+1
+NEDU
+NULL
+
+Infantry Min Atk Damage
+17
+1
+NEDU
+NULL
+
+Mech Min Atk Damage
+29
+1
+NEDU
+NULL
+
+MdTank Min Atk Damage
+41
+1
+NEDU
+NULL
+
+Unit 0x4 Min Atk Damage
+53
+1
+NEDU
+NULL
+
+Tank Min Atk Damage
+65
+1
+NEDU
+NULL
+
+Recon Min Atk Damage
+77
+1
+NEDU
+NULL
+
+APC Min Atk Damage
+89
+1
+NEDU
+NULL
+
+Neotank Min Atk Damage
+101
+1
+NEDU
+NULL
+
+Unit 0x9 Min Atk Damage
+113
+1
+NEDU
+NULL
+
+Artillery Min Atk Damage
+125
+1
+NEDU
+NULL
+
+Rockets Min Atk Damage
+137
+1
+NEDU
+NULL
+
+Unit 0xC Min Atk Damage
+149
+1
+NEDU
+NULL
+
+Unit 0xD Min Atk Damage
+161
+1
+NEDU
+NULL
+
+Anti-Air Min Atk Damage
+173
+1
+NEDU
+NULL
+
+Missiles Min Atk Damage
+185
+1
+NEDU
+NULL
+
+Fighters Min Atk Damage
+197
+1
+NEDU
+NULL
+
+Bombers Min Atk Damage
+209
+1
+NEDU
+NULL
+
+Unit 0x13 Min Atk Damage
+221
+1
+NEDU
+NULL
+
+B-Copter Min Atk Damage
+233
+1
+NEDU
+NULL
+
+T-Copter Min Atk Damage
+245
+1
+NEDU
+NULL
+
+Battleship Min Atk Damage
+257
+1
+NEDU
+NULL
+
+Cruiser Min Atk Damage
+269
+1
+NEDU
+NULL
+
+Lander Min Atk Damage
+281
+1
+NEDU
+NULL
+
+Sub Min Atk Damage
+293
+1
+NEDU
+NULL
+
+Infantry Max Counter Damage
+16
+1
+NEDU
+NULL
+
+Mech Max Counter Damage
+28
+1
+NEDU
+NULL
+
+MdTank Max Counter Damage
+40
+1
+NEDU
+NULL
+
+Unit 0x4 Max Counter Damage
+52
+1
+NEDU
+NULL
+
+Tank Max Counter Damage
+64
+1
+NEDU
+NULL
+
+Recon Max Counter Damage
+76
+1
+NEDU
+NULL
+
+APC Max Counter Damage
+88
+1
+NEDU
+NULL
+
+Neotank Max Counter Damage
+100
+1
+NEDU
+NULL
+
+Unit 0x9 Max Counter Damage
+112
+1
+NEDU
+NULL
+
+Artillery Max Counter Damage
+124
+1
+NEDU
+NULL
+
+Rockets Max Counter Damage
+136
+1
+NEDU
+NULL
+
+Unit 0xC Max Counter Damage
+148
+1
+NEDU
+NULL
+
+Unit 0xD Max Counter Damage
+160
+1
+NEDU
+NULL
+
+Anti-Air Max Counter Damage
+172
+1
+NEDU
+NULL
+
+Missiles Max Counter Damage
+184
+1
+NEDU
+NULL
+
+Fighters Max Counter Damage
+196
+1
+NEDU
+NULL
+
+Bombers Max Counter Damage
+208
+1
+NEDU
+NULL
+
+Unit 0x13 Max Counter Damage
+220
+1
+NEDU
+NULL
+
+B-Copter Max Counter Damage
+232
+1
+NEDU
+NULL
+
+T-Copter Max Counter Damage
+244
+1
+NEDU
+NULL
+
+Battleship Max Counter Damage
+256
+1
+NEDU
+NULL
+
+Cruiser Max Counter Damage
+268
+1
+NEDU
+NULL
+
+Lander Max Counter Damage
+280
+1
+NEDU
+NULL
+
+Sub Max Counter Damage
+292
+1
+NEDU
+NULL
+
+Infantry Minimum HP
+19
+1
+NEDU
+NULL
+
+Mech Minimum HP
+31
+1
+NEDU
+NULL
+
+MdTank Minimum HP
+43
+1
+NEDU
+NULL
+
+Unit 0x4 Minimum HP
+55
+1
+NEDU
+NULL
+
+Tank Minimum HP
+67
+1
+NEDU
+NULL
+
+Recon Minimum HP
+79
+1
+NEDU
+NULL
+
+APC Minimum HP
+91
+1
+NEDU
+NULL
+
+Neotank Minimum HP
+103
+1
+NEDU
+NULL
+
+Unit 0x9 Minimum HP
+115
+1
+NEDU
+NULL
+
+Artillery Minimum HP
+127
+1
+NEDU
+NULL
+
+Rockets Minimum HP
+139
+1
+NEDU
+NULL
+
+Unit 0xC Minimum HP
+151
+1
+NEDU
+NULL
+
+Unit 0xD Minimum HP
+163
+1
+NEDU
+NULL
+
+Anti-Air Minimum HP
+175
+1
+NEDU
+NULL
+
+Missiles Minimum HP
+187
+1
+NEDU
+NULL
+
+Fighters Minimum HP
+199
+1
+NEDU
+NULL
+
+Bombers Minimum HP
+211
+1
+NEDU
+NULL
+
+Unit 0x13 Minimum HP
+223
+1
+NEDU
+NULL
+
+B-Copter Minimum HP
+235
+1
+NEDU
+NULL
+
+T-Copter Minimum HP
+247
+1
+NEDU
+NULL
+
+Battleship Minimum HP
+259
+1
+NEDU
+NULL
+
+Cruiser Minimum HP
+271
+1
+NEDU
+NULL
+
+Lander Minimum HP
+283
+1
+NEDU
+NULL
+
+Sub Minimum HP
+295
+1
+NEDU
+NULL
+
+Infantry Minimum Fuel
+18
+1
+NEDU
+NULL
+
+Mech Minimum Fuel
+30
+1
+NEDU
+NULL
+
+MdTank Minimum Fuel
+42
+1
+NEDU
+NULL
+
+Unit 0x4 Minimum Fuel
+54
+1
+NEDU
+NULL
+
+Tank Minimum Fuel
+66
+1
+NEDU
+NULL
+
+Recon Minimum Fuel
+78
+1
+NEDU
+NULL
+
+APC Minimum Fuel
+90
+1
+NEDU
+NULL
+
+Neotank Minimum Fuel
+102
+1
+NEDU
+NULL
+
+Unit 0x9 Minimum Fuel
+114
+1
+NEDU
+NULL
+
+Artillery Minimum Fuel
+126
+1
+NEDU
+NULL
+
+Rockets Minimum Fuel
+138
+1
+NEDU
+NULL
+
+Unit 0xC Minimum Fuel
+150
+1
+NEDU
+NULL
+
+Unit 0xD Minimum Fuel
+162
+1
+NEDU
+NULL
+
+Anti-Air Minimum Fuel
+174
+1
+NEDU
+NULL
+
+Missiles Minimum Fuel
+186
+1
+NEDU
+NULL
+
+Fighters Minimum Fuel
+198
+1
+NEDU
+NULL
+
+Bombers Minimum Fuel
+210
+1
+NEDU
+NULL
+
+Unit 0x13 Minimum Fuel
+222
+1
+NEDU
+NULL
+
+B-Copter Minimum Fuel
+234
+1
+NEDU
+NULL
+
+T-Copter Minimum Fuel
+246
+1
+NEDU
+NULL
+
+Battleship Minimum Fuel
+258
+1
+NEDU
+NULL
+
+Cruiser Minimum Fuel
+270
+1
+NEDU
+NULL
+
+Lander Minimum Fuel
+282
+1
+NEDU
+NULL
+
+Sub Minimum Fuel
+294
+1
+NEDU
+NULL
+
+
+Header 0x1
+1
+1
+NEDU
+NULL
+
+Header 0x2
+2
+1
+NEDU
+NULL
+
+Header 0x3
+3
+1
+NEDU
+NULL
+
+Header 0x5
+5
+1
+NEDU
+NULL
+
+Header 0x8
+8
+1
+NEDU
+NULL
+
+Header 0x9
+9
+1
+NEDU
+NULL
+
+Header 0xA
+10
+1
+NEDU
+NULL
+
+Header 0xB
+11
+1
+NEDU
+NULL
+
+Header 0xC
+12
+1
+NEDU
+NULL
+
+Header 0xD
+13
+1
+NEDU
+NULL
+
+Header 0xE
+14
+1
+NEDU
+NULL
+
+Header 0xF
+15
+1
+NEDU
+NULL
+
+Infantry Value 0x5 to 0x9
+20
+5
+HEXA
+NULL
+
+Mech Value 0x5 to 0x9
+32
+5
+HEXA
+NULL
+
+MdTank Value 0x5 to 0x9
+44
+5
+HEXA
+NULL
+
+Unit 0x4 Value 0x5 to 0x9
+56
+5
+HEXA
+NULL
+
+Tank Value 0x5 to 0x9
+68
+5
+HEXA
+NULL
+
+Recon Value 0x5 to 0x9
+80
+5
+HEXA
+NULL
+
+APC Value 0x5 to 0x9
+92
+5
+HEXA
+NULL
+
+Neotank Value 0x5 to 0x9
+104
+5
+HEXA
+NULL
+
+Unit 0x9 Value 0x5 to 0x9
+116
+5
+HEXA
+NULL
+
+Artillery Value 0x5 to 0x9
+128
+5
+HEXA
+NULL
+
+Rockets Value 0x5 to 0x9
+140
+5
+HEXA
+NULL
+
+Unit 0xC Value 0x5 to 0x9
+152
+5
+HEXA
+NULL
+
+Unit 0xD Value 0x5 to 0x9
+164
+5
+HEXA
+NULL
+
+Anti-Air Value 0x5 to 0x9
+176
+5
+HEXA
+NULL
+
+Missiles Value 0x5 to 0x9
+188
+5
+HEXA
+NULL
+
+Fighters Value 0x5 to 0x9
+200
+5
+HEXA
+NULL
+
+Bombers Value 0x5 to 0x9
+212
+5
+HEXA
+NULL
+
+Unit 0x13 Value 0x5 to 0x9
+224
+5
+HEXA
+NULL
+
+B-Copter Value 0x5 to 0x9
+236
+5
+HEXA
+NULL
+
+T-Copter Value 0x5 to 0x9
+248
+5
+HEXA
+NULL
+
+Battleship Value 0x5 to 0x9
+260
+5
+HEXA
+NULL
+
+Cruiser Value 0x5 to 0x9
+272
+5
+HEXA
+NULL
+
+Lander Value 0x5 to 0x9
+284
+5
+HEXA
+NULL
+
+Sub Value 0x5 to 0x9
+296
+5
+HEXA
+NULL

@@ -1,0 +1,31 @@
+Plain
+River
+Mountain
+Forest
+Road
+City
+Sea
+HQ
+Umi?
+Airport
+Port
+Bridge
+Shoal
+Base
+Pipe
+Pipe Seam
+Silo
+Used Silo
+Reef
+Lab
+Minicannon S
+Minicannon N
+Minicannon W
+Minicannon E
+Laser
+Cannon S
+Cannon N
+Volcano
+Factory
+Deathray
+Giant Silo/Fortress

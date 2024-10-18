@@ -1,0 +1,42 @@
+5CA94C - Cleanup 
+5CA9A8 - Border Skirmish 
+5CAA04 - Orange Dawn 
+5CAA60 - Flak Attack 
+5CAABC - Lash Out! 
+5CAB18 - Andy's Time 
+5CAB74 - Test Of Time 
+5CABD0 - Liberation 
+5CAC2C - Toy Box 
+5CAC88 - Tanks! 
+5CACE4 - Reclamation 
+5CAD40 - T Minus 15 
+5CAD9C - Two-Week Test 
+5CADF8 - Nature Walk 
+5CAE54 - Neotanks?! 
+5CAEB0 - Factory Blues 
+5CAF0C - Silo Scramble 
+5CAF68 - Showstopper 
+5CAFC4 - Sensei's Return 
+5CB020 - Duty & Honor 
+5CB07C - A Mirror Darkly 
+5CB0D8 - Foul Play 
+5CB134 - Sea Of Hope 
+5CB190 - The Hunt's End 
+5CB1EC - Sea Fortress 
+5CB248 - Drake's Dilemma 
+5CB2A4 - Sinking Feeling 
+5CB300 - To The Rescue! 
+5CB35C - Navy vs. Air 
+5CB3B8 - Rain of Fire
+5CB414 - Danger X9 
+5CB470 - Great Sea Battle 
+5CB4CC - Hot Pursuit 
+5CB528 - The Final Front 
+5CB584 - Border Skirmish 
+5CB5E0 - orange Dawn 
+5CB63C - Andy's Time 
+5CB698 - Mountain Ops 
+5CB6F4 - Sea For All 
+5CB750 - POW Rescue 
+5CB7AC - Test Of Time 
+5CB808 - Liberation

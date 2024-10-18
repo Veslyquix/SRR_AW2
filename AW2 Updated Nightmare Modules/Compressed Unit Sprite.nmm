@@ -1,0 +1,61 @@
+1
+Advance Wars 2 Compressed Unit Sprite Editor
+0x49CDAC
+24
+36
+Units.txt
+NULL
+
+OS Unit Sprite
+0
+4
+NEHU
+NULL
+
+BM Unit Sprite
+4
+4
+NEHU
+NULL
+
+GE Unit Sprite
+8
+4
+NEHU
+NULL
+
+YC Unit Sprite
+12
+4
+NEHU
+NULL
+
+BH Unit Sprite
+16
+4
+NEHU
+NULL
+
+Sprite Format Pointer
+20
+4
+NEHU
+NULL
+
+Unknown
+24
+4
+NEHU
+NULL
+
+Unknown
+28
+4
+NEHU
+NULL
+
+Unknown
+32
+4
+NEHU
+NULL

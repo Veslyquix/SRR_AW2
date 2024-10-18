@@ -1,0 +1,589 @@
+1
+AW2 (U) CO Stats editor
+0x619750
+72
+208
+AW2 CO2 List.txt
+NULL
+
+No Edit
+0
+8
+NEHU
+NULL
+
+Infantry Attack
+8
+2
+NEDS
+NULL
+
+Infantry Defence
+10
+2
+NEDS
+NULL
+
+Infantry Movement
+12
+2
+NEDS
+NULL
+
+Infantry Range
+14
+2
+NEDS
+NULL
+
+Mech Attack
+16
+2
+NEDS
+NULL
+
+Mech Defence
+18
+2
+NEDS
+NULL
+
+Mech Movement
+20
+2
+NEDS
+NULL
+
+Mech Range
+22
+2
+NEDS
+NULL
+
+Medium Tank Attack
+24
+2
+NEDS
+NULL
+
+Medium Tank Defence
+26
+2
+NEDS
+NULL
+
+Medium Tank Movement
+28
+2
+NEDS
+NULL
+
+Medium Tank Range
+30
+2
+NEDS
+NULL
+
+Unit ID 0x4 Attack
+32
+2
+NEDS
+NULL
+
+Unit ID 0x4 Defence
+34
+2
+NEDS
+NULL
+
+Unit ID 0x4 Movement
+36
+2
+NEDS
+NULL
+
+Unit ID 0x4 Range
+38
+2
+NEDS
+NULL
+
+Tank Attack
+40
+2
+NEDS
+NULL
+
+Tank Defence
+42
+2
+NEDS
+NULL
+
+Tank Movement
+44
+2
+NEDS
+NULL
+
+Tank Range
+46
+2
+NEDS
+NULL
+
+Recon Attack
+48
+2
+NEDS
+NULL
+
+Recon Defence
+50
+2
+NEDS
+NULL
+
+Recon Movement
+52
+2
+NEDS
+NULL
+
+Recon Range
+54
+2
+NEDS
+NULL
+
+APC Attack
+56
+2
+NEDS
+NULL
+
+APC Defence
+58
+2
+NEDS
+NULL
+
+APC Movement
+60
+2
+NEDS
+NULL
+
+APC Range
+62
+2
+NEDS
+NULL
+
+Neotank Attack
+64
+2
+NEDS
+NULL
+
+Neotank Defence
+66
+2
+NEDS
+NULL
+
+Neotank Movement
+68
+2
+NEDS
+NULL
+
+Neotank Range
+70
+2
+NEDS
+NULL
+
+Unit ID 0x9 Attack
+72
+2
+NEDS
+NULL
+
+Unit ID 0x9 Defence
+74
+2
+NEDS
+NULL
+
+Unit ID 0x9 Movement
+76
+2
+NEDS
+NULL
+
+Unit ID 0x9 Range
+78
+2
+NEDS
+NULL
+
+Artillery Attack
+80
+2
+NEDS
+NULL
+
+Artillery Defence
+82
+2
+NEDS
+NULL
+
+Artillery Movement
+84
+2
+NEDS
+NULL
+
+Artillery Range
+86
+2
+NEDS
+NULL
+
+Rockets Attack
+88
+2
+NEDS
+NULL
+
+Rockets Defence
+90
+2
+NEDS
+NULL
+
+Rockets Movement
+92
+2
+NEDS
+NULL
+
+Rockets Range
+94
+2
+NEDS
+NULL
+
+Unit ID 0xC Attack
+96
+2
+NEDS
+NULL
+
+Unit ID 0xC Defence
+98
+2
+NEDS
+NULL
+
+Unit ID 0xC Movement
+100
+2
+NEDS
+NULL
+
+Unit ID 0xC Range
+102
+2
+NEDS
+NULL
+
+Unit ID 0xD Attack
+104
+2
+NEDS
+NULL
+
+Unit ID 0xD Defence
+106
+2
+NEDS
+NULL
+
+Unit ID 0xD Movement
+108
+2
+NEDS
+NULL
+
+Unit ID 0xD Range
+110
+2
+NEDS
+NULL
+
+Anti Air Attack
+112
+2
+NEDS
+NULL
+
+Anti Air Defence
+114
+2
+NEDS
+NULL
+
+Anti Air Movement
+116
+2
+NEDS
+NULL
+
+Anti Air Range
+118
+2
+NEDS
+NULL
+
+Missiles Attack
+120
+2
+NEDS
+NULL
+
+Missiles Defence
+122
+2
+NEDS
+NULL
+
+Missiles Movement
+124
+2
+NEDS
+NULL
+
+Missiles Range
+126
+2
+NEDS
+NULL
+
+Fighter Attack
+128
+2
+NEDS
+NULL
+
+Fighter Defence
+130
+2
+NEDS
+NULL
+
+Fighter Movement
+132
+2
+NEDS
+NULL
+
+Fighter Range
+134
+2
+NEDS
+NULL
+
+Bomber Attack
+136
+2
+NEDS
+NULL
+
+Bomber Defence
+138
+2
+NEDS
+NULL
+
+Bomber Movement
+140
+2
+NEDS
+NULL
+
+Bomber Range
+142
+2
+NEDS
+NULL
+
+Unit ID 0x12 Attack
+144
+2
+NEDS
+NULL
+
+Unit ID 0x12 Defence
+146
+2
+NEDS
+NULL
+
+Unit ID 0x12 Movement
+148
+2
+NEDS
+NULL
+
+Unit ID 0x12 Range
+150
+2
+NEDS
+NULL
+
+Battle Copter Attack
+152
+2
+NEDS
+NULL
+
+Battle Copter Defence
+154
+2
+NEDS
+NULL
+
+Battle Copter Movement
+156
+2
+NEDS
+NULL
+
+Battle Copter Range
+158
+2
+NEDS
+NULL
+
+Transport Copter Attack
+160
+2
+NEDS
+NULL
+
+Transport Copter Defence
+162
+2
+NEDS
+NULL
+
+Transport Copter Movement
+164
+2
+NEDS
+NULL
+
+Transport Copter Range
+166
+2
+NEDS
+NULL
+
+Battleship Attack
+168
+2
+NEDS
+NULL
+
+Battleship Defence
+170
+2
+NEDS
+NULL
+
+Battleship Movement
+172
+2
+NEDS
+NULL
+
+Battleship Range
+174
+2
+NEDS
+NULL
+
+Cruiser Attack
+176
+2
+NEDS
+NULL
+
+Cruiser Defence
+178
+2
+NEDS
+NULL
+
+Cruiser Movement
+180
+2
+NEDS
+NULL
+
+Cruiser Range
+182
+2
+NEDS
+NULL
+
+Lander Attack
+184
+2
+NEDS
+NULL
+
+Lander Defence
+186
+2
+NEDS
+NULL
+
+Lander Movement
+188
+2
+NEDS
+NULL
+
+Lander Range
+190
+2
+NEDS
+NULL
+
+Sub Attack
+192
+2
+NEDS
+NULL
+
+Sub Defence
+194
+2
+NEDS
+NULL
+
+Sub Movement
+196
+2
+NEDS
+NULL
+
+Sub Range
+198
+2
+NEDS
+NULL

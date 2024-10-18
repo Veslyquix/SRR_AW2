@@ -1,0 +1,265 @@
+1
+Advance Wars 2 Map Header Editor
+0x5C7800
+179
+92
+Maps.txt
+NULL
+
+Dialogue Header
+0
+4
+NEHU
+NULL
+
+Terms
+4
+4
+NEHU
+NULL
+
+Hardcoded Unit Pointer
+8
+4
+NEHU
+NULL
+
+4x4 Tile Graphic
+12
+4
+NEHU
+NULL
+
+Name Index
+16
+2
+NEDU
+NULL
+
+Unknown
+18
+1
+NEHU
+NULL
+
+Fog of War Toggle
+19
+1
+NDHU
+Fog.txt
+
+Number of Players
+20
+2
+NEHU
+NULL
+
+Category
+22
+2
+NDHU
+Category.txt
+
+(Hack) Player 1 Control
+24
+1
+NDHU
+Control.txt
+
+(Hack) Player 2 Control
+25
+1
+NDHU
+Control.txt
+
+(Hack) Player 3 Control
+26
+1
+NDHU
+Control.txt
+
+(Hack) Player 4 Control
+27
+1
+NDHU
+Control.txt
+
+NC Speed Rank Turn Limit
+28
+2
+NEDU
+NULL
+
+HC Speed Rank Turn Limit
+30
+2
+NEDU
+NULL
+
+Timer
+32
+2
+NEHU
+NULL
+
+(Hack) Lab Unit
+34
+1
+NEHU
+NULL
+
+Unknown
+35
+1
+NEHU
+NULL
+
+(Hack) Weather Settings
+36
+4
+NEHU
+NULL
+
+NC Map Pointer
+40
+4
+NEHU
+NULL
+
+HC Map Pointer
+44
+4
+NEHU
+NULL
+
+NC Unit Pointer
+48
+4
+NEHU
+NULL
+
+HC Unit Pointer
+52
+4
+NEHU
+NULL
+
+Player 1 CO
+56
+1
+NDHU
+CO.txt
+
+Player 2 CO
+57
+1
+NDHU
+CO.txt
+
+Player 3 CO
+58
+1
+NDHU
+CO.txt
+
+Player 4 CO
+59
+1
+NDHU
+CO.txt
+
+Player 1 Color
+60
+1
+NDHU
+Color.txt
+
+Player 2 Color
+61
+1
+NDHU
+Color.txt
+
+Player 3 Color
+62
+1
+NDHU
+Color.txt
+
+Player 4 Color
+63
+1
+NDHU
+Color.txt
+
+Player 1 Team
+64
+1
+NDHU
+Team.txt
+
+Player 2 Team
+65
+1
+NDHU
+Team.txt
+
+Player 3 Team
+66
+1
+NDHU
+Team.txt
+
+Player 4 Team
+67
+1
+NDHU
+Team.txt
+
+Unknown
+68
+4
+NEHU
+NULL
+
+Unknown
+72
+4
+NEHU
+NULL
+
+Unknown
+76
+4
+NEHU
+NULL
+
+Unknown
+80
+4
+NEHU
+NULL
+
+Map Intro
+84
+1
+NDHU
+Color.txt
+
+(Hack) Properties
+85
+1
+NEDU
+NULL
+
+Unknown
+86
+2
+NEHU
+NULL
+
+Unknown
+88
+4
+NEHU
+NULL

@@ -1,0 +1,97 @@
+1
+Advance Wars 2 Shop Screen Graphic
+0x49DC50
+24
+60
+Units.txt
+NULL
+
+Blank
+0
+4
+NEHU
+NULL
+
+OS Picture Format
+4
+4
+NEHU
+NULL
+
+BM Picture Format
+8
+4
+NEHU
+NULL
+
+GE Picture Format
+12
+4
+NEHU
+NULL
+
+YC Picture Format
+16
+4
+NEHU
+NULL
+
+BH Picture Format
+20
+4
+NEHU
+NULL
+
+OS Graphic Pointer
+24
+4
+NEHU
+NULL
+
+BM Graphic Pointer
+28
+4
+NEHU
+NULL
+
+GE Graphic Pointer
+32
+4
+NEHU
+NULL
+
+YC Graphic Pointer
+36
+4
+NEHU
+NULL
+
+BH Graphic Pointer
+40
+4
+NEHU
+NULL
+
+Blank
+44
+4
+NEHU
+NULL
+
+Blank
+48
+4
+NEHU
+NULL
+
+Blank
+52
+4
+NEHU
+NULL
+
+Blank
+56
+4
+NEHU
+NULL

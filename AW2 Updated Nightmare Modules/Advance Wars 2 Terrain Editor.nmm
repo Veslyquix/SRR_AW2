@@ -1,0 +1,55 @@
+1
+Advance Wars 2 Terrain Editor
+0x5D5850
+31
+20
+Terrain.txt
+NULL
+
+Picture Pointer
+0
+4
+NEHU
+NULL
+
+Picture Pallete Pointer
+4
+4
+NEHU
+NULL
+
+Graphic Reading Method
+8
+3
+NEHU
+NULL
+
+Unknown
+11
+1
+NEHU
+NULL
+
+Name Index
+12
+2
+NEDU
+NULL
+
+Description Index
+14
+2
+NEDU
+NULL
+
+Terrain Defense
+16
+2
+NEDS
+NULL
+
+Unknown
+18
+2
+NEHU
+NULL

@@ -1,0 +1,24 @@
+Infantry
+Mech
+Medium Tank
+(Glitchy)
+Tank
+Recon
+APC
+Neotank
+(Glitchy)
+Artillery
+Rocket
+(Glitchy)
+(Glitchy)
+Anti Air
+Missile
+Fighter
+Bomber
+(Glitchy)
+Battle Copter
+Transport Copter
+Battleship
+Cruiser
+Lander
+Sub

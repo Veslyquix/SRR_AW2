@@ -1,0 +1,8 @@
+0x00000000
+0x085D511C Standard Clear
+0x085D51FC Standard Snow
+0x085D52DC Standard Rain
+0x085D53BC Perfect Movement
+0x085D549C Sami's Clear
+0x085D557C Sami's Snow
+0x085D565C Sami's Rain

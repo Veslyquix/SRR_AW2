@@ -1,0 +1,103 @@
+1
+Advance Wars 2 Info Screen Editor
+0x49E398
+24
+32
+Units.txt
+NULL
+
+Unit Info
+0
+2
+NEDU
+NULL
+
+Movement Info
+2
+2
+NEDU
+NULL
+
+Vision Info
+4
+2
+NEDU
+NULL
+
+Fuel Info
+6
+2
+NEDU
+NULL
+
+Weapon 1 Info
+8
+2
+NEDU
+NULL
+
+Ammo Info
+10
+2
+NEDU
+NULL
+
+Range Info
+12
+2
+NEDU
+NULL
+
+Weapon 1 Info 1
+14
+2
+NEDU
+NULL
+
+Weapon 1 Info 2
+16
+2
+NEDU
+NULL
+
+Weapon 1 Info 3
+18
+2
+NEDU
+NULL
+
+Weapon 1 Info 4
+20
+2
+NEDU
+NULL
+
+Weapon 2 Info
+22
+2
+NEDU
+NULL
+
+Weapon 2 Info 1
+24
+2
+NEDU
+NULL
+
+Weapon 2 Info 2
+26
+2
+NEDU
+NULL
+
+Weapon 2 Info 3
+28
+2
+NEDU
+NULL
+
+Weapon 2 Info 4
+30
+2
+NEDU
+NULL

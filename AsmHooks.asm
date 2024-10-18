@@ -368,6 +368,139 @@ pop {r3}
 bx r3 
 .ltorg 
 
+.global GetNumberOfDaysHook
+.type GetNumberOfDaysHook, %function 
+GetNumberOfDaysHook: @ copy of 43630 
+push {r4-r5, lr} 
+mov r4, r0 
+mov r5, r1 
+
+bl ShouldMapBeRandomized 
+cmp r0, #0 
+beq VanillaDays 
+mov r0, #0 
+b ExitDays 
+VanillaDays: 
+mov r0, r4 
+mov r1, r5 
+ldr r2, =0x8043650 
+ldr r2, [r2]  
+ldr r3, =0x8043654 
+ldr r3, [r3]  
+ldrb r1, [r3, #2] 
+mov r0, #0x5c 
+mul r0, r1 
+add r1, r0, r2 
+ldrh r0, [r1, #0x24] 
+cmp r0, #0 
+bne ExitDays 
+mov r1, r3 
+add r1, #0x30 
+ldrb r0, [r1] 
+
+ExitDays: 
+pop {r4-r5} 
+pop {r1} 
+bx r1 
+.ltorg 
+
+@ 618f8 
+
+@0x618a8 callHackNew short 0x46c0 
+
+.global EnsureFactoryPointer 
+.type EnsureFactoryPointer, %function 
+EnsureFactoryPointer: 
+push {lr} 
+add r0, r2 
+ldr r0, [r0] 
+cmp r0, #0 
+bne StoreFactoryPointerVanilla 
+ldr r0, =GenericFactoryUnits 
+StoreFactoryPointerVanilla: 
+str r0, [r5] 
+blh 0x8061cdc 
+blh 0x8061cf8 
+pop {r1} 
+bx r1 
+.ltorg 
+
+.global EnsureFactoryPointer2 
+.type EnsureFactoryPointer2, %function 
+EnsureFactoryPointer2: 
+push {r4-r5, lr} 
+sub sp, #0x60 
+ldr r4, [r6]
+ldr r5, [r4] 
+cmp r5, #0 
+bne UseVanillaFactoryPointer
+
+
+
+mov r1, sp 
+ldr r2, =GenericFactoryUnits 
+mov r3, #0 
+DefaultFactoryUnitsLoop:
+ldr r0, [r2, r3] 
+str r0, [r1, r3] 
+add r3, #4 
+cmp r3, #0x60  
+blt DefaultFactoryUnitsLoop 
+blh 0x803866c @ difficulty 
+mov r1, sp 
+str r1, [r4] 
+bl RandomizeFactoryUnits 
+UseVanillaFactoryPointer: 
+blh 0x80607e8
+str r5, [r4] @ restore to normal afterwards 
+add sp, #0x60 
+pop {r4-r5} 
+pop {r0} 
+bx r0 
+.ltorg 
+
+
+
+.global GetCampaignHeader
+.type GetCampaignHeader, %function 
+GetCampaignHeader: @ see 0x807733a 
+push {lr} 
+blh 0x803866c @ difficulty & checks if we're actually in campaign 
+lsl r3, r0, #2 @ either 4 or 0  
+ldr r2, =0x80773a4 
+ldr r2, [r2] @ldr r2, =0x81CC5A0 @ r5=81CC5A0
+ldr r2, [r2] 
+ldr r0, [r2, #0xC] @ 0202FE08 current mission highlighted
+ldr r2, =0x80773a0 
+ldr r2, [r2] @ldr r3, =0x8615194 
+lsl r1, r0, #1 
+add r1, r0 
+lsl r1, #4 
+add r0, r1, r2
+pop {r1} 
+bx r1 
+.ltorg 
+
+.global GetFactoryUnitsPointer 
+.type GetFactoryUnitsPointer, %function 
+GetFactoryUnitsPointer: @ 
+push {lr} 
+bl GetCampaignHeader 
+ldr r0, [r0, #0x24] 
+pop {r1} @ [0x8615194+0x24]?
+bx r1 
+.ltorg 
+@mov r3, #0 
+@ldsh r2, [r0, r3] @ gives 0x8A 
+@ldr r3, =0x85CC7A0 
+@mov r0, #0x5C 
+@mul r0, r2 
+@add r2, r0, r3 
+@ldr r0, [r2, #0x24] 
+
+
+@ [0x85CA938+0x24]? 8615194+0x24 
+
 .global GetNumberOfPlayers 
 .type GetNumberOfPlayers, %function 
 GetNumberOfPlayers: @ see 0x807733a 

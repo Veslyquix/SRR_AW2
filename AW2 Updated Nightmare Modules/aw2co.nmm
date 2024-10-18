@@ -1,0 +1,325 @@
+1
+AW2 (U) CO Stats editor
+0x5D3DD0
+24
+260
+AW2 CO List.txt
+NULL
+
+CO Name Index
+0
+2
+NEDU
+NULL
+
+Music
+4
+2
+NDHU
+Music List.txt
+
+Snow Bringer %
+6
+2
+NEDS
+NULL
+
+Rain Bringer %
+8
+2
+NEDS
+NULL
+
+CO Power Stars
+12
+1
+NEDS
+NULL
+
+Super CO Power Stars
+16
+1
+NEDS
+NULL
+
+Army Sprites
+20
+2
+NEHU
+NULL
+
+Colour
+22
+1
+NDHU
+Army List.txt
+
+COP Quote 1
+32
+2
+NEDU
+NULL
+
+COP Quote 2
+34
+2
+NEDU
+NULL
+
+COP Quote 3
+36
+2
+NEDU
+NULL
+
+COP Quote 4
+38
+2
+NEDU
+NULL
+
+COP Quote 5
+40
+2
+NEDU
+NULL
+
+COP Quote 6
+42
+2
+NEDU
+NULL
+
+CO Dossier Page 1
+44
+2
+NEDU
+NULL
+
+CO Dossier Page 2
+46
+2
+NEDU
+NULL
+
+CO Dossier Page 3
+48
+2
+NEDU
+NULL
+
+CO Dossier Page 4
+50
+2
+NEDU
+NULL
+
+Victory Quote
+52
+2
+NEDU
+NULL
+
+Special Skills (D2D)
+64
+1
+NDHU
+Special Abilities.txt
+
+Vision Bonus (D2D)
+68
+2
+NEDS
+NULL
+
+Positive Luck (Note: Min 1 or crash) (D2D)
+70
+2
+NEDS
+NULL
+
+Negative Luck (D2D)
+72
+2
+NEDS
+NULL
+
+Counterattack Multiplier Modifier (D2D)
+74
+2
+NEDS
+NULL
+
+Unit Cost Modifier (D2D)
+76
+2
+NEDS
+NULL
+
+Capture Rate Modifier (D2D)
+78
+2
+NEDS
+NULL
+
+Movement Chart (D2D)
+80
+4
+NEHU
+NULL
+
+Movement Chart - Snow (D2D)
+84
+4
+NEHU
+NULL
+
+Movement Chart - Rain (D2D)
+88
+4
+NEHU
+NULL
+
+CO Power Name ID
+124
+2
+NEDU
+NULL
+
+CO Power Assembly Pointer
+128
+4
+NEHU
+NULL
+
+Special Abilities (COP)
+132
+1
+NDHU
+Special Abilities.txt
+
+Vision Bonus (COP)
+136
+2
+NEDS
+NULL
+
+Positive Luck (Note: Min 1 or crash) (COP)
+138
+2
+NEDS
+NULL
+
+Negative Luck (COP)
+140
+2
+NEDS
+NULL
+
+Counterattack Multiplier Modifier (COP)
+142
+2
+NEDS
+NULL
+
+Unit Cost Modifier (COP)
+144
+2
+NEDS
+NULL
+
+Capture Rate Modifier (COP)
+146
+2
+NEDS
+NULL
+
+Movement Chart (COP)
+148
+4
+NEHU
+NULL
+
+Movement Chart - Snow (COP)
+152
+4
+NEHU
+NULL
+
+Movement Chart - Rain (COP)
+156
+4
+NEHU
+NULL
+
+SCO Power Name ID
+192
+2
+NEDU
+NULL
+
+SCO Power Assembly Pointer
+196
+4
+NEHU
+NULL
+
+Special Abilities (SCOP)
+200
+1
+NDHU
+Special Abilities.txt
+
+Vision Bonus (SCOP)
+204
+2
+NEDS
+NULL
+
+Positive Luck (Note: Min 1 or crash) (SCOP)
+206
+2
+NEDS
+NULL
+
+Negative Luck (SCOP)
+208
+2
+NEDS
+NULL
+
+Counterattack Multiplier Modifier (SCOP)
+210
+2
+NEDS
+NULL
+
+Unit Cost Modifier (SCOP)
+212
+2
+NEDS
+NULL
+
+Capture Rate Modifier (SCOP)
+214
+2
+NEDS
+NULL
+
+Movement Chart (SCOP)
+216
+4
+NEHU
+NULL
+
+Movement Chart - Snow (SCOP)
+220
+4
+NEHU
+NULL
+
+Movement Chart - Rain (SCOP)
+224
+4
+NEHU
+NULL

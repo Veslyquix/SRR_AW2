@@ -1,0 +1,49 @@
+0x0000
+0x00C9 - Eagle's Theme
+0x00CA - Drake's Theme
+0x00CB - Grit's Theme
+0x00CC - Silence
+0x00CD - Count Up!
+0x00D1 - Andy's Theme
+0x00D2 - Max's Theme
+0x00D3 - Kanbei's Theme
+0x00D4 - Sonja's Theme
+0x00D5 - Olaf's Theme
+0x00D6 - Nell's Theme
+0x00D8 - Map Editor Theme
+0x00D9 - Sami's Theme
+0x00DA - 'DEFEAT'
+0x00DB - Sturm's Theme
+0x00DC - Last Stage Theme
+0x012C - Advance Wars 2 Opening
+0x012D - Lash's Theme
+0x012E - Hachi's Theme
+0x012F - Sensei's Theme
+0x0130 - Advance Wars 2 Ending
+0x0190 - Wars World News
+0x0191 - Adder's Theme
+0x0192 - Hawke's Theme
+0x0193 - Colin's Theme
+0x0194 - Orange Star Mission
+0x0195 - Green Earth Mission
+0x0196 - Yellow Comet Mission
+0x0197 - Blue Moon Mission
+0x0198 - Black Hole Mission
+0x0199 - Black Hole Super Power!
+0x019A - Super Power!
+0x019B - Black Hole Theme
+0x019C - Flak's Theme
+0x019D - Orange Star Theme
+0x019E - Jess' Theme
+0x019F - To the last stage
+0x01A0 - Victory Fanfare
+0x01A1 - Battle Success
+0x01A2 - Factory Domination
+0x01A3 - BH Power!
+0x01A4 - Power!
+0x01A5 - Green Earth Theme
+0x01A6 - Yellow Comet Theme
+0x01A7 - Blue Moon Theme
+0x01A8 - Macro Land Map
+0x01A9 - The World of Macro Land
+0x01AA - Battle Fanfare

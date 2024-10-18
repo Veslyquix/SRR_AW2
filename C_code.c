@@ -226,6 +226,182 @@ enum {
   sub
 };
 
+#define tcop_factory 0x14
+#define apc_factory 0x7
+// 0x60 / 32 days of 3 units
+// clang-format off
+const u8 GenericFactoryUnits[] = {
+tcop_factory, tank, inf, // on loop? 
+recon, none1, none1, // day 1 
+none1, none1, mech, 
+none1, inf, none1, 
+
+inf, tank, none1, 
+inf, recon, mech, 
+none1, apc_factory, artl, 
+apc_factory, none1, copter, 
+
+mdt, none1, none1, 
+none1, neo, none1, 
+none1, none1, rckt, 
+tank, recon, tank, // day 11 
+// below is identical to Liberation (Hard) 
+copter, copter, copter, 
+tank, none1, anti, 
+none1, artl, mdt, 
+none1, none1, none1, 
+inf, none1, neo, 
+tank, tank, tank, 
+none1, inf, none1, 
+bomber, none1, anti, 
+artl, inf, none1, 
+mdt, none1, tank, 
+none1, fighter, none1, 
+none1, anti, mech, 
+inf, mdt, artl, 
+none1, none1, none1, 
+bomber, neo, fighter, 
+mech, none1, tank, 
+none1, tank, none1, 
+anti, anti, none1, 
+none1, none1, tank, 
+tank, inf, mech,
+};
+
+// Liberation (Hard)
+const u8 GenericFactoryUnits2[] = {
+tcop_factory, tank, inf, // on loop? 
+recon, copter, none1, // day 1 
+none1, anti, mech, 
+none1, none1, none1, 
+bomber, mdt, artl, 
+inf, none1, mech, 
+none1, fighter, none1, 
+apc_factory, none1, tank, 
+neo, rckt, neo, 
+none1, none1, none1, 
+none1, tcop_factory, inf, 
+miss, recon, none1, 
+copter, copter, copter, 
+tank, none1, anti, 
+none1, artl, mdt, 
+none1, none1, none1, 
+inf, none1, neo, 
+tank, tank, tank, 
+none1, inf, none1, 
+bomber, none1, anti, 
+artl, inf, none1, 
+mdt, none1, tank, 
+none1, fighter, none1, 
+none1, anti, mech, 
+inf, mdt, artl, 
+none1, none1, none1, 
+bomber, neo, fighter, 
+mech, none1, tank, 
+none1, tank, none1, 
+anti, anti, none1, 
+none1, none1, tank, 
+tank, inf, mech,
+};
+
+const u8 validNoneUnits[] = {none1, none1, none1, none1, none1, inf, mech, recon, }; 
+const u8 validWeakUnits[] = {inf, mech, apc_factory, recon, tcop_factory, none1};
+const u8 validMedUnits[] = {inf, mech, tank, recon, anti, copter, artl, none1};
+const u8 validStrongUnits[] = {mdt,    mech, tank,    rckt,   anti,
+                             copter, miss, fighter, bomber, neo, none1};
+
+// clang-format on
+void RandomizeFactoryUnits(int difficulty, u8 data[0x60]) {
+  int tmp = 0;
+  int rand = 0;
+  int size = 0;
+  const u8 *bank = validWeakUnits;
+  for (int i = 0; i < 0x60; ++i) {
+    tmp = data[i];
+    switch (tmp) {
+    case none1: {
+      bank = validNoneUnits;
+      break;
+    }
+    case inf: {
+      bank = validWeakUnits;
+      break;
+    }
+    case mech: {
+      bank = validWeakUnits;
+      break;
+    }
+    case apc_factory: {
+      bank = validWeakUnits;
+      break;
+    }
+    case recon: {
+      bank = validWeakUnits;
+      break;
+    }
+    case tcop_factory: {
+      bank = validWeakUnits;
+      break;
+    }
+    case tank: {
+      bank = validMedUnits;
+      break;
+    }
+    case anti: {
+      bank = validMedUnits;
+      break;
+    }
+    case copter: {
+      bank = validMedUnits;
+      break;
+    }
+    case artl: {
+      bank = validMedUnits;
+      break;
+    }
+    case mdt: {
+      bank = validStrongUnits;
+      break;
+    }
+    case rckt: {
+      bank = validStrongUnits;
+      break;
+    }
+    case miss: {
+      bank = validStrongUnits;
+      break;
+    }
+    case fighter: {
+      bank = validStrongUnits;
+      break;
+    }
+    case bomber: {
+      bank = validStrongUnits;
+      break;
+    }
+    case neo: {
+      bank = validStrongUnits;
+      break;
+    }
+    default:
+    }
+    if (bank == validNoneUnits) {
+      size = sizeof(validNoneUnits);
+    }
+    if (bank == validWeakUnits) {
+      size = sizeof(validWeakUnits);
+    }
+    if (bank == validMedUnits) {
+      size = sizeof(validMedUnits);
+    }
+    if (bank == validStrongUnits) {
+      size = sizeof(validStrongUnits);
+    }
+    rand = HashByte_Ch(i, size, gCh, tmp);
+    data[i] = bank[rand];
+  }
+};
+
 struct PlayerStruct {
   u32 funds;     // P1 Funds
   u32 spent;     // P1 Total Funds spent
@@ -258,8 +434,8 @@ struct PlayerStruct {
   020232EC		: Stores a team related byte - Appears to be the used
   one, others used for setup 020232ED		: P1's HQ X Co-ordinate 020232EE
   : P1's HQ Y Co-ordinate 020232EF		: P1's Selection Cursor X
-  Co-ordinate 020232F0		: P1's Selection Cursor Y Co-ordinate 020232F2
-  : If set to True, Kill Player on next End Turn. 020232F3		: Rank
+  Co-ordinate 020232F0		: P1's Selection Cursor Y Co-ordinate
+  020232F2 : If set to True, Kill Player on next End Turn. 020232F3 : Rank
   Earned 020232F4		: Points for Speed Score 020232F5
   : Points for Power Score 020232F6		: Points for Technique Score
   020232F8		: Total Score
@@ -301,8 +477,8 @@ int IsCoAiControlled(int co) {
   return result;
 }
 
-// const int PowModifiers[13] = { -30, -20, -10, 0, 10, 15, 20, 30, 40, 50, 60,
-// 70, 75 } ;
+// const int PowModifiers[13] = { -30, -20, -10, 0, 10, 15, 20, 30, 40, 50,
+// 60, 70, 75 } ;
 int HashPow(int number, int noise, int offset, int coPow) {
   LoadDesignRoom1Name();
   const s8 *table = PowModifiers;
@@ -396,8 +572,8 @@ const s8 BomberMov[] = {0, 0, 0, 0, 3, 1, 2, -1, -2, -3, -4, -1, -2};
 const s8 CoBomberMov[] = {0, 0, 0, 0, 1, 1, 3, 1, 2, -1, -2, 0, 0};
 const s8 SCoBomberMov[] = {0, 1, 1, 1, 2, 1, 3, 1, 3, -1, 2, 0, 0};
 int HashMov(int number, int noise, int offset, int coPow) {
-  // int result = HashByte_Global(number, (max_mov - min_mov)+1, noise, noise);
-  // result = (max_mov - result) + min_mov;
+  // int result = HashByte_Global(number, (max_mov - min_mov)+1, noise,
+  // noise); result = (max_mov - result) + min_mov;
   LoadDesignRoom1Name();
   const s8 *table = MovModifiers;
   int size = sizeof(MovModifiers);
@@ -819,8 +995,18 @@ extern void MakeReefSafe(int x, int y, int one);
 #define RoadH (0x184 >> 2)
 
 #define Laser 0x604 >> 2
-#define Cannon 0x608 >> 2
+#define CannonD 0x608 >> 2
+#define CannonU 0x60C >> 2
+#define CannonL 0x610 >> 2
+#define CannonR 0x614 >> 2
+
+#define BlackCannonD 0x61C >> 2
+#define BlackCannonU 0x628 >> 2
+#define Factory 0x634 >> 2
+#define DeathRay 0x640 >> 2 // also missile silo thing
 #define Volcano 0x69C >> 2
+#define Ruin 0x6AC >> 2
+#define XTile 0x6BC >> 2
 
 // Design room definitions
 // 0
@@ -844,13 +1030,27 @@ extern void MakeReefSafe(int x, int y, int one);
 // 0x12
 #define _Reef 0x13
 
+// I added for my own code
+#define _Laser 0x15
+#define _CannonD 0x16
+#define _CannonU 0x17
+#define _CannonL 0x18
+#define _CannonR 0x19
+#define _BlackCannonD 0x1A
+#define _BlackCannonU 0x1B
+#define _Factory 0x1C
+#define _DeathRay 0x1D // also missile silo thing
+#define _Volcano 0x1E
+#define _Ruin 0x1F
+#define _XTile 0x20
+
 // #define ForceSizeX 20
 // #define ForceSizeY 15
 #define LineSegment
 #define HQs
 #define Pieces
 #define Filler
-// #define ForceTileBank defaultTiles
+#define ForceTileBank defaultTiles
 // #define ForceType _Sea
 
 // Randomized wiggly line function without diagonal moves and ensuring no gaps
@@ -1037,6 +1237,64 @@ extern u16 SelectedTileY;
 /* 0C */ u8 _pad_0C[0xF - 0xC];
 /* 0F */ u8 unk0F;
 // clang-format off
+struct playSt { 
+    u8 unk3FC0; 
+    u8 gameMode; // Game Mode (1 = War Room, 2 = Campaign, 3 = Versus)
+    u16 mapID; //- Map ID
+    u8 event20; //- Set by Event 0x20, Trigger condition for certain Events
+	
+	u8 dispMiniPanel; //		- Whether the Terrain/Unit Info Minipanel is displayed (0 = Off, 1 = On)
+	u8 campaignRelated; //		- Campaign Setting - Set by Events
+	u8 eventRelated; //		- Set by some Events?
+	u8 coAbilities; //		- CO Abilities On/Off
+	u8 animOpts; //		- Animation Mode Options (1-3 = A-C, 0 = Off)
+	u8 unk3FCA; //		-
+	u8 unk3FCB; //		-
+	u8 bgmOn; //3FCC		- Music On/Off
+	u8 fog; //		- Fog of War
+	u8 unk3FCE;//		-
+	u8 unk3FCF;	//	-
+    u32 unk3FD0; //	(w)	- Appears to be unused
+	u32 unk3FD4;// (w)	- Has the value "100,000" stored for Vs. Menu Map Selection
+	u32 unk3FD8;// (w)	- Has the value "100,000" stored for Vs. Menu Map Selection
+	u32 unk3FDC;// (w)	- Has the value "100,000" stored for Vs. Menu Map Selection
+
+	u32 unk3FE0;// (w)	- Has the value "100,000" stored for Vs. Menu Map Selection
+	u8 unk3FE4;//		-
+	u8 unk3FE5;//		-
+	u8 unk3FE6;//		-
+	u8 unk3FE7;//		-
+	u16 propertyFunds; //	(hw)	- Funds per property
+	u8 unk3FEA;//		-
+	u8 unk3FEB;//		-
+	u8 weather;//		- Currently Active Weather
+	u8 randomWeatherOn;//		- Random Weather on/off
+	u8 unk3FEE; //		- 
+	u8 defaultWeather; //		- Default Weather
+
+	u8 turnLimit;//		- Turn Limit
+	u8 captureLimit; //3FF1		- Capture Limit
+	u8 savingEnabled; //3FF2		- Toggle to Enable/Disable Saving
+	u8 unk3FF3;//		-
+	u8 p1Color; //3FF4		- Army 1 Colour (Only used during setup)
+	u8 p2Color; //3FF5		- Army 2 Colour (Only used during setup)
+	u8 p3Color; //3FF6		- Army 3 Colour (Only used during setup)
+	u8 p4Color; //3FF7		- Army 4 Colour (Only used during setup)
+	u8 unk3FF8; //		-
+	u8 p1AiControlled; //3FF9		- Army 1 AI/Player (Setup)
+	u8 p2AiControlled; //3FFA		- Army 2 AI/Player (Setup)
+	u8 p3AiControlled; //3FFB		- Army 3 AI/Player (Setup)
+	u8 p4AiControlled; //3FFC		- Army 4 AI/Player (Setup
+	u8 unk3FFD; //		-
+	u8 p1CO; //3FFE		- Army 1 CO (Setup)
+	u8 p2CO; //3FFF		- Army 2 CO (Setup)
+	u8 p3CO; //4000		- Army 3 CO (Setup)
+	u8 p4CO; //4001		- Army 4 CO (Setup)
+
+
+}; 
+
+
 struct activeMap {
   u8 unk1[0x8-0]; 
   u16 SelectedTileX;
@@ -1056,46 +1314,74 @@ struct activeMap {
 };
 // clang-format on
 extern struct activeMap *gActiveMap;
+extern struct playSt gPlaySt;
 
 const struct tileWeight defaultTiles[] = {
-    {_Plain, 85}, {_River, 0}, {_Mtn, 45},  {_Wood, 45}, {_Road, 40},
-    {_City, 25},  {_Sea, 55},  {_Arprt, 4}, {_Port, 1},  {_Brdg, 15},
-    {_Shoal, 15}, {_Base, 15}, {_Pipe, 0},  {_Silo, 12}, {_Reef, 0},
+    {_Plain, 85},  {_River, 0},        {_Mtn, 45},         {_Wood, 45},
+    {_Road, 40},   {_City, 25},        {_Sea, 55},         {_Arprt, 4},
+    {_Port, 1},    {_Brdg, 15},        {_Shoal, 15},       {_Base, 15},
+    {_Pipe, 0},    {_Silo, 12},        {_Reef, 0},         {_Laser, 6},
+    {_CannonD, 3}, {_CannonU, 3},      {_CannonL, 3},      {_CannonR, 3},
+    {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_DeathRay, 1},
+    {_Factory, 5},
 };
 
 const struct tileWeight mountainousTiles[] = {
-    {_Plain, 15}, {_River, 0}, {_Mtn, 125}, {_Wood, 15}, {_Road, 15},
-    {_City, 25},  {_Sea, 15},  {_Arprt, 4}, {_Port, 1},  {_Brdg, 0},
-    {_Shoal, 0},  {_Base, 15}, {_Pipe, 0},  {_Silo, 8},  {_Reef, 0},
+    {_Plain, 15},  {_River, 0},        {_Mtn, 125},        {_Wood, 15},
+    {_Road, 15},   {_City, 25},        {_Sea, 15},         {_Arprt, 4},
+    {_Port, 1},    {_Brdg, 0},         {_Shoal, 0},        {_Base, 15},
+    {_Pipe, 0},    {_Silo, 8},         {_Reef, 0},         {_Laser, 6},
+    {_CannonD, 3}, {_CannonU, 3},      {_CannonL, 3},      {_CannonR, 3},
+    {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_DeathRay, 1},
+    {_Factory, 1},
 };
 
 const struct tileWeight forestTiles[] = {
-    {_Plain, 15}, {_River, 0}, {_Mtn, 25},  {_Wood, 155}, {_Road, 15},
-    {_City, 25},  {_Sea, 15},  {_Arprt, 4}, {_Port, 1},   {_Brdg, 0},
-    {_Shoal, 0},  {_Base, 15}, {_Pipe, 0},  {_Silo, 4},   {_Reef, 0},
+    {_Plain, 15},  {_River, 0},        {_Mtn, 25},         {_Wood, 155},
+    {_Road, 15},   {_City, 25},        {_Sea, 15},         {_Arprt, 4},
+    {_Port, 1},    {_Brdg, 0},         {_Shoal, 0},        {_Base, 15},
+    {_Pipe, 0},    {_Silo, 4},         {_Reef, 0},         {_Laser, 6},
+    {_CannonD, 3}, {_CannonU, 3},      {_CannonL, 3},      {_CannonR, 3},
+    {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_BlackCannonU, 1},
+    {_Factory, 1}, {_DeathRay, 1},
 };
 
 const struct tileWeight industrialTiles[] = {
-    {_Plain, 15}, {_River, 0}, {_Mtn, 15},   {_Wood, 15}, {_Road, 155},
-    {_City, 25},  {_Sea, 15},  {_Arprt, 6},  {_Port, 1},  {_Brdg, 80},
-    {_Shoal, 10}, {_Base, 20}, {_Pipe, 100}, {_Silo, 25}, {_Reef, 0},
+    {_Plain, 15},  {_River, 0},        {_Mtn, 15},         {_Wood, 15},
+    {_Road, 155},  {_City, 25},        {_Sea, 15},         {_Arprt, 6},
+    {_Port, 1},    {_Brdg, 80},        {_Shoal, 10},       {_Base, 20},
+    {_Pipe, 100},  {_Silo, 25},        {_Reef, 0},         {_Laser, 6},
+    {_CannonD, 3}, {_CannonU, 3},      {_CannonL, 3},      {_CannonR, 3},
+    {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_BlackCannonU, 1},
+    {_Factory, 1}, {_DeathRay, 1},
 };
 const struct tileWeight pipeTiles[] = {
-    {_Plain, 15}, {_River, 0}, {_Mtn, 15},   {_Wood, 15}, {_Road, 60},
-    {_City, 25},  {_Sea, 15},  {_Arprt, 4},  {_Port, 1},  {_Brdg, 40},
-    {_Shoal, 10}, {_Base, 15}, {_Pipe, 255}, {_Silo, 12}, {_Reef, 0},
+    {_Plain, 15},  {_River, 0},        {_Mtn, 15},         {_Wood, 15},
+    {_Road, 60},   {_City, 25},        {_Sea, 15},         {_Arprt, 4},
+    {_Port, 1},    {_Brdg, 40},        {_Shoal, 10},       {_Base, 15},
+    {_Pipe, 255},  {_Silo, 12},        {_Reef, 0},         {_Laser, 6},
+    {_CannonD, 3}, {_CannonU, 3},      {_CannonL, 3},      {_CannonR, 3},
+    {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_BlackCannonU, 1},
+    {_Factory, 1}, {_DeathRay, 1},
 };
 const struct tileWeight waterTiles[] = {
-    {_Plain, 15},  {_River, 0}, {_Mtn, 15},  {_Wood, 15}, {_Road, 20},
-    {_City, 25},   {_Sea, 155}, {_Arprt, 6}, {_Port, 8},  {_Brdg, 80},
-    {_Shoal, 155}, {_Base, 15}, {_Pipe, 20}, {_Silo, 6},  {_Reef, 10},
+    {_Plain, 15},  {_River, 0},        {_Mtn, 15},         {_Wood, 15},
+    {_Road, 20},   {_City, 25},        {_Sea, 155},        {_Arprt, 6},
+    {_Port, 8},    {_Brdg, 80},        {_Shoal, 155},      {_Base, 15},
+    {_Pipe, 20},   {_Silo, 6},         {_Reef, 10},        {_Laser, 6},
+    {_CannonD, 3}, {_CannonU, 3},      {_CannonL, 3},      {_CannonR, 3},
+    {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_BlackCannonU, 1},
+    {_Factory, 1}, {_DeathRay, 1},
 };
 const struct tileWeight riverTiles[] = {
-    {_Plain, 15}, {_River, 255}, {_Mtn, 15},  {_Wood, 15}, {_Road, 20},
-    {_City, 25},  {_Sea, 0},     {_Arprt, 6}, {_Port, 2},  {_Brdg, 80},
-    {_Shoal, 45}, {_Base, 15},   {_Pipe, 20}, {_Silo, 6},  {_Reef, 0},
+    {_Plain, 15},  {_River, 255},      {_Mtn, 15},         {_Wood, 15},
+    {_Road, 20},   {_City, 25},        {_Sea, 0},          {_Arprt, 6},
+    {_Port, 2},    {_Brdg, 80},        {_Shoal, 45},       {_Base, 15},
+    {_Pipe, 20},   {_Silo, 6},         {_Reef, 0},         {_Laser, 6},
+    {_CannonD, 3}, {_CannonU, 3},      {_CannonL, 3},      {_CannonR, 3},
+    {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_BlackCannonU, 1},
+    {_Factory, 1}, {_DeathRay, 1},
 };
-
 // extern const u32 gTileBank[];
 const struct tileWeight *const gTileBank[] = {
     defaultTiles, mountainousTiles, forestTiles, industrialTiles,
@@ -1125,6 +1411,55 @@ void MakeSomeTile(int ix, int iy, int tile, int map_size_x, u16 data[]) {
   // MakeTile();
 
   switch (tile) {
+  case _Laser: {
+    MakeTileSimple(ix, iy, Laser);
+    break;
+  }
+  case _CannonD: {
+    MakeTileSimple(ix, iy, CannonD);
+    break;
+  }
+  case _CannonU: {
+    MakeTileSimple(ix, iy, CannonU);
+    break;
+  }
+  case _CannonL: {
+    MakeTileSimple(ix, iy, CannonL);
+    break;
+  }
+  case _CannonR: {
+    MakeTileSimple(ix, iy, CannonR);
+    break;
+  }
+  case _BlackCannonD: {
+    MakeTileSimple(ix, iy, BlackCannonD);
+    break;
+  }
+  case _BlackCannonU: {
+    MakeTileSimple(ix, iy, BlackCannonU);
+    break;
+  }
+  case _Factory: {
+    MakeTileSimple(ix, iy, Factory);
+    break;
+  }
+  case _DeathRay: { // also missile silo thing
+    MakeTileSimple(ix, iy, DeathRay);
+    break;
+  }
+  case _Volcano: {
+    MakeTileSimple(ix, iy, Volcano);
+    break;
+  }
+  case _Ruin: {
+    MakeTileSimple(ix, iy, Ruin);
+    break;
+  }
+  case _XTile: {
+    MakeTileSimple(ix, iy, XTile);
+    break;
+  }
+
   case _Plain: {
     MakeTileSimple(ix, iy, Plain);
     break;
@@ -1275,7 +1610,7 @@ extern void SetSelectedTile(int);
 const u8 WigglyLineTypes[] = {
     _Road, _River, _River, _Pipe, _Sea, 0,
 };
-
+extern u32 GetFactoryUnitsPointer(void);
 void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   if (!ShouldMapBeRandomized()) {
     return;
@@ -1441,8 +1776,24 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   bank = ForceTileBank;
 #endif
   // const struct tileWeight *bank = gTileBank[0];
+  int blackHoleExists =
+      ((gPlaySt.p1Color == 5) || (gPlaySt.p2Color == 5) ||
+       (gPlaySt.p3Color == 5) ||
+       (gPlaySt.p4Color == 5)); // chance this doesn't work with < 4 players ?
+  int factories = GetFactoryUnitsPointer();
+  if (gPlaySt.gameMode != 2) {
+    factories = 0;
+    blackHoleExists = 0;
+  }
+  factories = 1;
+  blackHoleExists = 1;
   int totalWeight = 0;
   int size = (sizeof(defaultTiles) >> 2);
+  if (!blackHoleExists) { // no minicanons / lasers / volcanoes
+    size -= 10;
+  } else if (!factories) {
+    size -= 1;
+  }
   struct tileWeight tiles[size]; // defaultTiles is pointers, so >> 2
   for (int i = 0; i < size; ++i) {
     totalWeight += bank[i].weight;

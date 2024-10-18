@@ -1,0 +1,109 @@
+1
+Advance Wars 2 Campaign Header Editor
+0x615194
+42
+48
+CMaps.txt
+NULL
+
+Map ID
+0
+2
+NEHU
+NULL
+
+Special Property
+2
+1
+NEHU
+NULL
+
+Difficulty Stars
+3
+1
+NEHU
+NULL
+
+Hard Mode Stars
+4
+2
+NEHU
+NULL
+
+Flag X
+6
+2
+NEHU
+NULL
+
+Flag Y
+8
+2
+NEHU
+NULL
+
+Unknown
+10
+2
+NEHU
+NULL
+
+Map Section To Color
+12
+4
+NEHU
+NULL
+
+Map Description
+16
+2
+NEDU
+NULL
+
+Unknown
+18
+2
+NEHU
+NULL
+
+Pre-battle Dialogue
+20
+4
+NEHU
+NULL
+
+Unknown
+24
+4
+NEHU
+NULL
+
+Unknown
+28
+4
+NEHU
+NULL
+
+CO Select Pointer
+32
+4
+NEHU
+NULL
+
+Factory Script NC
+36
+4
+NEHU
+NULL
+
+Factory Script HC
+40
+4
+NEHU
+NULL
+
+Unknown
+44
+4
+NEHU
+NULL
