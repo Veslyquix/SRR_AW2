@@ -41,6 +41,10 @@ ORG $618a8
 ORG $618F8 
 callHackNew(EnsureFactoryPointer2) 
 
+ORG $2CE08 
+callHackNew(ToggleMusicWinCh)
+SHORT $46c0 
+
 
 ORG $67568 // skip waiting on boot and unlocks things by Xenesis 
 callHackNew(BitSet_UnlockAll) 

@@ -425,6 +425,27 @@ pop {r1}
 bx r1 
 .ltorg 
 
+.global ToggleMusicWinCh
+.type ToggleMusicWinCh, %function 
+ToggleMusicWinCh: 
+push {lr} 
+blh WinCh_P1
+blh WinCh_P2
+
+
+ldr r3, =0x802CE20 
+ldr r3, [r3] 
+ldr r1, [r3] 
+ldrb r2, [r1, #0xC] 
+mov r0, #1 
+sub r0, r2 
+strb r0, [r1, #0xC] 
+ldrb r0, [r1, #0xC] 
+mov r4, r3 
+pop {r3} 
+bx r3 
+.ltorg 
+
 .global EnsureFactoryPointer2 
 .type EnsureFactoryPointer2, %function 
 EnsureFactoryPointer2: 

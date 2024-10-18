@@ -10,6 +10,8 @@ POIN Base3_data
 POIN Beach2_data 
 POIN Beach3_data 
 POIN Beach_data 
+POIN BlackCannonD_data 
+POIN BlackCannonU_data 
 POIN Bridge3_data 
 POIN Bridge4_data 
 POIN Bridge5_data 
@@ -20,6 +22,8 @@ POIN City5_data
 POIN City6_data 
 POIN City7_data 
 POIN City8_data 
+POIN DeathRay_data 
+POIN Factory_data 
 POIN LoneTree_data 
 POIN Mountain1_data 
 POIN Mountain2_data 
@@ -39,12 +43,13 @@ POIN Road_data
 POIN Trees2_data 
 POIN Trees3_data 
 POIN Trees_data 
+POIN Volcano_data 
 POIN Water2_data 
 POIN Water3_data 
 POIN Water_data 
 WORD 0 
  
-#define NumberOfMapPiecesDef 38 
+#define NumberOfMapPiecesDef 43 
  
 ALIGN 4 
 Base1_data: 
@@ -64,6 +69,12 @@ Beach3_data:
 ALIGN 4 
 Beach_data: 
 #incbin "Beach_data.dmp" 
+ALIGN 4 
+BlackCannonD_data: 
+#incbin "BlackCannonD_data.dmp" 
+ALIGN 4 
+BlackCannonU_data: 
+#incbin "BlackCannonU_data.dmp" 
 ALIGN 4 
 Bridge3_data: 
 #incbin "Bridge3_data.dmp" 
@@ -94,6 +105,12 @@ City7_data:
 ALIGN 4 
 City8_data: 
 #incbin "City8_data.dmp" 
+ALIGN 4 
+DeathRay_data: 
+#incbin "DeathRay_data.dmp" 
+ALIGN 4 
+Factory_data: 
+#incbin "Factory_data.dmp" 
 ALIGN 4 
 LoneTree_data: 
 #incbin "LoneTree_data.dmp" 
@@ -151,6 +168,9 @@ Trees3_data:
 ALIGN 4 
 Trees_data: 
 #incbin "Trees_data.dmp" 
+ALIGN 4 
+Volcano_data: 
+#incbin "Volcano_data.dmp" 
 ALIGN 4 
 Water2_data: 
 #incbin "Water2_data.dmp" 

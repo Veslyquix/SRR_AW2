@@ -1926,7 +1926,7 @@ Format
 
 ;Game Rules
 0x03003FC0
-	3FC1		- Game Mode (1 = War Room, 2 = Campaign, 3 = Versus)
+	3FC1		- Game Mode (1 = Campaign, 2 = War Room, 3 = Versus)
 	3FC2	H	- Map ID
 	3FC4		- Set by Event 0x20, Trigger condition for certain Events
 	3FC5		- Whether the Terrain/Unit Info Minipanel is displayed (0 = Off, 1 = On)

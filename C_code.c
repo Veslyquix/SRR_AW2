@@ -919,7 +919,8 @@ struct ChHeader {
 extern struct Map_Struct *MapPiecesTable[0xFF];
 
 void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID);
-void CopyMapPiece(u16 dst[], u8 xx, u8 yy, u8 map_size_x, u8 map_size_y, int);
+void CopyMapPiece(u16 dst[], u8 placement_x, u8 placement_y, u8 map_size_x,
+                  u8 map_size_y, int defaultTile, int blackHoleExists);
 extern int RandomizeMaps;
 int ShouldMapBeRandomized(void) {
   LoadDesignRoom1Name();
@@ -1044,13 +1045,13 @@ extern void MakeReefSafe(int x, int y, int one);
 #define _Ruin 0x1F
 #define _XTile 0x20
 
-// #define ForceSizeX 20
-// #define ForceSizeY 15
+// #define ForceSizeX 35
+// #define ForceSizeY 35
 #define LineSegment
 #define HQs
 #define Pieces
 #define Filler
-#define ForceTileBank defaultTiles
+// #define ForceTileBank defaultTiles
 // #define ForceType _Sea
 
 // Randomized wiggly line function without diagonal moves and ensuring no gaps
@@ -1239,7 +1240,7 @@ extern u16 SelectedTileY;
 // clang-format off
 struct playSt { 
     u8 unk3FC0; 
-    u8 gameMode; // Game Mode (1 = War Room, 2 = Campaign, 3 = Versus)
+    u8 gameMode; // Game Mode (1 = Campaign, 2 = War Room, 3 = Versus)
     u16 mapID; //- Map ID
     u8 event20; //- Set by Event 0x20, Trigger condition for certain Events
 	
@@ -1315,72 +1316,65 @@ struct activeMap {
 // clang-format on
 extern struct activeMap *gActiveMap;
 extern struct playSt gPlaySt;
-
+#define NumberOfBlackHoleInventionsInTileBanks 5
 const struct tileWeight defaultTiles[] = {
-    {_Plain, 85},  {_River, 0},        {_Mtn, 45},         {_Wood, 45},
-    {_Road, 40},   {_City, 25},        {_Sea, 55},         {_Arprt, 4},
-    {_Port, 1},    {_Brdg, 15},        {_Shoal, 15},       {_Base, 15},
-    {_Pipe, 0},    {_Silo, 12},        {_Reef, 0},         {_Laser, 6},
-    {_CannonD, 3}, {_CannonU, 3},      {_CannonL, 3},      {_CannonR, 3},
-    {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_DeathRay, 1},
-    {_Factory, 5},
+    {_Plain, 85}, {_River, 0},   {_Mtn, 45},    {_Wood, 45},   {_Road, 40},
+    {_City, 25},  {_Sea, 55},    {_Arprt, 4},   {_Port, 1},    {_Brdg, 15},
+    {_Shoal, 15}, {_Base, 15},   {_Pipe, 0},    {_Silo, 12},   {_Reef, 0},
+    {_Laser, 2},  {_CannonD, 1}, {_CannonU, 1}, {_CannonL, 1}, {_CannonR, 1},
+    // {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_DeathRay, 1},
+    // {_Factory, 5},
 };
 
 const struct tileWeight mountainousTiles[] = {
-    {_Plain, 15},  {_River, 0},        {_Mtn, 125},        {_Wood, 15},
-    {_Road, 15},   {_City, 25},        {_Sea, 15},         {_Arprt, 4},
-    {_Port, 1},    {_Brdg, 0},         {_Shoal, 0},        {_Base, 15},
-    {_Pipe, 0},    {_Silo, 8},         {_Reef, 0},         {_Laser, 6},
-    {_CannonD, 3}, {_CannonU, 3},      {_CannonL, 3},      {_CannonR, 3},
-    {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_DeathRay, 1},
-    {_Factory, 1},
+    {_Plain, 15}, {_River, 0},   {_Mtn, 125},   {_Wood, 15},   {_Road, 15},
+    {_City, 25},  {_Sea, 15},    {_Arprt, 4},   {_Port, 1},    {_Brdg, 0},
+    {_Shoal, 0},  {_Base, 15},   {_Pipe, 0},    {_Silo, 8},    {_Reef, 0},
+    {_Laser, 2},  {_CannonD, 1}, {_CannonU, 1}, {_CannonL, 1}, {_CannonR, 1},
+    // {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_DeathRay, 1},
+    // {_Factory, 5},
 };
 
 const struct tileWeight forestTiles[] = {
-    {_Plain, 15},  {_River, 0},        {_Mtn, 25},         {_Wood, 155},
-    {_Road, 15},   {_City, 25},        {_Sea, 15},         {_Arprt, 4},
-    {_Port, 1},    {_Brdg, 0},         {_Shoal, 0},        {_Base, 15},
-    {_Pipe, 0},    {_Silo, 4},         {_Reef, 0},         {_Laser, 6},
-    {_CannonD, 3}, {_CannonU, 3},      {_CannonL, 3},      {_CannonR, 3},
-    {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_BlackCannonU, 1},
-    {_Factory, 1}, {_DeathRay, 1},
+    {_Plain, 15}, {_River, 0},   {_Mtn, 25},    {_Wood, 155},  {_Road, 15},
+    {_City, 25},  {_Sea, 15},    {_Arprt, 4},   {_Port, 1},    {_Brdg, 0},
+    {_Shoal, 0},  {_Base, 15},   {_Pipe, 0},    {_Silo, 4},    {_Reef, 0},
+    {_Laser, 2},  {_CannonD, 1}, {_CannonU, 1}, {_CannonL, 1}, {_CannonR, 1},
+    // {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_DeathRay, 1},
+    // {_Factory, 5},
 };
 
 const struct tileWeight industrialTiles[] = {
-    {_Plain, 15},  {_River, 0},        {_Mtn, 15},         {_Wood, 15},
-    {_Road, 155},  {_City, 25},        {_Sea, 15},         {_Arprt, 6},
-    {_Port, 1},    {_Brdg, 80},        {_Shoal, 10},       {_Base, 20},
-    {_Pipe, 100},  {_Silo, 25},        {_Reef, 0},         {_Laser, 6},
-    {_CannonD, 3}, {_CannonU, 3},      {_CannonL, 3},      {_CannonR, 3},
-    {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_BlackCannonU, 1},
-    {_Factory, 1}, {_DeathRay, 1},
+    {_Plain, 15}, {_River, 0},   {_Mtn, 15},    {_Wood, 15},   {_Road, 155},
+    {_City, 25},  {_Sea, 15},    {_Arprt, 6},   {_Port, 1},    {_Brdg, 80},
+    {_Shoal, 10}, {_Base, 20},   {_Pipe, 100},  {_Silo, 25},   {_Reef, 0},
+    {_Laser, 2},  {_CannonD, 2}, {_CannonU, 2}, {_CannonL, 2}, {_CannonR, 2},
+    // {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_DeathRay, 1},
+    // {_Factory, 5},
 };
 const struct tileWeight pipeTiles[] = {
-    {_Plain, 15},  {_River, 0},        {_Mtn, 15},         {_Wood, 15},
-    {_Road, 60},   {_City, 25},        {_Sea, 15},         {_Arprt, 4},
-    {_Port, 1},    {_Brdg, 40},        {_Shoal, 10},       {_Base, 15},
-    {_Pipe, 255},  {_Silo, 12},        {_Reef, 0},         {_Laser, 6},
-    {_CannonD, 3}, {_CannonU, 3},      {_CannonL, 3},      {_CannonR, 3},
-    {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_BlackCannonU, 1},
-    {_Factory, 1}, {_DeathRay, 1},
+    {_Plain, 15}, {_River, 0},   {_Mtn, 15},    {_Wood, 15},   {_Road, 60},
+    {_City, 25},  {_Sea, 15},    {_Arprt, 4},   {_Port, 1},    {_Brdg, 40},
+    {_Shoal, 10}, {_Base, 15},   {_Pipe, 255},  {_Silo, 12},   {_Reef, 0},
+    {_Laser, 4},  {_CannonD, 1}, {_CannonU, 1}, {_CannonL, 1}, {_CannonR, 1},
+    // {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_DeathRay, 1},
+    // {_Factory, 5},
 };
 const struct tileWeight waterTiles[] = {
-    {_Plain, 15},  {_River, 0},        {_Mtn, 15},         {_Wood, 15},
-    {_Road, 20},   {_City, 25},        {_Sea, 155},        {_Arprt, 6},
-    {_Port, 8},    {_Brdg, 80},        {_Shoal, 155},      {_Base, 15},
-    {_Pipe, 20},   {_Silo, 6},         {_Reef, 10},        {_Laser, 6},
-    {_CannonD, 3}, {_CannonU, 3},      {_CannonL, 3},      {_CannonR, 3},
-    {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_BlackCannonU, 1},
-    {_Factory, 1}, {_DeathRay, 1},
+    {_Plain, 15},  {_River, 0},   {_Mtn, 15},    {_Wood, 15},   {_Road, 20},
+    {_City, 25},   {_Sea, 155},   {_Arprt, 6},   {_Port, 8},    {_Brdg, 80},
+    {_Shoal, 155}, {_Base, 15},   {_Pipe, 20},   {_Silo, 6},    {_Reef, 10},
+    {_Laser, 2},   {_CannonD, 1}, {_CannonU, 1}, {_CannonL, 1}, {_CannonR, 1},
+    // {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_DeathRay, 1},
+    // {_Factory, 5},
 };
 const struct tileWeight riverTiles[] = {
-    {_Plain, 15},  {_River, 255},      {_Mtn, 15},         {_Wood, 15},
-    {_Road, 20},   {_City, 25},        {_Sea, 0},          {_Arprt, 6},
-    {_Port, 2},    {_Brdg, 80},        {_Shoal, 45},       {_Base, 15},
-    {_Pipe, 20},   {_Silo, 6},         {_Reef, 0},         {_Laser, 6},
-    {_CannonD, 3}, {_CannonU, 3},      {_CannonL, 3},      {_CannonR, 3},
-    {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_BlackCannonU, 1},
-    {_Factory, 1}, {_DeathRay, 1},
+    {_Plain, 15}, {_River, 255}, {_Mtn, 15},    {_Wood, 15},   {_Road, 20},
+    {_City, 25},  {_Sea, 0},     {_Arprt, 6},   {_Port, 2},    {_Brdg, 80},
+    {_Shoal, 45}, {_Base, 15},   {_Pipe, 20},   {_Silo, 6},    {_Reef, 0},
+    {_Laser, 2},  {_CannonD, 1}, {_CannonU, 1}, {_CannonL, 1}, {_CannonR, 1},
+    // {_Volcano, 1}, {_BlackCannonD, 1}, {_BlackCannonU, 1}, {_DeathRay, 1},
+    // {_Factory, 5},
 };
 // extern const u32 gTileBank[];
 const struct tileWeight *const gTileBank[] = {
@@ -1610,11 +1604,13 @@ extern void SetSelectedTile(int);
 const u8 WigglyLineTypes[] = {
     _Road, _River, _River, _Pipe, _Sea, 0,
 };
+extern u8 aiUnitType;
 extern u32 GetFactoryUnitsPointer(void);
 void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   if (!ShouldMapBeRandomized()) {
     return;
   }
+  aiUnitType = 1; // land + air
   if ((int)gActiveMap < 0) {
     gActiveMap = (void *)0x200B000;
   }
@@ -1756,16 +1752,28 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
 #endif
 
   data = mapTileData;
+  int blackHoleExists = true;
+  // ((gPlaySt.p1Color == 5) || (gPlaySt.p2Color == 5) ||
+  // (gPlaySt.p3Color == 5) ||
+  // (gPlaySt.p4Color == 5)); // chance this doesn't work with < 4 players ?
+  // int factories = GetFactoryUnitsPointer();
+  if (gPlaySt.gameMode != 1) { // if not campaign, no black hole
+    blackHoleExists = 0;
+  }
+  int totalWeight = 0;
+  int size = (sizeof(defaultTiles) >> 2);
+  if (!blackHoleExists) { // no minicanons / lasers / volcanoes
+    size -= NumberOfBlackHoleInventionsInTileBanks;
+  }
 #ifdef Pieces
-  // gCh = cID; // remove later
-  // return;
 
   for (int iy = 0; iy < map_size_y; iy++) {
     for (int ix = 0; ix < map_size_x; ix++) {
       // dst->data[(iy * map_size_x) + ix] = 1;
       //  if (FrequencyOfObjects_Link > NextRN_N(100)) {
 
-      CopyMapPiece(data, ix, iy, map_size_x, map_size_y, defaultTile);
+      CopyMapPiece(data, ix, iy, map_size_x, map_size_y, defaultTile,
+                   blackHoleExists);
     }
   }
 #endif
@@ -1776,24 +1784,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   bank = ForceTileBank;
 #endif
   // const struct tileWeight *bank = gTileBank[0];
-  int blackHoleExists =
-      ((gPlaySt.p1Color == 5) || (gPlaySt.p2Color == 5) ||
-       (gPlaySt.p3Color == 5) ||
-       (gPlaySt.p4Color == 5)); // chance this doesn't work with < 4 players ?
-  int factories = GetFactoryUnitsPointer();
-  if (gPlaySt.gameMode != 2) {
-    factories = 0;
-    blackHoleExists = 0;
-  }
-  factories = 1;
-  blackHoleExists = 1;
-  int totalWeight = 0;
-  int size = (sizeof(defaultTiles) >> 2);
-  if (!blackHoleExists) { // no minicanons / lasers / volcanoes
-    size -= 10;
-  } else if (!factories) {
-    size -= 1;
-  }
+
   struct tileWeight tiles[size]; // defaultTiles is pointers, so >> 2
   for (int i = 0; i < size; ++i) {
     totalWeight += bank[i].weight;
@@ -1854,13 +1845,17 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
 }
 
 void CopyMapPiece(u16 dst[], u8 placement_x, u8 placement_y, u8 map_size_x,
-                  u8 map_size_y, int defaultTile) {
+                  u8 map_size_y, int defaultTile, int blackHoleExists) {
   int rand = HashByte_Ch(placement_x, NumberOfMapPieces, placement_y, (int)dst);
   struct Map_Struct *T = MapPiecesTable[rand];
   // struct Map_Struct *T = MapPiecesTable[0];
   int piece_size_x = (T->x);
   int piece_size_y = (T->y);
   int exit = false; // default to false
+
+  if ((!blackHoleExists) && (piece_size_x >= 5) && (piece_size_y >= 6)) {
+    return;
+  }
 
   int border_y = placement_y;
   int border_x = placement_x;
@@ -1873,7 +1868,11 @@ void CopyMapPiece(u16 dst[], u8 placement_x, u8 placement_y, u8 map_size_x,
   }
   for (int y = 0; y <= piece_size_y + 1; y++) {
     for (int x = 0; x <= piece_size_x + 1;
-         x++) { // if any tile is not the default, then immediately exit
+         x++) { // if any tile is not the default, then immediately exit, unless
+                // plains on our map chunk
+      if ((T->data[(y * piece_size_x) + x] >> 2) == Plain) {
+        continue;
+      } //
       if (dst[(border_y + y) * map_size_x + border_x + x] != defaultTile) {
         exit = true;
       }
@@ -1891,6 +1890,18 @@ void CopyMapPiece(u16 dst[], u8 placement_x, u8 placement_y, u8 map_size_x,
         // T->data[y*piece_size_x+x];
         tile = T->data[y * piece_size_x + x] >> 2;
         switch (tile) {
+        case Plain: {
+          continue; // don't overwrite if plains
+        }
+        // case Seam:
+        case DeathRay:
+        case CannonD:
+        case CannonU:
+        case CannonL:
+        case CannonR:
+        case BlackCannonD:
+        case BlackCannonU:
+        case Laser:
         case City:
         case Base:
         case Airport:

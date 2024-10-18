@@ -11,6 +11,11 @@
 	.type   \name, object
 	.set    \name, \value
 .endm
+@ 28CF4 
+SET_FUNC MapMainIdle, 0x80345C8 
+@ see 0x8028CF4 
+SET_FUNC WinCh_P1, 0x8028AEC 
+SET_FUNC WinCh_P2, 0x8028568  
 
 SET_FUNC MakeRiver, 0x8009F11 
 SET_FUNC MakeMountain, 0x800b049 
@@ -55,7 +60,7 @@ SET_FUNC MakeTileSimple, 0x8001159 @ r0 x r1 y r2 tile
 
 @ store tile into 0x200B000 
 @ coord x into 0x200b008, y into 0x200b00a 
-
+SET_DATA aiUnitType, 0x30046B8 
 @AI Table Stuff:
 @0x030046B4: Pointer to current Black Hole Factory Deployment List
 @0x030046B8: 0x1 = Airport Present, 0x2 = Port Present
