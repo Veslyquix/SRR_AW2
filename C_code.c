@@ -918,9 +918,26 @@ struct ChHeader {
 
 extern struct Map_Struct *MapPiecesTable[0xFF];
 
+struct randomMapInfo {
+  u8 sizeX;
+  u8 sizeY;
+  u8 blackHoleExists;
+  u8 city;
+  u8 base;
+  u8 airport;
+  u8 port;
+  u8 silo;
+  u8 minicannon;
+  u8 laser;
+  u8 blackcannon;
+  u8 deathray;
+  u8 factory;
+  u8 volcano;
+};
+
 void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID);
-void CopyMapPiece(u16 dst[], u8 placement_x, u8 placement_y, u8 map_size_x,
-                  u8 map_size_y, int defaultTile, int blackHoleExists);
+void CopyMapPiece(u16 dst[], u8 placement_x, u8 placement_y, int defaultTile,
+                  struct randomMapInfo *mapInfo);
 extern int RandomizeMaps;
 int ShouldMapBeRandomized(void) {
   LoadDesignRoom1Name();
@@ -1186,11 +1203,11 @@ void SetMapSize(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   }
   int x = dst->x;
   int y = dst->y;
-  if (x > 35) {
-    x = 35;
+  if (x > 23) { // decrease the odds of max sized maps
+    x = 23;
   }
-  if (y > 35) {
-    y = 35;
+  if (y > 23) {
+    y = 23;
   }
   x = HashByte_Ch(gCh, x, 5, 0) + x / 2; // 50% to 150% of usual
   y = HashByte_Ch(gCh, y, 5, 0) + y / 2;
@@ -1313,6 +1330,7 @@ struct activeMap {
   u16 unk3a;
   u16 previousTile; 
 };
+
 // clang-format on
 extern struct activeMap *gActiveMap;
 extern struct playSt gPlaySt;
@@ -1396,53 +1414,202 @@ void AddPropertyByID(int id, int ix, int iy, int map_size_x, u16 data[]) {
   data[(iy * map_size_x) + ix] = id;
 }
 
-void MakeSomeTile(int ix, int iy, int tile, int map_size_x, u16 data[]) {
+int CanWeMakeMoreLasers(struct randomMapInfo *mapInfo) {
+  int max = (mapInfo->sizeX + mapInfo->sizeY) / 8;
+  if (max > 5) {
+    max = 5;
+  }
+  if (max < 2) {
+    max = 2;
+  }
+  // max = 99;
+  int result = false;
+  if (mapInfo->laser <= max) {
+    result = true;
+  }
+  return result;
+}
+int CanWeMakeMoreCannons(struct randomMapInfo *mapInfo) {
+  int max = (mapInfo->sizeX + mapInfo->sizeY) / 8;
+  if (max > 6) {
+    max = 6;
+  }
+  if (max < 3) {
+    max = 3;
+  }
+  int result = false;
+  if (mapInfo->minicannon <= max) {
+    result = true;
+  }
+  return result;
+}
+int CanWeMakeMoreBlackCannons(struct randomMapInfo *mapInfo) {
+  int max = (mapInfo->sizeX + mapInfo->sizeY) / 20;
+  if (max > 3) {
+    max = 3;
+  }
+  int result = false;
+  if (mapInfo->blackcannon <= max) {
+    result = true;
+  }
+  return result;
+}
+int CanWeMakeMoreDeathRays(struct randomMapInfo *mapInfo) {
+  int max = (mapInfo->sizeX + mapInfo->sizeY) / 20;
+  if (max > 3) {
+    max = 3;
+  }
+  int result = false;
+  if (mapInfo->deathray <= max) {
+    result = true;
+  }
+  return result;
+}
+int CanWeMakeMoreFactories(struct randomMapInfo *mapInfo) {
+  int max = 1;
+  int result = false;
+  if (mapInfo->factory <= max) {
+    result = true;
+  }
+  return result;
+}
+int CanWeMakeMoreVolcanoes(struct randomMapInfo *mapInfo) {
+  int max = 1;
+  int result = false;
+  if (mapInfo->volcano <= max) {
+    result = true;
+  }
+  return result;
+}
+int CanWeMakeMoreSilos(struct randomMapInfo *mapInfo) {
+  int max = (mapInfo->sizeX + mapInfo->sizeY) / 8;
+  if (max > 8) {
+    max = 8;
+  }
+  int result = false;
+  if (mapInfo->silo <= max) {
+    result = true;
+  }
+  return result;
+}
+int CanWeMakeMoreCities(struct randomMapInfo *mapInfo) {
+  int max = (mapInfo->sizeX * mapInfo->sizeY) / 30;
+  int result = false;
+  if (mapInfo->city <= max) {
+    result = true;
+  }
+  return result;
+}
+int CanWeMakeMoreBases(struct randomMapInfo *mapInfo) {
+  int max = (mapInfo->sizeX * mapInfo->sizeY) / 40;
+  int result = false;
+  if (mapInfo->base <= max) {
+    result = true;
+  }
+  return result;
+}
+
+int CanWeMakeMoreAirports(struct randomMapInfo *mapInfo) {
+  int max = (mapInfo->sizeX * mapInfo->sizeY) / 50;
+  if (max > 10) {
+    max = 10;
+  }
+  int result = false;
+  if (mapInfo->airport <= max) {
+    result = true;
+  }
+  return result;
+}
+int CanWeMakeMorePorts(struct randomMapInfo *mapInfo) {
+  int max = (mapInfo->sizeX * mapInfo->sizeY) / 50;
+  if (max > 10) {
+    max = 10;
+  }
+  int result = false;
+  if (mapInfo->port <= max) {
+    result = true;
+  }
+  return result;
+}
+
+void MakeSomeTile(int ix, int iy, int tile, u16 data[],
+                  struct randomMapInfo *mapInfo) {
   gActiveMap->SelectedTile = tile; // needed
   // Unk_200B036 = tiles[i].tile; // ??
-
+  int map_size_x = mapInfo->sizeX;
   gActiveMap->SelectedTileX = ix;
   gActiveMap->SelectedTileY = iy;
   // MakeTile();
 
   switch (tile) {
   case _Laser: {
-    MakeTileSimple(ix, iy, Laser);
+    mapInfo->laser++;
+    if (CanWeMakeMoreLasers(mapInfo)) {
+      MakeTileSimple(ix, iy, Laser);
+    }
     break;
   }
   case _CannonD: {
-    MakeTileSimple(ix, iy, CannonD);
+    mapInfo->minicannon++;
+    if (CanWeMakeMoreCannons(mapInfo)) {
+      MakeTileSimple(ix, iy, CannonD);
+    }
     break;
   }
   case _CannonU: {
-    MakeTileSimple(ix, iy, CannonU);
+    mapInfo->minicannon++;
+    if (CanWeMakeMoreCannons(mapInfo)) {
+      MakeTileSimple(ix, iy, CannonU);
+    }
     break;
   }
   case _CannonL: {
-    MakeTileSimple(ix, iy, CannonL);
+    mapInfo->minicannon++;
+    if (CanWeMakeMoreCannons(mapInfo)) {
+      MakeTileSimple(ix, iy, CannonL);
+    }
     break;
   }
   case _CannonR: {
-    MakeTileSimple(ix, iy, CannonR);
+    mapInfo->minicannon++;
+    if (CanWeMakeMoreCannons(mapInfo)) {
+      MakeTileSimple(ix, iy, CannonR);
+    }
     break;
   }
   case _BlackCannonD: {
-    MakeTileSimple(ix, iy, BlackCannonD);
+    mapInfo->blackcannon++;
+    if (CanWeMakeMoreBlackCannons(mapInfo)) {
+      MakeTileSimple(ix, iy, BlackCannonD);
+    }
     break;
   }
   case _BlackCannonU: {
-    MakeTileSimple(ix, iy, BlackCannonU);
+    mapInfo->blackcannon++;
+    if (CanWeMakeMoreBlackCannons(mapInfo)) {
+      MakeTileSimple(ix, iy, BlackCannonU);
+    }
     break;
   }
   case _Factory: {
-    MakeTileSimple(ix, iy, Factory);
+    mapInfo->factory++;
+    if (CanWeMakeMoreFactories(mapInfo)) {
+      MakeTileSimple(ix, iy, Factory);
+    }
     break;
   }
   case _DeathRay: { // also missile silo thing
-    MakeTileSimple(ix, iy, DeathRay);
+    mapInfo->deathray++;
+    if (CanWeMakeMoreDeathRays(mapInfo)) {
+      MakeTileSimple(ix, iy, DeathRay);
+    }
     break;
   }
   case _Volcano: {
-    MakeTileSimple(ix, iy, Volcano);
+    mapInfo->volcano++;
+    if (CanWeMakeMoreVolcanoes(mapInfo)) {
+      MakeTileSimple(ix, iy, Volcano);
+    }
     break;
   }
   case _Ruin: {
@@ -1506,27 +1673,42 @@ void MakeSomeTile(int ix, int iy, int tile, int map_size_x, u16 data[]) {
     break;
   }
   case _City: {
-    AddPropertyByID(City, ix, iy, map_size_x, data);
+    mapInfo->city++;
+    if (CanWeMakeMoreCities(mapInfo)) {
+      AddPropertyByID(City, ix, iy, map_size_x, data);
+    }
     // MakeProperty(0, ix, iy);
     break;
   }
   case _Base: {
-    AddPropertyByID(Base, ix, iy, map_size_x, data);
+    mapInfo->base++;
+    if (CanWeMakeMoreBases(mapInfo)) {
+      AddPropertyByID(Base, ix, iy, map_size_x, data);
+    }
     // MakeProperty(1, ix, iy);
     break;
   }
   case _Arprt: {
-    AddPropertyByID(Airport, ix, iy, map_size_x, data);
+    mapInfo->airport++;
+    if (CanWeMakeMoreAirports(mapInfo)) {
+      AddPropertyByID(Airport, ix, iy, map_size_x, data);
+    }
     // MakeProperty(2, ix, iy);
     break;
   }
   case _Port: {
-    AddPropertyByID(Port, ix, iy, map_size_x, data);
+    mapInfo->port++;
+    if (CanWeMakeMorePorts(mapInfo)) {
+      AddPropertyByID(Port, ix, iy, map_size_x, data);
+    }
     // MakeProperty(3, ix, iy);
     break;
   }
   case _Silo: {
-    AddPropertyByID(Silo, ix, iy, map_size_x, data);
+    mapInfo->silo++;
+    if (CanWeMakeMoreSilos(mapInfo)) {
+      AddPropertyByID(Silo, ix, iy, map_size_x, data);
+    }
     // MakeProperty(4, ix, iy);
     break;
   }
@@ -1654,8 +1836,31 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   // SelectedTile_3A = 0;
   // PreviousTile_3C = 9;
   // Surplus = 0; // at 0x800C468 it checks if this is <= 0x3B
+  int blackHoleExists = true;
+  // ((gPlaySt.p1Color == 5) || (gPlaySt.p2Color == 5) ||
+  // (gPlaySt.p3Color == 5) ||
+  // (gPlaySt.p4Color == 5)); // chance this doesn't work with < 4 players ?
+  // int factories = GetFactoryUnitsPointer();
+  if (gPlaySt.gameMode != 1) { // if not campaign, no black hole
+    blackHoleExists = 0;
+  }
+
   gActiveMap->Surplus = 0;
   gActiveMap->factionProperties = 0;
+  struct randomMapInfo mapInfo;
+  mapInfo.sizeX = map_size_x;
+  mapInfo.sizeY = map_size_y;
+  mapInfo.blackHoleExists = blackHoleExists;
+  mapInfo.city = 0;
+  mapInfo.base = 0;
+  mapInfo.airport = 0;
+  mapInfo.port = 0;
+  mapInfo.silo = 0;
+  mapInfo.minicannon = 0;
+  mapInfo.laser = 0;
+  mapInfo.blackcannon = 0;
+  mapInfo.deathray = 0;
+  mapInfo.factory = 0;
 
   // int pathLength = 15;
   // int amountOfPaths = map_size_y * map_size_x;
@@ -1752,14 +1957,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
 #endif
 
   data = mapTileData;
-  int blackHoleExists = true;
-  // ((gPlaySt.p1Color == 5) || (gPlaySt.p2Color == 5) ||
-  // (gPlaySt.p3Color == 5) ||
-  // (gPlaySt.p4Color == 5)); // chance this doesn't work with < 4 players ?
-  // int factories = GetFactoryUnitsPointer();
-  if (gPlaySt.gameMode != 1) { // if not campaign, no black hole
-    blackHoleExists = 0;
-  }
+
   int totalWeight = 0;
   int size = (sizeof(defaultTiles) >> 2);
   if (!blackHoleExists) { // no minicanons / lasers / volcanoes
@@ -1772,8 +1970,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
       // dst->data[(iy * map_size_x) + ix] = 1;
       //  if (FrequencyOfObjects_Link > NextRN_N(100)) {
 
-      CopyMapPiece(data, ix, iy, map_size_x, map_size_y, defaultTile,
-                   blackHoleExists);
+      CopyMapPiece(data, ix, iy, defaultTile, &mapInfo);
     }
   }
 #endif
@@ -1809,7 +2006,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
         }
         // tiles[i].tile = _City;
 
-        MakeSomeTile(ix, iy, tiles[i].tile, map_size_x, data);
+        MakeSomeTile(ix, iy, tiles[i].tile, data, &mapInfo);
       }
     }
   }
@@ -1844,8 +2041,11 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
   gCh = cID;
 }
 
-void CopyMapPiece(u16 dst[], u8 placement_x, u8 placement_y, u8 map_size_x,
-                  u8 map_size_y, int defaultTile, int blackHoleExists) {
+void CopyMapPiece(u16 dst[], u8 placement_x, u8 placement_y, int defaultTile,
+                  struct randomMapInfo *mapInfo) {
+  int blackHoleExists = mapInfo->blackHoleExists;
+  int map_size_x = mapInfo->sizeX;
+  int map_size_y = mapInfo->sizeY;
   int rand = HashByte_Ch(placement_x, NumberOfMapPieces, placement_y, (int)dst);
   struct Map_Struct *T = MapPiecesTable[rand];
   // struct Map_Struct *T = MapPiecesTable[0];
@@ -1889,25 +2089,65 @@ void CopyMapPiece(u16 dst[], u8 placement_x, u8 placement_y, u8 map_size_x,
         // dst[((placement_y+y) * map_size_x) + placement_x+x] =
         // T->data[y*piece_size_x+x];
         tile = T->data[y * piece_size_x + x] >> 2;
+
         switch (tile) {
         case Plain: {
           continue; // don't overwrite if plains
+          // break;
         }
         // case Seam:
-        case DeathRay:
+        case DeathRay: {
+          mapInfo->deathray++;
+          gActiveMap->Surplus++;
+          break;
+        }
         case CannonD:
         case CannonU:
         case CannonL:
-        case CannonR:
-        case BlackCannonD:
-        case BlackCannonU:
-        case Laser:
-        case City:
-        case Base:
-        case Airport:
-        case Port:
-        case Silo: {
+        case CannonR: {
+          mapInfo->minicannon++;
           gActiveMap->Surplus++;
+          break;
+        }
+        case BlackCannonD:
+        case BlackCannonU: {
+          mapInfo->blackcannon++;
+          gActiveMap->Surplus++;
+          break;
+        }
+        case Laser: {
+          mapInfo->laser++;
+          gActiveMap->Surplus++;
+          break;
+        }
+        case City: {
+          mapInfo->city++;
+          gActiveMap->Surplus++;
+          break;
+        }
+        case Base: {
+          mapInfo->base++;
+          gActiveMap->Surplus++;
+          break;
+        }
+        case Airport: {
+          mapInfo->airport++;
+          gActiveMap->Surplus++;
+          break;
+        }
+        case Port: {
+          mapInfo->port++;
+          gActiveMap->Surplus++;
+          break;
+        }
+        case Silo: {
+          mapInfo->silo++;
+          gActiveMap->Surplus++;
+          break;
+        }
+        case Volcano: {
+          mapInfo->volcano++;
+          break;
         }
         default:
         }
