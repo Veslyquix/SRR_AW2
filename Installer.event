@@ -30,7 +30,7 @@ WORD 1
 
 // 15976
 PUSH 
-
+// [3003FCC]?
 // procScr WaitForLaser_0848B5AC 
 // PROC_REPEAT(801c755)  
 // 30002b4+0x18 is frames on current image 
@@ -81,7 +81,24 @@ BYTE $03 $00 $30 $00 $03 $00 $31 $00 $03 $00 $30 $00 $03 $00 $31 $00
 BYTE $03 $00 $32 $00 $04 $00 $33 $00 $04 $00 $34 $00 $04 $00 $35 $00 
 BYTE $04 $00 $36 $00 $00 $00 $01 $00 $00 $00 $FF $00 
 
-
+// https://forums.warsworldnews.com/viewtopic.php?p=417135&hilit=music#p417135
+// sfx 
+// 8070478 play track r0 = 0x1C9 as laser * 8 = E48 
+// 0xE48 + 0x24238C SongTableOffset
+// POIN 0x8484c64 
+// laser SFX 
+ORG $484c64
+BYTE $02 $00 $0A $00 $60 $20 $24 $08 $C8 $4B $48 $08 $0B $4C $48 $08 
+BYTE $BC $00 $BB $4B $BD $00 $BE $6E $C0 $40 $92 $CF $2A $78 $86 $E0 
+BYTE $3D $8C $F2 $34 $74 $86 $E0 $3D $78 $8C $EE $37 $86 $F6 $3D $9C 
+BYTE $F2 $34 $74 $86 $E8 $39 $78 $9A $F8 $35 $8C $EE $37 $8C $F2 $34 
+BYTE $74 $8B $CE $2A $81 $CF $27 $78 $98 $E8 $3F $98 $F8 $33 $74 $86 
+BYTE $EC $3C $78 $9A $F4 $37 $9C $86 $CF $2E $74 $85 $CE $27 $93 $E0 
+BYTE $37 $78 $92 $E8 $36 $92 $F6 $33 $9A $9A $CF $2A $74 $8B $CE $2E 
+BYTE $A2 $81 $A5 $81 $2A $B1 $BC $00 $BD $03 $BE $6E $C0 $40 $CF $25 
+BYTE $78 $B0 $E6 $3D $20 $97 $CE $25 $81 $E6 $3A $50 $98 $36 $54 $8C 
+BYTE $3D $20 $8C $34 $48 $8C $3A $50 $8C $8C $36 $54 $98 $34 $48 $97 
+BYTE $B1 $00 $00 $00
 
 
 ORG $43630 
