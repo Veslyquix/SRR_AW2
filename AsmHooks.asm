@@ -73,7 +73,7 @@ AttCont:
 ldrb r0, [r6, #0x18]
 mov r2, #0 
 cmp r0, #0 
-beq ReturnDefaultAtt
+@beq ReturnDefaultAtt
 ldsh r0, [r7, r2] 
 ldsh r1, [r1, r2] 
 add r0, r1 
@@ -125,7 +125,7 @@ DefCont:
 ldrb r0, [r6, #0x18]
 mov r2, #2
 cmp r0, #0 
-beq ReturnDefaultDef
+@beq ReturnDefaultDef
 ldsh r0, [r7, r2] 
 ldsh r1, [r1, r2] 
 add r0, r1 
@@ -176,7 +176,7 @@ MovCont:
 ldrb r0, [r6, #0x18]
 mov r2, #4
 cmp r0, #0 
-beq ReturnDefaultMov
+@beq ReturnDefaultMov
 ldsh r0, [r7, r2] 
 ldsh r1, [r1, r2] 
 add r0, r1 
@@ -229,15 +229,18 @@ ldrb r0, [r6, #0x18]
 mov r2, #6
 
 cmp r0, #0 
-beq ReturnDefaultRange
+@beq ReturnDefaultRange
+
+mov r3, #4 @ for mov 
+ldsh r2, [r7, r3] 
+ldsh r3, [r1, r3] 
+add r3, r2 
+
 ldsh r0, [r7, r2] 
 ldsh r1, [r1, r2] 
 add r0, r1 
 
-mov r3, #4 @ for mov 
-ldsh r2, [r7, r3] 
-ldsh r3, [r7, r3] 
-add r3, r2 
+
 
 ldr r1, [sp]
 ldr r2, [sp, #4]
