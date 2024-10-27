@@ -980,8 +980,9 @@ extern void MakeSeaSafest(int x, int y);
 extern void MakeBridge(int x, int y, int one);
 extern void MakeShoal(int x, int y, int one);
 extern void MakePipe(int x, int y);
-extern void MakeSeam(int x, int y, int one);
+extern void MakeSeam(int x, int y);
 extern void MakeReefSafe(int x, int y, int one);
+extern int GetSeamType(int x, int y);
 
 #define HQ_OS (0x714 >> 2)
 #define BASE_OS (0x718 >> 2)
@@ -1071,6 +1072,14 @@ extern void MakeReefSafe(int x, int y, int one);
 // #define ForceTileBank defaultTiles
 // #define ForceType _Sea
 
+void MakeSeamOrPipe(int x, int y) {
+  if (GetSeamType(x, y) != 0x180) {
+    MakeSeam(x, y);
+  } else {
+    MakePipe(x, y);
+  }
+}
+
 // Randomized wiggly line function without diagonal moves and ensuring no gaps
 void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
                     int factionB, int id) {
@@ -1078,6 +1087,7 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
   int x = xA, y = yA;
   // mapTileData[(y * sizeX) + x] = 0x104; // Mark the start point [201ee78]!!
   void (*func)(int x, int y) = MakeRoad; // default
+  // id = _Pipe;
   int tile = Plain;
   int tmp = 0;
   switch (id) {
@@ -1088,7 +1098,7 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
     break;
   }
   case _Pipe: {
-    func = MakePipe;
+    func = MakeSeamOrPipe;
     break;
   }
   case _River: {
@@ -1664,7 +1674,7 @@ void MakeSomeTile(int ix, int iy, int tile, u16 data[],
     break;
   }
   case _Seam: {
-    MakeSeam(ix, iy, 1);
+    MakeSeam(ix, iy);
     break;
   }
   case _Reef: {
@@ -1722,12 +1732,11 @@ void MakeSomeTile(int ix, int iy, int tile, u16 data[],
   // data[(iy * map_size_x) + ix] = tiles[i].tile;
 }
 
-/*
-void memcpy(void *s1, const void *s2, size_t n) {
-  for (int i = 0; i < n; ++i) {
-    s1 = s2;
-  }
-}*/
+// void memcpy(void *s1, const void *s2, size_t n) {
+// for (int i = 0; i < n; ++i) {
+// s1 = s2;
+// }
+// }
 extern int GetNumberOfPlayers(void);
 int ValidCoord(int x, int y, int sizeX, int sizeY) {
   if (x < 0 || y < 0) {
@@ -1782,7 +1791,12 @@ void PlaceHQAndBase(int x, int y, int sizeX, int sizeY, int faction, u16 *data,
   numberOfBases -= SetDataIfValidCoord(x, y + 1, sizeX, sizeY, tile, data);
 }
 extern void SetSelectedTile(int);
-
+// void *memset(void *dest, int val, u32 len) {
+// register unsigned char *ptr = (unsigned char *)dest;
+// while (len-- > 0)
+// *ptr++ = val;
+// return dest;
+// }
 const u8 WigglyLineTypes[] = {
     _Road, _River, _River, _Pipe, _Sea, 0,
 };
@@ -1800,7 +1814,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
 
   u8 someData[0x40];
   for (int i = 0; i < 0x40; ++i) {
-    someData[i] = Unk_200B000[i] + 1;
+    someData[i] = Unk_200B000[i];
     Unk_200B000[i] = 0;
   }
 
@@ -1823,7 +1837,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
       mapTileData[(iy * map_size_x) + ix] =
           defaultTile; // make everything the default
       terrainTileData[(iy * map_size_x) + ix] =
-          1; // otherwise MakeRoad and MakeTile etc. will change tiles
+          0; // otherwise MakeRoad and MakeTile etc. will change tiles
       // tile
       // map.SelectedTileX = ix;
       // map.SelectedTileY = iy;
@@ -2035,7 +2049,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
     }
   }
   for (int i = 0; i < 0x40; ++i) {
-    Unk_200B000[i] = someData[i] - 1;
+    Unk_200B000[i] = someData[i];
   }
   gActiveMap = (void *)activeMap;
   gCh = cID;

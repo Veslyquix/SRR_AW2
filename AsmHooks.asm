@@ -227,17 +227,19 @@ b ExitRange
 RangeCont:
 ldrb r0, [r6, #0x18]
 mov r2, #6
-
 cmp r0, #0 
 @beq ReturnDefaultRange
 
-mov r3, #4 @ for mov 
-ldsh r2, [r7, r3] 
-ldsh r3, [r1, r3] 
+mov r4, #4 @ for mov 
+
+ldsh r2, [r7, r4] 
+ldsh r3, [r1, r4] 
 add r3, r2 
 
-ldsh r0, [r7, r2] 
-ldsh r1, [r1, r2] 
+mov r4, #6 @ range 
+
+ldsh r0, [r7, r4] 
+ldsh r1, [r1, r4] 
 add r0, r1 
 
 
@@ -590,6 +592,46 @@ Map_Loop_Start:
 	bx	r1
 	.ltorg
  
- 
+.global memset 
+.type memset, %function 
+memset: 
+@ void *memset(void *dest, int val, u32 len)
+push {r0} 
+sub sp, #4 
+
+mov r3, #0 
+str r3, [sp] 
+
+lsr r2, #1 @ in SHORT units, not bytes 
+mov r3, #1 
+lsl r3, #24 @ fill, not copy 
+orr r2, r3 
+
+lsr r1, r0, #1 
+lsl r1, #1 
+mov r0, sp 
+swi 0xB 
+
+add sp, #4 
+pop {r0} 
+bx lr 
+.ltorg 
+
+.global memcpy 
+.type memcpy, %function 
+memcpy: 
+@ void *memcpy(void *src, void *dest, u32 len)
+push {r0} 
+lsr r0, #1 
+lsl r0, #1 
+lsr r1, #1 
+lsl r1, #1 
+lsr r2, #1 @ in SHORT units, not bytes 
+swi 0xB 
+
+pop {r0} 
+bx lr 
+.ltorg 
+
  
  

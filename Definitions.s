@@ -41,6 +41,7 @@ SET_FUNC MakeBridge, 0x8008F6D
 SET_FUNC MakeShoal, 0x8007BA5 @ Called by MakeSeaSafe
 SET_FUNC MakePipe, 0x8010D29 
 SET_FUNC MakeSeam, 0x8010D81 
+SET_FUNC GetSeamType, 0x8010605 
 SET_FUNC MakeReefSafe, 0x800BF79 
 
 SET_DATA mapTileData, 0x201EE72
