@@ -1066,6 +1066,7 @@ extern int GetSeamType(int x, int y);
 // #define ForceSizeX 35
 // #define ForceSizeY 35
 #define LineSegment
+// #define ForceLineType _Pipe
 #define HQs
 #define Pieces
 #define Filler
@@ -1087,7 +1088,9 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
   int x = xA, y = yA;
   // mapTileData[(y * sizeX) + x] = 0x104; // Mark the start point [201ee78]!!
   void (*func)(int x, int y) = MakeRoad; // default
-  // id = _Pipe;
+#ifdef ForceLineType
+  id = _Pipe;
+#endif
   int tile = Plain;
   int tmp = 0;
   switch (id) {
