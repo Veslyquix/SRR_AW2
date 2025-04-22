@@ -1135,9 +1135,9 @@ void drawWigglyRoad(int xA, int yA, int xB, int yB, int sizeX, int factionA,
     if (attempts > 500) {
       break;
     }
-    backtrackChance = Mod(attempts, 8) < 4 ? 0 : 2;
+    backtrackChance = ModNum(attempts, 8) < 4 ? 0 : 2;
     backtrackChance += attempts < 50 ? 2 : 5;
-    if (!Mod(attempts, freq)) {
+    if (!ModNum(attempts, freq)) {
       dir = HashByte_Ch(
           dir, 2, x + id,
           attempts); // Randomly choose between 0 (horizontal) or 1 (vertical)
@@ -1663,7 +1663,7 @@ void MakeSomeTile(int ix, int iy, int tile, u16 data[],
   }
   case _Brdg: {
     // MakeBridge(ix, iy, 1);
-    MakeTileSimple(ix, iy, BridgeH + (Mod(Mod(ix, iy), 2) << 1));
+    MakeTileSimple(ix, iy, BridgeH + (ModNum(ModNum(ix, iy), 2) << 1));
     break;
   }
   case _Shoal: {
@@ -1897,7 +1897,7 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
 
   qMin = (map_size_y >> 1) * q.y;
   p1.y = HashByte_Ch(map_size_y, qMaxY, map_size_x, offset + 6) + qMin;
-  int type = WigglyLineTypes[Mod(p1.x + p1.y, sizeof(WigglyLineTypes))];
+  int type = WigglyLineTypes[ModNum(p1.x + p1.y, sizeof(WigglyLineTypes))];
   q.x = !q.x;
   q.y = !q.y; // opposite corner
   qMin = (map_size_x >> 1) * q.x;
@@ -1957,15 +1957,15 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
 
   drawWigglyRoad(p1.x, p1.y, p2.x, p2.y, map_size_x, 0, 1, _Road);
   p3.x = p2.x;
-  p3.y = Mod(p2.y + (map_size_y >> 1), map_size_y);
+  p3.y = ModNum(p2.y + (map_size_y >> 1), map_size_y);
   if (numberOfPlayers > 2) {
     drawWigglyRoad(p2.x, p2.y, p3.x, p3.y, map_size_x, 1, 2, _Road);
     drawWigglyRoad(p1.x, p1.y, p3.x, p3.y, map_size_x, 0, 2, _Road);
   }
-  p4.x = Mod(p2.x + (map_size_x >> 1), map_size_x);
+  p4.x = ModNum(p2.x + (map_size_x >> 1), map_size_x);
   p4.y = p2.y;
   if (numberOfPlayers > 3) {
-    p3.x = Mod(p1.x + (map_size_x >> 1), map_size_x);
+    p3.x = ModNum(p1.x + (map_size_x >> 1), map_size_x);
     p3.y = p1.y;
 
     drawWigglyRoad(p3.x, p3.y, p4.x, p4.y, map_size_x, 2, 3, _Road);
@@ -2032,16 +2032,16 @@ void GenerateMap(struct Map_Struct *dst, struct ChHeader *head, int chID) {
 #ifdef HQs
   // for some reason MakeTile kills some properties so gotta place 'em again
   PlaceHQAndBase(p1.x, p1.y, map_size_x, map_size_y, 0, data,
-                 Mod(p1.x + p1.y, 3) + 2);
+                 ModNum(p1.x + p1.y, 3) + 2);
   PlaceHQAndBase(p2.x, p2.y, map_size_x, map_size_y, 1, data,
-                 Mod(p2.x + p2.y, 3) + 2);
+                 ModNum(p2.x + p2.y, 3) + 2);
   if (numberOfPlayers > 2) {
     PlaceHQAndBase(p3.x, p3.y, map_size_x, map_size_y, 2, data,
-                   Mod(p3.x + p3.y, 3) + 2);
+                   ModNum(p3.x + p3.y, 3) + 2);
   }
   if (numberOfPlayers > 3) {
     PlaceHQAndBase(p4.x, p4.y, map_size_x, map_size_y, 3, data,
-                   Mod(p4.x + p4.y, 3) + 2);
+                   ModNum(p4.x + p4.y, 3) + 2);
   }
 #endif
 

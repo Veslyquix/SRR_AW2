@@ -44,9 +44,9 @@ SET_FUNC MakeSeam, 0x8010D81
 SET_FUNC GetSeamType, 0x8010605 
 SET_FUNC MakeReefSafe, 0x800BF79 
 
-SET_DATA mapTileData, 0x201EE72
-SET_DATA terrainTileData, 0x201E450+0x1432  
-SET_DATA currentTileData, 0x201E450+0x417a
+SET_DATA mapTileData, 0x201EE72 @ not right? partway through 
+SET_DATA terrainTileData, 0x201E450+0x1432  @ 0x201f882 
+SET_DATA currentTileData, 0x201E450+0x417a  @ 0x20225ca
 SET_DATA gPlaySt, 0x3003FC0
 SET_DATA gActiveMap, 0x200B0B0 
 @[201f882]?

@@ -36,9 +36,16 @@ bx lr
 .global ModNum 
 .type ModNum, %function 
 ModNum: 
-swi 6 
-mov r0, r1 
+cmp r1, #0 
+bne ContinueMod 
+mov r11, r11 
+mov r0, #0 
 bx lr 
+ContinueMod: 
+swi 6
+mov r0, r1
+bx lr
+.ltorg 
 
 .global GetClassAtt
 .type GetClassAtt, %function 
